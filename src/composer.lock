@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5e2648387103df4e5ed614caf7e3c348",
+    "content-hash": "59a831620913d9a25631a728c9ed1975",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -4256,6 +4256,61 @@
                 }
             ],
             "time": "2025-09-03T16:03:54+00:00"
+        },
+        {
+            "name": "outerweb/filament-translatable-fields",
+            "version": "v3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/outer-web/filament-translatable-fields.git",
+                "reference": "87b70b005a37cd6d13a85e864838317102ca364f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/outer-web/filament-translatable-fields/zipball/87b70b005a37cd6d13a85e864838317102ca364f",
+                "reference": "87b70b005a37cd6d13a85e864838317102ca364f",
+                "shasum": ""
+            },
+            "require": {
+                "filament/filament": "^4.0",
+                "laravel/framework": "^10.0|^11.0|^12.0",
+                "php": "^8.1",
+                "spatie/laravel-package-tools": "^1.16",
+                "spatie/laravel-translatable": "^6.6"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Outerweb\\FilamentTranslatableFields\\FilamentTranslatableFieldsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src\\Helpers\\helpers.php"
+                ],
+                "psr-4": {
+                    "Outerweb\\FilamentTranslatableFields\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Outerweb",
+                    "email": "info@outerweb.be"
+                }
+            ],
+            "description": "This package adds a way to interact with outerweb/translatable-fields in Filament.",
+            "homepage": "https://github.com/outer-web/filament-translatable-fields",
+            "support": {
+                "issues": "https://github.com/outer-web/filament-translatable-fields/issues",
+                "source": "https://github.com/outer-web/filament-translatable-fields/tree/v3.0.0"
+            },
+            "time": "2025-08-20T11:24:19+00:00"
         },
         {
             "name": "paragonie/constant_time_encoding",
