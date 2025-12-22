@@ -7,23 +7,32 @@ use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 
 class PagesTable
 {
     public static function configure(Table $table): Table
     {
         return $table
+            ->defaultSort('id', 'desc')
             ->columns([
-                TextColumn::make('key')
+                TextColumn::make('id')
+                    ->label('ID'),
+                TextColumn::make('title')
+                    ->label('Title')
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        $locale = app()->getLocale();
+                        return $query->whereRaw("LOWER(JSON_UNQUOTE(JSON_EXTRACT(title, '$.\"{$locale}\"'))) LIKE ?", ["%" . strtolower($search) . "%"]);
+                    }),
+
+                TextColumn::make('slug')
+                    ->label('美化URL')
+                    ->copyable()
                     ->searchable(),
+
                 TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->label('创建时间')
+                    ->dateTime('Y-m-d H:i'),
             ])
             ->filters([
                 //
