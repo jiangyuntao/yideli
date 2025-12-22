@@ -15,6 +15,7 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
 
 class EnquiryResource extends Resource
 {
@@ -27,6 +28,16 @@ class EnquiryResource extends Resource
     protected static ?string $navigationLabel = '询价管理';
     protected static ?string $pluralModelLabel = '询价管理';
     protected static ?string $modelLabel = '询价';
+
+    public static function canCreate(): bool
+    {
+        return false;
+    }
+
+    public static function canEdit(Model $record): bool
+    {
+        return false;
+    }
 
     public static function form(Schema $schema): Schema
     {
