@@ -79,7 +79,6 @@ class ProductForm
                                     ->label('规格参数')
                                     ->keyLabel('参数')
                                     ->valueLabel('值')
-                                    ->reorderable()
                                     ->translatable(),
                             ]),
                     ])
