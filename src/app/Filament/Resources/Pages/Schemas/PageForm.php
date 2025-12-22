@@ -51,7 +51,7 @@ class PageForm
                             ]),
 
                         // --- 右侧：系统设置 (占 1 列) ---
-                        Section::make('标识')
+                        Section::make('设置')
                             ->columnSpan(1)
                             ->schema([
                                 // 3. Key (唯一标识符)
