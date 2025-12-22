@@ -7,6 +7,7 @@ use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
 
 class ProductsTable
@@ -15,21 +16,21 @@ class ProductsTable
     {
         return $table
             ->columns([
-                TextColumn::make('brand')
+                TextColumn::make('name')
+                    ->label('商品名称')
                     ->searchable(),
-                IconColumn::make('is_visible')
-                    ->boolean(),
+                TextColumn::make('category.name')
+                    ->label('分类')
+                    ->searchable(),
+                ToggleColumn::make('is_visible')
+                    ->label('是否可见'),
                 TextColumn::make('created_at')
+                    ->label('创建时间')
                     ->dateTime()
-                    ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
+                    ->label('更新时间')
                     ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('deleted_at')
-                    ->dateTime()
-                    ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
