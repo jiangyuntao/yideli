@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Filament\Panel;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -47,5 +48,18 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function canAccessPanel(Panel $panel): bool
+    {
+        if ($this->id == 1) {
+            return true;
+        }
+
+        if ($this->hasPermissionTo('View:Dashboard')) {
+            return true;
+        }
+
+        abort(403, '您没有权限进入后台系统');
     }
 }
