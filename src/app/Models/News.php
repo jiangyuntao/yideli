@@ -14,4 +14,9 @@ class News extends Model
     protected $guarded = [];
 
     public $translatable = ['title', 'slug', 'content'];
+
+    public function category()
+    {
+        return $this->belongsTo(NewsCategory::class);
+    }
 }

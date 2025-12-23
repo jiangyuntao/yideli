@@ -3,7 +3,9 @@
 namespace App\Filament\Resources\News\Schemas;
 
 use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
@@ -22,7 +24,6 @@ class NewsForm
                         Section::make('新闻内容')
                             ->columnSpan(2)
                             ->schema([
-                                // 1. 标题
                                 TextInput::make('title')
                                     ->label('标题')
                                     ->maxLength(255)
@@ -38,7 +39,6 @@ class NewsForm
                                         'zh' => 'required',
                                     ]),
 
-                                // 2. Slug
                                 TextInput::make('slug')
                                     ->label('美化URL')
                                     ->maxLength(255)
@@ -46,7 +46,6 @@ class NewsForm
                                         'zh' => 'required',
                                     ]),
 
-                                // 3. 正文
                                 RichEditor::make('content')
                                     ->label('Content')
                                     ->extraAttributes([
@@ -62,7 +61,29 @@ class NewsForm
                         Section::make('设置')
                             ->columnSpan(1)
                             ->schema([
-                                // 4. 发布时间
+                                Select::make('category_id')
+                                    ->label('分类')
+                                    ->relationship('category', 'name')
+                                    ->searchable()
+                                    ->preload()
+                                    // 核心：处理分类名称是多语言 JSON 的情况
+                                    // 假设 Category Model 使用了 HasTranslations Trait，这里会自动显示当前语言名称
+                                    ->getOptionLabelFromRecordUsing(
+                                        fn($record) =>
+                                        $record->parent
+                                            ? "{$record->parent->name} > {$record->name}" // 显示父子层级
+                                            : $record->name
+                                    ),
+
+                                FileUpload::make('cover_image')
+                                    ->label('封面图')
+                                    ->disk('public')
+                                    ->directory('products')
+                                    ->image()
+                                    ->imageEditor()
+                                    ->maxSize(1024 * 2) // 10MB
+                                    ->acceptedFileTypes(['image/*']),
+
                                 DateTimePicker::make('published_at')
                                     ->label('发布时间')
                                     ->helperText('留空则保存为草稿')

@@ -5,6 +5,7 @@ namespace App\Filament\Resources\News\Tables;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -18,7 +19,7 @@ class NewsTable
             ->columns([
                 TextColumn::make('id')
                     ->label('ID'),
-                // 1. 标题 (JSON 搜索)
+
                 TextColumn::make('title')
                     ->label('标题')
                     ->searchable(query: function (Builder $query, string $search): Builder {
@@ -27,7 +28,15 @@ class NewsTable
                     })
                     ->limit(50),
 
-                // 2. 状态 (虚拟字段，通过 published_at 判断)
+                TextColumn::make('category.name')
+                    ->label('分类')
+                    ->searchable(),
+
+                ImageColumn::make('cover_image')
+                    ->label('封面图')
+                    ->disk('public')
+                    ->imageHeight(50),
+
                 TextColumn::make('status')
                     ->label('状态')
                     ->badge()
@@ -37,13 +46,11 @@ class NewsTable
                         '草稿' => 'gray',
                     }),
 
-                // 3. 发布时间
                 TextColumn::make('published_at')
                     ->label('发布时间')
                     ->dateTime('Y-m-d H:i')
                     ->placeholder('草稿'),
 
-                // 4. 更新时间
                 TextColumn::make('updated_at')
                     ->label('更新时间')
                     ->dateTime()
