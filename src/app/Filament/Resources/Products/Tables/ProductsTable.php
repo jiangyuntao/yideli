@@ -6,6 +6,7 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
@@ -25,6 +26,10 @@ class ProductsTable
                 TextColumn::make('category.name')
                     ->label('分类')
                     ->searchable(),
+                ImageColumn::make('cover_image')
+                    ->label('封面图')
+                    ->disk('public')
+                    ->imageHeight(50),
                 ToggleColumn::make('is_visible')
                     ->label('是否可见'),
                 TextColumn::make('created_at')

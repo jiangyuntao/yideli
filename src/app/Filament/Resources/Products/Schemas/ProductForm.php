@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Products\Schemas;
 
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\KeyValue;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
@@ -23,7 +24,6 @@ class ProductForm
                         Section::make('基础信息')
                             ->columnSpan(2)
                             ->schema([
-                                // 1. 产品名称
                                 TextInput::make('name')
                                     ->label('产品名称')
                                     ->maxLength(255)
@@ -32,7 +32,6 @@ class ProductForm
                                         'zh' => 'required',
                                     ]),
 
-                                // 2. Slug
                                 TextInput::make('slug')
                                     ->label('美化URL')
                                     ->maxLength(255)
@@ -40,7 +39,6 @@ class ProductForm
                                         'zh' => 'required',
                                     ]),
 
-                                // 3. 详情内容
                                 RichEditor::make('content')
                                     ->label('内容')
                                     ->columnSpanFull()
@@ -54,7 +52,6 @@ class ProductForm
                         Section::make('设置与属性')
                             ->columnSpan(1)
                             ->schema([
-                                // 4. 分类选择 (新增)
                                 Select::make('category_id')
                                     ->label('分类')
                                     ->relationship('category', 'name')
@@ -69,12 +66,19 @@ class ProductForm
                                             : $record->name
                                     ),
 
-                                // 5. 可见性
+                                FileUpload::make('cover_image')
+                                    ->label('封面图')
+                                    ->disk('public')
+                                    ->directory('products')
+                                    ->image()
+                                    ->imageEditor()
+                                    ->maxSize(1024 * 2) // 10MB
+                                    ->acceptedFileTypes(['image/*']),
+
                                 Toggle::make('is_visible')
                                     ->label('是否可见')
                                     ->default(true),
 
-                                // 6. 规格参数
                                 KeyValue::make('specifications')
                                     ->label('规格参数')
                                     ->keyLabel('参数')
