@@ -19,7 +19,7 @@ class PagesTable
                 TextColumn::make('id')
                     ->label('ID'),
                 TextColumn::make('title')
-                    ->label('Title')
+                    ->label('标题')
                     ->searchable(query: function (Builder $query, string $search): Builder {
                         $locale = app()->getLocale();
                         return $query->whereRaw("LOWER(JSON_UNQUOTE(JSON_EXTRACT(title, '$.\"{$locale}\"'))) LIKE ?", ["%" . strtolower($search) . "%"]);

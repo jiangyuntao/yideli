@@ -60,12 +60,12 @@ class AdminPanelProvider extends PanelProvider
             ->plugins([
                 FilamentTranslatableFieldsPlugin::make()
                     ->supportedLocales([
-                        'zh_CN' => '中', // 简体中文（中国）
-                        'en_US' => '英', // 英语（美国）
-                        'ru_RU' => '俄', // 俄语（俄罗斯）
-                        'es_ES' => '西', // 西班牙语（西班牙）
-                        'fr_FR' => '法', // 法语（法国）
-                        'ar_SA' => '阿', // 阿拉伯语（沙特）
+                        'zh_CN' => '简体中文', // 简体中文（中国）
+                        'en_US' => '英语', // 英语（美国）
+                        'ru_RU' => '俄语', // 俄语（俄罗斯）
+                        'es_ES' => '西班牙语', // 西班牙语（西班牙）
+                        'fr_FR' => '法语', // 法语（法国）
+                        'ar_SA' => '阿拉伯语', // 阿拉伯语（沙特）
                     ]),
                 FilamentShieldPlugin::make(),
             ]);
