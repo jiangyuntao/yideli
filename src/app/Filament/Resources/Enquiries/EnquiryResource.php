@@ -23,7 +23,7 @@ class EnquiryResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedPencilSquare;
 
-    protected static ?int $navigationSort = 6;
+    protected static ?int $navigationSort = 7;
 
     protected static ?string $navigationLabel = '询价管理';
     protected static ?string $pluralModelLabel = '询价管理';

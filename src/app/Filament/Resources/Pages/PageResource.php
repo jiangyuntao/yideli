@@ -22,7 +22,7 @@ class PageResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'title';
 
-    protected static ?int $navigationSort = 5;
+    protected static ?int $navigationSort = 6;
 
     protected static ?string $navigationLabel = '单页面管理';
     protected static ?string $pluralModelLabel = '单页面管理';

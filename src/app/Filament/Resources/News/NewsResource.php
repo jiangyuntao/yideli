@@ -22,7 +22,7 @@ class NewsResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'title';
 
-    protected static ?int $navigationSort = 4;
+    protected static ?int $navigationSort = 5;
 
     protected static ?string $navigationLabel = '新闻管理';
     protected static ?string $pluralModelLabel = '新闻管理';
