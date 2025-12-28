@@ -42,9 +42,9 @@ class ProductForm
                                 RichEditor::make('content')
                                     ->label('内容')
                                     ->columnSpanFull()
-                                    ->extraAttributes([
-                                        'style' => 'min-height: 300px',
-                                    ])
+                                    // ->extraAttributes([
+                                    //     'style' => 'min-height: 300px',
+                                    // ])
                                     ->translatable(),
                             ]),
 

@@ -41,9 +41,9 @@ class PageForm
                                 // 2. 富文本内容 (多语言)
                                 RichEditor::make('content')
                                     ->label('内容')
-                                    ->extraAttributes([
-                                        'style' => 'min-height: 300px;'
-                                    ])
+                                    // ->extraAttributes([
+                                    //     'style' => 'min-height: 300px;'
+                                    // ])
                                     ->columnSpanFull() // 占满整行
                                     ->fileAttachmentsDisk('public') // 图片上传磁盘
                                     ->fileAttachmentsDirectory('pages') // 图片存放目录

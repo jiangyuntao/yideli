@@ -48,9 +48,9 @@ class NewsForm
 
                                 RichEditor::make('content')
                                     ->label('Content')
-                                    ->extraAttributes([
-                                        'style' => 'height: 300px;'
-                                    ])
+                                    // ->extraAttributes([
+                                    //     'style' => 'height: 300px;'
+                                    // ])
                                     ->columnSpanFull()
                                     ->fileAttachmentsDisk('public')
                                     ->fileAttachmentsDirectory('news')

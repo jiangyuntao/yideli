@@ -8,6 +8,6 @@ class IndexController extends BaseController
 {
     public function index(Request $request)
     {
-        return view('index.index.index', $this->data);
+        return view('index.index.new', $this->data);
     }
 }
