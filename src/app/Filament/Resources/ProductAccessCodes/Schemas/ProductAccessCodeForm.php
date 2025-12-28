@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\ProductAccessCodes\Schemas;
 
 use Filament\Actions\Action;
+use Filament\Forms\Components\CheckboxList;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
 use Filament\Forms\Components\DateTimePicker;
@@ -26,17 +27,40 @@ class ProductAccessCodeForm
                         Section::make('基础信息')
                             ->columnSpan(2)
                             ->schema([
-                                // 1. 关联产品
-                                // 如果是在 ProductRelationManager 中使用，这个字段会自动隐藏
-                                Select::make('product_id')
-                                    ->label('产品')
-                                    ->relationship('product', 'name') // 这里的 name 如果是 JSON，需要你的 Model 有 Accessor 或者配置
-                                    ->getOptionLabelFromRecordUsing(fn($record) => $record->name) // 确保多语言名称正常显示
-                                    ->searchable()
-                                    ->preload()
-                                    ->required()
-                                    ->hiddenOn('relationManager'), // 关键配置
+                                CheckboxList::make('products')
+                                    ->label('关联产品')
+                                    ->relationship('products', 'name') // 关联关系
 
+                                    // 1. 开启全选 / 反选功能
+                                    ->bulkToggleable()
+
+                                    // 2. 开启搜索（产品多的时候很有用）
+                                    ->searchable()
+
+                                    // 3. 布局优化：分成2列显示，避免列表太长
+                                    ->columns(2)
+
+                                    // 4. 关键：解析你的 JSON 数据结构
+                                    // 你的数据是: {"ar_SA": null, "zh_CN": "测试产品"}
+                                    ->getOptionLabelFromRecordUsing(function ($record) {
+                                        // 优先取 zh_CN
+                                        if (!empty($record->name['zh_CN'])) {
+                                            return $record->name['zh_CN'];
+                                        }
+
+                                        // 其次取 en_US (如果有)
+                                        if (!empty($record->name['en_US'])) {
+                                            return $record->name['en_US'];
+                                        }
+
+                                        // 兜底：取第一个非空的值
+                                        $firstName = collect($record->name)->filter()->first();
+
+                                        return $firstName ?? '未命名产品';
+                                    })
+
+                                    // 让组件占满整行
+                                    ->columnSpanFull(),
                                 // 2. 访问码 (Code)
                                 TextInput::make('code')
                                     ->label('访问码')
@@ -64,14 +88,6 @@ class ProductAccessCodeForm
                         Section::make('设置')
                             ->columnSpan(1)
                             ->schema([
-                                Select::make('user_id')
-                                    ->label('用户')
-                                    ->relationship('user', 'name') // 关联 User 模型
-                                    ->searchable() // 允许搜索名字
-                                    ->preload() // 如果用户少于50个，自动加载下拉表
-                                    ->required()
-                                    // 默认选中当前操作员(管理员)，但允许修改
-                                    ->helperText('选择用户，该用户将关联到这个访问码。'),
                                 // 4. 过期时间
                                 DateTimePicker::make('expires_at')
                                     ->label('过期时间')

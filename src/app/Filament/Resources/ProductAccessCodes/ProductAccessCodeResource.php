@@ -57,7 +57,7 @@ class ProductAccessCodeResource extends Resource
         return [
             'index' => ListProductAccessCodes::route('/'),
             'create' => CreateProductAccessCode::route('/create'),
-            'view' => ViewProductAccessCode::route('/{record}'),
+            // 'view' => ViewProductAccessCode::route('/{record}'),
             'edit' => EditProductAccessCode::route('/{record}/edit'),
         ];
     }

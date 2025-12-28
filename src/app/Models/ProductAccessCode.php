@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ProductAccessCode extends Model
@@ -11,9 +12,9 @@ class ProductAccessCode extends Model
 
     protected $guarded = [];
 
-    public function product()
+    public function products(): BelongsToMany
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsToMany(Product::class, 'product_access_code_product');
     }
 
     public function user()

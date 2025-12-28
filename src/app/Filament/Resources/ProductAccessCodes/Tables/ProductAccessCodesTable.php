@@ -26,15 +26,20 @@ class ProductAccessCodesTable
                     ->copyMessage('访问码复制成功!')
                     ->searchable(),
 
-                // 2. 关联产品 (如果在 RelationManager 中可以隐藏此列)
-                TextColumn::make('product.name') // 这里也会自动处理多语言 Accessor
-                    ->label('产品')
-                    ->limit(30)
-                    ->hiddenOn('relationManager'), // 在关联管理中隐藏
-
-                TextColumn::make('user.name') // 假设 User 模型有 name 字段
-                    ->label('用户'),
-
+                TextColumn::make('products.name')
+                    ->label('适用产品')
+                    ->badge() // 使用徽章样式
+                    ->separator(',') // 如果不用 badge，可以用逗号分隔
+                    ->limitList(3) // 如果关联太多，只显示前3个，剩下的显示 "+X more"
+                    // 同样，处理 JSON 多语言显示问题：
+                    ->formatStateUsing(function ($state) {
+                        // $state 可能是具体的 name 值，取决于 Filament 如何解析 JSON
+                        // 如果这里拿到的是数组或对象，需要取出当前语言
+                        if (is_array($state) || is_object($state)) {
+                            return $state['zh'] ?? $state['en'] ?? '未知';
+                        }
+                        return $state;
+                    }),
                 // 3. 状态 (虚拟计算列)
                 TextColumn::make('status')
                     ->label('状态')
