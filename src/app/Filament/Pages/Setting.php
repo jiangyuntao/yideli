@@ -43,10 +43,7 @@ class Setting extends SettingsPage
 
                                 TextInput::make('site_keywords')
                                     ->label('SEO 关键词')
-                                    ->placeholder('Filament, Laravel, Admin'),
-
-                                TextInput::make('icp_beian')
-                                    ->label('ICP 备案号'),
+                                    ->placeholder('笔记本, 销售, 服务'),
 
                                 Toggle::make('is_active')
                                     ->label('网站开启状态')
