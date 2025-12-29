@@ -9,6 +9,4 @@ Route::get('/{lang?}/news', 'App\Http\Controllers\Index\NewsController@index')->
 Route::get('/{lang?}/news/{slug}', 'App\Http\Controllers\Index\NewsController@show')->name('news.show');
 Route::get('/{lang?}/page/{slug}', 'App\Http\Controllers\Index\PageController@show')->name('page.show');
 Route::get('/{lang?}/inquire', 'App\Http\Controllers\Index\InquireController@form')->name('inquire.form');
-Route::get('/{lang?}/production-process', function () {
-    return view('index.production-process');
-});
+Route::get('/{lang?}/production-process', 'App\Http\Controllers\Index\ProductionProcessController@index')->name('production-process');

@@ -91,7 +91,7 @@
     <div class="flex-1">
       <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-8 gap-y-12">
 
-        <div class="product-card group cursor-pointer" x-show="activeCategory === 'all' || activeCategory === 'notebooks'">
+        <a href="{{ route('product.show', ['lang' => $lang, 'slug' => 'artistic-series-spiral-notebook']) }}" class="product-card group cursor-pointer" x-show="activeCategory === 'all' || activeCategory === 'notebooks'">
           <div class="aspect-[4/5] bg-gray-50 relative overflow-hidden mb-4">
             <img src="{{ asset('images/binding-book-1.jpg') }}" alt="Artistic Spiral Notebook" class="w-full h-full object-contain p-8 group-hover:scale-105 transition duration-700">
 
@@ -103,7 +103,7 @@
           </div>
           <h3 class="text-lg font-serif text-yideli-dark group-hover:underline underline-offset-4 decoration-1">Artistic Series Spiral Notebook</h3>
           <p class="text-sm text-gray-500 mt-1">Twin-wire binding · 120gsm Paper · Custom Cover</p>
-        </div>
+        </a>
 
         <div class="product-card group cursor-pointer" x-show="activeCategory === 'all' || activeCategory === 'notebooks'">
           <div class="aspect-[4/5] bg-gray-50 relative overflow-hidden mb-4">
