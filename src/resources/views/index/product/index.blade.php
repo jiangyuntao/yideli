@@ -2,7 +2,7 @@
 
 @section('main')
   <div class="bg-yideli-base border-b border-yideli-line">
-    <img src="{{ asset('images/product-1.jpg') }}">
+    <img src="{{ asset('images/product-index-banner.jpg') }}">
   </div>
 
   <div class="bg-yideli-base py-16 lg:py-24 border-b border-yideli-line">
