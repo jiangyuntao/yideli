@@ -1,162 +1,198 @@
 @extends('index.layout')
 
 @section('main')
-  <div class="relative bg-gray-50 h-64 sm:h-80 flex items-center justify-center overflow-hidden">
-    <img src="https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?q=80&w=2000&auto=format&fit=crop"
-      class="absolute inset-0 w-full h-full object-cover opacity-10">
-    <div class="relative z-10 text-center max-w-2xl px-4">
-      <h1 class="text-4xl sm:text-5xl text-gray-900 font-bold mb-3">Our Collections</h1>
-      <p class="text-gray-600 text-lg italic">Explore our range of premium stationery designed for professionals.</p>
-    </div>
+<div class="bg-yideli-base py-16 lg:py-24 border-b border-yideli-line">
+  <div class="max-w-[1600px] mx-auto px-6 lg:px-12 text-center">
+    <span class="text-xs font-bold tracking-[0.2em] uppercase text-yideli-dark mb-4 block">Our Collections</span>
+    <h1 class="text-4xl lg:text-6xl font-serif text-yideli-dark mb-6">Designed for Inspiration</h1>
+    <p class="text-gray-600 max-w-2xl mx-auto font-light text-lg">
+      Explore our comprehensive range of stationery. From the tactile feel of our premium notebooks to the precision of our writing instruments.
+    </p>
   </div>
+</div>
 
-  <div class="max-w-[96rem] mx-auto px-4 sm:px-6 lg:px-10 py-12 lg:py-16">
-    <div class="flex flex-col lg:flex-row gap-12">
+<div class="max-w-[1920px] mx-auto px-6 lg:px-12 py-12 lg:py-20">
+  <div class="flex flex-col lg:flex-row gap-12">
 
-      <aside class="w-full lg:w-1/5 space-y-8 flex-shrink-0">
-        <div class="lg:sticky lg:top-32">
-          <h3 class="text-xl font-bold border-l-4 border-red-600 pl-3 mb-6">Product Categories</h3>
-
-          <ul class="space-y-2 select-none">
-
-            <li x-data="{ open: true }">
-              <div @click="open = !open"
-                class="flex justify-between items-center cursor-pointer py-2 hover:text-red-600 group">
-                <span class="font-bold text-red-600">Notebooks</span>
-                <i :class="open ? 'ri-arrow-down-s-line' : 'ri-arrow-right-s-line'"
-                  class="text-gray-400 group-hover:text-red-600"></i>
-              </div>
-              <ul x-show="open" x-collapse class="pl-4 border-l border-gray-200 ml-2 space-y-2 mt-1">
-                <li><a href="#" class="block py-1 text-gray-600 hover:text-red-600">Hardcover Series</a></li>
-                <li><a href="#" class="block py-1 text-gray-600 hover:text-red-600">Softcover Journals</a></li>
-                <li><a href="#" class="block py-1 text-gray-600 hover:text-red-600">Spiral Bound</a></li>
-              </ul>
-            </li>
-
-            <li x-data="{ open: false }">
-              <div @click="open = !open"
-                class="flex justify-between items-center cursor-pointer py-2 hover:text-red-600 group">
-                <span class="font-bold text-gray-800">Writing Instruments</span>
-                <i :class="open ? 'ri-arrow-down-s-line' : 'ri-arrow-right-s-line'"
-                  class="text-gray-400 group-hover:text-red-600"></i>
-              </div>
-              <ul x-show="open" x-collapse class="pl-4 border-l border-gray-200 ml-2 space-y-2 mt-1">
-                <li><a href="#" class="block py-1 text-gray-600 hover:text-red-600">Fountain Pens</a></li>
-                <li><a href="#" class="block py-1 text-gray-600 hover:text-red-600">Gel Ink Rollers</a></li>
-                <li><a href="#" class="block py-1 text-gray-600 hover:text-red-600">Gift Sets</a></li>
-              </ul>
-            </li>
-
-            <li x-data="{ open: false }">
-              <div @click="open = !open"
-                class="flex justify-between items-center cursor-pointer py-2 hover:text-red-600 group">
-                <span class="font-bold text-gray-800">Office Accessories</span>
-                <i :class="open ? 'ri-arrow-down-s-line' : 'ri-arrow-right-s-line'"
-                  class="text-gray-400 group-hover:text-red-600"></i>
-              </div>
-              <ul x-show="open" x-collapse class="pl-4 border-l border-gray-200 ml-2 space-y-2 mt-1">
-                <li><a href="#" class="block py-1 text-gray-600 hover:text-red-600">Desk Organizers</a></li>
-                <li><a href="#" class="block py-1 text-gray-600 hover:text-red-600">Business Card Holders</a></li>
-              </ul>
-            </li>
-
+    <aside class="hidden lg:block w-64 flex-shrink-0">
+      <div class="sticky top-32 space-y-10">
+        <div>
+          <h3 class="font-serif text-xl mb-6 text-yideli-dark">Categories</h3>
+          <ul class="space-y-3 text-sm">
             <li>
-              <a href="#" class="block py-2 font-bold text-gray-800 hover:text-red-600">New Arrivals</a>
+              <button @click="activeCategory = 'all'"
+                :class="activeCategory === 'all' ? 'text-yideli-dark font-bold pl-2 border-l-2 border-yideli-dark' : 'text-gray-500 hover:text-yideli-dark'"
+                class="transition-all duration-200 block w-full text-left">
+                View All
+              </button>
+            </li>
+            <li>
+              <button @click="activeCategory = 'notebooks'"
+                :class="activeCategory === 'notebooks' ? 'text-yideli-dark font-bold pl-2 border-l-2 border-yideli-dark' : 'text-gray-500 hover:text-yideli-dark'"
+                class="transition-all duration-200 block w-full text-left">
+                Notebooks & Journals
+              </button>
+            </li>
+            <li>
+              <button @click="activeCategory = 'writing'"
+                :class="activeCategory === 'writing' ? 'text-yideli-dark font-bold pl-2 border-l-2 border-yideli-dark' : 'text-gray-500 hover:text-yideli-dark'"
+                class="transition-all duration-200 block w-full text-left">
+                Writing Instruments
+              </button>
+            </li>
+            <li>
+              <button @click="activeCategory = 'office'"
+                :class="activeCategory === 'office' ? 'text-yideli-dark font-bold pl-2 border-l-2 border-yideli-dark' : 'text-gray-500 hover:text-yideli-dark'"
+                class="transition-all duration-200 block w-full text-left">
+                Office Supplies
+              </button>
             </li>
           </ul>
         </div>
-      </aside>
 
-      <div class="w-full lg:w-4/5">
-
-        <div class="flex flex-col sm:flex-row justify-between items-center mb-8 pb-4 border-b border-gray-100">
-          <span class="text-gray-500 mb-4 sm:mb-0">Showing 9 of 24 products</span>
-          <div class="flex items-center space-x-4">
-            <span class="text-sm text-gray-500">Filter by:</span>
-            <select class="border border-gray-200 rounded-md py-1 px-3 text-sm focus:ring-red-600 focus:border-red-600">
-              <option>All Colors</option>
-              <option>Black</option>
-              <option>Red</option>
-              <option>Blue</option>
-            </select>
-            <select class="border border-gray-200 rounded-md py-1 px-3 text-sm focus:ring-red-600 focus:border-red-600">
-              <option>Recommended</option>
-              <option>Newest</option>
-            </select>
+        <div>
+          <h3 class="font-serif text-xl mb-6 text-yideli-dark">Material</h3>
+          <div class="space-y-2">
+            <label class="flex items-center gap-3 cursor-pointer group">
+              <input type="checkbox" class="w-4 h-4 rounded border-gray-300 text-yideli-dark focus:ring-yideli-dark">
+              <span class="text-sm text-gray-500 group-hover:text-yideli-dark transition">PU Leather</span>
+            </label>
+            <label class="flex items-center gap-3 cursor-pointer group">
+              <input type="checkbox" class="w-4 h-4 rounded border-gray-300 text-yideli-dark focus:ring-yideli-dark">
+              <span class="text-sm text-gray-500 group-hover:text-yideli-dark transition">Metal</span>
+            </label>
+            <label class="flex items-center gap-3 cursor-pointer group">
+              <input type="checkbox" class="w-4 h-4 rounded border-gray-300 text-yideli-dark focus:ring-yideli-dark">
+              <span class="text-sm text-gray-500 group-hover:text-yideli-dark transition">Recycled Paper</span>
+            </label>
           </div>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
-
-          <div class="group">
-            <a href="{{ route('product.show', ['slug' => 'something']) }}" class="block">
-              <div class="relative overflow-hidden rounded-sm bg-gray-100 mb-4 aspect-[4/5]">
-                <img src="https://images.unsplash.com/photo-1544816155-12df9643f363?q=80&w=800&auto=format&fit=crop"
-                  class="w-full h-full object-cover transition duration-700 group-hover:scale-105">
-                <div
-                  class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/60 to-transparent p-6 opacity-0 group-hover:opacity-100 transition duration-300">
-                  <span class="text-white text-sm uppercase tracking-widest font-bold">View Details <i
-                      class="ri-arrow-right-line ml-1"></i></span>
-                </div>
-              </div>
-              <div class="text-center group-hover:text-red-600 transition duration-300">
-                <h3 class="text-lg font-bold text-gray-900">The Classic Executive</h3>
-                <p class="text-gray-500 text-sm mt-1">Hardcover Notebooks</p>
-              </div>
-            </a>
-          </div>
-
-          <div class="group">
-            <a href="{{ route('product.show', ['slug' => 'something']) }}" class="block">
-              <div class="relative overflow-hidden rounded-sm bg-gray-100 mb-4 aspect-[4/5]">
-                <img src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?q=80&w=1200&auto=format&fit=cropp"
-                  class="w-full h-full object-cover transition duration-700 group-hover:scale-105">
-                <div
-                  class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/60 to-transparent p-6 opacity-0 group-hover:opacity-100 transition duration-300">
-                  <span class="text-white text-sm uppercase tracking-widest font-bold">View Details <i
-                      class="ri-arrow-right-line ml-1"></i></span>
-                </div>
-              </div>
-              <div class="text-center group-hover:text-red-600 transition duration-300">
-                <h3 class="text-lg font-bold text-gray-900">Modernist Blue</h3>
-                <p class="text-gray-500 text-sm mt-1">Softcover Journals</p>
-              </div>
-            </a>
-          </div>
-
-          <div class="group">
-            <a href="{{ route('product.show', ['slug' => 'something']) }}" class="block">
-              <div class="relative overflow-hidden rounded-sm bg-gray-100 mb-4 aspect-[4/5]">
-                <img src="https://images.unsplash.com/photo-1517842645767-c639042777db?q=80&w=1200&auto=format&fit=crop"
-                  class="w-full h-full object-cover transition duration-700 group-hover:scale-105">
-                <div
-                  class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/60 to-transparent p-6 opacity-0 group-hover:opacity-100 transition duration-300">
-                  <span class="text-white text-sm uppercase tracking-widest font-bold">View Details <i
-                      class="ri-arrow-right-line ml-1"></i></span>
-                </div>
-                <div class="absolute top-3 left-3 bg-gray-900 text-white text-xs px-2 py-1 uppercase tracking-wider">
-                  New Arrival</div>
-              </div>
-              <div class="text-center group-hover:text-red-600 transition duration-300">
-                <h3 class="text-lg font-bold text-gray-900">Botanical Series</h3>
-                <p class="text-gray-500 text-sm mt-1">Limited Edition</p>
-              </div>
-            </a>
-          </div>
-
-        </div>
-
-        <div class="mt-16 border-t border-gray-100 pt-8 flex justify-center">
-          <nav class="flex space-x-2">
-            <span class="px-4 py-2 text-gray-400 border border-transparent">Previous</span>
-            <span class="px-4 py-2 bg-red-600 text-white border border-red-600 rounded-sm">1</span>
-            <a href="#"
-              class="px-4 py-2 border border-gray-200 text-gray-700 hover:border-red-600 hover:text-red-600 transition rounded-sm">2</a>
-            <a href="#"
-              class="px-4 py-2 border border-gray-200 text-gray-700 hover:border-red-600 hover:text-red-600 transition rounded-sm">Next</a>
-          </nav>
+        <div class="bg-yideli-base p-6 text-center border border-yideli-line">
+          <h4 class="font-serif text-lg mb-2">Need a Catalog?</h4>
+          <p class="text-xs text-gray-500 mb-4">Download our 2025 Full Product Catalog PDF.</p>
+          <button class="text-xs font-bold uppercase tracking-widest border-b border-yideli-dark pb-1 hover:opacity-70 transition">Download Now</button>
         </div>
       </div>
+    </aside>
+
+    <div class="lg:hidden w-full mb-8">
+      <button @click="mobileFilterOpen = !mobileFilterOpen" class="w-full flex justify-between items-center px-4 py-3 border border-gray-200 text-sm font-medium">
+        <span>Filter Products</span>
+        <span>+</span>
+      </button>
+      <div x-show="mobileFilterOpen" class="border-x border-b border-gray-200 p-4 space-y-4">
+        <button @click="activeCategory = 'all'; mobileFilterOpen = false" class="block w-full text-left text-sm py-1">View All</button>
+        <button @click="activeCategory = 'notebooks'; mobileFilterOpen = false" class="block w-full text-left text-sm py-1">Notebooks</button>
+        <button @click="activeCategory = 'writing'; mobileFilterOpen = false" class="block w-full text-left text-sm py-1">Writing Instruments</button>
+      </div>
+    </div>
+
+    <div class="flex-1">
+      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-8 gap-y-12">
+
+        <div class="product-card group cursor-pointer" x-show="activeCategory === 'all' || activeCategory === 'notebooks'">
+          <div class="aspect-[4/5] bg-gray-50 relative overflow-hidden mb-4">
+            <img src="{{ asset('images/binding-book-1.jpg') }}" alt="Artistic Spiral Notebook" class="w-full h-full object-contain p-8 group-hover:scale-105 transition duration-700">
+
+            <div class="product-action absolute bottom-0 left-0 w-full bg-white/95 backdrop-blur py-4 px-6 translate-y-full opacity-0 transition duration-300 border-t border-yideli-line flex justify-between items-center">
+              <span class="text-xs font-bold uppercase tracking-wider text-yideli-dark">Quick View</span>
+              <span class="text-yideli-dark">→</span>
+            </div>
+            <span class="absolute top-4 left-4 bg-yideli-dark text-white text-[10px] font-bold px-2 py-1 uppercase tracking-widest">New</span>
+          </div>
+          <h3 class="text-lg font-serif text-yideli-dark group-hover:underline underline-offset-4 decoration-1">Artistic Series Spiral Notebook</h3>
+          <p class="text-sm text-gray-500 mt-1">Twin-wire binding · 120gsm Paper · Custom Cover</p>
+        </div>
+
+        <div class="product-card group cursor-pointer" x-show="activeCategory === 'all' || activeCategory === 'notebooks'">
+          <div class="aspect-[4/5] bg-gray-50 relative overflow-hidden mb-4">
+            <img src="{{ asset('images/line-circle-book-1.jpg') }}" alt="Elastic Band Notebook" class="w-full h-full object-contain p-4 group-hover:scale-105 transition duration-700">
+
+            <div class="product-action absolute bottom-0 left-0 w-full bg-white/95 backdrop-blur py-4 px-6 translate-y-full opacity-0 transition duration-300 border-t border-yideli-line flex justify-between items-center">
+              <span class="text-xs font-bold uppercase tracking-wider text-yideli-dark">Quick View</span>
+              <span class="text-yideli-dark">→</span>
+            </div>
+            <span class="absolute top-4 left-4 bg-[#D4A373] text-white text-[10px] font-bold px-2 py-1 uppercase tracking-widest">Best Seller</span>
+          </div>
+          <h3 class="text-lg font-serif text-yideli-dark group-hover:underline underline-offset-4 decoration-1">Classic Elastic Band Journal</h3>
+          <p class="text-sm text-gray-500 mt-1">PU Leather · Expandable Pocket · Multiple Colors</p>
+        </div>
+
+        <div class="product-card group cursor-pointer" x-show="activeCategory === 'all' || activeCategory === 'writing'">
+          <div class="aspect-[4/5] bg-gray-50 relative overflow-hidden mb-4">
+            <img src="{{ asset('images/notebook-1.jpg') }}" alt="Elastic Band Notebook" class="w-full h-full object-contain p-4 group-hover:scale-105 transition duration-700">
+
+            <div class="product-action absolute bottom-0 left-0 w-full bg-white/95 backdrop-blur py-4 px-6 translate-y-full opacity-0 transition duration-300 border-t border-yideli-line flex justify-between items-center">
+              <span class="text-xs font-bold uppercase tracking-wider text-yideli-dark">Quick View</span>
+              <span class="text-yideli-dark">→</span>
+            </div>
+          </div>
+          <h3 class="text-lg font-serif text-yideli-dark group-hover:underline underline-offset-4 decoration-1">Matte Black Fountain Pen</h3>
+          <p class="text-sm text-gray-500 mt-1">Brass Body · Fine Nib · Gift Box Included</p>
+        </div>
+
+        <div class="product-card group cursor-pointer" x-show="activeCategory === 'all' || activeCategory === 'writing'">
+          <div class="aspect-[4/5] bg-gray-50 relative overflow-hidden mb-4">
+            <img src="{{ asset('images/notebook-2.jpg') }}" alt="Elastic Band Notebook" class="w-full h-full object-contain p-4 group-hover:scale-105 transition duration-700">
+
+            <div class="product-action absolute bottom-0 left-0 w-full bg-white/95 backdrop-blur py-4 px-6 translate-y-full opacity-0 transition duration-300 border-t border-yideli-line flex justify-between items-center">
+              <span class="text-xs font-bold uppercase tracking-wider text-yideli-dark">Quick View</span>
+              <span class="text-yideli-dark">→</span>
+            </div>
+          </div>
+          <h3 class="text-lg font-serif text-yideli-dark group-hover:underline underline-offset-4 decoration-1">Executive Gel Pen Series</h3>
+          <p class="text-sm text-gray-500 mt-1">0.5mm Tip · Quick Dry Ink · Smooth Grip</p>
+        </div>
+
+        <div class="product-card group cursor-pointer" x-show="activeCategory === 'all' || activeCategory === 'office'">
+          <div class="aspect-[4/5] bg-gray-50 relative overflow-hidden mb-4">
+            <img src="{{ asset('images/weekly-calendar-2.jpg') }}" alt="Elastic Band Notebook" class="w-full h-full object-contain p-4 group-hover:scale-105 transition duration-700">
+
+            <div class="product-action absolute bottom-0 left-0 w-full bg-white/95 backdrop-blur py-4 px-6 translate-y-full opacity-0 transition duration-300 border-t border-yideli-line flex justify-between items-center">
+              <span class="text-xs font-bold uppercase tracking-wider text-yideli-dark">Quick View</span>
+              <span class="text-yideli-dark">→</span>
+            </div>
+          </div>
+          <h3 class="text-lg font-serif text-yideli-dark group-hover:underline underline-offset-4 decoration-1">Professional Color Pencils</h3>
+          <p class="text-sm text-gray-500 mt-1">48/72 Colors · Oil-based · Cedar Wood</p>
+        </div>
+
+        <div class="product-card group cursor-pointer" x-show="activeCategory === 'all' || activeCategory === 'notebooks'">
+          <div class="aspect-[4/5] bg-gray-50 relative overflow-hidden mb-4">
+            <img src="{{ asset('images/weekly-calendar-1.jpg') }}" alt="Elastic Band Notebook" class="w-full h-full object-contain p-4 group-hover:scale-105 transition duration-700">
+
+            <div class="product-action absolute bottom-0 left-0 w-full bg-white/95 backdrop-blur py-4 px-6 translate-y-full opacity-0 transition duration-300 border-t border-yideli-line flex justify-between items-center">
+              <span class="text-xs font-bold uppercase tracking-wider text-yideli-dark">Quick View</span>
+              <span class="text-yideli-dark">→</span>
+            </div>
+          </div>
+          <h3 class="text-lg font-serif text-yideli-dark group-hover:underline underline-offset-4 decoration-1">Linen Hardcover Notebook</h3>
+          <p class="text-sm text-gray-500 mt-1">A5 Size · Dot Grid · Lay-flat Binding</p>
+        </div>
+
+      </div>
+
+      <div class="mt-20 flex justify-center gap-2">
+        <button class="w-10 h-10 flex items-center justify-center border border-yideli-dark bg-yideli-dark text-white text-sm">1</button>
+        <button class="w-10 h-10 flex items-center justify-center border border-yideli-line hover:border-yideli-dark text-sm transition">2</button>
+        <button class="w-10 h-10 flex items-center justify-center border border-yideli-line hover:border-yideli-dark text-sm transition">→</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<section class="bg-yideli-dark text-white py-16">
+  <div class="max-w-4xl mx-auto px-6 text-center">
+    <h2 class="text-3xl font-serif mb-4">Custom OEM/ODM Services</h2>
+    <p class="text-white/80 mb-8 font-light">
+      Can't find exactly what you're looking for? We offer full customization for size, material, logo, and packaging.
+    </p>
+    <div class="flex flex-col sm:flex-row justify-center gap-4">
+      <a href="#contact" class="px-8 py-3 bg-white text-yideli-dark font-medium uppercase text-xs tracking-widest hover:bg-yideli-base transition">Request Custom Quote</a>
+      <a href="#" class="px-8 py-3 border border-white text-white font-medium uppercase text-xs tracking-widest hover:bg-white/10 transition">Download OEM Guide</a>
     </div>
   </div>
+</section>
 @endsection

@@ -1,182 +1,182 @@
 @extends('index.layout')
 
+@section('head')
+  <title>Yideli - Professional Stationery</title>
+@endsection
+
 @section('main')
-  <div class="relative w-full h-[550px] sm:h-[650px] lg:h-[750px] bg-white flex items-center">
-    <div class="absolute inset-0">
-      <img src="https://images.unsplash.com/photo-1514429015793-8a42fb25e17f?q=80&w=1025&auto=format&fit=crop"
-        alt="Elegant Notebook on a light marble desk" class="w-full h-full object-cover brightness-[.9]">
+  <section class="relative lg:h-[85vh] flex flex-col lg:flex-row overflow-hidden">
+    <div class="lg:w-1/3 flex items-center justify-center p-12 lg:p-20 order-2 lg:order-1 bg-yideli-base">
+      <div class="max-w-md">
+        <span class="block text-xs font-bold tracking-[0.2em] uppercase mb-4 text-yideli-dark">Professional
+          Stationery</span>
+        <h1 class="text-4xl lg:text-5xl font-serif font-medium leading-tight mb-8 text-yideli-dark">
+          Writing,<br>
+          In Its Purest Form.
+        </h1>
+        <p class="text-gray-600 mb-10 leading-relaxed font-light">
+          20 years of dedication to the craft of pen-making. We balance material and design to deliver a smooth, precise
+          writing experience. Yideli, let inspiration flow naturally.
+        </p>
+        <a href="#products"
+          class="inline-flex items-center px-8 py-4 border border-yideli-dark/20 hover:bg-yideli-dark hover:text-white transition duration-500 text-sm tracking-widest uppercase group">
+          Discover Collection
+          <span class="ml-2 group-hover:translate-x-1 transition-transform">→</span>
+        </a>
+      </div>
     </div>
-
-    <div class="relative z-10 max-w-[96rem] mx-auto px-4 sm:px-6 lg:px-10">
-      <h1
-        class="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-extrabold text-white drop-shadow-lg leading-tight max-w-5xl">
-        Crafting Ideas. Defining Your Legacy.
-      </h1>
-      <p class="mt-4 sm:mt-8 text-lg sm:text-xl lg:text-2xl text-white drop-shadow-sm max-w-xl font-medium">
-        Experience the difference of premium paper and meticulous binding. Tools for inspired productivity.
-      </p>
-      <a href="#collections"
-        class="mt-8 sm:mt-12 inline-block bg-red-600 text-white text-base sm:text-xl font-bold px-10 sm:px-16 py-3 sm:py-5 rounded-full shadow-2xl hover:bg-red-700 transition duration-300 w-fit uppercase tracking-wider">
-        View Our Notebooks
-      </a>
+    <div class="lg:w-2/3 h-[50vh] lg:h-auto order-1 lg:order-2 relative">
+      <img src="https://images.unsplash.com/photo-1515096788709-a3cf4ce0a4a6?q=80&w=2500&auto=format&fit=crop"
+        alt="Premium Pen Stationery" class="absolute inset-0 w-full h-full object-cover">
     </div>
-  </div>
+  </section>
 
-  <section id="collections" class="py-16 sm:py-24 lg:py-32 bg-white">
-    <div class="max-w-[96rem] mx-auto px-4 sm:px-6 lg:px-10">
-      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-center text-gray-900 mb-12 sm:mb-20">The
-        Yideli Products</h2>
+  <section class="py-24 lg:py-32 px-6 lg:px-12 bg-white">
+    <div class="max-w-[1600px] mx-auto grid lg:grid-cols-2 gap-16 items-center">
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-12">
+      <div class="relative bg-[#F7F9F5] aspect-square flex items-center justify-center p-12 group">
+        <img src="https://images.unsplash.com/photo-1585336261022-680e295ce3fe?q=80&w=1000&auto=format&fit=crop"
+          alt="Yideli Signature Pen"
+          class="w-3/4 h-3/4 object-contain mix-blend-multiply group-hover:scale-105 transition duration-700 ease-out">
+      </div>
 
-        <div class="group relative overflow-hidden rounded-lg shadow-xl border border-gray-100">
-          <img src="https://images.unsplash.com/photo-1522836924445-4478bdeb860c?q=80&w=800&auto=format&fit=crop"
-            alt="Leather Notebook on a light surface"
-            class="w-full h-[300px] sm:h-[480px] object-cover mb-4 sm:mb-6 group-hover:scale-[1.05] transition duration-700">
-          <div class="p-4 sm:p-6">
-            <h3 class="text-xl sm:text-2xl font-semibold text-gray-900">The Executive Line</h3>
-            <p class="text-gray-700 mt-2 sm:mt-3 mb-4 sm:mb-6 text-sm sm:text-base">Refined leather and
-              subtle detailing. The perfect choice for daily business.</p>
-            <a href="#"
-              class="inline-block text-red-600 font-bold border-b-2 border-red-600 hover:text-red-800 hover:border-red-800 transition duration-300 text-sm sm:text-base">
-              Explore Details &rarr;
-            </a>
+      <div class="lg:pl-12">
+        <span class="text-yideli-dark text-xs font-bold tracking-widest mb-3 block uppercase">New Arrival</span>
+        <h2 class="text-3xl lg:text-4xl font-serif text-yideli-dark mb-6">Classic Series · Matte Metal Fountain Pen</h2>
+
+        <p class="text-gray-600 mb-8 leading-relaxed font-light text-lg">
+          Designed for business professionals. Featuring a high-density brass barrel with a seven-layer matte finish.
+          The German-imported Iridium nib ensures every stroke is silky smooth.
+        </p>
+
+        <div class="border-t border-yideli-line my-8">
+          <div class="py-4 border-b border-yideli-line grid grid-cols-3 gap-4">
+            <span class="font-bold text-sm text-yideli-dark">Material</span>
+            <span class="col-span-2 text-gray-600 text-sm">Brass Barrel / Stainless Steel Nib</span>
+          </div>
+          <div class="py-4 border-b border-yideli-line grid grid-cols-3 gap-4">
+            <span class="font-bold text-sm text-yideli-dark">Specs</span>
+            <span class="col-span-2 text-gray-600 text-sm">142mm x 12mm / 35g</span>
+          </div>
+          <div class="py-4 border-b border-yideli-line grid grid-cols-3 gap-4">
+            <span class="font-bold text-sm text-yideli-dark">Usage</span>
+            <span class="col-span-2 text-gray-600 text-sm">Business Signing / Daily Use / Gifting</span>
           </div>
         </div>
 
-        <div class="group relative overflow-hidden rounded-lg shadow-xl border border-gray-100">
-          <img src="https://images.unsplash.com/photo-1631173716529-fd1696a807b0?q=80&w=800&auto=format&fit=crop"
-            alt="Minimalist Notebooks Stacked"
-            class="w-full h-[300px] sm:h-[480px] object-cover mb-4 sm:mb-6 group-hover:scale-[1.05] transition duration-700">
-          <div class="p-4 sm:p-6">
-            <h3 class="text-xl sm:text-2xl font-semibold text-gray-900">The Modernist Series</h3>
-            <p class="text-gray-700 mt-2 sm:mt-3 mb-4 sm:mb-6 text-sm sm:text-base">Clean lines, bold
-              colors, and contemporary material choices.</p>
-            <a href="#"
-              class="inline-block text-red-600 font-bold border-b-2 border-red-600 hover:text-red-800 hover:border-red-800 transition duration-300 text-sm sm:text-base">
-              Explore Details &rarr;
-            </a>
-          </div>
-        </div>
-
-        <div class="group relative overflow-hidden rounded-lg shadow-xl border border-gray-100">
-          <img src="https://images.unsplash.com/photo-1612599316791-451087c7fe15?q=80&w=800&auto=format&fit=crop"
-            alt="Eco-friendly Recycled Paper Notebook"
-            class="w-full h-[300px] sm:h-[480px] object-cover mb-4 sm:mb-6 group-hover:scale-[1.05] transition duration-700">
-          <div class="p-4 sm:p-6">
-            <h3 class="text-xl sm:text-2xl font-semibold text-gray-900">The Conscious Keeper</h3>
-            <p class="text-gray-700 mt-2 sm:mt-3 mb-4 sm:mb-6 text-sm sm:text-base">Made with
-              FSC-certified paper and recycled materials. Sustainable luxury.</p>
-            <a href="#"
-              class="inline-block text-red-600 font-bold border-b-2 border-red-600 hover:text-red-800 hover:border-red-800 transition duration-300 text-sm sm:text-base">
-              Explore Details &rarr;
-            </a>
-          </div>
-        </div>
+        <button
+          class="w-full lg:w-auto bg-yideli-dark text-white px-10 py-4 text-sm font-medium hover:bg-yideli-hover transition shadow-lg shadow-yideli-dark/20 uppercase tracking-wide">
+          View Details & Quote
+        </button>
       </div>
     </div>
   </section>
 
-  <section id="craftsmanship" class="py-16 sm:py-24 lg:py-32 bg-gray-50 border-t border-b border-gray-100">
-    <div class="max-w-[96rem] mx-auto px-4 sm:px-6 lg:px-10">
-      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-center text-gray-900 mb-12 sm:mb-24">About
-        Yideli</h2>
+  <section class="py-20 bg-yideli-base border-t border-yideli-line overflow-hidden">
+    <div class="px-6 lg:px-12 mb-12 flex justify-between items-end">
+      <div>
+        <h3 class="font-serif text-2xl text-yideli-dark mb-2">Curated Selection</h3>
+        <p class="text-gray-500 text-sm">Fine Stationery for Professionals</p>
+      </div>
+      <a href="#" class="btn-minimal text-sm font-medium text-yideli-dark pb-1">View All Products</a>
+    </div>
 
-      <div class="flex flex-col md:flex-row items-stretch gap-8 sm:gap-16">
-        <div class="md:w-1/2">
-          <img src="https://images.unsplash.com/photo-1759310347467-578dfd846229?q=80&w=1171&auto=format&fit=crop"
-            alt="Close-up of Notebook Pages and Binding"
-            class="w-full h-[300px] sm:h-full object-cover rounded-lg shadow-2xl border border-gray-100">
-        </div>
-        <div class="md:w-1/2 space-y-6 sm:space-y-12 flex flex-col justify-between">
+    <div class="flex overflow-x-auto no-scrollbar space-x-1 px-6 lg:px-12 pb-10 -mx-6 lg:-mx-12">
+
+      <div class="min-w-[280px] lg:min-w-[320px] group cursor-pointer">
+        <div class="aspect-[4/5] bg-white mb-6 overflow-hidden relative">
+          <img src="https://images.unsplash.com/photo-1544816155-12df9643f363?q=80&w=800&auto=format&fit=crop"
+            class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+          <div class="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition duration-500"></div>
           <div
-            class="p-6 sm:p-8 bg-white rounded-lg shadow-xl border-l-4 border-red-600 hover:shadow-2xl transition duration-300">
-            <h3 class="text-2xl sm:text-3xl font-bold text-gray-900">Proprietary Paper Stock</h3>
-            <p class="text-gray-700 mt-2 sm:mt-3 text-base sm:text-lg">Our paper is perfectly weighted
-              and formulated to ensure minimal bleed-through for fountain pens and markers.</p>
-          </div>
-          <div
-            class="p-6 sm:p-8 bg-white rounded-lg shadow-xl border-l-4 border-red-600 hover:shadow-2xl transition duration-300">
-            <h3 class="text-2xl sm:text-3xl font-bold text-gray-900">Lay-Flat Binding Perfection</h3>
-            <p class="text-gray-700 mt-2 sm:mt-3 text-base sm:text-lg">Using durable thread-sewn
-              signatures, every Yideli notebook is guaranteed to open and lay perfectly flat for an
-              unhindered writing experience.</p>
-          </div>
-          <div
-            class="p-6 sm:p-8 bg-white rounded-lg shadow-xl border-l-4 border-red-600 hover:shadow-2xl transition duration-300">
-            <h3 class="text-2xl sm:text-3xl font-bold text-gray-900">Precision and Detail</h3>
-            <p class="text-gray-700 mt-2 sm:mt-3 text-base sm:text-lg">From cover embossing to edge
-              foiling, every production step adheres to the highest global quality standards.</p>
+            class="absolute bottom-4 left-0 w-full text-center opacity-0 group-hover:opacity-100 transition duration-500 translate-y-4 group-hover:translate-y-0">
+            <span
+              class="bg-white/90 px-4 py-2 text-xs font-bold uppercase tracking-widest text-yideli-dark shadow-sm">Quick
+              View</span>
           </div>
         </div>
+        <h4 class="font-bold text-yideli-dark text-lg group-hover:underline decoration-1 underline-offset-4">
+          Business Notebook Set</h4>
+        <p class="text-gray-500 text-sm mt-1">A5 / 100g Dowling Paper / Gift Box</p>
+      </div>
+
+      <div class="min-w-[280px] lg:min-w-[320px] group cursor-pointer">
+        <div class="aspect-[4/5] bg-white mb-6 overflow-hidden relative">
+          <img src="https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?q=80&w=800&auto=format&fit=crop"
+            class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+        </div>
+        <h4 class="font-bold text-yideli-dark text-lg group-hover:underline decoration-1 underline-offset-4">
+          Minimal Desk Organizer</h4>
+        <p class="text-gray-500 text-sm mt-1">ABS Material / Nordic Design</p>
+      </div>
+
+      <div class="min-w-[280px] lg:min-w-[320px] group cursor-pointer">
+        <div class="aspect-[4/5] bg-white mb-6 overflow-hidden relative">
+          <img src="{{ asset('images/notebook-1.jpg') }}"
+            class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+        </div>
+        <h4 class="font-bold text-yideli-dark text-lg group-hover:underline decoration-1 underline-offset-4">
+          Pro Art Color Pencils</h4>
+        <p class="text-gray-500 text-sm mt-1">48 Colors / Oil-based Core</p>
+      </div>
+
+      <div class="min-w-[280px] lg:min-w-[320px] group cursor-pointer">
+        <div class="aspect-[4/5] bg-white mb-6 overflow-hidden relative">
+          <img src="https://images.unsplash.com/photo-1522125670776-3c7abb882bc2?q=80&w=800&auto=format&fit=crop"
+            class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+        </div>
+        <h4 class="font-bold text-yideli-dark text-lg group-hover:underline decoration-1 underline-offset-4">
+          Executive Gel Pen</h4>
+        <p class="text-gray-500 text-sm mt-1">0.5mm / Fast-dry Ink</p>
       </div>
     </div>
   </section>
 
-  <section id="custom" class="py-16 sm:py-24 lg:py-32 bg-white">
-    <div class="max-w-[96rem] mx-auto px-4 sm:px-6 lg:px-10 text-center">
-      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 sm:mb-10">Elevate Your Brand
-        with Customization</h2>
-      <p class="text-lg sm:text-xl lg:text-2xl text-gray-700 mb-12 sm:mb-20 max-w-4xl mx-auto font-medium">
-        Yideli is your one-stop solution for corporate gifting and promotional products. Unlock endless
-        possibilities with our OEM/ODM services.
-      </p>
+  <section class="py-24 lg:py-32 px-6 lg:px-12 bg-white">
+    <div class="max-w-[1600px] mx-auto grid lg:grid-cols-12 gap-12 lg:gap-24">
 
-      <div class="flex flex-col md:flex-row justify-between relative">
-        <div class="hidden lg:block absolute top-1/4 left-1/4 right-1/4 h-1 bg-gray-200 -translate-y-1/2">
+      <div class="lg:col-span-5 flex flex-col justify-center">
+        <span class="text-yideli-dark text-sm font-bold tracking-widest mb-6 uppercase">Our Factory</span>
+        <h2 class="text-3xl lg:text-5xl font-serif text-yideli-dark mb-8 leading-tight">
+          From Taizhou,<br>To The World.
+        </h2>
+        <div class="space-y-6 text-gray-600 font-light leading-relaxed">
+          <p>
+            Established in 2005, Yideli is located in the beautiful coastal city of Taizhou. As a modern stationery
+            enterprise integrating design, R&D, and production, we have always adhered to the belief that "Quality is
+            Faith".
+          </p>
+          <p>
+            Our factory boasts a production workshop of over 10,000 square meters, equipped with internationally
+            advanced automated injection and assembly machinery. Whether it is OEM manufacturing or ODM design, we
+            deliver trustworthy products with rigorous standards.
+          </p>
         </div>
-        <div class="hidden lg:block absolute top-1/4 left-1/2 right-1/4 h-1 bg-gray-200 -translate-y-1/2">
+        <div class="mt-10">
+          <a href="#about"
+            class="inline-flex items-center px-8 py-4 border border-yideli-dark text-yideli-dark hover:bg-yideli-dark hover:text-white transition duration-300 uppercase text-sm tracking-wide">
+            Explore Our Craft
+            <span class="ml-2">→</span>
+          </a>
         </div>
-        <div class="hidden lg:block absolute top-1/4 left-3/4 right-1/4 h-1 bg-gray-200 -translate-y-1/2">
-        </div>
+      </div>
 
-        <div class="w-full md:w-1/4 p-2 sm:p-4 mb-8 md:mb-0">
-          <div class="relative p-6 sm:p-8 shadow-2xl rounded-lg bg-gray-50 border-t-4 border-red-600 h-full">
-            <div
-              class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-red-600 text-white rounded-full w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center text-xl sm:text-3xl font-extrabold shadow-lg">
-              01</div>
-            <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mt-6 sm:mt-6">Concept & Design</h3>
-            <p class="text-gray-700 text-sm sm:text-lg mt-3">Initial consultation to define your
-              requirements for materials, size, and layout.</p>
-          </div>
+      <div class="lg:col-span-7 grid grid-cols-2 gap-4 items-center">
+        <div class="space-y-4 translate-y-8">
+          <img src="{{ asset('images/line-circle-book-1.jpg') }}"
+            class="w-full h-64 object-cover grayscale hover:grayscale-0 transition duration-700">
+          <img src="{{ asset('images/weekly-calendar-1.jpg') }}"
+            class="w-full h-80 object-cover grayscale hover:grayscale-0 transition duration-700">
         </div>
-        <div class="w-full md:w-1/4 p-2 sm:p-4 mb-8 md:mb-0">
-          <div class="relative p-6 sm:p-8 shadow-2xl rounded-lg bg-gray-50 border-t-4 border-red-600 h-full">
-            <div
-              class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-red-600 text-white rounded-full w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center text-xl sm:text-3xl font-extrabold shadow-lg">
-              02</div>
-            <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mt-6 sm:mt-6">Material Sourcing</h3>
-            <p class="text-gray-700 text-sm sm:text-lg mt-3">Selection of premium covers (leather,
-              fabric) and paper types (recycled, bamboo).</p>
-          </div>
-        </div>
-        <div class="w-full md:w-1/4 p-2 sm:p-4 mb-8 md:mb-0">
-          <div class="relative p-6 sm:p-8 shadow-2xl rounded-lg bg-gray-50 border-t-4 border-red-600 h-full">
-            <div
-              class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-red-600 text-white rounded-full w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center text-xl sm:text-3xl font-extrabold shadow-lg">
-              03</div>
-            <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mt-6 sm:mt-6">Branding & Finish</h3>
-            <p class="text-gray-700 text-sm sm:text-lg mt-3">Exclusive logo application via embossing,
-              foiling, or digital print.</p>
-          </div>
-        </div>
-        <div class="w-full md:w-1/4 p-2 sm:p-4 mb-8 md:mb-0">
-          <div class="relative p-6 sm:p-8 shadow-2xl rounded-lg bg-gray-50 border-t-4 border-red-600 h-full">
-            <div
-              class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-red-600 text-white rounded-full w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center text-xl sm:text-3xl font-extrabold shadow-lg">
-              04</div>
-            <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mt-6 sm:mt-6">Production & Delivery
-            </h3>
-            <p class="text-gray-700 text-sm sm:text-lg mt-3">Efficient bulk manufacturing and reliable
-              global logistics fulfillment.</p>
+        <div class="space-y-4">
+          <img src="https://images.unsplash.com/photo-1516961642265-531546e84af2?q=80&w=600&auto=format&fit=crop"
+            class="w-full h-80 object-cover grayscale hover:grayscale-0 transition duration-700">
+          <div class="w-full h-64 bg-yideli-dark flex items-center justify-center p-6 text-center">
+            <p class="text-yideli-base font-serif italic text-xl">"Details make perfection."</p>
           </div>
         </div>
       </div>
 
-      <a href="#contact"
-        class="mt-12 sm:mt-20 inline-block bg-red-600 text-white text-base sm:text-xl font-semibold px-10 sm:px-16 py-3 sm:py-5 rounded-full shadow-2xl hover:bg-red-700 transition duration-300 uppercase tracking-wider">
-        Discuss Your Custom Project
-      </a>
     </div>
   </section>
 @endsection
