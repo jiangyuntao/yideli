@@ -180,9 +180,7 @@
     </div>
   </section>
 
-  <section class="py-12 lg:py-24 px-6 lg:px-12 bg-white">
-    <div class="max-w-[1600px] mx-auto grid lg:grid-cols-12 gap-12 lg:gap-24"></div>
-    <img src="{{ asset('images/cert.jpg') }}" alt="">
-    </div>
+  <section class="py-6 lg:py-12 px-6 lg:px-12 bg-[#fcfcef]">
+    <img class="w-full lg:max-w-[800px] mx-auto" src="{{ asset('images/cert.jpg') }}" alt="">
   </section>
 @endsection

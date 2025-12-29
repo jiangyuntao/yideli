@@ -139,6 +139,17 @@
 
   <section class="py-24 bg-yideli-base">
     <div class="max-w-[800px] mx-auto text-center px-6">
+      <div>
+        <img src="{{ asset('images/custom-1.jpg') }}">
+      </div>
+      <div>
+        <img src="{{ asset('images/custom-2.jpg') }}">
+      </div>
+    </div>
+  </section>
+
+  <section class="py-24 bg-yideli-base">
+    <div class="max-w-[800px] mx-auto text-center px-6">
       <h2 class="text-3xl font-serif text-yideli-dark mb-6">See It For Yourself</h2>
       <p class="text-gray-600 mb-8 font-light">
         We welcome international clients to visit our factory in Taizhou. Schedule a tour to witness our production
