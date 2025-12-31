@@ -60,92 +60,16 @@
       </div>
     </div>
 
-    <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-      <div class="order-2 lg:order-1 relative">
-        <div class="step-number text-yideli-dark">03</div>
-        <h2 class="text-3xl font-serif text-yideli-dark mb-4 relative z-10">Precision Molding & Printing</h2>
-        <p class="text-gray-600 leading-relaxed font-light relative z-10">
-          Our workshop is equipped with 50+ automated injection molding machines. For notebooks, we utilize Heidelberg
-          offset printing presses to ensure vibrant cover colors and crisp inner lines. Logo customization is handled via
-          silk-screen, pad printing, or laser engraving.
-        </p>
-      </div>
-      <div class="order-1 lg:order-2">
-        <img src="{{ asset('images/product-1.jpg') }}" class="w-full h-[400px] object-cover rounded-sm shadow-xl"
-          alt="Molding Machine">
-      </div>
-    </div>
-
-    <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-      <div class="order-1">
-        <img src="{{ asset('images/product-2.jpg') }}" class="w-full h-[400px] object-cover rounded-sm shadow-xl"
-          alt="Assembly Line">
-      </div>
-      <div class="order-2 relative">
-        <div class="step-number text-yideli-dark right-0 left-auto">04</div>
-        <h2 class="text-3xl font-serif text-yideli-dark mb-4 relative z-10">Automated Assembly</h2>
-        <p class="text-gray-600 leading-relaxed font-light relative z-10">
-          Components are assembled using a mix of automated robotic arms and skilled manual labor. For pens, ink refills
-          are inserted and tested for flow. For notebooks, binding (glue, spiral, or stitching) is performed with high
-          precision machinery to ensure longevity.
-        </p>
-      </div>
-    </div>
-
-    <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-      <div class="order-2 lg:order-1 relative">
-        <div class="step-number text-yideli-dark">05</div>
-        <h2 class="text-3xl font-serif text-yideli-dark mb-4 relative z-10">Quality Control (QC)</h2>
-        <p class="text-gray-600 leading-relaxed font-light relative z-10">
-          Every batch undergoes AQL 2.5/4.0 inspection standards. We conduct writing distance tests, drop tests, and
-          high-temperature storage tests. Only products that pass 100% of our checkpoints proceed to packaging.
-        </p>
-      </div>
-      <div class="order-1 lg:order-2">
-        <img src="{{ asset('images/notebook-4.jpg') }}" class="w-full h-[400px] object-cover rounded-sm shadow-xl"
-          alt="QC Inspection">
-      </div>
-    </div>
-
   </section>
 
   <section class="bg-yideli-dark text-white py-20 lg:py-28">
     <div class="max-w-[1200px] mx-auto px-6 lg:px-12 text-center">
       <h2 class="text-3xl lg:text-4xl font-serif mb-8">Committed to Global Standards</h2>
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-        <div class="p-6 border border-white/20 rounded hover:bg-white/5 transition">
-          <div class="text-4xl font-bold mb-2">ISO</div>
-          <div class="text-sm opacity-80 uppercase tracking-widest">9001:2015</div>
-          <p class="mt-2 text-xs opacity-60">Quality Management</p>
-        </div>
-        <div class="p-6 border border-white/20 rounded hover:bg-white/5 transition">
-          <div class="text-4xl font-bold mb-2">BSCI</div>
-          <div class="text-sm opacity-80 uppercase tracking-widest">Grade A</div>
-          <p class="mt-2 text-xs opacity-60">Social Compliance</p>
-        </div>
-        <div class="p-6 border border-white/20 rounded hover:bg-white/5 transition">
-          <div class="text-4xl font-bold mb-2">FSC</div>
-          <div class="text-sm opacity-80 uppercase tracking-widest">Certified</div>
-          <p class="mt-2 text-xs opacity-60">Sustainable Paper</p>
-        </div>
-        <div class="p-6 border border-white/20 rounded hover:bg-white/5 transition">
-          <div class="text-4xl font-bold mb-2">EN71</div>
-          <div class="text-sm opacity-80 uppercase tracking-widest">Safe</div>
-          <p class="mt-2 text-xs opacity-60">European Safety Standard</p>
-        </div>
-      </div>
     </div>
   </section>
 
-  <section class="py-24 bg-yideli-base">
-    <div class="max-w-[800px] mx-auto text-center px-6">
-      <div>
-        <img src="{{ asset('images/custom-1.jpg') }}">
-      </div>
-      <div>
-        <img src="{{ asset('images/custom-2.jpg') }}">
-      </div>
-    </div>
+  <section>
+    <img src="{{ asset('images/custom-2.jpg') }}">
   </section>
 
   <section class="py-24 bg-yideli-base">

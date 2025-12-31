@@ -32,24 +32,59 @@
                 </button>
               </li>
               <li>
-                <button @click="activeCategory = 'notebooks'"
+                <!-- 点击展开/收起子分类 -->
+                <button @click="activeCategory = 'notebooks'; showSub = !showSub"
                   :class="activeCategory === 'notebooks' ? 'text-yideli-dark font-bold pl-2 border-l-2 border-yideli-dark' : 'text-gray-500 hover:text-yideli-dark'"
-                  class="transition-all duration-200 block w-full text-left">
-                  Notebooks & Journals
+                  class="transition-all duration-200 block w-full text-left flex items-center justify-between">
+                  <span>Planner & Diaries</span>
+                  <span x-show="activeCategory === 'notebooks'" x-text="showSub ? '−' : '+'" class="text-sm"></span>
                 </button>
+                <!-- 子分类列表 -->
+                <ul x-show="showSub" x-transition class="mt-2 ml-4 space-y-2 text-xs text-gray-600">
+                  <li><button @click="activeSub = 'daily-planner'" :class="activeSub === 'daily-planner' ? 'text-yideli-dark font-semibold' : 'hover:text-yideli-dark'" class="block">2026 Diaries</button></li>
+                  <li><button @click="activeSub = 'weekly-diary'" :class="activeSub === 'weekly-diary' ? 'text-yideli-dark font-semibold' : 'hover:text-yideli-dark'" class="block">Academic Diaries</button></li>
+                  <li><button @click="activeSub = 'travel-journal'" :class="activeSub === 'travel-journal' ? 'text-yideli-dark font-semibold' : 'hover:text-yideli-dark'" class="block">Undated Diaries</button></li>
+                  <li><button @click="activeSub = 'travel-journal'" :class="activeSub === 'travel-journal' ? 'text-yideli-dark font-semibold' : 'hover:text-yideli-dark'" class="block">Permanent Agenda</button></li>
+                </ul>
               </li>
               <li>
                 <button @click="activeCategory = 'writing'"
                   :class="activeCategory === 'writing' ? 'text-yideli-dark font-bold pl-2 border-l-2 border-yideli-dark' : 'text-gray-500 hover:text-yideli-dark'"
                   class="transition-all duration-200 block w-full text-left">
-                  Writing Instruments
+                  Spiral notebook
                 </button>
               </li>
               <li>
                 <button @click="activeCategory = 'office'"
                   :class="activeCategory === 'office' ? 'text-yideli-dark font-bold pl-2 border-l-2 border-yideli-dark' : 'text-gray-500 hover:text-yideli-dark'"
                   class="transition-all duration-200 block w-full text-left">
-                  Office Supplies
+                  Notebook
+                </button>
+
+                <ul x-show="showSub" x-transition class="mt-2 ml-4 space-y-2 text-xs text-gray-600">
+                  <li><button @click="activeSub = 'daily-planner'" :class="activeSub === 'daily-planner' ? 'text-yideli-dark font-semibold' : 'hover:text-yideli-dark'" class="block">Hard Cover</button></li>
+                  <li><button @click="activeSub = 'weekly-diary'" :class="activeSub === 'weekly-diary' ? 'text-yideli-dark font-semibold' : 'hover:text-yideli-dark'" class="block">Soft Cover</button></li>
+                </ul>
+              </li>
+              <li>
+                <button @click="activeCategory = 'office'"
+                  :class="activeCategory === 'office' ? 'text-yideli-dark font-bold pl-2 border-l-2 border-yideli-dark' : 'text-gray-500 hover:text-yideli-dark'"
+                  class="transition-all duration-200 block w-full text-left">
+                  Elastic band notebook
+                </button>
+              </li>
+              <li>
+                <button @click="activeCategory = 'office'"
+                  :class="activeCategory === 'office' ? 'text-yideli-dark font-bold pl-2 border-l-2 border-yideli-dark' : 'text-gray-500 hover:text-yideli-dark'"
+                  class="transition-all duration-200 block w-full text-left">
+                  Address book
+                </button>
+              </li>
+              <li>
+                <button @click="activeCategory = 'office'"
+                  :class="activeCategory === 'office' ? 'text-yideli-dark font-bold pl-2 border-l-2 border-yideli-dark' : 'text-gray-500 hover:text-yideli-dark'"
+                  class="transition-all duration-200 block w-full text-left">
+                  Floders & Organizers
                 </button>
               </li>
             </ul>

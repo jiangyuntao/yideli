@@ -113,10 +113,6 @@
               class="flex-1 bg-yideli-dark text-white text-center py-4 text-sm font-bold uppercase tracking-widest hover:bg-yideli-hover transition shadow-lg shadow-yideli-dark/20">
               Request Quote
             </a>
-            <a href="#"
-              class="flex-1 border border-yideli-dark text-yideli-dark text-center py-4 text-sm font-bold uppercase tracking-widest hover:bg-yideli-base transition">
-              Download Spec Sheet
-            </a>
           </div>
           <p class="text-[10px] text-gray-400 mt-3 text-center">
             Volume discounts available for orders over 5,000 units.

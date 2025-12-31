@@ -5,69 +5,22 @@
 @endsection
 
 @section('main')
-  <section class="relative lg:h-[85vh] flex flex-col lg:flex-row overflow-hidden">
-    <div class="lg:w-1/3 flex items-center justify-center p-12 lg:p-20 order-2 lg:order-1 bg-yideli-base">
-      <div class="max-w-md">
-        <span class="block text-xs font-bold tracking-[0.2em] uppercase mb-4 text-yideli-dark">Professional
-          Stationery</span>
-        <h1 class="text-4xl lg:text-5xl font-serif font-medium leading-tight mb-8 text-yideli-dark">
-          Writing,<br>
-          In Its Purest Form.
-        </h1>
-        <p class="text-gray-600 mb-10 leading-relaxed font-light">
-          20 years of dedication to the craft of pen-making. We balance material and design to deliver a smooth, precise
-          writing experience. Yideli, let inspiration flow naturally.
-        </p>
-        <a href="#products"
-          class="inline-flex items-center px-8 py-4 border border-yideli-dark/20 hover:bg-yideli-dark hover:text-white transition duration-500 text-sm tracking-widest uppercase group">
-          Discover Collection
-          <span class="ml-2 group-hover:translate-x-1 transition-transform">→</span>
-        </a>
-      </div>
-    </div>
-    <div class="lg:w-2/3 h-[50vh] lg:h-auto order-1 lg:order-2 relative">
-      <img src="https://images.unsplash.com/photo-1515096788709-a3cf4ce0a4a6?q=80&w=2500&auto=format&fit=crop"
-        alt="Premium Pen Stationery" class="absolute inset-0 w-full h-full object-cover">
-    </div>
-  </section>
-
-  <section class="py-24 lg:py-32 px-6 lg:px-12 bg-white">
-    <div class="max-w-[1600px] mx-auto grid lg:grid-cols-2 gap-16 items-center">
-
-      <div class="relative bg-[#F7F9F5] aspect-square flex items-center justify-center p-12 group">
-        <img src="{{ asset('images/notebook-2.jpg') }}" alt="Yideli Signature Pen"
-          class="w-3/4 h-3/4 object-contain mix-blend-multiply group-hover:scale-105 transition duration-700 ease-out">
-      </div>
-
-      <div class="lg:pl-12">
-        <span class="text-yideli-dark text-xs font-bold tracking-widest mb-3 block uppercase">New Arrival</span>
-        <h2 class="text-3xl lg:text-4xl font-serif text-yideli-dark mb-6">Classic Series · Matte Metal Fountain Pen</h2>
-
-        <p class="text-gray-600 mb-8 leading-relaxed font-light text-lg">
-          Designed for business professionals. Featuring a high-density brass barrel with a seven-layer matte finish.
-          The German-imported Iridium nib ensures every stroke is silky smooth.
-        </p>
-
-        <div class="border-t border-yideli-line my-8">
-          <div class="py-4 border-b border-yideli-line grid grid-cols-3 gap-4">
-            <span class="font-bold text-sm text-yideli-dark">Material</span>
-            <span class="col-span-2 text-gray-600 text-sm">Brass Barrel / Stainless Steel Nib</span>
-          </div>
-          <div class="py-4 border-b border-yideli-line grid grid-cols-3 gap-4">
-            <span class="font-bold text-sm text-yideli-dark">Specs</span>
-            <span class="col-span-2 text-gray-600 text-sm">142mm x 12mm / 35g</span>
-          </div>
-          <div class="py-4 border-b border-yideli-line grid grid-cols-3 gap-4">
-            <span class="font-bold text-sm text-yideli-dark">Usage</span>
-            <span class="col-span-2 text-gray-600 text-sm">Business Signing / Daily Use / Gifting</span>
-          </div>
+  <section class="relative lg:h-[80vh] flex flex-col lg:flex-row overflow-hidden">
+    <!-- Swiper 轮播 -->
+    <div class="swiper w-full h-[80vh] lg:h-auto order-1 lg:order-2 relative">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <img src="{{ asset('images/index-banner-1.jpg') }}" alt="Premium Pen Stationery" class="w-full h-full object-cover">
         </div>
-
-        <button
-          class="w-full lg:w-auto bg-yideli-dark text-white px-10 py-4 text-sm font-medium hover:bg-yideli-hover transition shadow-lg shadow-yideli-dark/20 uppercase tracking-wide">
-          View Details & Quote
-        </button>
+        <div class="swiper-slide">
+          <img src="{{ asset('images/index-banner-2.jpg') }}" alt="Premium Pen Stationery" class="w-full h-full object-cover">
+        </div>
       </div>
+      <!-- 分页器 -->
+      <div class="swiper-pagination absolute bottom-4 left-1/2 transform -translate-x-1/2 z-10"></div>
+      <!-- 导航按钮 -->
+      <div class="swiper-button-prev absolute left-4 top-1/2 transform -translate-y-1/2 z-10 text-white/70 hover:text-white transition"></div>
+      <div class="swiper-button-next absolute right-4 top-1/2 transform -translate-y-1/2 z-10 text-white/70 hover:text-white transition"></div>
     </div>
   </section>
 
@@ -96,38 +49,34 @@
           </div>
         </div>
         <h4 class="text-center font-bold text-yideli-dark text-lg group-hover:underline decoration-1 underline-offset-4">
-          Business Notebook Set</h4>
-        <p class="text-center text-gray-500 text-sm mt-1">A5 / 100g Dowling Paper / Gift Box</p>
+          Planner & Diaries</h4>
       </div>
 
       <div class="min-w-[280px] lg:min-w-[320px] group cursor-pointer">
         <div class="aspect-[4/5] bg-white mb-6 overflow-hidden relative">
-          <img src="{{ asset('images/weekly-calendar-2.jpg') }}"
+          <img src="{{ asset('images/line-circle-book-1.jpg') }}"
             class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
         </div>
         <h4 class="text-center font-bold text-yideli-dark text-lg group-hover:underline decoration-1 underline-offset-4">
-          Minimal Desk Organizer</h4>
-        <p class="text-center text-gray-500 text-sm mt-1">ABS Material / Nordic Design</p>
+          Spiral Notebook</h4>
       </div>
 
       <div class="min-w-[280px] lg:min-w-[320px] group cursor-pointer">
         <div class="aspect-[4/5] bg-white mb-6 overflow-hidden relative">
-          <img src="{{ asset('images/weekly-calendar-3.jpg') }}"
+          <img src="{{ asset('images/notebook-1.jpg') }}"
             class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
         </div>
         <h4 class="text-center font-bold text-yideli-dark text-lg group-hover:underline decoration-1 underline-offset-4">
-          Pro Art Color Pencils</h4>
-        <p class="text-center text-gray-500 text-sm mt-1">48 Colors / Oil-based Core</p>
+          Notebook</h4>
       </div>
 
       <div class="min-w-[280px] lg:min-w-[320px] group cursor-pointer">
-        <div class="aspect-[4/5] bg-[#fbfbee] mb-6 overflow-hidden relative flex justify-center items-center">
-          <img src="{{ asset('images/weekly-calendar-4.jpg') }}"
-            class="w-2/3 h-2/3 object-cover group-hover:scale-105 transition duration-700">
+        <div class="aspect-[4/5] bg-[#fbfbee] mb-6 overflow-hidden relative">
+          <img src="{{ asset('images/binding-book-1.jpg') }}"
+            class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
         </div>
         <h4 class="text-center font-bold text-yideli-dark text-lg group-hover:underline decoration-1 underline-offset-4">
-          Executive Gel Pen</h4>
-        <p class="text-center text-gray-500 text-sm mt-1">0.5mm / Fast-dry Ink</p>
+          Elastic band notebook</h4>
       </div>
     </div>
   </section>
@@ -138,18 +87,14 @@
       <div class="lg:col-span-5 flex flex-col justify-center">
         <span class="text-yideli-dark text-sm font-bold tracking-widest mb-6 uppercase">Our Factory</span>
         <h2 class="text-3xl lg:text-5xl font-serif text-yideli-dark mb-8 leading-tight">
-          From Taizhou,<br>To The World.
+          YIDELI: Crafting a Legacy in Every Page
         </h2>
         <div class="space-y-6 text-gray-600 font-light leading-relaxed">
           <p>
-            Established in 2005, Yideli is located in the beautiful coastal city of Taizhou. As a modern stationery
-            enterprise integrating design, R&D, and production, we have always adhered to the belief that "Quality is
-            Faith".
+            Founded in 1989, YIDELI Industrial Trading Co., Ltd. specializes in the manufacture of high-quality diaries, notebooks, planners, journals, and wire-bound notebooks. We are experts in producing well-crafted covers utilizing materials such as printable PU, solid PU, PVC, and genuine leather.
           </p>
           <p>
-            Our factory boasts a production workshop of over 10,000 square meters, equipped with internationally
-            advanced automated injection and assembly machinery. Whether it is OEM manufacturing or ODM design, we
-            deliver trustworthy products with rigorous standards.
+            Our philosophy is to prioritize excellence over scale, with an unwavering commitment to detail and quality. This principle is the cornerstone of our long-standing partnerships.
           </p>
         </div>
         <div class="mt-10">
@@ -177,6 +122,28 @@
         </div>
       </div>
 
+    </div>
+  </section>
+
+   <section class="bg-yideli-dark text-yideli-base py-16">
+    <div
+      class="max-w-[1600px] mx-auto px-6 lg:px-12 grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-white/10">
+      <div>
+        <span class="block text-4xl lg:text-5xl font-serif font-bold mb-2">2005</span>
+        <span class="text-sm uppercase tracking-widest opacity-80">Established</span>
+      </div>
+      <div>
+        <span class="block text-4xl lg:text-5xl font-serif font-bold mb-2">10k+</span>
+        <span class="text-sm uppercase tracking-widest opacity-80">Square Meters</span>
+      </div>
+      <div>
+        <span class="block text-4xl lg:text-5xl font-serif font-bold mb-2">50+</span>
+        <span class="text-sm uppercase tracking-widest opacity-80">Export Countries</span>
+      </div>
+      <div>
+        <span class="block text-4xl lg:text-5xl font-serif font-bold mb-2">ISO</span>
+        <span class="text-sm uppercase tracking-widest opacity-80">Certified Factory</span>
+      </div>
     </div>
   </section>
 

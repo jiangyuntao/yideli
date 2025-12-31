@@ -89,20 +89,16 @@
 <body
   class="bg-yideli-base text-yideli-text font-sans antialiased selection:bg-yideli-dark selection:text-white overflow-x-hidden">
 
-  <div class="bg-yideli-dark text-yideli-base text-xs py-2 text-center px-4 tracking-wide">
-    <p>Direct Source Factory · OEM/ODM Services · Worldwide Shipping</p>
-  </div>
-
   <header x-data="{ mobileMenu: false, searchOpen: false }"
-    class="sticky top-0 z-50 bg-yideli-base/90 backdrop-blur-sm transition-all duration-300 border-b border-transparent hover:border-yideli-line">
+    class="sticky bg-yideli-dark top-0 z-50 bg-yideli-base/90 backdrop-blur-sm transition-all duration-300 border-b border-transparent hover:border-yideli-line">
     <div class="max-w-[1920px] mx-auto px-6 lg:px-12 h-20 flex justify-between items-center">
       <div class="flex-shrink-0 mr-8">
         <a href="{{ route('index') }}" class="block">
-          <img src="{{ asset('images/logo_big.jpg') }}" alt="Yideli Logo" class="h-12 w-auto object-contain mix-blend-multiply">
+          <img src="{{ asset('images/logo_big.jpg') }}" alt="Yideli Logo" class="h-20 w-auto object-contain">
         </a>
       </div>
 
-      <nav class="hidden lg:flex gap-8 text-sm font-medium tracking-wide">
+      <nav class="hidden lg:flex gap-16 text-sm font-medium tracking-wide " style="margin-top:32px; color: rgb(239 245 230);">
         <a href="{{ route('index', ['lang' => $lang]) }}" class="hover:text-yideli-dark/70 transition">HOME</a>
         <a href="{{ route('page.show', ['lang' => $lang, 'slug' => 'about-us']) }}" class="hover:text-yideli-dark/70 transition">ABOUT US</a>
         <a href="{{ route('product.index', ['lang' => $lang]) }}" class="hover:text-yideli-dark/70 transition">PRODUCT DISPLAY</a>
@@ -111,7 +107,7 @@
         <a href="{{ route('inquire.form', ['lang' => $lang]) }}" class="hover:text-yideli-dark/70 transition">CONTACT US</a>
       </nav>
 
-      <div class="flex items-center gap-6">
+      <div class="flex items-center gap-6" style="margin-top:32px;color:rgb(239 245 230);">
         <div class="relative" x-data="{
             open: false,
             current: 'en_US',
