@@ -81,7 +81,7 @@
     </div>
   </section>
 
-  <section class="py-24 lg:py-32 px-6 lg:px-12 bg-white">
+  <section class="py-24 lg:py-32 px-6 lg:px-12">
     <div class="max-w-[1600px] mx-auto grid lg:grid-cols-12 gap-12 lg:gap-24">
 
       <div class="lg:col-span-5 flex flex-col justify-center">
