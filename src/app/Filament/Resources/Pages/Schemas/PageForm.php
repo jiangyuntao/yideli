@@ -2,7 +2,11 @@
 
 namespace App\Filament\Resources\Pages\Schemas;
 
+use Filament\Forms\Components\Builder;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
@@ -38,16 +42,73 @@ class PageForm
                                         'zh' => 'required',
                                     ]),
 
-                                // 2. 富文本内容 (多语言)
-                                RichEditor::make('content')
-                                    ->label('内容')
-                                    // ->extraAttributes([
-                                    //     'style' => 'min-height: 300px;'
-                                    // ])
-                                    ->columnSpanFull() // 占满整行
-                                    ->fileAttachmentsDisk('public') // 图片上传磁盘
-                                    ->fileAttachmentsDirectory('pages') // 图片存放目录
-                                    ->translatable(),
+                                // Builder 内容构建器
+                                Builder::make('content')
+                                    ->label('页面内容')
+                                    ->blocks([
+                                        // --- 1. Hero 顶部大图 ---
+                                        Builder\Block::make('hero')
+                                            ->label('顶部大图 (Hero)')
+                                            ->schema([
+                                                TextInput::make('heading')->label('主标题'),
+                                                TextInput::make('subheading')->label('副标题'),
+                                                FileUpload::make('image')
+                                                    ->label('背景图')
+                                                    ->image()
+                                                    ->directory('pages')
+                                                    ->required(),
+                                            ]),
+
+                                        // --- 2. 图文混排 (本次优化的核心) ---
+                                        Builder\Block::make('image_text')
+                                            ->label('图文混排')
+                                            ->schema([
+                                                Select::make('layout')
+                                                    ->label('布局方向')
+                                                    ->options([
+                                                        'left_image' => '左图右文',
+                                                        'right_image' => '右图左文',
+                                                    ])
+                                                    ->default('left_image')
+                                                    ->selectablePlaceholder(false)
+                                                    ->columnSpanFull(),
+
+                                                FileUpload::make('image')
+                                                    ->label('配图')
+                                                    ->image()
+                                                    ->directory('pages')
+                                                    ->required()
+                                                    ->columnSpanFull(),
+
+                                                RichEditor::make('text')
+                                                    ->label('文字内容')
+                                                    ->required()
+                                                    ->columnSpanFull(),
+                                            ])
+                                            ->columns(2),
+
+                                        // --- 3. 统计数据 ---
+                                        Builder\Block::make('stats')
+                                            ->label('统计数据栏')
+                                            ->schema([
+                                                Repeater::make('items')
+                                                    ->label('数据项')
+                                                    ->schema([
+                                                        TextInput::make('number')->label('数值')->required(),
+                                                        TextInput::make('label')->label('标签')->required(),
+                                                    ])
+                                                    ->grid(4)
+                                            ]),
+
+                                        // --- 4. 纯文本 ---
+                                        Builder\Block::make('text_content')
+                                            ->label('纯文本段落')
+                                            ->schema([
+                                                TextInput::make('heading')->label('段落标题 (可选)'),
+                                                RichEditor::make('content')->label('正文内容'),
+                                            ]),
+                                    ])
+                                    ->columnSpanFull(),
                             ]),
 
                         // --- 右侧：系统设置 (占 1 列) ---
