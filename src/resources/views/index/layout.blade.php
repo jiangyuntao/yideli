@@ -90,7 +90,7 @@
   class="bg-yideli-base text-yideli-text font-sans antialiased selection:bg-yideli-dark selection:text-white overflow-x-hidden">
 
   <header x-data="{ mobileMenu: false, searchOpen: false }"
-    class="sticky bg-yideli-dark top-0 z-50 bg-yideli-base/90 backdrop-blur-sm transition-all duration-300 border-b border-transparent hover:border-yideli-line">
+    class="sticky bg-yideli-dark top-0 z-50 backdrop-blur-sm transition-all duration-300 shadow-md">
     <div class="max-w-[1920px] mx-auto px-6 lg:px-12 h-20 flex justify-between items-center">
       <div class="flex-shrink-0 mr-8">
         <a href="{{ route('index') }}" class="block">
@@ -100,15 +100,15 @@
 
       <nav class="hidden lg:flex gap-16 text-sm font-medium tracking-wide "
         style="margin-top:32px; color: rgb(239 245 230);">
-        <a href="{{ route('index', ['lang' => $lang]) }}" class="hover:text-yideli-dark/70 transition">HOME</a>
+        <a href="{{ route('index', ['lang' => $lang]) }}" class="hover:text-gray-300 transition">HOME</a>
         <a href="{{ route('page.show', ['lang' => $lang, 'slug' => 'about-us']) }}"
-          class="hover:text-yideli-dark/70 transition">ABOUT US</a>
-        <a href="{{ route('production-process', ['lang' => $lang]) }}"
-          class="hover:text-yideli-dark/70 transition">PRODUCTION PROCESS</a>
-        <a href="{{ route('product.index', ['lang' => $lang]) }}" class="hover:text-yideli-dark/70 transition">PRODUCT
+          class="hover:text-gray-300 transition">ABOUT US</a>
+        <a href="{{ route('production-process', ['lang' => $lang]) }}" class="hover:text-gray-300 transition">PRODUCTION
+          PROCESS</a>
+        <a href="{{ route('product.index', ['lang' => $lang]) }}" class="hover:text-gray-300 transition">PRODUCT
           DISPLAY</a>
-        <a href="{{ route('news.index', ['lang' => $lang]) }}" class="hover:text-yideli-dark/70 transition">NEWS</a>
-        <a href="{{ route('inquire.form', ['lang' => $lang]) }}" class="hover:text-yideli-dark/70 transition">CONTACT
+        <a href="{{ route('news.index', ['lang' => $lang]) }}" class="hover:text-gray-300 transition">NEWS</a>
+        <a href="{{ route('inquire.form', ['lang' => $lang]) }}" class="hover:text-gray-300 transition">CONTACT
           US</a>
       </nav>
 
@@ -126,10 +126,10 @@
             }
         }">
           <button @click="open = !open" @click.outside="open = false"
-            class="flex items-center gap-1 text-sm font-medium hover:text-yideli-dark/70 focus:outline-none">
+            class="flex items-center gap-1 text-sm font-medium hover:text-gray-300 focus:outline-none">
             <span class="font-bold" x-text="current.split('_')[0].toUpperCase()"></span>
-            <svg class="w-3 h-3 text-gray-500 transition-transform duration-200" :class="open ? 'rotate-180' : ''"
-              fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg class="w-3 h-3 text-white transition-transform duration-200 hover:text-gray-300"
+              :class="open ? 'rotate-180' : ''" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
             </svg>
           </button>
@@ -153,7 +153,8 @@
         </div>
         <button @click="mobileMenu = !mobileMenu" class="lg:hidden p-2">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16">
+            </path>
           </svg>
         </button>
       </div>

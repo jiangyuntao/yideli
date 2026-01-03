@@ -74,9 +74,11 @@
 
     <div class="w-full flex flex-col lg:flex-row justify-center items-center gap-4">
 
-      <div class="min-w-[280px] lg:min-w-[320px] group cursor-pointer">
+      @foreach ($categories as $category)
+      <a href="{{ route('product.index', ['lang' => $lang, 'slug' => $category->slug]) }}"
+        class="min-w-[280px] lg:min-w-[320px] group cursor-pointer">
         <div class="aspect-[4/5] bg-white mb-6 overflow-hidden relative">
-          <img src="{{ asset('images/weekly-calendar-1.jpg') }}"
+          <img src="{{ asset('storage/' . $category->cover_image) }}"
             class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
           <div class="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition duration-500"></div>
           <div
@@ -87,35 +89,10 @@
           </div>
         </div>
         <h4 class="text-center font-bold text-yideli-dark text-lg group-hover:underline decoration-1 underline-offset-4">
-          Planner & Diaries</h4>
-      </div>
+          {{ $category->name }}</h4>
+      </a>
+      @endforeach
 
-      <div class="min-w-[280px] lg:min-w-[320px] group cursor-pointer">
-        <div class="aspect-[4/5] bg-white mb-6 overflow-hidden relative">
-          <img src="{{ asset('images/line-circle-book-1.jpg') }}"
-            class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
-        </div>
-        <h4 class="text-center font-bold text-yideli-dark text-lg group-hover:underline decoration-1 underline-offset-4">
-          Spiral Notebook</h4>
-      </div>
-
-      <div class="min-w-[280px] lg:min-w-[320px] group cursor-pointer">
-        <div class="aspect-[4/5] bg-white mb-6 overflow-hidden relative">
-          <img src="{{ asset('images/notebook-1.jpg') }}"
-            class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
-        </div>
-        <h4 class="text-center font-bold text-yideli-dark text-lg group-hover:underline decoration-1 underline-offset-4">
-          Notebook</h4>
-      </div>
-
-      <div class="min-w-[280px] lg:min-w-[320px] group cursor-pointer">
-        <div class="aspect-[4/5] bg-[#fbfbee] mb-6 overflow-hidden relative">
-          <img src="{{ asset('images/binding-book-1.jpg') }}"
-            class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
-        </div>
-        <h4 class="text-center font-bold text-yideli-dark text-lg group-hover:underline decoration-1 underline-offset-4">
-          Elastic band notebook</h4>
-      </div>
     </div>
   </section>
 
@@ -139,7 +116,7 @@
           </p>
         </div>
         <div class="mt-10">
-          <a href="#about"
+          <a href="{{ route('page.show', ['lang' => $lang, 'slug' => 'about-us']) }}"
             class="inline-flex items-center px-8 py-4 border border-yideli-dark text-yideli-dark hover:bg-yideli-dark hover:text-white transition duration-300 uppercase text-sm tracking-wide">
             Explore Our Craft
             <span class="ml-2">→</span>
@@ -147,20 +124,12 @@
         </div>
       </div>
 
-      <div class="lg:col-span-7 grid grid-cols-2 gap-4 items-center">
-        <div class="space-y-4 translate-y-8">
-          <img src="{{ asset('images/yearly-calendar-1.jpg') }}"
-            class="w-full h-64 object-cover grayscale hover:grayscale-0 transition duration-700">
-          <img src="{{ asset('images/yearly-calendar-2.jpg') }}"
-            class="w-full h-80 object-cover grayscale hover:grayscale-0 transition duration-700">
-        </div>
-        <div class="space-y-4">
-          <img src="{{ asset('images/yearly-calendar-3.jpg') }}"
-            class="w-full h-80 object-cover grayscale hover:grayscale-0 transition duration-700">
-          <div class="w-full h-64 bg-yideli-dark flex items-center justify-center p-6 text-center">
-            <p class="text-yideli-base font-serif italic text-xl">"Details make perfection."</p>
-          </div>
-        </div>
+      <div class="lg:col-span-7 relative h-full min-h-[500px]">
+          <video class="absolute inset-0 w-full h-full object-cover rounded-lg shadow-2xl" autoplay loop muted playsinline>
+              <source src="videos/out-factory.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+          </video>
+          <div class="absolute inset-0 bg-black/10 rounded-lg pointer-events-none"></div>
       </div>
 
     </div>
