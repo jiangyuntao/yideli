@@ -92,6 +92,7 @@ class Setting extends SettingsPage
                                     ->label('轮播图片')
                                     ->image()
                                     ->directory('carousel') // 图片存放在 storage/app/public/carousel
+                                    ->disk('public')
                                     ->required()
                                     ->columnSpanFull(),
 
@@ -104,8 +105,7 @@ class Setting extends SettingsPage
                                 TextInput::make('custom_url')
                                     ->label('输入链接地址')
                                     ->placeholder('https://...')
-                                    ->visible(fn(Get $get) => $get('type') === 'url')
-                                    ->required(fn(Get $get) => $get('type') === 'url')
+                                    ->required()
                                     ->columnSpan(1),
 
                                 Select::make('in_new_windows')

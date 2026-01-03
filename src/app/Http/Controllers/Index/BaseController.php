@@ -12,5 +12,6 @@ class BaseController extends Controller
     public function __construct(Request $request)
     {
         $this->data['lang'] = $request->segment(1) ?? 'en';
+        $this->data['settings'] = app('App\Settings\GeneralSettings');
     }
 }

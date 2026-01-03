@@ -5,22 +5,60 @@
 @endsection
 
 @section('main')
-  <section class="relative lg:h-[80vh] flex flex-col lg:flex-row overflow-hidden">
-    <!-- Swiper 轮播 -->
-    <div class="swiper w-full h-[80vh] lg:h-auto order-1 lg:order-2 relative">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide">
-          <img src="{{ asset('images/index-banner-1.jpg') }}" alt="Premium Pen Stationery" class="w-full h-full object-cover">
+  <section x-data="carousel()" x-init="init()" @mouseenter="stopAutoplay()" @mouseleave="startAutoplay()"
+    class="relative w-full mx-auto overflow-hidden shadow-2xl group" x-cloak>
+
+    <div class="flex min-h-40vh md:min-h-[800px] transition-transform duration-700 ease-in-out h-[400px] md:h-[500px]"
+      :style="`transform: translateX(-${active * 100}%)`">
+
+      <template x-for="(slide, index) in slides" :key="index">
+        <div class="w-full flex-shrink-0 relative h-full">
+
+          <a :href="slide.custom_url || '#'" :target="slide.in_new_windows == 1 ? '_blank' : '_self'"
+            class="block w-full h-full relative cursor-pointer">
+
+            <img :src="getImageUrl(slide.image)" :alt="slide.title" class="w-full h-full object-cover">
+
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-90"></div>
+
+            <div class="absolute bottom-0 left-0 p-8 w-full md:w-2/3">
+              <h2
+                class="text-white text-2xl md:text-4xl font-bold leading-tight drop-shadow-md transform transition-all duration-500 translate-y-0"
+                x-text="slide.title"></h2>
+
+              <div class="mt-4 inline-flex items-center text-white/80 text-sm font-medium hover:text-white transition">
+                <span>阅读详情</span>
+                <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3">
+                  </path>
+                </svg>
+              </div>
+            </div>
+          </a>
         </div>
-        <div class="swiper-slide">
-          <img src="{{ asset('images/index-banner-2.jpg') }}" alt="Premium Pen Stationery" class="w-full h-full object-cover">
-        </div>
-      </div>
-      <!-- 分页器 -->
-      <div class="swiper-pagination absolute bottom-4 left-1/2 transform -translate-x-1/2 z-10"></div>
-      <!-- 导航按钮 -->
-      <div class="swiper-button-prev absolute left-4 top-1/2 transform -translate-y-1/2 z-10 text-white/70 hover:text-white transition"></div>
-      <div class="swiper-button-next absolute right-4 top-1/2 transform -translate-y-1/2 z-10 text-white/70 hover:text-white transition"></div>
+      </template>
+    </div>
+
+    <button @click="prev()"
+      class="absolute opacity-100 left-4 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/30 backdrop-blur-sm text-white p-3 rounded-full transition-all duration-300 opacity-0 group-hover:opacity-100 focus:outline-none translate-x-4 group-hover:translate-x-0">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+      </svg>
+    </button>
+
+    <button @click="next()"
+      class="absolute opacity-100 right-4 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/30 backdrop-blur-sm text-white p-3 rounded-full transition-all duration-300 opacity-0 group-hover:opacity-100 focus:outline-none -translate-x-4 group-hover:translate-x-0">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+      </svg>
+    </button>
+
+    <div class="absolute bottom-6 right-6 flex space-x-2">
+      <template x-for="(slide, index) in slides" :key="index">
+        <button @click="active = index" class="h-2 rounded-full transition-all duration-300 focus:outline-none"
+          :class="active === index ? 'w-8 bg-white' : 'w-2 bg-white/50 hover:bg-white/80'">
+        </button>
+      </template>
     </div>
   </section>
 
@@ -91,10 +129,13 @@
         </h2>
         <div class="space-y-6 text-gray-600 font-light leading-relaxed">
           <p>
-            Founded in 1989, YIDELI Industrial Trading Co., Ltd. specializes in the manufacture of high-quality diaries, notebooks, planners, journals, and wire-bound notebooks. We are experts in producing well-crafted covers utilizing materials such as printable PU, solid PU, PVC, and genuine leather.
+            Founded in 1989, YIDELI Industrial Trading Co., Ltd. specializes in the manufacture of high-quality diaries,
+            notebooks, planners, journals, and wire-bound notebooks. We are experts in producing well-crafted covers
+            utilizing materials such as printable PU, solid PU, PVC, and genuine leather.
           </p>
           <p>
-            Our philosophy is to prioritize excellence over scale, with an unwavering commitment to detail and quality. This principle is the cornerstone of our long-standing partnerships.
+            Our philosophy is to prioritize excellence over scale, with an unwavering commitment to detail and quality.
+            This principle is the cornerstone of our long-standing partnerships.
           </p>
         </div>
         <div class="mt-10">
@@ -125,7 +166,7 @@
     </div>
   </section>
 
-   <section class="bg-yideli-dark text-yideli-base py-16">
+  <section class="bg-yideli-dark text-yideli-base py-16">
     <div
       class="max-w-[1600px] mx-auto px-6 lg:px-12 grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-white/10">
       <div>
@@ -150,4 +191,45 @@
   <section class="py-6 lg:py-12 px-6 lg:px-12 bg-[#fcfcef]">
     <img class="w-full lg:max-w-[800px] mx-auto" src="{{ asset('images/cert.jpg') }}" alt="">
   </section>
+@endsection
+
+@section('script')
+  <script>
+    function carousel() {
+      return {
+        active: 0,
+        interval: null,
+        slides: @json($settings->home_carousel),
+
+        init() {
+          this.startAutoplay();
+        },
+
+        getImageUrl(path) {
+          if (path.startsWith('http')) {
+            return path;
+          }
+          return '/storage/' + path;
+        },
+
+        next() {
+          this.active = this.active === this.slides.length - 1 ? 0 : this.active + 1;
+        },
+
+        prev() {
+          this.active = this.active === 0 ? this.slides.length - 1 : this.active - 1;
+        },
+
+        startAutoplay() {
+          this.interval = setInterval(() => {
+            this.next();
+          }, 5000);
+        },
+
+        stopAutoplay() {
+          clearInterval(this.interval);
+        }
+      }
+    }
+  </script>
 @endsection
