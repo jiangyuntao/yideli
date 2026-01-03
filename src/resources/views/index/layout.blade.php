@@ -98,13 +98,18 @@
         </a>
       </div>
 
-      <nav class="hidden lg:flex gap-16 text-sm font-medium tracking-wide " style="margin-top:32px; color: rgb(239 245 230);">
+      <nav class="hidden lg:flex gap-16 text-sm font-medium tracking-wide "
+        style="margin-top:32px; color: rgb(239 245 230);">
         <a href="{{ route('index', ['lang' => $lang]) }}" class="hover:text-yideli-dark/70 transition">HOME</a>
-        <a href="{{ route('page.show', ['lang' => $lang, 'slug' => 'about-us']) }}" class="hover:text-yideli-dark/70 transition">ABOUT US</a>
-        <a href="{{ route('product.index', ['lang' => $lang]) }}" class="hover:text-yideli-dark/70 transition">PRODUCT DISPLAY</a>
-        <a href="{{ route('production-process', ['lang' => $lang]) }}" class="hover:text-yideli-dark/70 transition">PRODUCTION PROCESS</a>
+        <a href="{{ route('page.show', ['lang' => $lang, 'slug' => 'about-us']) }}"
+          class="hover:text-yideli-dark/70 transition">ABOUT US</a>
+        <a href="{{ route('production-process', ['lang' => $lang]) }}"
+          class="hover:text-yideli-dark/70 transition">PRODUCTION PROCESS</a>
+        <a href="{{ route('product.index', ['lang' => $lang]) }}" class="hover:text-yideli-dark/70 transition">PRODUCT
+          DISPLAY</a>
         <a href="{{ route('news.index', ['lang' => $lang]) }}" class="hover:text-yideli-dark/70 transition">NEWS</a>
-        <a href="{{ route('inquire.form', ['lang' => $lang]) }}" class="hover:text-yideli-dark/70 transition">CONTACT US</a>
+        <a href="{{ route('inquire.form', ['lang' => $lang]) }}" class="hover:text-yideli-dark/70 transition">CONTACT
+          US</a>
       </nav>
 
       <div class="flex items-center gap-6" style="margin-top:32px;color:rgb(239 245 230);">
@@ -158,11 +163,15 @@
       class="lg:hidden absolute top-full left-0 w-full bg-yideli-base border-t border-yideli-line shadow-lg">
       <div class="flex flex-col p-6 gap-4 text-lg font-serif text-yideli-dark">
         <a href="{{ route('index', ['lang' => $lang]) }}" class="py-2 border-b border-yideli-line/30">HOME</a>
-        <a href="{{ route('page.show', ['lang' => $lang, 'slug' => 'about-us']) }}" class="py-2 border-b border-yideli-line/30">ABOUT US</a>
-        <a href="{{ route('production-process', ['lang' => $lang]) }}" class="py-2 border-b border-yideli-line/30">PRODUCTION PROCESS</a>
-        <a href="{{ route('product.index', ['lang' => $lang]) }}" class="py-2 border-b border-yideli-line/30">PRODUCT DISPLAY</a>
+        <a href="{{ route('page.show', ['lang' => $lang, 'slug' => 'about-us']) }}"
+          class="py-2 border-b border-yideli-line/30">ABOUT US</a>
+        <a href="{{ route('product.index', ['lang' => $lang]) }}" class="py-2 border-b border-yideli-line/30">PRODUCT
+          DISPLAY</a>
+        <a href="{{ route('production-process', ['lang' => $lang]) }}"
+          class="py-2 border-b border-yideli-line/30">PRODUCTION PROCESS</a>
         <a href="{{ route('news.index', ['lang' => $lang]) }}" class="py-2 border-b border-yideli-line/30">NEWS</a>
-        <a href="{{ route('inquire.form', ['lang' => $lang]) }}" class="py-2 border-b border-yideli-line/30">CONTACT US</a>
+        <a href="{{ route('inquire.form', ['lang' => $lang]) }}" class="py-2 border-b border-yideli-line/30">CONTACT
+          US</a>
       </div>
     </div>
   </header>
