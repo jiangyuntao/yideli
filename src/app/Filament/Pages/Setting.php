@@ -2,15 +2,22 @@
 
 namespace App\Filament\Pages;
 
+use App\Models\News;
+use App\Models\Page;
+use App\Models\Product;
 use App\Settings\GeneralSettings;
 use BackedEnum;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Pages\SettingsPage;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Utilities\Get;
+use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
 
 class Setting extends SettingsPage
@@ -73,6 +80,49 @@ class Setting extends SettingsPage
                             ]),
                     ])
                     ->columnSpanFull(),
+
+                Section::make('轮播图设置')
+                    ->columnSpan(2)
+                    ->schema([
+                        Repeater::make('home_carousel') // 存入数据库的字段名
+                            ->label('首页轮播图配置')
+                            ->schema([
+                                // 1. 上传图片
+                                FileUpload::make('image')
+                                    ->label('轮播图片')
+                                    ->image()
+                                    ->directory('carousel') // 图片存放在 storage/app/public/carousel
+                                    ->required()
+                                    ->columnSpanFull(),
+
+                                // 2. 标题（可选）
+                                TextInput::make('title')
+                                    ->label('显示标题')
+                                    ->columnSpan(2),
+
+                                // 5. 外部链接输入框 (仅当类型为 url 时显示)
+                                TextInput::make('custom_url')
+                                    ->label('输入链接地址')
+                                    ->placeholder('https://...')
+                                    ->visible(fn(Get $get) => $get('type') === 'url')
+                                    ->required(fn(Get $get) => $get('type') === 'url')
+                                    ->columnSpan(1),
+
+                                Select::make('in_new_windows')
+                                    ->label('是否在新窗口打开')
+                                    ->options([
+                                        '1' => '是',
+                                        '0' => '否',
+                                    ])
+                                    ->default('0')
+                                    ->native(false)
+                                    ->columnSpan(1),
+                            ])
+                            ->columns(2) // 布局为两列
+                            ->grid(1) // 列表显示模式
+                            ->itemLabel(fn(array $state): ?string => $state['title'] ?? null) // 折叠时显示标题
+                            ->collapsible(),
+                    ]),
             ]);
     }
 }
