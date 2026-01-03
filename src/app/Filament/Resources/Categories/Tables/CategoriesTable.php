@@ -7,6 +7,7 @@ use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ForceDeleteBulkAction;
 use Filament\Actions\RestoreBulkAction;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Filters\TrashedFilter;
@@ -20,8 +21,13 @@ class CategoriesTable
             ->columns([
                 TextColumn::make('name')
                     ->label('名称')
-                    ->searchable()
-                    ->sortable(),
+                    ->searchable(),
+
+                ImageColumn::make('cover_image')
+                    ->label('封面图')
+                    ->disk('public')
+                    ->imageHeight(50),
+
                 ToggleColumn::make('is_visible')
                     ->label('是否可见'),
             ])

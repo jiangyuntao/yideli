@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Categories\Schemas;
 
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -62,6 +63,14 @@ class CategoryForm
                                     )
                                     // 优化显示：因为 name 是 JSON，用 Accessor 获取当前语言的字符串
                                     ->getOptionLabelFromRecordUsing(fn($record) => $record->name),
+
+                                FileUpload::make('cover_image')
+                                    ->label('封面图')
+                                    ->disk('public')
+                                    ->directory('category-images')
+                                    ->image()
+                                    ->maxSize(1024 * 2) // 2MB
+                                    ->helperText('建议上传 400x500px 的图片'),
 
                                 TextInput::make('sort_order')
                                     ->label('排序')
