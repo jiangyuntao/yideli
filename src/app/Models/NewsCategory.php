@@ -24,4 +24,9 @@ class NewsCategory extends Model
     {
         return $this->hasMany(self::class, 'parent_id');
     }
+
+    public function entries()
+    {
+        return $this->hasMany(News::class, 'category_id', 'id');
+    }
 }

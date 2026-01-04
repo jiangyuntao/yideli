@@ -47,87 +47,38 @@
 
       <div class="lg:col-span-8 space-y-12">
 
+        @foreach ($entries as $entry)
         <article
           class="flex flex-col md:flex-row gap-8 group news-card-hover cursor-pointer border-b border-gray-100 pb-12">
-          <a href="{{ route('news.show', ['lang' => $lang, 'slug' => 'expansion-of-automated-production-line-completed']) }}"
+          <a href="{{ route('news.show', ['lang' => $lang, 'slug' => $entry->slug]) }}"
             class="w-full md:w-1/3 aspect-[4/3] overflow-hidden bg-gray-100">
-            <img src="{{ asset('images/line-circel-book-4.jpg') }}"
-              class="w-full h-full object-cover news-image transition duration-700" alt="Factory">
+            <img src="{{ asset('storage/' . $entry->cover_image) }}"
+              class="w-full h-full object-cover news-image transition duration-700" alt="{{ $entry->title }}">
           </a>
-          <a href="{{ route('news.show', ['lang' => $lang, 'slug' => 'expansion-of-automated-production-line-completed']) }}"
+          <div href="{{ route('news.show', ['lang' => $lang, 'slug' => $entry->slug]) }}"
             class="w-full md:w-2/3 flex flex-col justify-center">
             <div class="flex items-center gap-3 text-xs text-gray-400 mb-3 uppercase tracking-wide">
-              <span class="text-yideli-dark font-bold">Company News</span> • Dec 15, 2025
+              <span class="text-yideli-dark font-bold">{{ $entry->category->name }}</span> • {{ $entry->published_at }}
             </div>
             <h3 class="text-xl font-serif text-yideli-dark mb-3 group-hover:text-yideli-hover transition">
-              Expansion of Automated Production Line Completed
-            </h3>
-            <p class="text-gray-500 font-light text-sm mb-4 leading-relaxed line-clamp-2">
-              To meet growing international demand, Yideli has successfully upgraded Workshop B with fully automated
-              injection molding equipment, increasing daily output by 40%.
-            </p>
-            <div class="relative w-max">
-              <a href="{{ route('news.show', ['lang' => $lang, 'slug' => 'expansion-of-automated-production-line-completed']) }}"
-                class="text-xs font-bold uppercase tracking-widest text-yideli-dark">Read More</a>
-              <div
-                class="read-more-line absolute bottom-[-2px] left-0 w-0 h-[1px] bg-yideli-dark transition-all duration-300">
-              </div>
-            </div>
-          </a>
-        </article>
-
-        <article
-          class="flex flex-col md:flex-row gap-8 group news-card-hover cursor-pointer border-b border-gray-100 pb-12">
-          <div class="w-full md:w-1/3 aspect-[4/3] overflow-hidden bg-gray-100">
-            <img src="{{ asset('images/notebook-1.jpg') }}"
-              class="w-full h-full object-cover news-image transition duration-700" alt="Trends">
-          </div>
-          <div class="w-full md:w-2/3 flex flex-col justify-center">
-            <div class="flex items-center gap-3 text-xs text-gray-400 mb-3 uppercase tracking-wide">
-              <span class="text-yideli-dark font-bold">Industry Trends</span> • Nov 02, 2025
-            </div>
-            <h3 class="text-xl font-serif text-yideli-dark mb-3 group-hover:text-yideli-hover transition">
-              2026 Stationery Trend Forecast: Sustainable & Minimalist
+              {{ $entry->title }}
             </h3>
             <p class="text-gray-500 font-light text-sm mb-4 leading-relaxed line-clamp-2">
               Our R&D team analyzes the upcoming trends for the European and North American markets. Recycled materials
               and muted, earthy tones are set to dominate the shelves.
             </p>
             <div class="relative w-max">
-              <span class="text-xs font-bold uppercase tracking-widest text-yideli-dark">Read More</span>
+              <div href="{{ route('news.show', ['lang' => $lang, 'slug' => $entry->slug]) }}"
+                class="text-xs font-bold uppercase tracking-widest text-yideli-dark">Read More</div>
               <div
                 class="read-more-line absolute bottom-[-2px] left-0 w-0 h-[1px] bg-yideli-dark transition-all duration-300">
               </div>
             </div>
           </div>
         </article>
+        @endforeach
 
-        <article
-          class="flex flex-col md:flex-row gap-8 group news-card-hover cursor-pointer border-b border-gray-100 pb-12">
-          <div class="w-full md:w-1/3 aspect-[4/3] overflow-hidden bg-gray-100">
-            <img src="{{ asset('images/yearly-calendar-4.jpg') }}"
-              class="w-full h-full object-cover news-image transition duration-700" alt="Team">
-          </div>
-          <div class="w-full md:w-2/3 flex flex-col justify-center">
-            <div class="flex items-center gap-3 text-xs text-gray-400 mb-3 uppercase tracking-wide">
-              <span class="text-yideli-dark font-bold">Company News</span> • Sep 10, 2025
-            </div>
-            <h3 class="text-xl font-serif text-yideli-dark mb-3 group-hover:text-yideli-hover transition">
-              Yideli Receives ISO 14001 Environmental Certification
-            </h3>
-            <p class="text-gray-500 font-light text-sm mb-4 leading-relaxed line-clamp-2">
-              We are proud to announce that our factory has passed the rigorous ISO 14001 audit, reaffirming our
-              commitment to green manufacturing processes.
-            </p>
-            <div class="relative w-max">
-              <span class="text-xs font-bold uppercase tracking-widest text-yideli-dark">Read More</span>
-              <div
-                class="read-more-line absolute bottom-[-2px] left-0 w-0 h-[1px] bg-yideli-dark transition-all duration-300">
-              </div>
-            </div>
-          </div>
-        </article>
-
+        {{ $entries->links() }}
         <div class="flex gap-2 pt-4">
           <button
             class="px-4 py-2 border border-yideli-dark bg-yideli-dark text-white text-xs uppercase tracking-widest">1</button>
@@ -158,38 +109,19 @@
         <div>
           <h4 class="font-serif text-lg text-yideli-dark mb-4">Categories</h4>
           <ul class="space-y-3 text-sm font-light text-gray-600">
+            @foreach ($news_categories as $category)
             <li>
-              <a href="#" class="flex justify-between items-center hover:text-yideli-dark group">
-                <span>Company News</span>
+              <a href="{{ route('news.index', ['lang' => $lang,'slug' => $category->slug]) }}" class="flex justify-between items-center hover:text-yideli-dark group">
+                <span>{{ $category->name }}</span>
                 <span
-                  class="text-xs bg-gray-100 px-2 py-0.5 rounded-full group-hover:bg-yideli-base group-hover:text-yideli-dark">12</span>
+                  class="text-xs bg-gray-100 px-2 py-0.5 rounded-full group-hover:bg-yideli-base group-hover:text-yideli-dark">{{ $category->entries->count() }}</span>
               </a>
             </li>
-            <li>
-              <a href="#" class="flex justify-between items-center hover:text-yideli-dark group">
-                <span>Industry Insights</span>
-                <span
-                  class="text-xs bg-gray-100 px-2 py-0.5 rounded-full group-hover:bg-yideli-base group-hover:text-yideli-dark">5</span>
-              </a>
-            </li>
-            <li>
-              <a href="#" class="flex justify-between items-center hover:text-yideli-dark group">
-                <span>Exhibitions</span>
-                <span
-                  class="text-xs bg-gray-100 px-2 py-0.5 rounded-full group-hover:bg-yideli-base group-hover:text-yideli-dark">3</span>
-              </a>
-            </li>
-            <li>
-              <a href="#" class="flex justify-between items-center hover:text-yideli-dark group">
-                <span>New Products</span>
-                <span
-                  class="text-xs bg-gray-100 px-2 py-0.5 rounded-full group-hover:bg-yideli-base group-hover:text-yideli-dark">8</span>
-              </a>
-            </li>
+            @endforeach
           </ul>
         </div>
 
-        <div>
+        {{-- <div>
           <h4 class="font-serif text-lg text-yideli-dark mb-4">Tags</h4>
           <div class="flex flex-wrap gap-2">
             <a href="#"
@@ -204,7 +136,7 @@
               class="text-xs border border-gray-200 px-3 py-1.5 text-gray-500 hover:border-yideli-dark hover:text-yideli-dark transition">Canton
               Fair</a>
           </div>
-        </div>
+        </div> --}}
       </aside>
 
     </div>
