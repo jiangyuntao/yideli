@@ -19,49 +19,44 @@ class PageForm
     {
         return $schema
             ->components([
-                Grid::make(3)
+                Section::make('基础信息')
                     ->schema([
-                        // --- 左侧：主要内容区域 (占 2 列) ---
-                        Section::make('页面内容')
-                            ->columnSpan(2)
-                            ->schema([
-                                // 1. 标题 (多语言)
-                                TextInput::make('title')
-                                    ->label('标题')
-                                    ->maxLength(255)
-                                    // 自动Slug生成逻辑：输入标题时自动填充 Key
-                                    ->live(onBlur: true)
-                                    ->afterStateUpdated(function ($state, callable $set, $operation) {
-                                        // 仅在创建时自动生成，防止编辑时破坏现有链接
-                                        if ($operation === 'create') {
-                                            $set('key', Str::slug($state, '-')); // 使用下划线风格，如 about_us
-                                        }
-                                    })
-                                    // 仅中文必填
-                                    ->translatable(true, null, [
-                                        'zh' => 'required',
-                                    ]),
+                        TextInput::make('title')
+                            ->label('标题')
+                            ->maxLength(255)
+                            // 自动Slug生成逻辑：输入标题时自动填充 Key
+                            ->live(onBlur: true)
+                            ->afterStateUpdated(function ($state, callable $set, $operation) {
+                                // 仅在创建时自动生成，防止编辑时破坏现有链接
+                                if ($operation === 'create') {
+                                    $set('key', Str::slug($state, '-')); // 使用下划线风格，如 about_us
+                                }
+                            })
+                            // 仅中文必填
+                            ->translatable(true, null, [
+                                'zh' => 'required',
+                            ]),
 
-                                // Builder 内容构建器
-                                Builder::make('content')
-                                    ->label('页面内容')
-                                    ->blocks([
-                                        // --- 1. Hero 顶部大图 ---
-                                        Builder\Block::make('hero')
-                                            ->label('顶部大图 (Hero)')
-                                            ->schema([
-                                                TextInput::make('heading')->label('主标题'),
-                                                TextInput::make('subheading')->label('副标题'),
-                                                FileUpload::make('image')
-                                                    ->label('背景图')
-                                                    ->image()
-                                                    ->directory('pages')
-                                                    ->required(),
-                                            ]),
+                        TextInput::make('slug')
+                            ->label('美化URL')
+                            ->helperText('用于构建页面的URL，如 https://example.com/your-slug')
+                            ->required()
+                            ->maxLength(100)
+                            // 唯一性验证，编辑时忽略自己
+                            ->unique(ignoreRecord: true),
+                    ])
+                    ->columnSpanFull(),
 
-                                        // --- 2. 图文混排 (本次优化的核心) ---
-                                        Builder\Block::make('image_text')
-                                            ->label('图文混排')
+                Section::make('页面构建')
+                    ->schema([
+                        // Builder 内容构建器
+                        Builder::make('content')
+                            ->label('内容')
+                            ->blocks([
+                                Builder\Block::make('image_text')
+                                    ->label('图文混排')
+                                    ->schema([
+                                        Grid::make(3)
                                             ->schema([
                                                 Select::make('layout')
                                                     ->label('布局方向')
@@ -70,60 +65,49 @@ class PageForm
                                                         'right_image' => '右图左文',
                                                     ])
                                                     ->default('left_image')
-                                                    ->selectablePlaceholder(false)
-                                                    ->columnSpanFull(),
-
-                                                FileUpload::make('image')
-                                                    ->label('配图')
-                                                    ->image()
-                                                    ->directory('pages')
-                                                    ->required()
-                                                    ->columnSpanFull(),
-
-                                                RichEditor::make('text')
-                                                    ->label('文字内容')
-                                                    ->required()
-                                                    ->columnSpanFull(),
-                                            ])
-                                            ->columns(2),
-
-                                        // --- 3. 统计数据 ---
-                                        Builder\Block::make('stats')
-                                            ->label('统计数据栏')
-                                            ->schema([
-                                                Repeater::make('items')
-                                                    ->label('数据项')
-                                                    ->schema([
-                                                        TextInput::make('number')->label('数值')->required(),
-                                                        TextInput::make('label')->label('标签')->required(),
+                                                    ->native(false),
+                                                Select::make('ratio')
+                                                    ->label('左右比例')
+                                                    ->options([
+                                                        '1:2' => '1:2',
+                                                        '1:1' => '1:1',
+                                                        '2:1' => '2:1',
                                                     ])
-                                                    ->grid(4)
-                                            ]),
+                                                    ->default('1:1')
+                                                    ->native(false),
+                                                Select::make('image_sort')
+                                                    ->label('图片排序')
+                                                    ->options([
+                                                        'up_down' => '从上到下',
+                                                        'left_right' => '从左到右',
+                                                    ])
+                                                    ->default('up_down')
+                                                    ->native(false),
+                                            ])
+                                            ->columnSpanFull(),
 
-                                        // --- 4. 纯文本 ---
-                                        Builder\Block::make('text_content')
-                                            ->label('纯文本段落')
-                                            ->schema([
-                                                TextInput::make('heading')->label('段落标题 (可选)'),
-                                                RichEditor::make('content')->label('正文内容'),
-                                            ]),
+                                        FileUpload::make('images')
+                                            ->label('配图')
+                                            ->helperText('支持多张图片，建议图片数量为1、2、4、6、9')
+                                            ->image()
+                                            ->multiple()
+                                            ->directory('pages')
+                                            ->required()
+                                            ->columnSpanFull(),
+
+                                        RichEditor::make('text')
+                                            ->label('文字内容')
+                                            ->required()
+                                            ->columnSpanFull(),
                                     ])
-                                    ->columnSpanFull(),
-                            ]),
+                                    ->columns(2),
 
-                        // --- 右侧：系统设置 (占 1 列) ---
-                        Section::make('设置')
-                            ->columnSpan(1)
-                            ->schema([
-                                // 3. Key (唯一标识符)
-                                TextInput::make('slug')
-                                    ->label('美化URL')
-                                    ->helperText('用于构建页面的URL，如 https://example.com/your-slug')
-                                    ->required()
-                                    ->maxLength(100)
-                                    // 唯一性验证，编辑时忽略自己
-                                    ->unique(ignoreRecord: true),
-                            ]),
+                                Builder\Block::make('text_content')
+                                    ->label('富文本')
+                                    ->schema([
+                                        RichEditor::make('content')->label('正文内容'),
+                                    ]),
+                                ]),
                     ])
                     ->columnSpanFull(),
             ]);
