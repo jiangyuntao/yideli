@@ -37,7 +37,7 @@ class AdminPanelProvider extends PanelProvider
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
             ->pages([
-                Dashboard::class,
+                // Dashboard::class,
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
             ->widgets([
@@ -61,12 +61,12 @@ class AdminPanelProvider extends PanelProvider
             ->plugins([
                 FilamentTranslatableFieldsPlugin::make()
                     ->supportedLocales([
-                        'zh_CN' => '简体中文', // 简体中文（中国）
-                        'en_US' => '英语', // 英语（美国）
-                        'ru_RU' => '俄语', // 俄语（俄罗斯）
-                        'es_ES' => '西班牙语', // 西班牙语（西班牙）
-                        'fr_FR' => '法语', // 法语（法国）
-                        'ar_SA' => '阿拉伯语', // 阿拉伯语（沙特）
+                        'zh' => '简体中文', // 简体中文（中国）
+                        'en' => '英语', // 英语（美国）
+                        'ru' => '俄语', // 俄语（俄罗斯）
+                        'es' => '西班牙语', // 西班牙语（西班牙）
+                        'fr' => '法语', // 法语（法国）
+                        'ar' => '阿拉伯语', // 阿拉伯语（沙特）
                     ]),
                 FilamentShieldPlugin::make(),
             ]);
