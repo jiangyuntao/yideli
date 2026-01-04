@@ -14,6 +14,8 @@ class GeneralSettings extends Settings
     public ?string $contact_email;
     public ?string $contact_address;
     public ?string $contact_phone;
+    public ?string $contact_linkedin;
+    public ?string $contact_whatsapp;
     public ?array $home_carousel; // 首页轮播图
     public bool $is_active; // 网站维护开关
 

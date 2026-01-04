@@ -191,9 +191,9 @@
           ISO 9001 Certified Enterprise
         </p>
         <div class="text-white/70 text-sm space-y-2">
-          <p>Add: No. 123, Industrial Zone, Taizhou, China</p>
-          <p>Tel: +86 123 4567 8900</p>
-          <p>Email: sales@yideli.com</p>
+          <p>Add: {{ $settings->contact_address }}</p>
+          <p>Tel: {{ $settings->contact_phone }}</p>
+          <p>Email: {{ $settings->contact_email }}</p>
         </div>
       </div>
 

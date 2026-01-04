@@ -73,11 +73,14 @@ class Setting extends SettingsPage
                                     ->label('联系邮箱')
                                     ->email(),
                                 TextInput::make('contact_address')
-                                    ->label('地址')
-                                    ->email(),
+                                    ->label('地址'),
                                 TextInput::make('contact_phone')
                                     ->label('联系电话')
                                     ->tel(),
+                                TextInput::make('contact_linkedin')
+                                    ->label('LinkedIn 账号'),
+                                TextInput::make('contact_whatsapp')
+                                    ->label('WhatsApp 账号'),
                             ]),
                     ])
                     ->columnSpanFull(),

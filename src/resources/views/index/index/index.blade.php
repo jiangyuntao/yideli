@@ -27,7 +27,7 @@
                 x-text="slide.title"></h2>
 
               <div class="mt-4 inline-flex items-center text-white/80 text-sm font-medium hover:text-white transition">
-                <span>阅读详情</span>
+                <span>READ MORE</span>
                 <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3">
                   </path>
@@ -75,22 +75,23 @@
     <div class="w-full flex flex-col lg:flex-row justify-center items-center gap-4">
 
       @foreach ($categories as $category)
-      <a href="{{ route('product.index', ['lang' => $lang, 'slug' => $category->slug]) }}"
-        class="min-w-[280px] lg:min-w-[320px] group cursor-pointer">
-        <div class="aspect-[4/5] bg-white mb-6 overflow-hidden relative">
-          <img src="{{ asset('storage/' . $category->cover_image) }}"
-            class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
-          <div class="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition duration-500"></div>
-          <div
-            class="absolute bottom-4 left-0 w-full text-center opacity-0 group-hover:opacity-100 transition duration-500 translate-y-4 group-hover:translate-y-0">
-            <span
-              class="bg-white/90 px-4 py-2 text-xs font-bold uppercase tracking-widest text-yideli-dark shadow-sm">Quick
-              View</span>
+        <a href="{{ route('product.index', ['lang' => $lang, 'slug' => $category->slug]) }}"
+          class="min-w-[280px] lg:min-w-[320px] group cursor-pointer">
+          <div class="aspect-[4/5] bg-white mb-6 overflow-hidden relative">
+            <img src="{{ asset('storage/' . $category->cover_image) }}"
+              class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition duration-500"></div>
+            <div
+              class="absolute bottom-4 left-0 w-full text-center opacity-0 group-hover:opacity-100 transition duration-500 translate-y-4 group-hover:translate-y-0">
+              <span
+                class="bg-white/90 px-4 py-2 text-xs font-bold uppercase tracking-widest text-yideli-dark shadow-sm">Quick
+                View</span>
+            </div>
           </div>
-        </div>
-        <h4 class="text-center font-bold text-yideli-dark text-lg group-hover:underline decoration-1 underline-offset-4">
-          {{ $category->name }}</h4>
-      </a>
+          <h4 class="text-center font-bold text-yideli-dark text-lg group-hover:underline decoration-1 underline-offset-4">
+            {{ $category->name }}
+          </h4>
+        </a>
       @endforeach
 
     </div>
@@ -125,11 +126,11 @@
       </div>
 
       <div class="lg:col-span-7 relative h-full min-h-[500px]">
-          <video class="absolute inset-0 w-full h-full object-cover rounded-lg shadow-2xl" autoplay loop muted playsinline>
-              <source src="videos/out-factory.mp4" type="video/mp4">
-              Your browser does not support the video tag.
-          </video>
-          <div class="absolute inset-0 bg-black/10 rounded-lg pointer-events-none"></div>
+        <video class="absolute inset-0 w-full h-full object-cover rounded-lg shadow-2xl" autoplay loop muted playsinline>
+          <source src="videos/out-factory.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <div class="absolute inset-0 bg-black/10 rounded-lg pointer-events-none"></div>
       </div>
 
     </div>
