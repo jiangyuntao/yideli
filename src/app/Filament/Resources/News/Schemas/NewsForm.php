@@ -4,12 +4,14 @@ namespace App\Filament\Resources\News\Schemas;
 
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Str;
 
 class NewsForm
@@ -42,15 +44,10 @@ class NewsForm
                                 TextInput::make('slug')
                                     ->label('美化URL')
                                     ->maxLength(255)
-                                    ->translatable(true, null, [
-                                        'zh' => 'required',
-                                    ]),
+                                    ->translatable(),
 
                                 RichEditor::make('content')
-                                    ->label('Content')
-                                    // ->extraAttributes([
-                                    //     'style' => 'height: 300px;'
-                                    // ])
+                                    ->label('内容')
                                     ->columnSpanFull()
                                     ->fileAttachmentsDisk('public')
                                     ->fileAttachmentsDirectory('news')
@@ -74,6 +71,16 @@ class NewsForm
                                             ? "{$record->parent->name} > {$record->name}" // 显示父子层级
                                             : $record->name
                                     ),
+
+                                Radio::make('is_featured')
+                                    ->label('是否精选')
+                                    ->helperText('新闻首页顶部显示最新精选')
+                                    ->options([
+                                        '1' => '是',
+                                        '0' => '否',
+                                    ])
+                                    ->default('0')
+                                    ->inline(),
 
                                 FileUpload::make('cover_image')
                                     ->label('封面图')

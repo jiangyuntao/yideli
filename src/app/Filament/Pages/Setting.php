@@ -2,9 +2,6 @@
 
 namespace App\Filament\Pages;
 
-use App\Models\News;
-use App\Models\Page;
-use App\Models\Product;
 use App\Settings\GeneralSettings;
 use BackedEnum;
 use Filament\Forms\Components\FileUpload;
@@ -16,8 +13,6 @@ use Filament\Forms\Components\Toggle;
 use Filament\Pages\SettingsPage;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
-use Filament\Schemas\Components\Utilities\Get;
-use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
 
 class Setting extends SettingsPage

@@ -11,24 +11,24 @@
   <section class="max-w-[1200px] mx-auto px-6 lg:px-12 -mt-10 relative z-10 mb-20">
     <div
       class="bg-white shadow-xl border border-gray-100 grid lg:grid-cols-2 overflow-hidden group cursor-pointer news-card-hover">
-      <a href="{{ route('news.show', ['lang' => $lang, 'slug' => 'expansion-of-automated-production-line-completed']) }}"
+      <a href="{{ route('news.show', ['lang' => $lang, 'slug' => $featured_news->slug]) }}"
         class="relative overflow-hidden h-64 lg:h-96">
-        <img src="{{ asset('images/binding-book-4.jpg') }}"
-          class="w-full h-full object-cover news-image transition duration-700" alt="Exhibition">
+        <img src="{{ asset('storage/' . $featured_news->cover_image) }}"
+          class="w-full h-full object-cover news-image transition duration-700" alt="{{ $featured_news->title }}">
         <div
           class="absolute top-0 left-0 bg-yideli-dark text-white px-4 py-2 text-xs font-bold uppercase tracking-widest">
           Featured</div>
       </a>
-      <a href="{{ route('news.show', ['lang' => $lang, 'slug' => 'expansion-of-automated-production-line-completed']) }}"
+      <a href="{{ route('news.show', ['lang' => $lang, 'slug' => $featured_news->slug]) }}"
         class="p-8 lg:p-12 flex flex-col justify-center">
         <div class="flex items-center gap-4 text-xs text-gray-500 mb-4 uppercase tracking-wide font-medium">
-          <span class="text-yideli-dark">Exhibition</span>
+          <span class="text-yideli-dark">{{ $featured_news->category->name }}</span>
           <span>|</span>
-          <span>Oct 24, 2025</span>
+          <span>{{ $featured_news->published_at }}</span>
         </div>
         <h2
           class="text-2xl lg:text-3xl font-serif text-yideli-dark mb-4 group-hover:underline underline-offset-4 decoration-1">
-          Invitation: Visit Yideli at the 136th Canton Fair
+          {{ $featured_news->title }}
         </h2>
         <p class="text-gray-600 mb-8 font-light leading-relaxed line-clamp-3">
           We cordially invite you to visit our booth at Phase 3 of the Canton Fair. Discover our latest eco-friendly
