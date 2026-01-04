@@ -12,6 +12,8 @@ class GeneralSettings extends Settings
     public ?string $site_description;
     public ?string $site_keywords;
     public ?string $contact_email;
+    public ?string $contact_address;
+    public ?string $contact_phone;
     public ?array $home_carousel; // 首页轮播图
     public bool $is_active; // 网站维护开关
 

@@ -77,6 +77,12 @@ class Setting extends SettingsPage
                                 TextInput::make('contact_email')
                                     ->label('联系邮箱')
                                     ->email(),
+                                TextInput::make('contact_address')
+                                    ->label('地址')
+                                    ->email(),
+                                TextInput::make('contact_phone')
+                                    ->label('联系电话')
+                                    ->tel(),
                             ]),
                     ])
                     ->columnSpanFull(),
