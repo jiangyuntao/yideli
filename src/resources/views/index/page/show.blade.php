@@ -262,7 +262,7 @@
     </section>
 
 
-    <section class="grid grid-cols-12 md:grid-cols-4 gap-4 items-center mb-20">
+    <section class="grid grid-cols-2 md:grid-cols-4 gap-4 items-center mb-20">
         <div class="aspect-[3/4] bg-[#367C6D] rounded-sm"></div>
         <div class="aspect-[3/4] bg-[#367C6D] rounded-sm"></div>
         <div class="aspect-[3/4] bg-[#367C6D] rounded-sm"></div>
