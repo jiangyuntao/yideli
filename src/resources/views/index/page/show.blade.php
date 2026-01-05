@@ -5,7 +5,7 @@
 @endsection
 
 @section('main')
-    <main class="max-w-[1400px] mx-auto  px-6 py-12 md:py-20 font-serif">
+    <main class="max-w-[1600px] mx-auto  px-6 py-12 md:py-20 font-serif">
 
         <h1 class="text-3xl md:text-5xl font-bold text-[#1F5F53] text-center mb-16">
             YIDELI: Crafting a Legacy in Every Page
@@ -49,8 +49,8 @@
 
         <section class="w-full mb-16">
             <div class="relative w-full h-64 md:h-96 bg-gray-300 overflow-hidden rounded-sm shadow-sm">
-                <img src="{{ asset('images/about-us-hero-image-1.jpg') }}"
-                    alt="Factory Building" class="w-full h-full object-cover opacity-90">
+                <img src="{{ asset('images/about-us-hero-image-1.jpg') }}" alt="Factory Building"
+                    class="w-full h-full object-cover opacity-90">
                 <div class="absolute inset-0 bg-white/20"></div>
             </div>
         </section>
@@ -143,31 +143,77 @@
                 </div>
             </div>
 
-            <div class="mb-16">
+            <div class="mb-16" x-data="{
+                scrollVal: 0,
+
+                // 滑块控制滚动条
+                syncScroll() {
+                    const el = this.$refs.scrollContainer;
+                    const maxScroll = el.scrollWidth - el.clientWidth;
+                    el.scrollLeft = (this.scrollVal / 100) * maxScroll;
+                },
+
+                // 滚动条反向更新滑块
+                syncSlider() {
+                    const el = this.$refs.scrollContainer;
+                    const maxScroll = el.scrollWidth - el.clientWidth;
+                    if (maxScroll > 0) {
+                        this.scrollVal = (el.scrollLeft / maxScroll) * 100;
+                    }
+                }
+            }">
                 <div class="flex flex-col items-center">
                     <div class="mb-6">
-                        <img src="https://placehold.co/120x40/F4F7F2/1F5F53?text=Sedex" alt="Sedex Logo"
+                        <img src="https://placehold.co/120x40/F4F7F2/1F5F53?text=Slides" alt="Logo"
                             class="h-8 object-contain">
                     </div>
 
-                    <div class="w-full max-w-3xl overflow-x-auto flex gap-8 snap-x snap-mandatory no-scrollbar pb-4">
+                    <div x-ref="scrollContainer" @scroll="syncSlider()"
+                        class="w-full overflow-x-auto flex gap-8 snap-x snap-mandatory no-scrollbar pb-4 scroll-smooth">
+
                         <div class="snap-center shrink-0">
-                            <img src="https://placehold.co/200x280/e2e8f0/1F5F53?text=Certificate+1" alt="Certificate 1"
+                            <img src="https://placehold.co/200x280/e2e8f0/1F5F53?text=Certificate+1"
                                 class="h-64 w-auto shadow-sm rounded-sm">
                         </div>
                         <div class="snap-center shrink-0">
-                            <img src="https://placehold.co/200x280/e2e8f0/1F5F53?text=Certificate+2" alt="Certificate 2"
+                            <img src="https://placehold.co/200x280/e2e8f0/1F5F53?text=Certificate+2"
                                 class="h-64 w-auto shadow-sm rounded-sm">
                         </div>
                         <div class="snap-center shrink-0">
-                            <img src="https://placehold.co/200x280/e2e8f0/1F5F53?text=Certificate+3" alt="Certificate 3"
+                            <img src="https://placehold.co/200x280/e2e8f0/1F5F53?text=Certificate+3"
+                                class="h-64 w-auto shadow-sm rounded-sm">
+                        </div>
+                        <div class="snap-center shrink-0">
+                            <img src="https://placehold.co/200x280/e2e8f0/1F5F53?text=Certificate+4"
+                                class="h-64 w-auto shadow-sm rounded-sm">
+                        </div>
+                        <div class="snap-center shrink-0">
+                            <img src="https://placehold.co/200x280/e2e8f0/1F5F53?text=Certificate+5"
+                                class="h-64 w-auto shadow-sm rounded-sm">
+                        </div>
+                        <div class="snap-center shrink-0">
+                            <img src="https://placehold.co/200x280/e2e8f0/1F5F53?text=Certificate+6"
+                                class="h-64 w-auto shadow-sm rounded-sm">
+                        </div>
+                        <div class="snap-center shrink-0">
+                            <img src="https://placehold.co/200x280/e2e8f0/1F5F53?text=Certificate+7"
+                                class="h-64 w-auto shadow-sm rounded-sm">
+                        </div>
+                        <div class="snap-center shrink-0">
+                            <img src="https://placehold.co/200x280/e2e8f0/1F5F53?text=Certificate+8"
+                                class="h-64 w-auto shadow-sm rounded-sm">
+                        </div>
+                        <div class="snap-center shrink-0">
+                            <img src="https://placehold.co/200x280/e2e8f0/1F5F53?text=Certificate+9"
                                 class="h-64 w-auto shadow-sm rounded-sm">
                         </div>
                     </div>
-                    <p class="text-sm text-gray-500 mt-2">(可滑动图片)</p>
-                </div>
-                <div class="w-full max-w-md mx-auto h-px bg-[#A8C5BD] mt-8 text-center relative">
-                    <div class="absolute right-0 -top-1 w-2 h-2 bg-[#A8C5BD] rounded-full"></div>
+
+                    <div class="w-full max-w-md mt-6 px-4 flex items-center gap-4">
+                        <input type="range" min="0" max="100" value="0" x-model="scrollVal" @input="syncScroll()"
+                            class="w-full h-1.5 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-[#1F5F53]">
+                    </div>
+
                 </div>
             </div>
         </section>
@@ -224,10 +270,10 @@
             </div>
 
             <div class="md:col-span-7 grid grid-cols-2 gap-4">
-                <img src="{{ asset('images/office-1.jpg') }}"
-                    alt="R&D Team Member" class="w-full aspect-[3/4] object-cover rounded-sm shadow-sm">
-                <img src="{{ asset('images/office-2.jpg') }}"
-                    alt="Office Environment" class="w-full aspect-[3/4] object-cover rounded-sm shadow-sm">
+                <img src="{{ asset('images/office-1.jpg') }}" alt="R&D Team Member"
+                    class="w-full aspect-[3/4] object-cover rounded-sm shadow-sm">
+                <img src="{{ asset('images/office-2.jpg') }}" alt="Office Environment"
+                    class="w-full aspect-[3/4] object-cover rounded-sm shadow-sm">
             </div>
         </section>
 

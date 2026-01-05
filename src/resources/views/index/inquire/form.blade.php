@@ -11,7 +11,7 @@
   </div>
 </div>
 
-<section class="max-w-[1400px] mx-auto px-6 lg:px-12 py-20">
+<section class="max-w-[1600px] mx-auto px-6 lg:px-12 py-20">
   <div class="grid lg:grid-cols-12 gap-16 lg:gap-24">
 
     <div class="lg:col-span-5 space-y-12">

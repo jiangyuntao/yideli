@@ -4,7 +4,7 @@
   <div class="relative bg-yideli-base py-24 lg:py-32 border-b border-yideli-line overflow-hidden">
     <div class="absolute top-0 right-0 w-1/3 h-full bg-yideli-dark/5 skew-x-12 translate-x-1/2"></div>
 
-    <div class="max-w-[1200px] mx-auto px-6 lg:px-12 text-center relative z-10">
+    <div class="max-w-[1600px] mx-auto px-6 lg:px-12 text-center relative z-10">
       <span class="text-xs font-bold tracking-[0.2em] uppercase text-yideli-dark mb-4 block">Manufacturing
         Excellence</span>
       <h1 class="text-4xl lg:text-6xl font-serif text-yideli-dark mb-6">From Concept to Creation</h1>
@@ -15,7 +15,7 @@
     </div>
   </div>
 
-  <section class="max-w-[1400px] mx-auto px-6 lg:px-12 py-20 lg:py-32 space-y-24">
+  <section class="max-w-[1600px] mx-auto px-6 lg:px-12 py-20 lg:py-32 space-y-24">
 
     <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
       <div class="order-2 lg:order-1 relative">
@@ -63,13 +63,15 @@
   </section>
 
   <section class="bg-yideli-dark text-white py-20 lg:py-28">
-    <div class="max-w-[1200px] mx-auto px-6 lg:px-12 text-center">
+    <div class="max-w-[1600px] mx-auto px-6 lg:px-12 text-center">
       <h2 class="text-3xl lg:text-4xl font-serif mb-8">Committed to Global Standards</h2>
     </div>
   </section>
 
-  <section>
-    <img src="{{ asset('images/custom-2.jpg') }}">
+  <section class="px-6 lg:px-12 bg-[#f6fff4]">
+    <div class="max-w-[1600px] mx-auto">
+      <img src="{{ asset('images/custom-2.jpg') }}">
+    </div>
   </section>
 
   <section class="py-24 bg-yideli-base">

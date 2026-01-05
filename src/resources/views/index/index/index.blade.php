@@ -63,7 +63,7 @@
   </section>
 
   <section class="py-20 bg-yideli-base border-t border-yideli-line overflow-hidden">
-    <div class="px-6 lg:px-12 mb-12 flex justify-between items-end">
+    <div class="max-w-[1600px] mx-auto px-6 lg:px-12 mb-12 flex justify-between items-end">
       <div>
         <h3 class="font-serif text-2xl text-yideli-dark mb-2">Curated Selection</h3>
         <p class="text-gray-500 text-sm">Fine Stationery for Professionals</p>

@@ -28,19 +28,23 @@ class NewsController extends BaseController
             ->with('category')
             ->first();
 
-        $this->data['entries'] = News::where(function ($query) use ($request, $current_category) {
-            if ($current_category) {
-                $query->where('category_id', $current_category->id);
-            }
+        $this->data['entries'] = News::with('category')
+            ->where(function ($query) use ($request, $current_category) {
+                if ($current_category) {
+                    $query->where('category_id', $current_category->id);
+                }
 
-            if ($request->has('search')) {
-                $query->where('title', 'like', '%' . $request->search . '%');
-            }
-        })
-            ->where('id', '!=', $this->data['featured_news']->id)
+                if ($request->has('search')) {
+                    $query->where('title', 'like', '%' . $request->search . '%');
+                }
+            })
+            ->where(function ($query){
+                if (isset($this->data['featured_news'])) {
+                    $query->where('id', '!=', $this->data['featured_news']->id);
+                }
+            })
             ->where('published_at', '<=', now())
             ->orderBy('id', 'desc')
-            ->with('category')
             ->paginate(10);
 
         return view('index.news.index', $this->data);

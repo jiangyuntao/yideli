@@ -2,11 +2,13 @@
 
 @section('main')
   <div class="bg-yideli-base border-b border-yideli-line">
-    <img src="{{ asset('images/product-index-banner.jpg') }}">
+    <div class="max-w-[1920px] mx-auto">
+      <img src="{{ asset('images/product-index-banner.jpg') }}">
+    </div>
   </div>
 
   <div class="bg-yideli-base py-16 lg:py-24 border-b border-yideli-line">
-    <div class="max-w-[1600px] mx-auto px-6 lg:px-12 text-center">
+    <div class="max-w-[1400px] mx-auto px-6 lg:px-12 text-center">
       <span class="text-xs font-bold tracking-[0.2em] uppercase text-yideli-dark mb-4 block">Our Collections</span>
       <h1 class="text-4xl lg:text-6xl font-serif text-yideli-dark mb-6">Designed for Inspiration</h1>
       <p class="text-gray-600 max-w-2xl mx-auto font-light text-lg">
