@@ -39,17 +39,23 @@
       </template>
     </div>
 
+    <div
+      class="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-black/40 to-transparent pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+    </div>
+    <div
+      class="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-black/40 to-transparent pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+    </div>
     <button @click="prev()"
-      class="absolute opacity-100 left-4 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/30 backdrop-blur-sm text-white p-3 rounded-full transition-all duration-300 opacity-0 group-hover:opacity-100 focus:outline-none translate-x-4 group-hover:translate-x-0">
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+      class="absolute left-4 top-1/2 -translate-y-1/2 p-2 text-yideli-base hover:text-white hover:scale-110 transition-all duration-300 opacity-0 group-hover:opacity-100 focus:outline-none translate-x-4 group-hover:translate-x-0 drop-shadow-[0_0_5px_rgba(0,0,0,0.9)]">
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path>
       </svg>
     </button>
 
     <button @click="next()"
-      class="absolute opacity-100 right-4 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/30 backdrop-blur-sm text-white p-3 rounded-full transition-all duration-300 opacity-0 group-hover:opacity-100 focus:outline-none -translate-x-4 group-hover:translate-x-0">
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+      class="absolute right-4 top-1/2 -translate-y-1/2 p-2 text-yideli-base hover:text-white hover:scale-110 transition-all duration-300 opacity-0 group-hover:opacity-100 focus:outline-none -translate-x-4 group-hover:translate-x-0 drop-shadow-[0_0_5px_rgba(0,0,0,0.9)]">
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path>
       </svg>
     </button>
 
@@ -136,7 +142,7 @@
     </div>
   </section>
 
-  <section class="bg-yideli-dark text-yideli-base py-16">
+  {{-- <section class="bg-yideli-dark text-yideli-base py-16">
     <div
       class="max-w-[1600px] mx-auto px-6 lg:px-12 grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-white/10">
       <div>
@@ -156,10 +162,10 @@
         <span class="text-sm uppercase tracking-widest opacity-80">Certified Factory</span>
       </div>
     </div>
-  </section>
+  </section> --}}
 
   <section class="py-6 lg:py-12 px-6 lg:px-12 bg-[#fcfcef]">
-    <img class="w-full lg:max-w-[800px] mx-auto" src="{{ asset('images/cert.jpg') }}" alt="">
+    <img class="w-full lg:max-w-[1400px] mx-auto" src="{{ asset('images/cert-1-big.jpg') }}" alt="">
   </section>
 @endsection
 

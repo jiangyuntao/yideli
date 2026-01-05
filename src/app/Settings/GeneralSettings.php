@@ -13,6 +13,7 @@ class GeneralSettings extends Settings
     public ?string $site_keywords;
     public ?string $contact_email;
     public ?string $contact_address;
+    public ?string $contact_tel;
     public ?string $contact_phone;
     public ?string $contact_linkedin;
     public ?string $contact_whatsapp;
