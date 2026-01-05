@@ -1,13 +1,7 @@
 @extends('index.layout')
 
 @section('main')
-  <div class="bg-yideli-base border-b border-yideli-line">
-    <div class="max-w-[1920px] mx-auto">
-      <img src="{{ asset('images/product-index-banner.jpg') }}">
-    </div>
-  </div>
-
-  <div class="bg-yideli-base py-16 lg:py-24 border-b border-yideli-line">
+  <div class="bg-yideli-base py-16 lg:py-24">
     <div class="max-w-[1400px] mx-auto px-6 lg:px-12 text-center">
       <span class="text-xs font-bold tracking-[0.2em] uppercase text-yideli-dark mb-4 block">Our Collections</span>
       <h1 class="text-4xl lg:text-6xl font-serif text-yideli-dark mb-6">Designed for Inspiration</h1>
@@ -15,6 +9,12 @@
         Explore our comprehensive range of stationery. From the tactile feel of our premium notebooks to the precision of
         our writing instruments.
       </p>
+    </div>
+  </div>
+
+  <div class="bg-yideli-base bg-[#86806e]">
+    <div class="max-w-[1920px] mx-auto">
+      <img src="{{ asset('images/product-index-banner.jpg') }}">
     </div>
   </div>
 
