@@ -8,7 +8,7 @@
   <section x-data="carousel()" x-init="init()" @mouseenter="stopAutoplay()" @mouseleave="startAutoplay()"
     class="relative w-full mx-auto overflow-hidden shadow-2xl group" x-cloak>
 
-    <div class="flex min-h-40vh md:min-h-[800px] transition-transform duration-700 ease-in-out h-[400px] md:h-[500px]"
+    <div class="flex w-full aspect-[16/9] md:aspect-[21/9] transition-transform duration-700 ease-in-out"
       :style="`transform: translateX(-${active * 100}%)`">
 
       <template x-for="(slide, index) in slides" :key="index">
