@@ -164,8 +164,11 @@
     </div>
   </section> --}}
 
+  <section class="px-6 lg:px-12 bg-[#347e73]">
+    <img class="w-full lg:max-w-[1400px] mx-auto" src="{{ asset('images/cert-1-big-0-0.jpg') }}" alt="">
+  </section>
   <section class="py-6 lg:py-12 px-6 lg:px-12 bg-[#fcfcef]">
-    <img class="w-full lg:max-w-[1400px] mx-auto" src="{{ asset('images/cert-1-big.jpg') }}" alt="">
+    <img class="w-full lg:max-w-[1400px] mx-auto" src="{{ asset('images/cert-1-big-0-1.jpg') }}" alt="">
   </section>
 @endsection
 
