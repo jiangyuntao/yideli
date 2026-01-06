@@ -43,10 +43,18 @@
                 </button>
                 <!-- 子分类列表 -->
                 <ul x-show="showSub" x-transition class="mt-2 ml-4 space-y-2 text-xs text-gray-600">
-                  <li><button @click="activeSub = 'daily-planner'" :class="activeSub === 'daily-planner' ? 'text-yideli-dark font-semibold' : 'hover:text-yideli-dark'" class="block">2026 Diaries</button></li>
-                  <li><button @click="activeSub = 'weekly-diary'" :class="activeSub === 'weekly-diary' ? 'text-yideli-dark font-semibold' : 'hover:text-yideli-dark'" class="block">Academic Diaries</button></li>
-                  <li><button @click="activeSub = 'travel-journal'" :class="activeSub === 'travel-journal' ? 'text-yideli-dark font-semibold' : 'hover:text-yideli-dark'" class="block">Undated Diaries</button></li>
-                  <li><button @click="activeSub = 'travel-journal'" :class="activeSub === 'travel-journal' ? 'text-yideli-dark font-semibold' : 'hover:text-yideli-dark'" class="block">Permanent Agenda</button></li>
+                  <li><button @click="activeSub = 'daily-planner'"
+                      :class="activeSub === 'daily-planner' ? 'text-yideli-dark font-semibold' : 'hover:text-yideli-dark'"
+                      class="block">2026 Diaries</button></li>
+                  <li><button @click="activeSub = 'weekly-diary'"
+                      :class="activeSub === 'weekly-diary' ? 'text-yideli-dark font-semibold' : 'hover:text-yideli-dark'"
+                      class="block">Academic Diaries</button></li>
+                  <li><button @click="activeSub = 'travel-journal'"
+                      :class="activeSub === 'travel-journal' ? 'text-yideli-dark font-semibold' : 'hover:text-yideli-dark'"
+                      class="block">Undated Diaries</button></li>
+                  <li><button @click="activeSub = 'travel-journal'"
+                      :class="activeSub === 'travel-journal' ? 'text-yideli-dark font-semibold' : 'hover:text-yideli-dark'"
+                      class="block">Permanent Agenda</button></li>
                 </ul>
               </li>
               <li>
@@ -64,8 +72,12 @@
                 </button>
 
                 <ul x-show="showSub" x-transition class="mt-2 ml-4 space-y-2 text-xs text-gray-600">
-                  <li><button @click="activeSub = 'daily-planner'" :class="activeSub === 'daily-planner' ? 'text-yideli-dark font-semibold' : 'hover:text-yideli-dark'" class="block">Hard Cover</button></li>
-                  <li><button @click="activeSub = 'weekly-diary'" :class="activeSub === 'weekly-diary' ? 'text-yideli-dark font-semibold' : 'hover:text-yideli-dark'" class="block">Soft Cover</button></li>
+                  <li><button @click="activeSub = 'daily-planner'"
+                      :class="activeSub === 'daily-planner' ? 'text-yideli-dark font-semibold' : 'hover:text-yideli-dark'"
+                      class="block">Hard Cover</button></li>
+                  <li><button @click="activeSub = 'weekly-diary'"
+                      :class="activeSub === 'weekly-diary' ? 'text-yideli-dark font-semibold' : 'hover:text-yideli-dark'"
+                      class="block">Soft Cover</button></li>
                 </ul>
               </li>
               <li>
@@ -141,7 +153,7 @@
 
           <a href="{{ route('product.show', ['lang' => $lang, 'slug' => 'artistic-series-spiral-notebook']) }}"
             class="product-card group cursor-pointer" x-show="activeCategory === 'all' || activeCategory === 'notebooks'">
-            <div class="aspect-[4/5] bg-gray-50 relative overflow-hidden mb-4">
+            <div class="aspect-[4/5] bg-[#fcfcee] relative overflow-hidden mb-4">
               <img src="{{ asset('images/binding-book-1.jpg') }}" alt="Artistic Spiral Notebook"
                 class="w-full h-full object-contain p-8 group-hover:scale-105 transition duration-700">
 
@@ -160,7 +172,7 @@
 
           <div class="product-card group cursor-pointer"
             x-show="activeCategory === 'all' || activeCategory === 'notebooks'">
-            <div class="aspect-[4/5] bg-gray-50 relative overflow-hidden mb-4">
+            <div class="aspect-[4/5] bg-[#fcfcee] relative overflow-hidden mb-4">
               <img src="{{ asset('images/line-circle-book-1.jpg') }}" alt="Elastic Band Notebook"
                 class="w-full h-full object-contain p-4 group-hover:scale-105 transition duration-700">
 
@@ -180,7 +192,7 @@
 
           <div class="product-card group cursor-pointer"
             x-show="activeCategory === 'all' || activeCategory === 'writing'">
-            <div class="aspect-[4/5] bg-gray-50 relative overflow-hidden mb-4">
+            <div class="aspect-[4/5] bg-[#fcfcee] relative overflow-hidden mb-4">
               <img src="{{ asset('images/notebook-1.jpg') }}" alt="Elastic Band Notebook"
                 class="w-full h-full object-contain p-4 group-hover:scale-105 transition duration-700">
 
@@ -197,7 +209,7 @@
 
           <div class="product-card group cursor-pointer"
             x-show="activeCategory === 'all' || activeCategory === 'writing'">
-            <div class="aspect-[4/5] bg-gray-50 relative overflow-hidden mb-4">
+            <div class="aspect-[4/5] bg-[#fcfcee] relative overflow-hidden mb-4">
               <img src="{{ asset('images/notebook-2.jpg') }}" alt="Elastic Band Notebook"
                 class="w-full h-full object-contain p-4 group-hover:scale-105 transition duration-700">
 
@@ -213,7 +225,7 @@
           </div>
 
           <div class="product-card group cursor-pointer" x-show="activeCategory === 'all' || activeCategory === 'office'">
-            <div class="aspect-[4/5] bg-gray-50 relative overflow-hidden mb-4">
+            <div class="aspect-[4/5] bg-[#fcfcee] relative overflow-hidden mb-4">
               <img src="{{ asset('images/weekly-calendar-2.jpg') }}" alt="Elastic Band Notebook"
                 class="w-full h-full object-contain p-4 group-hover:scale-105 transition duration-700">
 
@@ -230,7 +242,7 @@
 
           <div class="product-card group cursor-pointer"
             x-show="activeCategory === 'all' || activeCategory === 'notebooks'">
-            <div class="aspect-[4/5] bg-gray-50 relative overflow-hidden mb-4">
+            <div class="aspect-[4/5] bg-[#fcfcee] relative overflow-hidden mb-4">
               <img src="{{ asset('images/weekly-calendar-1.jpg') }}" alt="Elastic Band Notebook"
                 class="w-full h-full object-contain p-4 group-hover:scale-105 transition duration-700">
 

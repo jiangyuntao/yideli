@@ -25,7 +25,7 @@
       <div class="order-2 lg:order-1 relative">
         <div class="step-number text-yideli-dark">01</div>
         <h2 class="text-3xl font-serif text-yideli-dark mb-4 relative z-10">Design Co-creation</h2>
-        <p class="text-gray-600 leading-relaxed font-light relative z-10">
+        <p class="text-gray-600 text-lg leading-relaxed font-light relative z-10">
           It all begins with the inspiration. You can provide complete designs for OEM production, or select and adapt
           from our extensive existing design library. Our design team works closely with you to professionally refine
           every
@@ -35,20 +35,20 @@
         </p>
       </div>
       <div class="order-1 lg:order-2">
-        <img src="{{ asset('images/weekly-calendar-2.jpg') }}" class="w-full h-[400px] object-cover rounded-sm shadow-xl"
+        <img src="{{ asset('images/weekly-calendar-2.jpg') }}" class="w-auto h-[300px] object-cover rounded-sm shadow-xl"
           alt="Design Process">
       </div>
     </div>
 
     <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
       <div class="order-1">
-        <img src="{{ asset('images/yearly-calendar-2.jpg') }}" class="w-full h-[400px] object-cover rounded-sm shadow-xl"
+        <img src="{{ asset('images/yearly-calendar-2.jpg') }}" class="w-auto h-[300px] object-cover rounded-sm shadow-xl"
           alt="Raw Material">
       </div>
       <div class="order-2 relative">
         <div class="step-number text-yideli-dark right-0 left-auto">02</div>
         <h2 class="text-3xl font-serif text-yideli-dark mb-4 relative z-10">Material Selection</h2>
-        <p class="text-gray-600 leading-relaxed font-light relative z-10">
+        <p class="text-gray-600 text-lg leading-relaxed font-light relative z-10">
           Quality begins with precise control over raw materials. Leveraging long-term partnerships with trusted
           suppliers, we
           offer a diverse range of cover materials (such as PU, PVC, genuine leather), specialty papers, and accessories
@@ -62,21 +62,23 @@
       <div class="order-2 relative">
         <div class="step-number text-yideli-dark right-0 left-auto">03</div>
         <h2 class="text-3xl font-serif text-yideli-dark mb-4 relative z-10">Sample Approval</h2>
-        <p class="text-gray-600 leading-relaxed font-light relative z-10">
-          After design finalization, we produce an accurate physical sample for your final confirmation. This critical step allows you to personally experience and approve every detail, guaranteeing that mass production will adhere exactly to the sample's standards.
+        <p class="text-gray-600 text-lg leading-relaxed font-light relative z-10">
+          After design finalization, we produce an accurate physical sample for your final confirmation. This critical
+          step allows you to personally experience and approve every detail, guaranteeing that mass production will adhere
+          exactly to the sample's standards.
         </p>
       </div>
       <div class="order-1 lg:order-2 relative">
-        <img src="{{ asset('images/notebook-1.jpg') }}" class="w-full h-[400px] object-cover rounded-sm shadow-xl"
+        <img src="{{ asset('images/notebook-1.jpg') }}" class="w-auto h-[300px] object-cover rounded-sm shadow-xl"
           alt="Raw Material">
       </div>
     </div>
 
   </section>
 
-  <section class="bg-yideli-dark text-white py-20 lg:py-28">
+  <section class="bg-yideli-dark text-white py-10 lg:py-18">
     <div class="max-w-[1600px] mx-auto px-6 lg:px-12 text-center">
-      <h2 class="text-3xl lg:text-4xl font-serif mb-8">Custom Proposal</h2>
+      <h2 class="text-3xl lg:text-4xl font-serif">Custom Proposal</h2>
     </div>
   </section>
 
