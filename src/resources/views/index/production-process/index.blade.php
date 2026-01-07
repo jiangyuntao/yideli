@@ -2,7 +2,7 @@
 
 @section('main')
   <div class="relative bg-yideli-base py-24 lg:py-32 border-b border-yideli-line overflow-hidden">
-    <div class="absolute top-0 right-0 w-1/3 h-full bg-yideli-dark/5 skew-x-12 translate-x-1/2"></div>
+    <div class="absolute top-0 end-0 w-1/3 h-full bg-yideli-dark/5 skew-x-12 translate-x-1/2"></div>
 
     <div class="max-w-[1600px] mx-auto px-6 lg:px-12 text-center relative z-10">
       <span class="text-xs font-bold tracking-[0.2em] uppercase text-yideli-dark mb-4 block">Manufacturing
@@ -46,7 +46,7 @@
           alt="Raw Material">
       </div>
       <div class="order-2 relative">
-        <div class="step-number text-yideli-dark right-0 left-auto">02</div>
+        <div class="step-number text-yideli-dark end-0 start-auto">02</div>
         <h2 class="text-3xl font-serif text-yideli-dark mb-4 relative z-10">Material Selection</h2>
         <p class="text-gray-600 text-lg leading-relaxed font-light relative z-10">
           Quality begins with precise control over raw materials. Leveraging long-term partnerships with trusted
@@ -60,7 +60,7 @@
 
     <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
       <div class="order-2 relative">
-        <div class="step-number text-yideli-dark right-0 left-auto">03</div>
+        <div class="step-number text-yideli-dark end-0 start-auto">03</div>
         <h2 class="text-3xl font-serif text-yideli-dark mb-4 relative z-10">Sample Approval</h2>
         <p class="text-gray-600 text-lg leading-relaxed font-light relative z-10">
           After design finalization, we produce an accurate physical sample for your final confirmation. This critical

@@ -23,7 +23,7 @@
           <img :src="activeImage" alt="Product Image"
             class="w-full h-full object-contain mix-blend-multiply transition-all duration-500">
           <div
-            class="absolute top-4 left-4 bg-[#D4A373] text-white text-[10px] font-bold px-2 py-1 uppercase tracking-widest">
+            class="absolute top-4 start-4 bg-[#D4A373] text-white text-[10px] font-bold px-2 py-1 uppercase tracking-widest">
             Best Seller</div>
         </div>
 

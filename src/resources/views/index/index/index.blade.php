@@ -21,14 +21,14 @@
 
             <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-90"></div>
 
-            <div class="absolute bottom-0 left-0 p-8 w-full md:w-2/3">
+            <div class="absolute bottom-0 start-0 p-8 w-full md:w-2/3">
               <h2
                 class="text-white text-2xl md:text-4xl font-bold leading-tight drop-shadow-md transform transition-all duration-500 translate-y-0"
                 x-text="slide.title"></h2>
 
               <div class="mt-4 inline-flex items-center text-white/80 text-sm font-medium hover:text-white transition">
                 <span>READ MORE</span>
-                <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-4 h-4 ms-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3">
                   </path>
                 </svg>
@@ -40,26 +40,26 @@
     </div>
 
     <div
-      class="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-black/40 to-transparent pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+      class="absolute inset-y-0 start-0 w-24 bg-gradient-to-r from-black/40 to-transparent pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300">
     </div>
     <div
-      class="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-black/40 to-transparent pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+      class="absolute inset-y-0 end-0 w-24 bg-gradient-to-l from-black/40 to-transparent pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300">
     </div>
     <button @click="prev()"
-      class="absolute left-4 top-1/2 -translate-y-1/2 p-2 text-yideli-base hover:text-white hover:scale-110 transition-all duration-300 opacity-0 group-hover:opacity-100 focus:outline-none translate-x-4 group-hover:translate-x-0 drop-shadow-[0_0_5px_rgba(0,0,0,0.9)]">
-      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      class="absolute start-4 top-1/2 -translate-y-1/2 p-2 text-yideli-base hover:text-white hover:scale-110 transition-all duration-300 opacity-0 group-hover:opacity-100 focus:outline-none translate-x-4 rtl:translate-x-4 group-hover:translate-x-0 group-hover:rtl:translate-x-0 drop-shadow-[0_0_5px_rgba(0,0,0,0.9)]">
+      <svg class="w-8 h-8 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path>
       </svg>
     </button>
 
     <button @click="next()"
-      class="absolute right-4 top-1/2 -translate-y-1/2 p-2 text-yideli-base hover:text-white hover:scale-110 transition-all duration-300 opacity-0 group-hover:opacity-100 focus:outline-none -translate-x-4 group-hover:translate-x-0 drop-shadow-[0_0_5px_rgba(0,0,0,0.9)]">
-      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      class="absolute end-4 top-1/2 -translate-y-1/2 p-2 text-yideli-base hover:text-white hover:scale-110 transition-all duration-300 opacity-0 group-hover:opacity-100 focus:outline-none -translate-x-4 rtl:translate-x-4 group-hover:translate-x-0 group-hover:rtl:translate-x-0 drop-shadow-[0_0_5px_rgba(0,0,0,0.9)]">
+      <svg class="w-8 h-8 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path>
       </svg>
     </button>
 
-    <div class="absolute bottom-6 right-6 flex space-x-2">
+    <div class="absolute bottom-6 end-6 flex space-x-2">
       <template x-for="(slide, index) in slides" :key="index">
         <button @click="active = index" class="h-2 rounded-full transition-all duration-300 focus:outline-none"
           :class="active === index ? 'w-8 bg-white' : 'w-2 bg-white/50 hover:bg-white/80'">
@@ -88,7 +88,7 @@
               class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
             <div class="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition duration-500"></div>
             <div
-              class="absolute bottom-4 left-0 w-full text-center opacity-0 group-hover:opacity-100 transition duration-500 translate-y-4 group-hover:translate-y-0">
+              class="absolute bottom-4 start-0 w-full text-center opacity-0 group-hover:opacity-100 transition duration-500 translate-y-4 group-hover:translate-y-0">
               <span
                 class="bg-white/90 px-4 py-2 text-xs font-bold uppercase tracking-widest text-yideli-dark shadow-sm">Quick
                 View</span>
@@ -126,7 +126,7 @@
           <a href="{{ route('page.show', ['lang' => $lang, 'slug' => 'about-us']) }}"
             class="inline-flex items-center px-8 py-4 border border-yideli-dark text-yideli-dark hover:bg-yideli-dark hover:text-white transition duration-300 uppercase text-sm tracking-wide">
             Explore Our Craft
-            <span class="ml-2">→</span>
+            <span class="ms-2">→</span>
           </a>
         </div>
       </div>

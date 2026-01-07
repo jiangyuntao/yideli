@@ -28,21 +28,21 @@
             <ul class="space-y-3 text-sm">
               <li>
                 <button @click="activeCategory = 'all'"
-                  :class="activeCategory === 'all' ? 'text-yideli-dark font-bold pl-2 border-l-2 border-yideli-dark' : 'text-gray-500 hover:text-yideli-dark'"
-                  class="transition-all duration-200 block w-full text-left">
+                  :class="activeCategory === 'all' ? 'text-yideli-dark font-bold ps-2 border-l-2 border-yideli-dark' : 'text-gray-500 hover:text-yideli-dark'"
+                  class="transition-all duration-200 block w-full text-start">
                   View All
                 </button>
               </li>
               <li>
                 <!-- 点击展开/收起子分类 -->
                 <button @click="activeCategory = 'notebooks'; showSub = !showSub"
-                  :class="activeCategory === 'notebooks' ? 'text-yideli-dark font-bold pl-2 border-l-2 border-yideli-dark' : 'text-gray-500 hover:text-yideli-dark'"
-                  class="transition-all duration-200 block w-full text-left flex items-center justify-between">
+                  :class="activeCategory === 'notebooks' ? 'text-yideli-dark font-bold ps-2 border-l-2 border-yideli-dark' : 'text-gray-500 hover:text-yideli-dark'"
+                  class="transition-all duration-200 block w-full text-start flex items-center justify-between">
                   <span>Planner & Diaries</span>
                   <span x-show="activeCategory === 'notebooks'" x-text="showSub ? '−' : '+'" class="text-sm"></span>
                 </button>
                 <!-- 子分类列表 -->
-                <ul x-show="showSub" x-transition class="mt-2 ml-4 space-y-2 text-xs text-gray-600">
+                <ul x-show="showSub" x-transition class="mt-2 ms-4 space-y-2 text-xs text-gray-600">
                   <li><button @click="activeSub = 'daily-planner'"
                       :class="activeSub === 'daily-planner' ? 'text-yideli-dark font-semibold' : 'hover:text-yideli-dark'"
                       class="block">2026 Diaries</button></li>
@@ -59,19 +59,19 @@
               </li>
               <li>
                 <button @click="activeCategory = 'writing'"
-                  :class="activeCategory === 'writing' ? 'text-yideli-dark font-bold pl-2 border-l-2 border-yideli-dark' : 'text-gray-500 hover:text-yideli-dark'"
-                  class="transition-all duration-200 block w-full text-left">
+                  :class="activeCategory === 'writing' ? 'text-yideli-dark font-bold ps-2 border-l-2 border-yideli-dark' : 'text-gray-500 hover:text-yideli-dark'"
+                  class="transition-all duration-200 block w-full text-start">
                   Spiral notebook
                 </button>
               </li>
               <li>
                 <button @click="activeCategory = 'office'"
-                  :class="activeCategory === 'office' ? 'text-yideli-dark font-bold pl-2 border-l-2 border-yideli-dark' : 'text-gray-500 hover:text-yideli-dark'"
-                  class="transition-all duration-200 block w-full text-left">
+                  :class="activeCategory === 'office' ? 'text-yideli-dark font-bold ps-2 border-l-2 border-yideli-dark' : 'text-gray-500 hover:text-yideli-dark'"
+                  class="transition-all duration-200 block w-full text-start">
                   Notebook
                 </button>
 
-                <ul x-show="showSub" x-transition class="mt-2 ml-4 space-y-2 text-xs text-gray-600">
+                <ul x-show="showSub" x-transition class="mt-2 ms-4 space-y-2 text-xs text-gray-600">
                   <li><button @click="activeSub = 'daily-planner'"
                       :class="activeSub === 'daily-planner' ? 'text-yideli-dark font-semibold' : 'hover:text-yideli-dark'"
                       class="block">Hard Cover</button></li>
@@ -82,22 +82,22 @@
               </li>
               <li>
                 <button @click="activeCategory = 'office'"
-                  :class="activeCategory === 'office' ? 'text-yideli-dark font-bold pl-2 border-l-2 border-yideli-dark' : 'text-gray-500 hover:text-yideli-dark'"
-                  class="transition-all duration-200 block w-full text-left">
+                  :class="activeCategory === 'office' ? 'text-yideli-dark font-bold ps-2 border-l-2 border-yideli-dark' : 'text-gray-500 hover:text-yideli-dark'"
+                  class="transition-all duration-200 block w-full text-start">
                   Elastic band notebook
                 </button>
               </li>
               <li>
                 <button @click="activeCategory = 'office'"
-                  :class="activeCategory === 'office' ? 'text-yideli-dark font-bold pl-2 border-l-2 border-yideli-dark' : 'text-gray-500 hover:text-yideli-dark'"
-                  class="transition-all duration-200 block w-full text-left">
+                  :class="activeCategory === 'office' ? 'text-yideli-dark font-bold ps-2 border-l-2 border-yideli-dark' : 'text-gray-500 hover:text-yideli-dark'"
+                  class="transition-all duration-200 block w-full text-start">
                   Address book
                 </button>
               </li>
               <li>
                 <button @click="activeCategory = 'office'"
-                  :class="activeCategory === 'office' ? 'text-yideli-dark font-bold pl-2 border-l-2 border-yideli-dark' : 'text-gray-500 hover:text-yideli-dark'"
-                  class="transition-all duration-200 block w-full text-left">
+                  :class="activeCategory === 'office' ? 'text-yideli-dark font-bold ps-2 border-l-2 border-yideli-dark' : 'text-gray-500 hover:text-yideli-dark'"
+                  class="transition-all duration-200 block w-full text-start">
                   Floders & Organizers
                 </button>
               </li>
@@ -140,11 +140,11 @@
         </button>
         <div x-show="mobileFilterOpen" class="border-x border-b border-gray-200 p-4 space-y-4">
           <button @click="activeCategory = 'all'; mobileFilterOpen = false"
-            class="block w-full text-left text-sm py-1">View All</button>
+            class="block w-full text-start text-sm py-1">View All</button>
           <button @click="activeCategory = 'notebooks'; mobileFilterOpen = false"
-            class="block w-full text-left text-sm py-1">Notebooks</button>
+            class="block w-full text-start text-sm py-1">Notebooks</button>
           <button @click="activeCategory = 'writing'; mobileFilterOpen = false"
-            class="block w-full text-left text-sm py-1">Writing Instruments</button>
+            class="block w-full text-start text-sm py-1">Writing Instruments</button>
         </div>
       </div>
 
@@ -158,12 +158,12 @@
                 class="w-full h-full object-contain p-8 group-hover:scale-105 transition duration-700">
 
               <div
-                class="product-action absolute bottom-0 left-0 w-full bg-white/95 backdrop-blur py-4 px-6 translate-y-full opacity-0 transition duration-300 border-t border-yideli-line flex justify-between items-center">
+                class="product-action absolute bottom-0 start-0 w-full bg-white/95 backdrop-blur py-4 px-6 translate-y-full opacity-0 transition duration-300 border-t border-yideli-line flex justify-between items-center">
                 <span class="text-xs font-bold uppercase tracking-wider text-yideli-dark">Quick View</span>
                 <span class="text-yideli-dark">→</span>
               </div>
               <span
-                class="absolute top-4 left-4 bg-yideli-dark text-white text-[10px] font-bold px-2 py-1 uppercase tracking-widest">New</span>
+                class="absolute top-4 start-4 bg-yideli-dark text-white text-[10px] font-bold px-2 py-1 uppercase tracking-widest">New</span>
             </div>
             <h3 class="text-lg font-serif text-yideli-dark group-hover:underline underline-offset-4 decoration-1">Artistic
               Series Spiral Notebook</h3>
@@ -177,12 +177,12 @@
                 class="w-full h-full object-contain p-4 group-hover:scale-105 transition duration-700">
 
               <div
-                class="product-action absolute bottom-0 left-0 w-full bg-white/95 backdrop-blur py-4 px-6 translate-y-full opacity-0 transition duration-300 border-t border-yideli-line flex justify-between items-center">
+                class="product-action absolute bottom-0 start-0 w-full bg-white/95 backdrop-blur py-4 px-6 translate-y-full opacity-0 transition duration-300 border-t border-yideli-line flex justify-between items-center">
                 <span class="text-xs font-bold uppercase tracking-wider text-yideli-dark">Quick View</span>
                 <span class="text-yideli-dark">→</span>
               </div>
               <span
-                class="absolute top-4 left-4 bg-[#D4A373] text-white text-[10px] font-bold px-2 py-1 uppercase tracking-widest">Best
+                class="absolute top-4 start-4 bg-[#D4A373] text-white text-[10px] font-bold px-2 py-1 uppercase tracking-widest">Best
                 Seller</span>
             </div>
             <h3 class="text-lg font-serif text-yideli-dark group-hover:underline underline-offset-4 decoration-1">Classic
@@ -197,7 +197,7 @@
                 class="w-full h-full object-contain p-4 group-hover:scale-105 transition duration-700">
 
               <div
-                class="product-action absolute bottom-0 left-0 w-full bg-white/95 backdrop-blur py-4 px-6 translate-y-full opacity-0 transition duration-300 border-t border-yideli-line flex justify-between items-center">
+                class="product-action absolute bottom-0 start-0 w-full bg-white/95 backdrop-blur py-4 px-6 translate-y-full opacity-0 transition duration-300 border-t border-yideli-line flex justify-between items-center">
                 <span class="text-xs font-bold uppercase tracking-wider text-yideli-dark">Quick View</span>
                 <span class="text-yideli-dark">→</span>
               </div>
@@ -214,7 +214,7 @@
                 class="w-full h-full object-contain p-4 group-hover:scale-105 transition duration-700">
 
               <div
-                class="product-action absolute bottom-0 left-0 w-full bg-white/95 backdrop-blur py-4 px-6 translate-y-full opacity-0 transition duration-300 border-t border-yideli-line flex justify-between items-center">
+                class="product-action absolute bottom-0 start-0 w-full bg-white/95 backdrop-blur py-4 px-6 translate-y-full opacity-0 transition duration-300 border-t border-yideli-line flex justify-between items-center">
                 <span class="text-xs font-bold uppercase tracking-wider text-yideli-dark">Quick View</span>
                 <span class="text-yideli-dark">→</span>
               </div>
@@ -230,7 +230,7 @@
                 class="w-full h-full object-contain p-4 group-hover:scale-105 transition duration-700">
 
               <div
-                class="product-action absolute bottom-0 left-0 w-full bg-white/95 backdrop-blur py-4 px-6 translate-y-full opacity-0 transition duration-300 border-t border-yideli-line flex justify-between items-center">
+                class="product-action absolute bottom-0 start-0 w-full bg-white/95 backdrop-blur py-4 px-6 translate-y-full opacity-0 transition duration-300 border-t border-yideli-line flex justify-between items-center">
                 <span class="text-xs font-bold uppercase tracking-wider text-yideli-dark">Quick View</span>
                 <span class="text-yideli-dark">→</span>
               </div>
@@ -247,7 +247,7 @@
                 class="w-full h-full object-contain p-4 group-hover:scale-105 transition duration-700">
 
               <div
-                class="product-action absolute bottom-0 left-0 w-full bg-white/95 backdrop-blur py-4 px-6 translate-y-full opacity-0 transition duration-300 border-t border-yideli-line flex justify-between items-center">
+                class="product-action absolute bottom-0 start-0 w-full bg-white/95 backdrop-blur py-4 px-6 translate-y-full opacity-0 transition duration-300 border-t border-yideli-line flex justify-between items-center">
                 <span class="text-xs font-bold uppercase tracking-wider text-yideli-dark">Quick View</span>
                 <span class="text-yideli-dark">→</span>
               </div>

@@ -24,7 +24,7 @@
             <span>{{ $entry->published_at }}</span>
           </div>
           <h1 class="text-3xl lg:text-5xl font-serif text-yideli-dark leading-tight mb-6">
-          {{ $entry->title }}
+            {{ $entry->title }}
           </h1>
           <div class="flex justify-between items-center border-b border-gray-100 pb-6">
             <div class="text-sm text-gray-500">By <span class="text-yideli-dark font-bold">Yideli Media Team</span></div>
@@ -53,7 +53,7 @@
         </div>
 
         <div class="mt-12 pt-8 border-t border-gray-100 flex gap-2">
-          <span class="text-sm font-bold text-yideli-dark mr-2 self-center">Tags:</span>
+          <span class="text-sm font-bold text-yideli-dark me-2 self-center">Tags:</span>
           <a href="#"
             class="px-3 py-1 bg-gray-50 text-xs text-gray-600 hover:bg-yideli-dark hover:text-white transition rounded">Canton
             Fair</a>
@@ -79,17 +79,17 @@
         <div class="sticky top-32">
 
           <!-- <div class="bg-yideli-dark text-white p-8 mb-12 shadow-lg">
-            <h3 class="font-serif text-2xl mb-4">Meeting Us?</h3>
-            <p class="text-white/80 text-sm mb-6 font-light">
-              Download our booth map and schedule a VIP meeting with our sales director.
-            </p>
-            <button class="w-full bg-white text-yideli-dark font-bold uppercase text-xs py-3 tracking-widest hover:bg-yideli-base transition mb-3">
-              Book Meeting
-            </button>
-            <button class="w-full border border-white text-white font-bold uppercase text-xs py-3 tracking-widest hover:bg-white/10 transition">
-              Download Map (PDF)
-            </button>
-          </div> -->
+              <h3 class="font-serif text-2xl mb-4">Meeting Us?</h3>
+              <p class="text-white/80 text-sm mb-6 font-light">
+                Download our booth map and schedule a VIP meeting with our sales director.
+              </p>
+              <button class="w-full bg-white text-yideli-dark font-bold uppercase text-xs py-3 tracking-widest hover:bg-yideli-base transition mb-3">
+                Book Meeting
+              </button>
+              <button class="w-full border border-white text-white font-bold uppercase text-xs py-3 tracking-widest hover:bg-white/10 transition">
+                Download Map (PDF)
+              </button>
+            </div> -->
 
           <div>
             <h4 class="font-serif text-lg text-yideli-dark mb-6 pb-2 border-b border-gray-100">Related News</h4>

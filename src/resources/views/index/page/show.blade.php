@@ -16,9 +16,9 @@
 
     .animate-marquee {
       /* 30s: 滚动一圈的时间，数字越大越慢
-             linear: 匀速滚动
-             infinite: 无限循环
-          */
+               linear: 匀速滚动
+               infinite: 无限循环
+            */
       animation: marquee 30s linear infinite;
     }
 
@@ -91,7 +91,7 @@
             reliable supply-chain management. This operation is supported by a dedicated workforce of over 300
             professionals, including:
           </p>
-          <ul class="list-disc pl-5 space-y-1">
+          <ul class="list-disc ps-5 space-y-1">
             <li>A specialized R&D team focused on stationery trends and innovation.</li>
             <li>Technicians with decades of hands-on industry experience.</li>
             <li>Skilled production and operations management personnel.</li>
@@ -220,16 +220,16 @@
             </div>
 
             <div
-              class="absolute top-0 left-0 w-16 h-full bg-gradient-to-r from-yideli-base to-transparent pointer-events-none">
+              class="absolute top-0 start-0 w-16 h-full bg-gradient-to-r from-yideli-base to-transparent pointer-events-none">
             </div>
             <div
-              class="absolute top-0 right-0 w-16 h-full bg-gradient-to-l from-yideli-base to-transparent pointer-events-none">
+              class="absolute top-0 end-0 w-16 h-full bg-gradient-to-l from-yideli-base to-transparent pointer-events-none">
             </div>
           </div>
         </div>
 
         <div class="w-full max-w-md mx-auto h-px bg-[#A8C5BD] mt-8 text-center relative">
-          <div class="absolute right-0 -top-1 w-2 h-2 bg-[#A8C5BD] rounded-full"></div>
+          <div class="absolute end-0 -top-1 w-2 h-2 bg-[#A8C5BD] rounded-full"></div>
         </div>
       </div>
     </section>
@@ -263,10 +263,10 @@
 
 
     <section class="grid grid-cols-2 md:grid-cols-4 gap-4 items-center mb-20">
-        <div class="aspect-[3/4] bg-[#367C6D] rounded-sm"></div>
-        <div class="aspect-[3/4] bg-[#367C6D] rounded-sm"></div>
-        <div class="aspect-[3/4] bg-[#367C6D] rounded-sm"></div>
-        <div class="aspect-[3/4] bg-[#367C6D] rounded-sm"></div>
+      <div class="aspect-[3/4] bg-[#367C6D] rounded-sm"></div>
+      <div class="aspect-[3/4] bg-[#367C6D] rounded-sm"></div>
+      <div class="aspect-[3/4] bg-[#367C6D] rounded-sm"></div>
+      <div class="aspect-[3/4] bg-[#367C6D] rounded-sm"></div>
     </section>
 
     <section class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center mb-20">
