@@ -171,52 +171,20 @@
 
       <div class="mb-16">
         <div class="flex flex-col items-center">
-          <div class="mb-6">
+          {{-- <div class="mb-6">
             <img src="https://placehold.co/120x40/F4F7F2/1F5F53?text=Slides" alt="Logo" class="h-8 object-contain">
-          </div>
+          </div> --}}
 
           <div class="w-full overflow-hidden relative group">
 
             <div class="flex gap-8 w-max animate-marquee group-hover:pause">
 
-              <img src="https://placehold.co/200x280/e2e8f0/1F5F53?text=Certificate+1"
+              @for ($i = 0; $i < 3; $i++)
+              @for ($j = 1; $j <= 8; $j++)
+              <img src="{{ asset('images/slides/' . $j . '.jpg') }}"
                 class="h-64 w-auto shadow-sm rounded-sm">
-              <img src="https://placehold.co/200x280/e2e8f0/1F5F53?text=Certificate+2"
-                class="h-64 w-auto shadow-sm rounded-sm">
-              <img src="https://placehold.co/200x280/e2e8f0/1F5F53?text=Certificate+3"
-                class="h-64 w-auto shadow-sm rounded-sm">
-              <img src="https://placehold.co/200x280/e2e8f0/1F5F53?text=Certificate+4"
-                class="h-64 w-auto shadow-sm rounded-sm">
-              <img src="https://placehold.co/200x280/e2e8f0/1F5F53?text=Certificate+5"
-                class="h-64 w-auto shadow-sm rounded-sm">
-              <img src="https://placehold.co/200x280/e2e8f0/1F5F53?text=Certificate+6"
-                class="h-64 w-auto shadow-sm rounded-sm">
-              <img src="https://placehold.co/200x280/e2e8f0/1F5F53?text=Certificate+7"
-                class="h-64 w-auto shadow-sm rounded-sm">
-              <img src="https://placehold.co/200x280/e2e8f0/1F5F53?text=Certificate+8"
-                class="h-64 w-auto shadow-sm rounded-sm">
-              <img src="https://placehold.co/200x280/e2e8f0/1F5F53?text=Certificate+9"
-                class="h-64 w-auto shadow-sm rounded-sm">
-
-              <img src="https://placehold.co/200x280/e2e8f0/1F5F53?text=Certificate+1"
-                class="h-64 w-auto shadow-sm rounded-sm">
-              <img src="https://placehold.co/200x280/e2e8f0/1F5F53?text=Certificate+2"
-                class="h-64 w-auto shadow-sm rounded-sm">
-              <img src="https://placehold.co/200x280/e2e8f0/1F5F53?text=Certificate+3"
-                class="h-64 w-auto shadow-sm rounded-sm">
-              <img src="https://placehold.co/200x280/e2e8f0/1F5F53?text=Certificate+4"
-                class="h-64 w-auto shadow-sm rounded-sm">
-              <img src="https://placehold.co/200x280/e2e8f0/1F5F53?text=Certificate+5"
-                class="h-64 w-auto shadow-sm rounded-sm">
-              <img src="https://placehold.co/200x280/e2e8f0/1F5F53?text=Certificate+6"
-                class="h-64 w-auto shadow-sm rounded-sm">
-              <img src="https://placehold.co/200x280/e2e8f0/1F5F53?text=Certificate+7"
-                class="h-64 w-auto shadow-sm rounded-sm">
-              <img src="https://placehold.co/200x280/e2e8f0/1F5F53?text=Certificate+8"
-                class="h-64 w-auto shadow-sm rounded-sm">
-              <img src="https://placehold.co/200x280/e2e8f0/1F5F53?text=Certificate+9"
-                class="h-64 w-auto shadow-sm rounded-sm">
-
+              @endfor
+              @endfor
             </div>
 
             <div
