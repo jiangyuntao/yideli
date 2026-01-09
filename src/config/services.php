@@ -35,4 +35,9 @@ return [
         ],
     ],
 
+    'youdao' => [
+        'app_key' => env('YOUDAO_APP_KEY'),
+        'app_secret' => env('YOUDAO_APP_SECRET'),
+    ],
+
 ];
