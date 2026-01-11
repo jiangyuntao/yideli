@@ -5,31 +5,44 @@
 @endsection
 
 @section('main')
-  <section x-data="carousel()" x-init="init()" @mouseenter="stopAutoplay()" @mouseleave="startAutoplay()"
-    class="relative w-full mx-auto overflow-hidden shadow-2xl group" x-cloak>
+  <section x-data="carousel()"
+           x-init="init()"
+           @mouseenter="stopAutoplay()"
+           @mouseleave="startAutoplay()"
+           class="relative w-full mx-auto overflow-hidden shadow-2xl group"
+           x-cloak>
 
     <div class="flex w-full aspect-[16/9] md:aspect-[21/9] transition-transform duration-700 ease-in-out"
-      :style="`transform: translateX(-${active * 100}%)`">
+         :style="`transform: translateX(-${active * 100}%)`">
 
-      <template x-for="(slide, index) in slides" :key="index">
+      <template x-for="(slide, index) in slides"
+                :key="index">
         <div class="w-full flex-shrink-0 relative h-full">
 
-          <a :href="slide.custom_url || '#'" :target="slide.in_new_windows == 1 ? '_blank' : '_self'"
-            class="block w-full h-full relative cursor-pointer">
+          <a :href="slide.custom_url || '#'"
+             :target="slide.in_new_windows == 1 ? '_blank' : '_self'"
+             class="block w-full h-full relative cursor-pointer">
 
-            <img :src="getImageUrl(slide.image)" :alt="slide.title" class="w-full h-full object-cover">
+            <img :src="getImageUrl(slide.image)"
+                 :alt="slide.title"
+                 class="w-full h-full object-cover">
 
             <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-90"></div>
 
             <div class="absolute bottom-0 start-0 p-8 w-full md:w-2/3">
-              <h2
-                class="text-white text-2xl md:text-4xl font-bold leading-tight drop-shadow-md transform transition-all duration-500 translate-y-0"
-                x-text="slide.title"></h2>
+              <h2 class="text-white text-2xl md:text-4xl font-bold leading-tight drop-shadow-md transform transition-all duration-500 translate-y-0"
+                  x-text="slide.title"></h2>
 
               <div class="mt-4 inline-flex items-center text-white/80 text-sm font-medium hover:text-white transition">
                 <span>READ MORE</span>
-                <svg class="w-4 h-4 ms-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3">
+                <svg class="w-4 h-4 ms-2"
+                     fill="none"
+                     stroke="currentColor"
+                     viewBox="0 0 24 24">
+                  <path stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M14 5l7 7m0 0l-7 7m7-7H3">
                   </path>
                 </svg>
               </div>
@@ -40,29 +53,43 @@
     </div>
 
     <div
-      class="absolute inset-y-0 start-0 w-24 bg-gradient-to-r from-black/40 to-transparent pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+         class="absolute inset-y-0 start-0 w-24 bg-gradient-to-r from-black/40 to-transparent pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300">
     </div>
     <div
-      class="absolute inset-y-0 end-0 w-24 bg-gradient-to-l from-black/40 to-transparent pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+         class="absolute inset-y-0 end-0 w-24 bg-gradient-to-l from-black/40 to-transparent pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300">
     </div>
     <button @click="prev()"
-      class="absolute start-4 top-1/2 -translate-y-1/2 p-2 text-yideli-base hover:text-white hover:scale-110 transition-all duration-300 opacity-0 group-hover:opacity-100 focus:outline-none translate-x-4 rtl:translate-x-4 group-hover:translate-x-0 group-hover:rtl:translate-x-0 drop-shadow-[0_0_5px_rgba(0,0,0,0.9)]">
-      <svg class="w-8 h-8 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path>
+            class="absolute start-4 top-1/2 -translate-y-1/2 p-2 text-yideli-base hover:text-white hover:scale-110 transition-all duration-300 opacity-0 group-hover:opacity-100 focus:outline-none translate-x-4 rtl:translate-x-4 group-hover:translate-x-0 group-hover:rtl:translate-x-0 drop-shadow-[0_0_5px_rgba(0,0,0,0.9)]">
+      <svg class="w-8 h-8 rtl:rotate-180"
+           fill="none"
+           stroke="currentColor"
+           viewBox="0 0 24 24">
+        <path stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2.5"
+              d="M15 19l-7-7 7-7"></path>
       </svg>
     </button>
 
     <button @click="next()"
-      class="absolute end-4 top-1/2 -translate-y-1/2 p-2 text-yideli-base hover:text-white hover:scale-110 transition-all duration-300 opacity-0 group-hover:opacity-100 focus:outline-none -translate-x-4 rtl:translate-x-4 group-hover:translate-x-0 group-hover:rtl:translate-x-0 drop-shadow-[0_0_5px_rgba(0,0,0,0.9)]">
-      <svg class="w-8 h-8 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path>
+            class="absolute end-4 top-1/2 -translate-y-1/2 p-2 text-yideli-base hover:text-white hover:scale-110 transition-all duration-300 opacity-0 group-hover:opacity-100 focus:outline-none -translate-x-4 rtl:translate-x-4 group-hover:translate-x-0 group-hover:rtl:translate-x-0 drop-shadow-[0_0_5px_rgba(0,0,0,0.9)]">
+      <svg class="w-8 h-8 rtl:rotate-180"
+           fill="none"
+           stroke="currentColor"
+           viewBox="0 0 24 24">
+        <path stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2.5"
+              d="M9 5l7 7-7 7"></path>
       </svg>
     </button>
 
     <div class="absolute bottom-6 end-6 flex space-x-2">
-      <template x-for="(slide, index) in slides" :key="index">
-        <button @click="active = index" class="h-2 rounded-full transition-all duration-300 focus:outline-none"
-          :class="active === index ? 'w-8 bg-white' : 'w-2 bg-white/50 hover:bg-white/80'">
+      <template x-for="(slide, index) in slides"
+                :key="index">
+        <button @click="active = index"
+                class="h-2 rounded-full transition-all duration-300 focus:outline-none"
+                :class="active === index ? 'w-8 bg-white' : 'w-2 bg-white/50 hover:bg-white/80'">
         </button>
       </template>
     </div>
@@ -75,26 +102,27 @@
         <p class="text-gray-500 text-sm">Fine Stationery for Professionals</p>
       </div>
       <a href="{{ route('product.index', ['lang' => $lang]) }}"
-        class="btn-minimal text-sm font-medium text-yideli-dark pb-1">View All Products</a>
+         class="btn-minimal text-sm font-medium text-yideli-dark pb-1">View All Products</a>
     </div>
 
     <div class="w-full flex flex-col lg:flex-row justify-center items-center gap-4">
 
       @foreach ($categories as $category)
         <a href="{{ route('product.index', ['lang' => $lang, 'slug' => $category->slug]) }}"
-          class="min-w-[280px] lg:min-w-[320px] group cursor-pointer">
+           class="min-w-[280px] lg:min-w-[320px] group cursor-pointer">
           <div class="aspect-[4/5] bg-white mb-6 overflow-hidden relative">
             <img src="{{ asset('storage/' . $category->cover_image) }}"
-              class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+                 class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
             <div class="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition duration-500"></div>
             <div
-              class="absolute bottom-4 start-0 w-full text-center opacity-0 group-hover:opacity-100 transition duration-500 translate-y-4 group-hover:translate-y-0">
+                 class="absolute bottom-4 start-0 w-full text-center opacity-0 group-hover:opacity-100 transition duration-500 translate-y-4 group-hover:translate-y-0">
               <span
-                class="bg-white/90 px-4 py-2 text-xs font-bold uppercase tracking-widest text-yideli-dark shadow-sm">Quick
+                    class="bg-white/90 px-4 py-2 text-xs font-bold uppercase tracking-widest text-yideli-dark shadow-sm">Quick
                 View</span>
             </div>
           </div>
-          <h4 class="text-center font-bold text-yideli-dark text-lg group-hover:underline decoration-1 underline-offset-4">
+          <h4
+              class="text-center font-bold text-yideli-dark text-lg group-hover:underline decoration-1 underline-offset-4">
             {{ $category->name }}
           </h4>
         </a>
@@ -124,7 +152,7 @@
         </div>
         <div class="mt-10">
           <a href="{{ route('page.show', ['lang' => $lang, 'slug' => 'about-us']) }}"
-            class="inline-flex items-center px-8 py-4 border border-yideli-dark text-yideli-dark hover:bg-yideli-dark hover:text-white transition duration-300 uppercase text-sm tracking-wide">
+             class="inline-flex items-center px-8 py-4 border border-yideli-dark text-yideli-dark hover:bg-yideli-dark hover:text-white transition duration-300 uppercase text-sm tracking-wide">
             Explore Our Craft
             <span class="ms-2">→</span>
           </a>
@@ -132,43 +160,27 @@
       </div>
 
       <div class="lg:col-span-7 relative h-full min-h-[500px]">
-        <video class="absolute inset-0 w-full h-full object-cover rounded-lg shadow-2xl" autoplay loop muted playsinline>
-          <source src="videos/out-factory.mp4" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
-        <div class="absolute inset-0 bg-black/10 rounded-lg pointer-events-none"></div>
+        <iframe class="absolute inset-0 w-full h-full object-cover rounded-lg shadow-2xl"
+                src="https://www.youtube.com/embed/XsQ_MKXkWv0?si=DFDwHxJqeoyyDiJ-"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen></iframe>
       </div>
 
     </div>
   </section>
-
-  {{-- <section class="bg-yideli-dark text-yideli-base py-16">
-    <div
-      class="max-w-[1600px] mx-auto px-6 lg:px-12 grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-white/10">
-      <div>
-        <span class="block text-4xl lg:text-5xl font-serif font-bold mb-2">2005</span>
-        <span class="text-sm uppercase tracking-widest opacity-80">Established</span>
-      </div>
-      <div>
-        <span class="block text-4xl lg:text-5xl font-serif font-bold mb-2">10k+</span>
-        <span class="text-sm uppercase tracking-widest opacity-80">Square Meters</span>
-      </div>
-      <div>
-        <span class="block text-4xl lg:text-5xl font-serif font-bold mb-2">50+</span>
-        <span class="text-sm uppercase tracking-widest opacity-80">Export Countries</span>
-      </div>
-      <div>
-        <span class="block text-4xl lg:text-5xl font-serif font-bold mb-2">ISO</span>
-        <span class="text-sm uppercase tracking-widest opacity-80">Certified Factory</span>
-      </div>
-    </div>
-  </section> --}}
 
   <section class="px-6 lg:px-12 bg-[#347e73]">
-    <img class="w-full lg:max-w-[1400px] mx-auto" src="{{ asset('images/cert-1-big-0-0.jpg') }}" alt="">
+    <img class="w-full lg:max-w-[1400px] mx-auto"
+         src="{{ asset('images/cert-1-big-0-0.jpg') }}"
+         alt="">
   </section>
   <section class="py-6 lg:py-12 px-6 lg:px-12 bg-[#fcfcef]">
-    <img class="w-full lg:max-w-[1400px] mx-auto" src="{{ asset('images/cert-1-big-0-1.jpg') }}" alt="">
+    <img class="w-full lg:max-w-[1400px] mx-auto"
+         src="{{ asset('images/cert-1-big-0-1.jpg') }}"
+         alt="">
   </section>
 @endsection
 
