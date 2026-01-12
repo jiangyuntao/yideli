@@ -9,15 +9,14 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 class AutoTranslateJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     public $model;
-
-    // 需要翻译的字段
-    protected array $fields = ['title', 'content', 'description'];
 
     // 目标语言映射 (Youdao code vs Laravel locale)
     // 假设 Laravel locale: zh, en, fr, es, ru, ar
@@ -37,8 +36,18 @@ class AutoTranslateJob implements ShouldQueue
      */
     public function handle(YoudaoTranslateService $translator): void
     {
+        if ($this->model->title) {
+            $titleField = 'title';
+        } else {
+            $titleField = 'name';
+        }
+
         // 1. 更新状态为进行中
         $this->model->update(['translation_status' => 'translating']);
+
+        // 中文 slug
+        $slugZh = Str::slug($this->model->getTranslation($titleField, 'zh', false), '-', 'zh');
+        $this->model->setTranslation('slug', 'zh', $slugZh);
 
         try {
             // 获取源语言内容 (假设后台录入的是中文)
@@ -46,7 +55,13 @@ class AutoTranslateJob implements ShouldQueue
             $sourceLocale = 'zh';
 
             foreach ($this->targetLocales as $locale) {
-                foreach ($this->fields as $field) {
+                $fields = $this->model->getTranslatableAttributes();
+                foreach ($fields as $field) {
+                    if ($field == 'slug') {
+                        $slug = Str::slug($this->model->getTranslation($titleField, $locale, false), '-', $locale);
+                        $this->model->setTranslation('slug', $locale, $slug);
+                    }
+
                     // 获取中文原文
                     // 使用 getTranslation 获取指定语言的值，避免获取到 fallback
                     $sourceText = $this->model->getTranslation($field, $sourceLocale, false);
@@ -58,7 +73,7 @@ class AutoTranslateJob implements ShouldQueue
 
                         if ($translatedText) {
                             // 写入翻译结果
-                            $this->model->setTranslation($field, $locale, $translatedText);
+                            $this->model->setTranslation($field, $locale, implode('', $translatedText['translation']));
                         }
                     }
                 }

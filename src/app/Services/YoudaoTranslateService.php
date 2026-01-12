@@ -23,8 +23,9 @@ class YoudaoTranslateService
         ];
 
         $params = add_auth_params($params, $this->appKey, $this->appSecret);
-        $r = do_call($this->apiUrl, 'post', array(), $params, 'application/json');
-        return json_decode($r, true);
+        $response = do_call($this->apiUrl, 'post', array(), $params, 'application/json');
+        $result = json_decode($response, true);
+        return $result;
     }
 }
 

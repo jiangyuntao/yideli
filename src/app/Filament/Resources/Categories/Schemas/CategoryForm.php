@@ -26,6 +26,7 @@ class CategoryForm
                             ->schema([
                                 TextInput::make('name')
                                     ->label('分类名称')
+                                    ->helperText('填写简体中文分类名称后，会自动翻译其他语言')
                                     ->maxLength(255)
                                     ->translatable(true, null, [
                                         'zh_CN' => 'required',
@@ -33,14 +34,14 @@ class CategoryForm
 
                                 TextInput::make('slug')
                                     ->label('美化URL')
+                                    ->helperText('会根据各语言分类名称自动生成')
                                     ->maxLength(255)
                                     // 注意：多语言字段的 unique 验证通常需要自定义规则，这里先不做严格唯一限制以免报错
-                                    ->translatable(true, null, [
-                                        'zh_CN' => 'required',
-                                    ]),
+                                    ->translatable(),
 
                                 Textarea::make('description')
                                     ->label('描述')
+                                    ->helperText('填写简体中文分类描述后，会自动翻译其他语言')
                                     ->rows(4)
                                     ->translatable(),
                             ]),
