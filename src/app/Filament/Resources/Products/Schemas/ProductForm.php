@@ -35,9 +35,7 @@ class ProductForm
                                 TextInput::make('slug')
                                     ->label('美化URL')
                                     ->maxLength(255)
-                                    ->translatable(true, null, [
-                                        'zh' => 'required',
-                                    ]),
+                                    ->translatable(),
 
                                 RichEditor::make('content')
                                     ->label('内容')

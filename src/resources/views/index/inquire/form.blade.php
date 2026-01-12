@@ -243,6 +243,7 @@
       </div>
 
       <div class="space-y-4" x-data="{ active: 0 }">
+        @if ($settings->faqs)
         @foreach ($settings->faqs as $k => $faq)
         <div class="bg-white border border-yideli-line">
           <button class="w-full flex justify-between items-center p-6 text-start"
@@ -257,6 +258,7 @@
           </div>
         </div>
         @endforeach
+        @endif
 
       </div>
     </div>
