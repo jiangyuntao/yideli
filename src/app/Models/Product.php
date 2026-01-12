@@ -18,10 +18,11 @@ class Product extends Model
         'name' => 'array', // 关键
         'content' => 'array',
         'specifications' => 'array',
+        'tags' => 'array',
         'is_visible' => 'boolean',
     ];
 
-    public $translatable = ['name', 'slug', 'content', 'specifications'];
+    public $translatable = ['name', 'slug', 'content', 'specifications', 'material', 'tags'];
 
     protected static function booted()
     {

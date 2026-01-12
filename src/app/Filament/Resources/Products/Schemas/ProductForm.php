@@ -6,6 +6,7 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\KeyValue;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Components\Grid;
@@ -77,10 +78,13 @@ class ProductForm
                                     ->label('是否可见')
                                     ->default(true),
 
-                                KeyValue::make('specifications')
-                                    ->label('规格参数')
-                                    ->keyLabel('参数')
-                                    ->valueLabel('值')
+                                TextInput::make('material')
+                                    ->label('材质')
+                                    ->maxLength(255)
+                                    ->translatable(),
+
+                                TagsInput::make('tags')
+                                    ->label('标签')
                                     ->translatable(),
                             ]),
                     ])
