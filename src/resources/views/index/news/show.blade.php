@@ -4,7 +4,7 @@
   <div class="bg-gray-50 py-4 border-b border-gray-100">
     <div class="max-w-[1200px] mx-auto px-6 lg:px-12">
       <nav class="flex text-xs text-gray-500 uppercase tracking-widest gap-2">
-        <a href="{{ route('index') }}" class="hover:text-yideli-dark">Home</a>
+        <a href="{{ route('index', ['lang' => $lang]) }}" class="hover:text-yideli-dark">Home</a>
         <span>/</span>
         <a href="{{ route('news.index', ['lang' => $lang]) }}" class="hover:text-yideli-dark">News</a>
         <span>/</span>
