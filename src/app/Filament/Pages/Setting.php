@@ -11,8 +11,8 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Pages\SettingsPage;
-use Filament\Schemas\Components\Grid;
-use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Tabs;
+use Filament\Schemas\Components\Tabs\Tab;
 use Filament\Schemas\Schema;
 
 class Setting extends SettingsPage
@@ -28,11 +28,10 @@ class Setting extends SettingsPage
     {
         return $schema
             ->schema([
-                Grid::make(3) // 整体 3 列布局
-                    ->schema([
-                        // --- 左侧：主要设置 ---
-                        Section::make('基础信息')
-                            ->columnSpan(2)
+                Tabs::make('tabs')
+                    ->columnSpanFull()
+                    ->tabs([
+                        Tab::make('基础信息')
                             ->schema([
                                 TextInput::make('site_name')
                                     ->label('网站名称')
@@ -53,9 +52,7 @@ class Setting extends SettingsPage
                                     ->default(true),
                             ]),
 
-                        // --- 右侧：图片与联系 ---
-                        Section::make('外观与联系')
-                            ->columnSpan(1)
+                        Tab::make('外观与联系')
                             ->schema([
                                 FileUpload::make('site_logo')
                                     ->label('网站 Logo')
@@ -83,50 +80,61 @@ class Setting extends SettingsPage
                                 TextInput::make('contact_whatsapp')
                                     ->label('WhatsApp 账号'),
                             ]),
-                    ])
-                    ->columnSpanFull(),
 
-                Section::make('轮播图设置')
-                    ->columnSpan(2)
-                    ->schema([
-                        Repeater::make('home_carousel') // 存入数据库的字段名
-                            ->label('首页轮播图配置')
+                        Tab::make('轮播图设置')
                             ->schema([
-                                // 1. 上传图片
-                                FileUpload::make('image')
-                                    ->label('轮播图片')
-                                    ->image()
-                                    ->directory('carousel') // 图片存放在 storage/app/public/carousel
-                                    ->disk('public')
-                                    ->required()
-                                    ->columnSpanFull(),
+                                Repeater::make('home_carousel') // 存入数据库的字段名
+                                    ->label('首页轮播图配置')
+                                    ->schema([
+                                        // 1. 上传图片
+                                        FileUpload::make('image')
+                                            ->label('轮播图片')
+                                            ->image()
+                                            ->directory('carousel') // 图片存放在 storage/app/public/carousel
+                                            ->disk('public')
+                                            ->required()
+                                            ->columnSpanFull(),
 
-                                // 2. 标题（可选）
-                                TextInput::make('title')
-                                    ->label('显示标题')
-                                    ->columnSpan(2),
+                                        // 2. 标题（可选）
+                                        TextInput::make('title')
+                                            ->label('显示标题')
+                                            ->columnSpan(2),
 
-                                // 5. 外部链接输入框 (仅当类型为 url 时显示)
-                                TextInput::make('custom_url')
-                                    ->label('输入链接地址')
-                                    ->placeholder('https://...')
-                                    ->required()
-                                    ->columnSpan(1),
+                                        // 5. 外部链接输入框 (仅当类型为 url 时显示)
+                                        TextInput::make('custom_url')
+                                            ->label('输入链接地址')
+                                            ->placeholder('https://...')
+                                            ->required()
+                                            ->columnSpan(1),
 
-                                Select::make('in_new_windows')
-                                    ->label('是否在新窗口打开')
-                                    ->options([
-                                        '1' => '是',
-                                        '0' => '否',
+                                        Select::make('in_new_windows')
+                                            ->label('是否在新窗口打开')
+                                            ->options([
+                                                '1' => '是',
+                                                '0' => '否',
+                                            ])
+                                            ->default('0')
+                                            ->native(false)
+                                            ->columnSpan(1),
                                     ])
-                                    ->default('0')
-                                    ->native(false)
-                                    ->columnSpan(1),
-                            ])
-                            ->columns(2) // 布局为两列
-                            ->grid(1) // 列表显示模式
-                            ->itemLabel(fn(array $state): ?string => $state['title'] ?? null) // 折叠时显示标题
-                            ->collapsible(),
+                                    ->columns(2) // 布局为两列
+                                    ->grid(1) // 列表显示模式
+                                    ->itemLabel(fn(array $state): ?string => $state['title'] ?? null) // 折叠时显示标题
+                                    ->collapsible(),
+                            ]),
+
+                        Tab::make('FAQ')
+                            ->schema([
+                                Repeater::make('faqs')
+                                    ->label('常见问题')
+                                    ->schema([
+                                        TextInput::make('question')
+                                            ->label('问题'),
+                                        Textarea::make('answer')
+                                            ->label('答案')
+                                            ->rows(5),
+                                    ])
+                            ],)
                     ]),
             ]);
     }
