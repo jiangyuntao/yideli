@@ -251,18 +251,42 @@
             <p class="text-sm text-gray-500 mt-1">Twin-wire binding · Private Collection</p>
           </div>
 
-          <div class="product-card group cursor-pointer"
+          <div @click="promptAccess('{{ route('product.show', ['lang' => $lang, 'slug' => 'artistic-series-spiral-notebook']) }}')"
+               class="product-card group cursor-pointer"
                x-show="activeCategory === 'all' || activeCategory === 'notebooks'">
-            <div class="aspect-[4/5] bg-[#fcfcee] relative overflow-hidden mb-4">
+            <div
+                 class="aspect-[4/5] bg-[#fcfcee] relative overflow-hidden mb-4 group-hover:shadow-lg transition-all duration-300">
+
               <img src="{{ asset('images/line-circle-book-1.jpg') }}"
                    alt="Elastic Band Notebook"
-                   class="w-full h-full object-contain p-4 group-hover:scale-105 transition duration-700">
+                   class="w-full h-full object-contain blur-xl scale-105 opacity-70 pointer-events-none">
 
-              <div
-                   class="product-action absolute bottom-0 start-0 w-full bg-white/95 backdrop-blur py-4 px-6 translate-y-full opacity-0 transition duration-300 border-t border-yideli-line flex justify-between items-center">
-                <span class="text-xs font-bold uppercase tracking-wider text-yideli-dark">Quick View</span>
-                <span class="text-yideli-dark">→</span>
+              <div class="absolute inset-0 bg-yideli-text/10 group-hover:bg-yideli-text/20 transition-colors"></div>
+
+              <div class="absolute inset-0 flex flex-col items-center justify-center text-yideli-dark">
+                <div
+                     class="bg-white/90 backdrop-blur-sm p-4 rounded-full shadow-md mb-2 group-hover:scale-110 transition-transform duration-300">
+                  <svg xmlns="http://www.w3.org/2000/svg"
+                       class="w-6 h-6"
+                       viewBox="0 0 24 24"
+                       fill="none"
+                       stroke="currentColor"
+                       stroke-width="2"
+                       stroke-linecap="round"
+                       stroke-linejoin="round">
+                    <rect x="3"
+                          y="11"
+                          width="18"
+                          height="11"
+                          rx="2"
+                          ry="2"></rect>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                  </svg>
+                </div>
+                <span class="text-xs font-bold uppercase tracking-widest bg-white/80 px-2 py-1 rounded">Private
+                  Access</span>
               </div>
+
               <span
                     class="absolute top-4 start-4 bg-[#D4A373] text-white text-[10px] font-bold px-2 py-1 uppercase tracking-widest">Best
                 Seller</span>
@@ -272,77 +296,174 @@
             <p class="text-sm text-gray-500 mt-1">PU Leather · Expandable Pocket · Multiple Colors</p>
           </div>
 
-          <div class="product-card group cursor-pointer"
+          <div @click="promptAccess('{{ route('product.show', ['lang' => $lang, 'slug' => 'artistic-series-spiral-notebook']) }}')"
+               class="product-card group cursor-pointer"
                x-show="activeCategory === 'all' || activeCategory === 'writing'">
-            <div class="aspect-[4/5] bg-[#fcfcee] relative overflow-hidden mb-4">
+            <div
+                 class="aspect-[4/5] bg-[#fcfcee] relative overflow-hidden mb-4 group-hover:shadow-lg transition-all duration-300">
+
               <img src="{{ asset('images/notebook-1.jpg') }}"
                    alt="Elastic Band Notebook"
-                   class="w-full h-full object-contain p-4 group-hover:scale-105 transition duration-700">
+                   class="w-full h-full object-contain blur-xl scale-105 opacity-70 pointer-events-none">
 
-              <div
-                   class="product-action absolute bottom-0 start-0 w-full bg-white/95 backdrop-blur py-4 px-6 translate-y-full opacity-0 transition duration-300 border-t border-yideli-line flex justify-between items-center">
-                <span class="text-xs font-bold uppercase tracking-wider text-yideli-dark">Quick View</span>
-                <span class="text-yideli-dark">→</span>
+              <div class="absolute inset-0 bg-yideli-text/10 group-hover:bg-yideli-text/20 transition-colors"></div>
+
+              <div class="absolute inset-0 flex flex-col items-center justify-center text-yideli-dark">
+                <div
+                     class="bg-white/90 backdrop-blur-sm p-4 rounded-full shadow-md mb-2 group-hover:scale-110 transition-transform duration-300">
+                  <svg xmlns="http://www.w3.org/2000/svg"
+                       class="w-6 h-6"
+                       viewBox="0 0 24 24"
+                       fill="none"
+                       stroke="currentColor"
+                       stroke-width="2"
+                       stroke-linecap="round"
+                       stroke-linejoin="round">
+                    <rect x="3"
+                          y="11"
+                          width="18"
+                          height="11"
+                          rx="2"
+                          ry="2"></rect>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                  </svg>
+                </div>
+                <span class="text-xs font-bold uppercase tracking-widest bg-white/80 px-2 py-1 rounded">Private
+                  Access</span>
               </div>
             </div>
+
             <h3 class="text-lg font-serif text-yideli-dark group-hover:underline underline-offset-4 decoration-1">Matte
               Black Fountain Pen</h3>
             <p class="text-sm text-gray-500 mt-1">Brass Body · Fine Nib · Gift Box Included</p>
           </div>
 
-          <div class="product-card group cursor-pointer"
+          <div @click="promptAccess('{{ route('product.show', ['lang' => $lang, 'slug' => 'artistic-series-spiral-notebook']) }}')"
+               class="product-card group cursor-pointer"
                x-show="activeCategory === 'all' || activeCategory === 'writing'">
-            <div class="aspect-[4/5] bg-[#fcfcee] relative overflow-hidden mb-4">
+            <div
+                 class="aspect-[4/5] bg-[#fcfcee] relative overflow-hidden mb-4 group-hover:shadow-lg transition-all duration-300">
+
               <img src="{{ asset('images/notebook-2.jpg') }}"
                    alt="Elastic Band Notebook"
-                   class="w-full h-full object-contain p-4 group-hover:scale-105 transition duration-700">
+                   class="w-full h-full object-contain blur-xl scale-105 opacity-70 pointer-events-none">
 
-              <div
-                   class="product-action absolute bottom-0 start-0 w-full bg-white/95 backdrop-blur py-4 px-6 translate-y-full opacity-0 transition duration-300 border-t border-yideli-line flex justify-between items-center">
-                <span class="text-xs font-bold uppercase tracking-wider text-yideli-dark">Quick View</span>
-                <span class="text-yideli-dark">→</span>
+              <div class="absolute inset-0 bg-yideli-text/10 group-hover:bg-yideli-text/20 transition-colors"></div>
+
+              <div class="absolute inset-0 flex flex-col items-center justify-center text-yideli-dark">
+                <div
+                     class="bg-white/90 backdrop-blur-sm p-4 rounded-full shadow-md mb-2 group-hover:scale-110 transition-transform duration-300">
+                  <svg xmlns="http://www.w3.org/2000/svg"
+                       class="w-6 h-6"
+                       viewBox="0 0 24 24"
+                       fill="none"
+                       stroke="currentColor"
+                       stroke-width="2"
+                       stroke-linecap="round"
+                       stroke-linejoin="round">
+                    <rect x="3"
+                          y="11"
+                          width="18"
+                          height="11"
+                          rx="2"
+                          ry="2"></rect>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                  </svg>
+                </div>
+                <span class="text-xs font-bold uppercase tracking-widest bg-white/80 px-2 py-1 rounded">Private
+                  Access</span>
               </div>
             </div>
-            <h3 class="text-lg font-serif text-yideli-dark group-hover:underline underline-offset-4 decoration-1">
+
+            <h3 class="text-lg font-serif text-yideli-dark group-hover:underline underline-offset-4 decoration-1">Matte
               Executive Gel Pen Series</h3>
             <p class="text-sm text-gray-500 mt-1">0.5mm Tip · Quick Dry Ink · Smooth Grip</p>
           </div>
 
-          <div class="product-card group cursor-pointer"
+          <div @click="promptAccess('{{ route('product.show', ['lang' => $lang, 'slug' => 'artistic-series-spiral-notebook']) }}')"
+               class="product-card group cursor-pointer"
                x-show="activeCategory === 'all' || activeCategory === 'office'">
-            <div class="aspect-[4/5] bg-[#fcfcee] relative overflow-hidden mb-4">
+            <div
+                 class="aspect-[4/5] bg-[#fcfcee] relative overflow-hidden mb-4 group-hover:shadow-lg transition-all duration-300">
+
               <img src="{{ asset('images/weekly-calendar-2.jpg') }}"
                    alt="Elastic Band Notebook"
-                   class="w-full h-full object-contain p-4 group-hover:scale-105 transition duration-700">
+                   class="w-full h-full object-contain blur-xl scale-105 opacity-70 pointer-events-none">
 
-              <div
-                   class="product-action absolute bottom-0 start-0 w-full bg-white/95 backdrop-blur py-4 px-6 translate-y-full opacity-0 transition duration-300 border-t border-yideli-line flex justify-between items-center">
-                <span class="text-xs font-bold uppercase tracking-wider text-yideli-dark">Quick View</span>
-                <span class="text-yideli-dark">→</span>
+              <div class="absolute inset-0 bg-yideli-text/10 group-hover:bg-yideli-text/20 transition-colors"></div>
+
+              <div class="absolute inset-0 flex flex-col items-center justify-center text-yideli-dark">
+                <div
+                     class="bg-white/90 backdrop-blur-sm p-4 rounded-full shadow-md mb-2 group-hover:scale-110 transition-transform duration-300">
+                  <svg xmlns="http://www.w3.org/2000/svg"
+                       class="w-6 h-6"
+                       viewBox="0 0 24 24"
+                       fill="none"
+                       stroke="currentColor"
+                       stroke-width="2"
+                       stroke-linecap="round"
+                       stroke-linejoin="round">
+                    <rect x="3"
+                          y="11"
+                          width="18"
+                          height="11"
+                          rx="2"
+                          ry="2"></rect>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                  </svg>
+                </div>
+                <span class="text-xs font-bold uppercase tracking-widest bg-white/80 px-2 py-1 rounded">Private
+                  Access</span>
               </div>
             </div>
-            <h3 class="text-lg font-serif text-yideli-dark group-hover:underline underline-offset-4 decoration-1">
+
+            <h3 class="text-lg font-serif text-yideli-dark group-hover:underline underline-offset-4 decoration-1">Matte
               Professional Color Pencils</h3>
             <p class="text-sm text-gray-500 mt-1">48/72 Colors · Oil-based · Cedar Wood</p>
           </div>
 
-          <div class="product-card group cursor-pointer"
+          <div @click="promptAccess('{{ route('product.show', ['lang' => $lang, 'slug' => 'artistic-series-spiral-notebook']) }}')"
+               class="product-card group cursor-pointer"
                x-show="activeCategory === 'all' || activeCategory === 'notebooks'">
-            <div class="aspect-[4/5] bg-[#fcfcee] relative overflow-hidden mb-4">
+            <div
+                 class="aspect-[4/5] bg-[#fcfcee] relative overflow-hidden mb-4 group-hover:shadow-lg transition-all duration-300">
+
               <img src="{{ asset('images/weekly-calendar-1.jpg') }}"
                    alt="Elastic Band Notebook"
-                   class="w-full h-full object-contain p-4 group-hover:scale-105 transition duration-700">
+                   class="w-full h-full object-contain blur-xl scale-105 opacity-70 pointer-events-none">
 
-              <div
-                   class="product-action absolute bottom-0 start-0 w-full bg-white/95 backdrop-blur py-4 px-6 translate-y-full opacity-0 transition duration-300 border-t border-yideli-line flex justify-between items-center">
-                <span class="text-xs font-bold uppercase tracking-wider text-yideli-dark">Quick View</span>
-                <span class="text-yideli-dark">→</span>
+              <div class="absolute inset-0 bg-yideli-text/10 group-hover:bg-yideli-text/20 transition-colors"></div>
+
+              <div class="absolute inset-0 flex flex-col items-center justify-center text-yideli-dark">
+                <div
+                     class="bg-white/90 backdrop-blur-sm p-4 rounded-full shadow-md mb-2 group-hover:scale-110 transition-transform duration-300">
+                  <svg xmlns="http://www.w3.org/2000/svg"
+                       class="w-6 h-6"
+                       viewBox="0 0 24 24"
+                       fill="none"
+                       stroke="currentColor"
+                       stroke-width="2"
+                       stroke-linecap="round"
+                       stroke-linejoin="round">
+                    <rect x="3"
+                          y="11"
+                          width="18"
+                          height="11"
+                          rx="2"
+                          ry="2"></rect>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                  </svg>
+                </div>
+                <span class="text-xs font-bold uppercase tracking-widest bg-white/80 px-2 py-1 rounded">Private
+                  Access</span>
               </div>
             </div>
+
             <h3 class="text-lg font-serif text-yideli-dark group-hover:underline underline-offset-4 decoration-1">Linen
               Hardcover Notebook</h3>
             <p class="text-sm text-gray-500 mt-1">A5 Size · Dot Grid · Lay-flat Binding</p>
           </div>
+
 
         </div>
 
