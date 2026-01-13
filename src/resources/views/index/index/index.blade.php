@@ -95,42 +95,6 @@
     </div>
   </section>
 
-  <section class="py-20 bg-yideli-base border-t border-yideli-line overflow-hidden">
-    <div class="max-w-[1600px] mx-auto px-6 lg:px-12 mb-12 flex justify-between items-end">
-      <div>
-        <h3 class="font-serif text-2xl text-yideli-dark mb-2">Curated Selection</h3>
-        <p class="text-gray-500 text-sm">Fine Stationery for Professionals</p>
-      </div>
-      <a href="{{ route('product.index', ['lang' => $lang]) }}"
-         class="btn-minimal text-sm font-medium text-yideli-dark pb-1">View All Products</a>
-    </div>
-
-    <div class="w-full flex flex-col lg:flex-row justify-center items-center gap-4">
-
-      @foreach ($categories as $category)
-        <a href="{{ route('product.index', ['lang' => $lang, 'slug' => $category->slug]) }}"
-           class="min-w-[280px] lg:min-w-[320px] group cursor-pointer">
-          <div class="aspect-[4/5] bg-white mb-6 overflow-hidden relative">
-            <img src="{{ asset('storage/' . $category->cover_image) }}"
-                 class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
-            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition duration-500"></div>
-            <div
-                 class="absolute bottom-4 start-0 w-full text-center opacity-0 group-hover:opacity-100 transition duration-500 translate-y-4 group-hover:translate-y-0">
-              <span
-                    class="bg-white/90 px-4 py-2 text-xs font-bold uppercase tracking-widest text-yideli-dark shadow-sm">Quick
-                View</span>
-            </div>
-          </div>
-          <h4
-              class="text-center font-bold text-yideli-dark text-lg group-hover:underline decoration-1 underline-offset-4">
-            {{ $category->name }}
-          </h4>
-        </a>
-      @endforeach
-
-    </div>
-  </section>
-
   <section class="py-24 lg:py-32 px-6 lg:px-12">
     <div class="max-w-[1600px] mx-auto grid lg:grid-cols-12 gap-12 lg:gap-24">
 
@@ -181,6 +145,42 @@
     <img class="w-full lg:max-w-[1400px] mx-auto"
          src="{{ asset('images/cert-1-big-0-1.jpg') }}"
          alt="">
+  </section>
+
+  <section class="py-20 bg-yideli-base border-t border-yideli-line overflow-hidden">
+    <div class="max-w-[1600px] mx-auto px-6 lg:px-12 mb-12 flex justify-between items-end">
+      <div>
+        <h3 class="font-serif text-2xl text-yideli-dark mb-2">Curated Selection</h3>
+        <p class="text-gray-500 text-sm">Fine Stationery for Professionals</p>
+      </div>
+      <a href="{{ route('product.index', ['lang' => $lang]) }}"
+         class="btn-minimal text-sm font-medium text-yideli-dark pb-1">View All Products</a>
+    </div>
+
+    <div class="w-full flex flex-col lg:flex-row justify-center items-center gap-4">
+
+      @foreach ($categories as $category)
+        <a href="{{ route('product.index', ['lang' => $lang, 'slug' => $category->slug]) }}"
+           class="min-w-[280px] lg:min-w-[320px] group cursor-pointer">
+          <div class="aspect-[4/5] bg-white mb-6 overflow-hidden relative">
+            <img src="{{ asset('storage/' . $category->cover_image) }}"
+                 class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition duration-500"></div>
+            <div
+                 class="absolute bottom-4 start-0 w-full text-center opacity-0 group-hover:opacity-100 transition duration-500 translate-y-4 group-hover:translate-y-0">
+              <span
+                    class="bg-white/90 px-4 py-2 text-xs font-bold uppercase tracking-widest text-yideli-dark shadow-sm">Quick
+                View</span>
+            </div>
+          </div>
+          <h4
+              class="text-center font-bold text-yideli-dark text-lg group-hover:underline decoration-1 underline-offset-4">
+            {{ $category->name }}
+          </h4>
+        </a>
+      @endforeach
+
+    </div>
   </section>
 @endsection
 
