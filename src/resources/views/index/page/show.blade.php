@@ -3,7 +3,6 @@
 @section('head')
   <title>About Us - Yideli Stationery</title>
   <style>
-    /* 定义 Marquee 关键帧：从 0% 移动到 -50% */
     @keyframes marquee {
       0% {
         transform: translateX(0);
@@ -15,14 +14,9 @@
     }
 
     .animate-marquee {
-      /* 30s: 滚动一圈的时间，数字越大越慢
-               linear: 匀速滚动
-               infinite: 无限循环
-            */
       animation: marquee 30s linear infinite;
     }
 
-    /* 鼠标悬停时暂停 */
     .group:hover .pause {
       animation-play-state: paused;
     }
@@ -74,7 +68,7 @@
 
     <section class="w-full mb-16">
       <div class="relative w-full h-64 md:h-96 bg-gray-300 overflow-hidden rounded-sm shadow-sm">
-        <img src="{{ asset('images/about-us-hero-image-1.jpg') }}" alt="Factory Building"
+        <img src="{{ asset('images/DJI_0603.webp') }}" alt="Factory Building"
           class="w-full h-full object-cover opacity-90">
         <div class="absolute inset-0 bg-white/20"></div>
       </div>
@@ -100,16 +94,28 @@
       </div>
 
       <div class="order-1 md:order-2 h-64 md:h-auto rounded-sm shadow-sm">
-        <img src="https://placehold.co/800x600/367C6D/367C6D" class="w-full">
+        <img src="{{ asset('images/IMG_5888.webp') }}" class="w-full">
       </div>
     </section>
 
     <section class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-20 items-center">
       <div class="grid grid-cols-2 gap-4">
-        <div class="aspect-[4/3] bg-[#367C6D] rounded-sm"></div>
-        <div class="aspect-[4/3] bg-[#367C6D] rounded-sm"></div>
-        <div class="aspect-[4/3] bg-[#367C6D] rounded-sm"></div>
-        <div class="aspect-[4/3] bg-[#367C6D] rounded-sm"></div>
+        <div class="aspect-[4/3] bg-[#367C6D] rounded-sm">
+          <img src="{{ asset('images/IMG_5950.webp') }}" alt="MBO Folding Machine" class="w-full h-full object-cover">
+        </div>
+        <div class="aspect-[4/3] bg-[#367C6D] rounded-sm">
+          <img src="{{ asset('images/IMG_5912.webp') }}" alt="Muller martini automatic stitching machine"
+            class="w-full h-full object-cover">
+        </div>
+        <div class="aspect-[4/3] bg-[#367C6D] rounded-sm">
+          <img src="{{ asset('images/IMG_5899.webp') }}" alt="Germany Heidelberg four-color printing machine"
+            class="w-full h-full object-cover">
+        </div>
+        <div class="aspect-[4/3] bg-[#367C6D] rounded-sm">
+          <img src="{{ asset('images/IMG_5881.webp') }}" alt="Germany kolbus cover auto-wrapping machine"
+            class="w-full h-full object-cover">
+
+        </div>
       </div>
 
       <div>
@@ -157,15 +163,33 @@
           </div>
         </div>
         <div class="md:col-span-5 grid grid-cols-3 gap-3">
-          <div class="aspect-[16/9] bg-[#367C6D] rounded-sm opacity-90"></div>
-          <div class="aspect-[16/9] bg-[#367C6D] rounded-sm opacity-90"></div>
-          <div class="aspect-[16/9] bg-[#367C6D] rounded-sm opacity-90"></div>
-          <div class="aspect-[16/9] bg-[#367C6D] rounded-sm opacity-90"></div>
-          <div class="aspect-[16/9] bg-[#367C6D] rounded-sm opacity-90"></div>
-          <div class="aspect-[16/9] bg-[#367C6D] rounded-sm opacity-90"></div>
-          <div class="aspect-[16/9] bg-[#367C6D] rounded-sm opacity-90"></div>
-          <div class="aspect-[16/9] bg-[#367C6D] rounded-sm opacity-90"></div>
-          <div class="aspect-[16/9] bg-[#367C6D] rounded-sm opacity-90"></div>
+          <div class="aspect-[16/9] bg-[#367C6D] rounded-sm opacity-90">
+            <img src="{{ asset('images/IMG_5963.webp') }}" class="w-full h-full object-cover">
+          </div>
+          <div class="aspect-[16/9] bg-[#367C6D] rounded-sm opacity-90">
+            <img src="{{ asset('images/IMG_5952.webp') }}" class="w-full h-full object-cover">
+          </div>
+          <div class="aspect-[16/9] bg-[#367C6D] rounded-sm opacity-90">
+            <img src="{{ asset('images/IMG_5943.webp') }}" class="w-full h-full object-cover">
+          </div>
+          <div class="aspect-[16/9] bg-[#367C6D] rounded-sm opacity-90">
+            <img src="{{ asset('images/IMG_5929.webp') }}" class="w-full h-full object-cover">
+          </div>
+          <div class="aspect-[16/9] bg-[#367C6D] rounded-sm opacity-90">
+            <img src="{{ asset('images/IMG_5897.webp') }}" class="w-full h-full object-cover">
+          </div>
+          <div class="aspect-[16/9] bg-[#367C6D] rounded-sm opacity-90">
+            <img src="{{ asset('images/IMG_5764.webp') }}" class="w-full h-full object-cover">
+          </div>
+          <div class="aspect-[16/9] bg-[#367C6D] rounded-sm opacity-90">
+            <img src="{{ asset('images/IMG_5747.webp') }}" class="w-full h-full object-cover">
+          </div>
+          <div class="aspect-[16/9] bg-[#367C6D] rounded-sm opacity-90">
+            <img src="{{ asset('images/IMG_5737.webp') }}" class="w-full h-full object-cover">
+          </div>
+          <div class="aspect-[16/9] bg-[#367C6D] rounded-sm opacity-90">
+            <img src="{{ asset('images/IMG_5734.webp') }}" class="w-full h-full object-cover">
+          </div>
         </div>
       </div>
 
@@ -207,8 +231,12 @@
       <div class="md:col-span-6 order-2 md:order-1">
         <div class="flex flex-col gap-4">
           <div class="grid grid-cols-1 gap-4">
-            <div class="aspect-[30/9] bg-[#367C6D] rounded-sm"></div>
-            <div class="aspect-[30/9] bg-[#367C6D] rounded-sm"></div>
+            <div class="aspect-[30/9] bg-[#367C6D] rounded-sm">
+              <img src="{{ asset('images/IMG_5989.webp') }}" class="w-full h-full object-cover">
+            </div>
+            <div class="aspect-[30/9] bg-[#367C6D] rounded-sm">
+              <img src="{{ asset('images/IMG_5975.webp') }}" class="w-full h-full object-cover">
+            </div>
           </div>
         </div>
       </div>
@@ -231,10 +259,18 @@
 
 
     <section class="grid grid-cols-2 md:grid-cols-4 gap-4 items-center mb-20">
-      <div class="aspect-[3/4] bg-[#367C6D] rounded-sm"></div>
-      <div class="aspect-[3/4] bg-[#367C6D] rounded-sm"></div>
-      <div class="aspect-[3/4] bg-[#367C6D] rounded-sm"></div>
-      <div class="aspect-[3/4] bg-[#367C6D] rounded-sm"></div>
+      <div class="aspect-[3/4] bg-[#367C6D] rounded-sm">
+        <img src="{{ asset('images/IMG_5943.webp') }}" class="w-full h-full object-cover">
+      </div>
+      <div class="aspect-[3/4] bg-[#367C6D] rounded-sm">
+        <img src="{{ asset('images/IMG_5950.webp') }}" class="w-full h-full object-cover">
+      </div>
+      <div class="aspect-[3/4] bg-[#367C6D] rounded-sm">
+        <img src="{{ asset('images/working-4.webp') }}" class="w-full h-full object-cover">
+      </div>
+      <div class="aspect-[3/4] bg-[#367C6D] rounded-sm">
+        <img src="{{ asset('images/working-8.webp') }}" class="w-full h-full object-cover">
+      </div>
     </section>
 
     <section class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center mb-20">
@@ -255,9 +291,9 @@
       </div>
 
       <div class="md:col-span-7 grid grid-cols-2 gap-4">
-        <img src="{{ asset('images/office-1.jpg') }}" alt="R&D Team Member"
+        <img src="{{ asset('images/working-6.webp') }}" alt="R&D Team Member"
           class="w-full aspect-[3/4] object-cover rounded-sm shadow-sm">
-        <img src="{{ asset('images/office-2.jpg') }}" alt="Office Environment"
+        <img src="{{ asset('images/working-3.webp') }}" alt="Office Environment"
           class="w-full aspect-[3/4] object-cover rounded-sm shadow-sm">
       </div>
     </section>
@@ -266,15 +302,33 @@
     <section class="mb-12">
       <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center mb-12">
         <div class="md:col-span-5 order-2 md:order-1 grid grid-cols-3 gap-3">
-          <div class="aspect-[16/9] bg-[#367C6D] rounded-sm opacity-90"></div>
-          <div class="aspect-[16/9] bg-[#367C6D] rounded-sm opacity-90"></div>
-          <div class="aspect-[16/9] bg-[#367C6D] rounded-sm opacity-90"></div>
-          <div class="aspect-[16/9] bg-[#367C6D] rounded-sm opacity-90"></div>
-          <div class="aspect-[16/9] bg-[#367C6D] rounded-sm opacity-90"></div>
-          <div class="aspect-[16/9] bg-[#367C6D] rounded-sm opacity-90"></div>
-          <div class="aspect-[16/9] bg-[#367C6D] rounded-sm opacity-90"></div>
-          <div class="aspect-[16/9] bg-[#367C6D] rounded-sm opacity-90"></div>
-          <div class="aspect-[16/9] bg-[#367C6D] rounded-sm opacity-90"></div>
+          <div class="aspect-[16/9] bg-[#367C6D] rounded-sm opacity-90">
+            <img src="{{ asset('images/IMG_5972.webp') }}" class="w-full h-full object-cover">
+          </div>
+          <div class="aspect-[16/9] bg-[#367C6D] rounded-sm opacity-90">
+            <img src="{{ asset('images/working-9.webp') }}" class="w-full h-full object-cover">
+          </div>
+          <div class="aspect-[16/9] bg-[#367C6D] rounded-sm opacity-90">
+            <img src="{{ asset('images/working-10.webp') }}" class="w-full h-full object-cover">
+          </div>
+          <div class="aspect-[16/9] bg-[#367C6D] rounded-sm opacity-90">
+            <img src="{{ asset('images/working-7.webp') }}" class="w-full h-full object-cover">
+          </div>
+          <div class="aspect-[16/9] bg-[#367C6D] rounded-sm opacity-90">
+            <img src="{{ asset('images/working-5.webp') }}" class="w-full h-full object-cover">
+          </div>
+          <div class="aspect-[16/9] bg-[#367C6D] rounded-sm opacity-90">
+            <img src="{{ asset('images/working-2.webp') }}" class="w-full h-full object-cover">
+          </div>
+          <div class="aspect-[16/9] bg-[#367C6D] rounded-sm opacity-90">
+            <img src="{{ asset('images/working-1.webp') }}" class="w-full h-full object-cover">
+          </div>
+          <div class="aspect-[16/9] bg-[#367C6D] rounded-sm opacity-90">
+            <img src="{{ asset('images/IMG_5967.webp') }}" class="w-full h-full object-cover">
+          </div>
+          <div class="aspect-[16/9] bg-[#367C6D] rounded-sm opacity-90">
+            <img src="{{ asset('images/IMG_5929.webp') }}" class="w-full h-full object-cover">
+          </div>
         </div>
 
         <div class="md:col-span-7 order-1 md:order-2">
@@ -296,6 +350,7 @@
 
     <section class="grid grid-cols-1 md:grid-cols-1">
       <div class="aspect-[16/9] w-full bg-[#367C6D] rounded-sm shadow-sm">
+        <img src="{{ asset('images/DJI_0614.webp') }}" class="w-full h-full object-cover">
       </div>
     </section>
   </main>
