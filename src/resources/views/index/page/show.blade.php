@@ -14,7 +14,7 @@
     }
 
     .animate-marquee {
-      animation: marquee 30s linear infinite;
+      animation: marquee 20s linear infinite;
     }
 
     .group:hover .pause {
@@ -195,17 +195,13 @@
 
       <div class="mb-16">
         <div class="flex flex-col items-center">
-          {{-- <div class="mb-6">
-            <img src="https://placehold.co/120x40/F4F7F2/1F5F53?text=Slides" alt="Logo" class="h-8 object-contain">
-          </div> --}}
-
           <div class="w-full overflow-hidden relative group">
 
             <div class="flex gap-8 w-max animate-marquee group-hover:pause">
 
               @for ($i = 0; $i < 3; $i++)
               @for ($j = 1; $j <= 8; $j++)
-              <img src="{{ asset('images/slides/' . $j . '.jpg') }}"
+              <img src="{{ asset('images/slides/' . $j . '.webp') }}"
                 class="h-64 w-auto shadow-sm rounded-sm">
               @endfor
               @endfor
