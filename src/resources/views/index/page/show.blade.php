@@ -24,7 +24,7 @@
 @endsection
 
 @section('main')
-  <main class="max-w-[1400px] mx-auto  px-6 py-12 md:py-20 font-serif">
+  <main class="max-w-[1600px] mx-auto  px-6 py-12 md:py-20 font-serif">
     <section class="w-full mb-16">
       <video class="inset-0 w-full h-full object-cover shadow-2xl" autoplay loop muted playsinline>
         <source src="{{ asset('videos/about-us-top.mp4') }}" type="video/mp4">
