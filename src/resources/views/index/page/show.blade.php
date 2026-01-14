@@ -25,11 +25,6 @@
 
 @section('main')
   <main class="max-w-[1600px] mx-auto  px-6 py-12 md:py-20 font-serif">
-
-    <h1 class="text-3xl md:text-5xl font-bold text-[#1F5F53] text-center mb-16">
-      YIDELI: Crafting a Legacy in Every Page
-    </h1>
-
     <section class="w-full mb-16">
       <video class="inset-0 w-full h-full object-cover shadow-2xl" autoplay loop muted playsinline>
         <source src="{{ asset('videos/about-us-top.mp4') }}" type="video/mp4">
@@ -38,19 +33,15 @@
     </section>
 
     <section class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16 items-start">
-      <div class="md:col-span-4 flex flex-col items-start">
+      <div class="md:col-span-5 flex flex-col items-start">
         <div class="mb-4">
           <div class="flex items-center gap-2">
-            <img src="{{ asset('images/logo-light-bg.png') }}" alt="Yideli Logo" class="h-auto w-40 object-contain">
+            <img src="{{ asset('images/start-2.webp') }}" alt="Yideli Logo" class="h-auto w-full object-contain">
           </div>
-          <p class="text-xs text-[#1F5F53] font-bold mt-2 tracking-wide uppercase">
-            Taizhou Yideli Industrial Trading Co., Ltd.
-          </p>
-          <div class="h-0.5 w-32 bg-[#A8C5BD] mt-2"></div>
         </div>
       </div>
 
-      <div class="md:col-span-8">
+      <div class="md:col-span-7">
         <h2 class="text-2xl md:text-3xl font-bold text-[#1F5F53] mb-6">Heritage & Commitment</h2>
         <div class="space-y-4 text-sm md:text-base leading-relaxed text-gray-800">
           <p>
