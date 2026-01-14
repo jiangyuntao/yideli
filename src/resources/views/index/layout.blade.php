@@ -25,7 +25,7 @@
         extend: {
           colors: {
             yideli: {
-              base: '#EFF5E6',
+              base: '#ECF2E8',
               dark: '#006B5F',
               text: '#1C3330',
               hover: '#005248',

@@ -101,9 +101,9 @@
       <div class="lg:col-span-5 flex flex-col justify-center">
         <span class="text-yideli-dark text-sm font-bold tracking-widest mb-6 uppercase">Our Factory</span>
         <h2 class="text-3xl lg:text-5xl font-serif text-yideli-dark mb-8 leading-tight">
-          YIDELI: Crafting a Legacy in Every Page
+          <img src="{{ asset('images/start-2.webp') }}" class="h-60 w-auto">
         </h2>
-        <div class="space-y-6 text-gray-600 font-light leading-relaxed">
+        <div class="space-y-6 text-gray-800 text-lg leading-relaxed">
           <p>
             Founded in 1989, YIDELI Industrial Trading Co., Ltd. specializes in the manufacture of high-quality diaries,
             notebooks, planners, journals, and wire-bound notebooks. We are experts in producing well-crafted covers
@@ -138,19 +138,19 @@
 
   <section class="px-6 lg:px-12 bg-[#347e73]">
     <img class="w-full lg:max-w-[1400px] mx-auto"
-         src="{{ asset('images/cert-1-big-0-0.jpg') }}"
+         src="{{ asset('images/cert-1-big-0-0.webp') }}"
          alt="">
   </section>
   <section class="py-6 lg:py-12 px-6 lg:px-12 bg-[#fcfcef]">
     <img class="w-full lg:max-w-[1400px] mx-auto"
-         src="{{ asset('images/cert-1-big-0-1.jpg') }}"
+         src="{{ asset('images/cert-1-big-0-1.webp') }}"
          alt="">
   </section>
 
   <section class="py-20 bg-yideli-base border-t border-yideli-line overflow-hidden">
     <div class="max-w-[1600px] mx-auto px-6 lg:px-12 mb-12 flex justify-between items-end">
       <div>
-        <h3 class="font-serif text-2xl text-yideli-dark mb-2">Curated Selection</h3>
+        <h3 class="font-serif text-4xl font-black text-yideli-dark mb-2">Curated Selection</h3>
         <p class="text-gray-500 text-sm">Fine Stationery for Professionals</p>
       </div>
       <a href="{{ route('product.index', ['lang' => $lang]) }}"
