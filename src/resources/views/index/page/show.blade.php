@@ -24,7 +24,7 @@
 @endsection
 
 @section('main')
-  <main class="max-w-[1600px] mx-auto  px-6 py-12 md:py-20 font-serif">
+  <main class="max-w-[1200px] mx-auto  px-6 py-12 md:py-20 font-serif">
     <section class="w-full mb-16">
       <video class="inset-0 w-full h-full object-cover shadow-2xl" autoplay loop muted playsinline>
         <source src="{{ asset('videos/about-us-top.mp4') }}" type="video/mp4">
@@ -35,14 +35,14 @@
     <section class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16 items-start">
       <div class="md:col-span-6 flex flex-col items-start">
         <div class="mb-4">
-          <div class="flex items-center gap-2">
+          <div class="flex items-center gap-2 pt-8">
             <img src="{{ asset('images/start-2.webp') }}" alt="Yierli Logo" class="h-60 w-auto object-contain">
           </div>
         </div>
       </div>
 
       <div class="md:col-span-6">
-        <h2 class="text-2xl md:text-4xl font-black text-[#1F5F53] mb-6">Heritage & Commitment</h2>
+        <h2 class="text-2xl md:text-4xl font-black text-[#1F5F53] mb-12">Heritage & Commitment</h2>
         <div class="space-y-4 text-sm md:text-lg leading-relaxed text-gray-800">
           <p>
             Founded in 1989, YIDELI Industrial Trading Co., Ltd. specializes in the manufacture of high-quality
@@ -57,17 +57,17 @@
       </div>
     </section>
 
-    <section class="w-full mb-16">
+    <section class="w-full mb-24">
       <div class="relative w-full h-64 md:h-96 bg-gray-300 overflow-hidden rounded-sm shadow-sm">
-        <img src="{{ asset('images/about-us/Heritage-Commitment.webp') }}" alt="Factory Building"
+        <img src="{{ asset('images/about-us/Heritage-Commitment.png') }}" alt="Factory Building"
           class="w-full h-full object-cover opacity-90">
         <div class="absolute inset-0 bg-white/20"></div>
       </div>
     </section>
 
-    <section class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-20 items-center">
+    <section class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-24 items-center">
       <div class="order-2 md:col-span-7 md:order-1">
-        <h2 class="text-2xl md:text-4xl font-black text-[#1F5F53] mb-6">Integrated Manufacturing</h2>
+        <h2 class="text-2xl md:text-4xl font-black text-[#1F5F53] mb-12">Integrated Manufacturing</h2>
         <div class="text-sm md:text-lg leading-relaxed text-gray-800 space-y-4">
           <p>
             Our core strength is our modern, standardized production facility in Taizhou, which houses a fully
@@ -84,49 +84,48 @@
         </div>
       </div>
 
-      <div class="order-1 md:col-span-5 md:order-2 h-64 md:h-auto rounded-sm shadow-sm">
-        <div class="grid grid-cols-2 gap-6">
-          <div class="aspect-[4/3] bg-[#367C6D] rounded-sm">
-            <img src="{{ asset('images/about-us/Integrated-Manufacturing-1.webp') }}" alt="MBO Folding Machine" class="w-full h-full object-cover">
+      <div class="order-1 md:col-span-5 md:order-2 h-64 md:h-auto rounded-sm shadow-sm pt-24">
+        <div class="grid grid-cols-2 gap-3">
+          <div class="aspect-[16/9] bg-[#367C6D] rounded-sm">
+            <img src="{{ asset('images/about-us/Integrated-Manufacturing-1.jpg') }}" class="w-full h-full object-cover">
           </div>
-          <div class="aspect-[4/3] bg-[#367C6D] rounded-sm">
-            <img src="{{ asset('images/IMG_5912.webp') }}" alt="Muller martini automatic stitching machine"
+          <div class="aspect-[16/9] bg-[#367C6D] rounded-sm">
+            <img src="{{ asset('images/about-us/Integrated-Manufacturing-2.jpg') }}" class="w-full h-full object-cover">
+          </div>
+          <div class="aspect-[16/9] bg-[#367C6D] rounded-sm">
+            <img src="{{ asset('images/about-us/Integrated-Manufacturing-3.jpg') }}"
               class="w-full h-full object-cover">
           </div>
-          <div class="aspect-[4/3] bg-[#367C6D] rounded-sm">
-            <img src="{{ asset('images/IMG_5899.webp') }}" alt="Germany Heidelberg four-color printing machine"
-              class="w-full h-full object-cover">
-          </div>
-          <div class="aspect-[4/3] bg-[#367C6D] rounded-sm">
-            <img src="{{ asset('images/IMG_5881.webp') }}" alt="Germany kolbus cover auto-wrapping machine"
+          <div class="aspect-[16/9] bg-[#367C6D] rounded-sm">
+            <img src="{{ asset('images/about-us/Integrated-Manufacturing-4.jpg') }}"
               class="w-full h-full object-cover">
           </div>
         </div>
       </div>
     </section>
 
-    <section class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-20 items-center">
-      <div class="grid grid-cols-2 gap-6">
-        <div class="rounded-sm overflow-hidden aspect-[5/3]">
-          <img src="{{ asset('images/about-us/Integrated-Manufacturing-5.webp') }}" class="w-full h-full object-fit">
+    <section class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-24 items-center">
+      <div class="grid grid-cols-2 md:col-span-7 gap-2 pr-28">
+        <div class="rounded-sm overflow-hidden aspect-[16/9]">
+          <img src="{{ asset('images/about-us/Integrated-Manufacturing-5.jpg') }}" class="w-full h-full object-cover">
         </div>
-        <div class="rounded-sm overflow-hidden aspect-[5/3]">
-          <img src="{{ asset('images/about-us/Integrated-Manufacturing-6.webp') }}" class="w-full h-full object-fit">
+        <div class="rounded-sm overflow-hidden aspect-[16/9]">
+          <img src="{{ asset('images/about-us/Integrated-Manufacturing-6.jpg') }}" class="w-full h-full object-cover">
         </div>
-        <div class="rounded-sm overflow-hidden aspect-[5/3]">
-          <img src="{{ asset('images/about-us/Integrated-Manufacturing-7.webp') }}" class="w-full h-full object-fit">
+        <div class="rounded-sm overflow-hidden aspect-[16/9]">
+          <img src="{{ asset('images/about-us/Integrated-Manufacturing-7.jpg') }}" class="w-full h-full object-cover">
         </div>
-        <div class="rounded-sm overflow-hidden aspect-[5/3]">
-          <img src="{{ asset('images/about-us/Integrated-Manufacturing-8.webp') }}" class="w-full h-full object-fit">
+        <div class="rounded-sm overflow-hidden aspect-[16/9]">
+          <img src="{{ asset('images/about-us/Integrated-Manufacturing-8.jpg') }}" class="w-full h-full object-cover">
         </div>
-        <div class="rounded-sm overflow-hidden aspect-[5/3]">
-          <img src="{{ asset('images/about-us/Integrated-Manufacturing-9.webp') }}" class="w-full h-full object-fit">
+        <div class="rounded-sm overflow-hidden aspect-[16/9]">
+          <img src="{{ asset('images/about-us/Integrated-Manufacturing-9.jpg') }}" class="w-full h-full object-cover">
         </div>
-        <div class="rounded-sm overflow-hidden aspect-[5/3]">
-          <img src="{{ asset('images/about-us/Integrated-Manufacturing-10.webp') }}" class="w-full h-full object-fit">
+        <div class="rounded-sm overflow-hidden aspect-[16/9]">
+          <img src="{{ asset('images/about-us/Integrated-Manufacturing-10.png') }}" class="w-full h-full object-cover">
         </div>
       </div>
-      <div>
+      <div class="md:col-span-5">
         <ul class="space-y-4 text-[#1F5F53] font-medium text-sm md:text-lg">
           <li class="flex items-center gap-2">
             <span class="w-1.5 h-1.5 bg-[#1F5F53] rounded-full"></span>
@@ -186,16 +185,16 @@
         </div>
         <div class="md:col-span-5 grid grid-cols-2 gap-3">
           <div class="aspect-[16/9] bg-[#367C6D] rounded-sm opacity-90">
-            <img src="{{ asset('images/about-us/Quality-Compliance-1.webp') }}" class="w-full h-full object-fit">
+            <img src="{{ asset('images/about-us/Quality-Compliance-1.jpg') }}" class="w-full h-full object-cover">
           </div>
           <div class="aspect-[16/9] bg-[#367C6D] rounded-sm opacity-90">
-            <img src="{{ asset('images/about-us/Quality-Compliance-2.webp') }}" class="w-full h-full object-fit">
+            <img src="{{ asset('images/about-us/Quality-Compliance-2.jpg') }}" class="w-full h-full object-cover">
           </div>
           <div class="aspect-[16/9] bg-[#367C6D] rounded-sm opacity-90">
-            <img src="{{ asset('images/about-us/Quality-Compliance-3.webp') }}" class="w-full h-full object-fit">
+            <img src="{{ asset('images/about-us/Quality-Compliance-3.jpg') }}" class="w-full h-full object-cover">
           </div>
           <div class="aspect-[16/9] bg-[#367C6D] rounded-sm opacity-90">
-            <img src="{{ asset('images/about-us/Quality-Compliance-4.webp') }}" class="w-full h-full object-fit">
+            <img src="{{ asset('images/about-us/Quality-Compliance-4.jpg') }}" class="w-full h-full object-cover">
           </div>
         </div>
       </div>
@@ -224,7 +223,7 @@
         </div>
 
         <div class="w-full max-w-md mx-auto h-px bg-[#A8C5BD] mt-8 text-center relative">
-          <div class="absolute end-0 -top-1 w-2 h-2 bg-[#A8C5BD] rounded-full"></div>
+          <div class="absolute end-0 -top-1 bg-[url('{{ asset('images/line.jpg') }}')] rounded-full"></div>
         </div>
       </div>
     </section>
