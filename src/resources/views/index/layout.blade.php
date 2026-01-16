@@ -143,7 +143,7 @@
 
   <header x-data="{ mobileMenu: false, searchOpen: false }"
           class="sticky bg-yideli-dark top-0 z-50 backdrop-blur-sm transition-all duration-300 shadow-md">
-    <div class="max-w-[1920px] mx-auto px-6 lg:px-12 h-20 flex justify-between items-center">
+    <div class="max-w-[1200px] mx-auto px-6 lg:px-12 h-20 flex justify-between items-center">
       <div class="flex-shrink-0 me-8">
         <a href="{{ route('index', ['lang' => $lang]) }}"
            class="block">
@@ -153,7 +153,7 @@
         </a>
       </div>
 
-      <nav class="hidden lg:flex gap-16 text-sm font-medium tracking-wide "
+      <nav class="hidden lg:flex gap-8 text-sm font-medium tracking-wide "
            style="margin-top:32px; color: rgb(239 245 230);">
         <a href="{{ route('index', ['lang' => $lang]) }}"
            class="hover:text-gray-300 transition">HOME</a>
@@ -287,7 +287,7 @@
 
   <footer class="bg-yideli-dark text-white pt-20 pb-10">
     <div
-         class="max-w-[1600px] mx-auto px-6 lg:px-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 border-b border-white/20 pb-16">
+         class="max-w-[1200px] mx-auto px-6 lg:px-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 border-b border-white/20 pb-16">
 
       <div class="lg:col-span-2">
         <h3 class="text-2xl font-bold font-serif tracking-wider">
@@ -441,7 +441,7 @@
     </div>
 
     <div
-         class="max-w-[1600px] mx-auto px-6 lg:px-12 mt-8 flex flex-col md:flex-row justify-between items-center text-xs text-white/40">
+         class="max-w-[1200px] mx-auto px-6 lg:px-12 mt-8 flex flex-col md:flex-row justify-between items-center text-xs text-white/40">
       <p>&copy; 2025 Yideli Stationery. All rights reserved.</p>
       <div class="flex gap-6 mt-4 md:mt-0">
         <a href="#"

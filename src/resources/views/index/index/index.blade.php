@@ -96,7 +96,7 @@
   </section>
 
   <section class="py-24 lg:py-32 px-6 lg:px-12">
-    <div class="max-w-[1600px] mx-auto grid lg:grid-cols-12 gap-12 lg:gap-24">
+    <div class="max-w-[1200px] mx-auto grid lg:grid-cols-12 gap-12 lg:gap-24">
 
       <div class="lg:col-span-5 flex flex-col justify-center">
         <span class="text-yideli-dark text-sm font-bold tracking-widest mb-6 uppercase">Our Factory</span>
@@ -137,18 +137,18 @@
   </section>
 
   <section class="px-6 lg:px-12 bg-[#347e73]">
-    <img class="w-full lg:max-w-[1400px] mx-auto"
+    <img class="w-full lg:max-w-[1200px] mx-auto"
          src="{{ asset('images/cert-1-big-0-0.webp') }}"
          alt="">
   </section>
   <section class="py-6 lg:py-12 px-6 lg:px-12 bg-[#fcfcef]">
-    <img class="w-full lg:max-w-[1400px] mx-auto"
+    <img class="w-full lg:max-w-[1200px] mx-auto"
          src="{{ asset('images/cert-1-big-0-1.webp') }}"
          alt="">
   </section>
 
   <section class="py-20 bg-yideli-base border-t border-yideli-line overflow-hidden">
-    <div class="max-w-[1600px] mx-auto px-6 lg:px-12 mb-12 flex justify-between items-end">
+    <div class="max-w-[1200px] mx-auto px-6 lg:px-12 mb-12 flex justify-between items-end">
       <div>
         <h3 class="font-serif text-4xl font-black text-yideli-dark mb-2">Curated Selection</h3>
         <p class="text-gray-500 text-sm">Fine Stationery for Professionals</p>

@@ -2,13 +2,13 @@
 
 @section('main')
   <div class="bg-yideli-base py-20">
-    <div class="max-w-[1400px] mx-auto px-6 lg:px-12 text-center">
+    <div class="max-w-[1200px] mx-auto px-6 lg:px-12 text-center">
       <span class="text-xs font-bold tracking-[0.2em] uppercase text-yideli-dark mb-4 block">Updates From Factory</span>
       <h1 class="text-4xl lg:text-5xl font-serif text-yideli-dark mb-0">News & Insights</h1>
     </div>
   </div>
 
-  <section class="max-w-[1400px] mx-auto px-6 lg:px-12 -mt-10 relative z-10 mb-20">
+  <section class="max-w-[1200px] mx-auto px-6 lg:px-12 -mt-10 relative z-10 mb-20">
     <div
       class="bg-white shadow-xl border border-gray-100 grid lg:grid-cols-2 overflow-hidden group cursor-pointer news-card-hover">
       <a href="{{ route('news.show', ['lang' => $lang, 'slug' => $featured_news->slug]) }}"
@@ -41,7 +41,7 @@
     </div>
   </section>
 
-  <div class="max-w-[1400px] mx-auto px-6 lg:px-12 pb-24">
+  <div class="max-w-[1200px] mx-auto px-6 lg:px-12 pb-24">
     <div class="grid lg:grid-cols-12 gap-12">
 
       <div class="lg:col-span-8 space-y-12">

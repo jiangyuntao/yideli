@@ -2,7 +2,7 @@
 
 @section('main')
   <div class="bg-gray-50 py-4 border-b border-gray-100">
-    <div class="max-w-[1400px] mx-auto px-6 lg:px-12">
+    <div class="max-w-[1200px] mx-auto px-6 lg:px-12">
       <nav class="flex text-xs text-gray-500 uppercase tracking-widest gap-2">
         <a href="index.html" class="hover:text-yideli-dark">Home</a>
         <span>/</span>
@@ -13,7 +13,7 @@
     </div>
   </div>
 
-  <section class="max-w-[1400px] mx-auto px-6 lg:px-12 py-12 lg:py-20"
+  <section class="max-w-[1200px] mx-auto px-6 lg:px-12 py-12 lg:py-20"
     x-data="{ activeImage: '{{ asset('images/notebook-1.jpg') }}' }">
     <div class="grid lg:grid-cols-2 gap-12 lg:gap-20">
 
@@ -139,7 +139,7 @@
     </div>
   </section>
 
-  <section class="max-w-[1400px] mx-auto px-6 lg:px-12 py-20">
+  <section class="max-w-[1200px] mx-auto px-6 lg:px-12 py-20">
     <div class="flex justify-between items-end mb-10 border-b border-gray-100 pb-4">
       <h2 class="text-2xl font-serif text-yideli-dark">You May Also Like</h2>
       <a href="products.html" class="text-xs font-bold uppercase tracking-widest text-yideli-dark hover:underline">View
