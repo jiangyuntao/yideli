@@ -159,7 +159,7 @@
            class="hover:text-gray-300 transition">HOME</a>
         <a href="{{ route('page.show', ['lang' => $lang, 'slug' => 'about-us']) }}"
            class="hover:text-gray-300 transition">ABOUT US</a>
-        <a href="{{ route('production-process', ['lang' => $lang]) }}"
+        <a href="{{ route('page.show', ['lang' => $lang, 'slug' => 'production-process']) }}"
            class="hover:text-gray-300 transition">PRODUCTION
           PROCESS</a>
         <a href="{{ route('product.index', ['lang' => $lang]) }}"
@@ -272,7 +272,7 @@
         <a href="{{ route('product.index', ['lang' => $lang]) }}"
            class="py-2 border-b border-yideli-line/30">PRODUCT
           DISPLAY</a>
-        <a href="{{ route('production-process', ['lang' => $lang]) }}"
+        <a href="{{ route('page.show', ['lang' => $lang, 'slug' => 'production-process']) }}"
            class="py-2 border-b border-yideli-line/30">PRODUCTION PROCESS</a>
         <a href="{{ route('news.index', ['lang' => $lang]) }}"
            class="py-2 border-b border-yideli-line/30">NEWS</a>
@@ -385,7 +385,7 @@
         <ul class="space-y-4 text-sm text-white/70">
           <li><a href="{{ route('page.show', ['lang' => $lang, 'slug' => 'about-us']) }}"
                class="hover:text-white transition">About Us</a></li>
-          <li><a href="{{ route('production-process', ['lang' => $lang]) }}"
+          <li><a href="{{ route('page.show', ['lang' => $lang, 'slug' => 'production-process']) }}"
                class="hover:text-white transition">Production Process</a></li>
           <li><a href="{{ route('product.index', ['lang' => $lang]) }}"
                class="hover:text-white transition">Product Display</a></li>

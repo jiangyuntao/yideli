@@ -2,25 +2,41 @@
 
 use Illuminate\Support\Facades\Route;
 
-// 1. 根目录自动跳转到默认语言 (例如 / -> /en)
+// 1. 引入控制器命名空间 (必须步骤)
+use App\Http\Controllers\Index\IndexController;
+use App\Http\Controllers\Index\ProductController;
+use App\Http\Controllers\Index\NewsController;
+use App\Http\Controllers\Index\PageController;
+use App\Http\Controllers\Index\InquireController;
+use App\Http\Controllers\Index\ProductionProcessController;
+
+// 1. 根目录自动跳转到默认语言
 Route::get('/', function () {
     return redirect('/en');
 });
 
 // 2. 带语言前缀的路由组
-Route::group(
-    [
-        'prefix' => '{lang}',
-        'where' => ['lang' => 'en|zh|fr|es|ru|ar'] // 在路由层面也做一次正则限制
-    ],
-    function () {
-        Route::get('/', 'App\Http\Controllers\Index\IndexController@index')->name('index');
-        Route::get('/products/{slug?}', 'App\Http\Controllers\Index\ProductController@index')->name('product.index');
-        Route::get('/product/{slug}', 'App\Http\Controllers\Index\ProductController@show')->name('product.show');
-        Route::get('/news/{slug?}', 'App\Http\Controllers\Index\NewsController@index')->name('news.index');
-        Route::get('/news/show/{slug}', 'App\Http\Controllers\Index\NewsController@show')->name('news.show');
-        Route::get('/page/{slug}', 'App\Http\Controllers\Index\PageController@show')->name('page.show');
-        Route::get('/inquire', 'App\Http\Controllers\Index\InquireController@form')->name('inquire.form');
-        Route::get('/production-process', 'App\Http\Controllers\Index\ProductionProcessController@index')->name('production-process');
+Route::prefix('{lang}')
+    ->where(['lang' => 'en|zh|fr|es|ru|ar'])
+    ->group(function () {
+        // 首页
+        Route::get('/', [IndexController::class, 'index'])->name('index');
+
+        // 产品相关
+        Route::get('/products/{slug?}', [ProductController::class, 'index'])->name('product.index');
+        Route::get('/product/{slug}', [ProductController::class, 'show'])->name('product.show');
+
+        // 新闻相关
+        Route::get('/news/{slug?}', [NewsController::class, 'index'])->name('news.index');
+        Route::get('/news/show/{slug}', [NewsController::class, 'show'])->name('news.show');
+
+        // 单页 (关于我们等)
+        Route::get('/page/{slug}', [PageController::class, 'show'])->name('page.show');
+
+        // 询盘/联系我们
+        Route::get('/inquire', [InquireController::class, 'form'])->name('inquire.form');
+
+        // 生产流程
+        Route::get('/production-process', [ProductionProcessController::class, 'index'])->name('production-process');
     }
 );
