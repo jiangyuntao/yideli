@@ -36,20 +36,8 @@ class AutoTranslateJob implements ShouldQueue
      */
     public function handle(YoudaoTranslateService $translator): void
     {
-        if ($this->model->title) {
-            $titleField = 'title';
-        } else {
-            $titleField = 'name';
-        }
-
         // 1. 更新状态为进行中
         $this->model->update(['translation_status' => 'translating']);
-
-        // 中文 slug
-        if (!$this->model->getTranslation('slug', 'zh', false)) {
-            $slugZh = Str::slug($this->model->getTranslation($titleField, 'zh', false), '-', 'zh');
-            $this->model->setTranslation('slug', 'zh', $slugZh);
-        }
 
         try {
             // 获取源语言内容 (假设后台录入的是中文)
@@ -59,9 +47,8 @@ class AutoTranslateJob implements ShouldQueue
             foreach ($this->targetLocales as $locale) {
                 $fields = $this->model->getTranslatableAttributes();
                 foreach ($fields as $field) {
-                    if ($field == 'slug' && !$this->model->getTranslation('slug', $locale, false)) {
-                        $slug = Str::slug($this->model->getTranslation($titleField, $locale, false), '-', $locale);
-                        $this->model->setTranslation('slug', $locale, $slug);
+                    if ($field == 'slug') {
+                        continue;
                     }
 
                     // 获取中文原文

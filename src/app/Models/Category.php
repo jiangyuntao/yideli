@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Bus;
 use Spatie\Translatable\HasTranslations;
 
 class Category extends Model
@@ -25,7 +26,10 @@ class Category extends Model
             if ($model->wasRecentlyCreated || $model->translation_status === 'pending') {
 
                 // 分发任务到队列
-                \App\Jobs\AutoTranslateJob::dispatch($model);
+                Bus::chain([
+                    new \App\Jobs\AutoTranslateJob($model),
+                    new \App\Jobs\AutoFillSlug($model),
+                ])->dispatch();
             }
         });
     }
