@@ -2,6 +2,8 @@
 
 namespace App\Services\YoudaoTranslate;
 
+use Illuminate\Support\Facades\Log;
+
 class Html
 {
     protected $appKey;
@@ -22,15 +24,20 @@ class Html
             'appKey' => $this->appKey,
             'salt' => $salt,
         ];
-        $args['from'] = $text;
+        $args['from'] = $from;
         $args['to'] = $to;
         $args['signType'] = 'v3';
         $curtime = strtotime("now");
         $args['curtime'] = $curtime;
         $signStr = $this->appKey . truncate($text) . $salt . $curtime . $this->appSecret;
         $args['sign'] = hash("sha256", $signStr);
-        $ret = call($this->apiUrl, $args);
-        return $ret;
+        $response = call($this->apiUrl, $args);
+        $result = json_decode($response, true);
+        if ($result['errorCode'] == 0) {
+            return $result['data']['translation'];
+        } else {
+            return '';
+        }
     }
 }
 

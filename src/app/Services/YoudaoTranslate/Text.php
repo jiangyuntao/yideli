@@ -25,7 +25,7 @@ class Text
         $params = add_auth_params($params, $this->appKey, $this->appSecret);
         $response = do_call($this->apiUrl, 'post', array(), $params, 'application/json');
         $result = json_decode($response, true);
-        return $result;
+        return implode('', $result['translation']);
     }
 }
 

@@ -65,8 +65,8 @@ class AutoTranslateJob implements ShouldQueue
 
                                 $translatedText = $translator->translate($item, 'zh-CHS', $locale);
 
-                                if ($translatedText && isset($translatedText['translation'])) {
-                                    $translatedArray[] = implode('', $translatedText['translation']);
+                                if ($translatedText) {
+                                    $translatedArray[] = $translatedText;
                                 } else {
                                     $translatedArray[] = $item;
                                 }
@@ -78,8 +78,8 @@ class AutoTranslateJob implements ShouldQueue
                         } else {
                             $translatedText = $translator->translate($sourceText, 'zh-CHS', $locale);
 
-                            if ($translatedText && isset($translatedText['translation'])) {
-                                $this->model->setTranslation($field, $locale, implode('', $translatedText['translation']));
+                            if ($translatedText) {
+                                $this->model->setTranslation($field, $locale,  $translatedText);
                             }
 
                             sleep(1);
