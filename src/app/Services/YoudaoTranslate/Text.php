@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\YoudaoTranslate;
 
-class YoudaoTranslateService
+class Text
 {
     protected $appKey;
     protected $appSecret;

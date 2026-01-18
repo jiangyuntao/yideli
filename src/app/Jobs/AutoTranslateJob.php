@@ -2,7 +2,7 @@
 
 namespace App\Jobs;
 
-use App\Services\YoudaoTranslateService;
+use App\Services\YoudaoTranslate;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -34,7 +34,7 @@ class AutoTranslateJob implements ShouldQueue
     /**
      * Execute the job.
      */
-    public function handle(YoudaoTranslateService $translator): void
+    public function handle(YoudaoTranslate $translator): void
     {
         // 1. 更新状态为进行中
         $this->model->update(['translation_status' => 'translating']);

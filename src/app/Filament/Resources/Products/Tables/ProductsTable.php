@@ -28,9 +28,6 @@ class ProductsTable
                     ->searchable(),
                 ImageColumn::make('cover_image')
                     ->label('封面图')
-                    ->getStateUsing(function ($record) {
-                        return $record->images[0] ?? null;
-                    })
                     ->disk('public')
                     ->imageHeight(50),
                 ToggleColumn::make('is_visible')

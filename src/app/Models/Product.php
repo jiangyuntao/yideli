@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -25,7 +26,7 @@ class Product extends Model
     protected static function booted()
     {
         static::saving(function ($model) {
-            if ($model->isDirty('name') || $model->isDirty('description')) {
+            if ($model->isDirty($model->translatable)) {
                 $model->translation_status = 'pending';
             }
 
@@ -48,5 +49,12 @@ class Product extends Model
     public function accessCodes(): BelongsToMany
     {
         return $this->belongsToMany(ProductAccessCode::class, 'product_access_code_product');
+    }
+
+    public function coverImage(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => $this->images[0] ?? null,
+        );
     }
 }
