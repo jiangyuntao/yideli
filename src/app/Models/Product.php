@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Bus;
 use Spatie\Translatable\HasTranslations;
 
 class Product extends Model
@@ -15,14 +16,11 @@ class Product extends Model
     protected $guarded = [];
 
     protected $casts = [
-        'name' => 'array', // 关键
-        'content' => 'array',
-        'specifications' => 'array',
-        'tags' => 'array',
+        'images' => 'array',
         'is_visible' => 'boolean',
     ];
 
-    public $translatable = ['name', 'slug', 'content', 'specifications', 'material', 'tags'];
+    public $translatable = ['name', 'slug', 'description', 'content', 'specifications', 'material', 'tags'];
 
     protected static function booted()
     {
@@ -34,7 +32,10 @@ class Product extends Model
             if ($model->wasRecentlyCreated || $model->translation_status === 'pending') {
 
                 // 分发任务到队列
-                \App\Jobs\AutoTranslateJob::dispatch($model);
+                Bus::chain([
+                    new \App\Jobs\AutoTranslateJob($model),
+                    new \App\Jobs\AutoFillSlug($model),
+                ])->dispatch();
             }
         });
     }

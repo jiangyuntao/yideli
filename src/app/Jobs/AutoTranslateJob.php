@@ -51,22 +51,39 @@ class AutoTranslateJob implements ShouldQueue
                         continue;
                     }
 
-                    // 获取中文原文
-                    // 使用 getTranslation 获取指定语言的值，避免获取到 fallback
                     $sourceText = $this->model->getTranslation($field, $sourceLocale, false);
 
                     if ($sourceText) {
-                        // 调用有道翻译
-                        // 有道源语言写 zh-CHS，目标语言看文档对应
-                        $translatedText = $translator->translate($sourceText, 'zh-CHS', $locale);
+                        if (is_array($sourceText)) {
+                            $translatedArray = [];
 
-                        if ($translatedText && isset($translatedText['translation'])) {
-                            // 写入翻译结果
-                            $this->model->setTranslation($field, $locale, implode('', $translatedText['translation']));
+                            foreach ($sourceText as $item) {
+                                if (!is_string($item) || $item === '') {
+                                    $translatedArray[] = $item;
+                                    continue;
+                                }
+
+                                $translatedText = $translator->translate($item, 'zh-CHS', $locale);
+
+                                if ($translatedText && isset($translatedText['translation'])) {
+                                    $translatedArray[] = implode('', $translatedText['translation']);
+                                } else {
+                                    $translatedArray[] = $item;
+                                }
+
+                                sleep(1);
+                            }
+
+                            $this->model->setTranslation($field, $locale, $translatedArray);
+                        } else {
+                            $translatedText = $translator->translate($sourceText, 'zh-CHS', $locale);
+
+                            if ($translatedText && isset($translatedText['translation'])) {
+                                $this->model->setTranslation($field, $locale, implode('', $translatedText['translation']));
+                            }
+
+                            sleep(1);
                         }
-
-                        // 防止访问频率受限
-                        sleep(1);
                     }
                 }
             }

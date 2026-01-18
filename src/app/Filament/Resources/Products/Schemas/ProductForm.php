@@ -7,6 +7,7 @@ use Filament\Forms\Components\KeyValue;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TagsInput;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Components\Grid;
@@ -38,6 +39,11 @@ class ProductForm
                                     ->maxLength(255)
                                     ->translatable(),
 
+                                Textarea::make('description')
+                                    ->label('产品描述')
+                                    ->rows(5)
+                                    ->translatable(),
+
                                 RichEditor::make('content')
                                     ->label('内容')
                                     ->columnSpanFull()
@@ -65,8 +71,15 @@ class ProductForm
                                             : $record->name
                                     ),
 
-                                FileUpload::make('cover_image')
-                                    ->label('封面图')
+                                TextInput::make('code')
+                                    ->label('产品编码')
+                                    ->maxLength(255),
+
+                                FileUpload::make('images')
+                                    ->label('图片')
+                                    ->multiple()
+                                    ->reorderable()
+                                    ->appendFiles()
                                     ->disk('public')
                                     ->directory('products')
                                     ->image()
@@ -76,6 +89,7 @@ class ProductForm
 
                                 Toggle::make('is_visible')
                                     ->label('是否可见')
+                                    ->inline(false)
                                     ->default(true),
 
                                 TextInput::make('material')
