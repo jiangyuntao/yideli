@@ -46,6 +46,16 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
 
+    public function relatedProducts()
+    {
+        return $this->belongsToMany(
+            Product::class,
+            'product_related', // 中间表名
+            'product_id',      // 当前模型外键
+            'related_product_id' // 关联模型外键
+        );
+    }
+
     public function accessCodes(): BelongsToMany
     {
         return $this->belongsToMany(ProductAccessCode::class, 'product_access_code_product');

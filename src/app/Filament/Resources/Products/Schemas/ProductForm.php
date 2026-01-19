@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\Products\Schemas;
 
 use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\KeyValue;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TagsInput;
@@ -13,6 +12,8 @@ use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 
 class ProductForm
 {
@@ -100,6 +101,19 @@ class ProductForm
                                 TagsInput::make('tags')
                                     ->label('标签')
                                     ->translatable(),
+                                Select::make('relatedProducts') // 对应模型中的关联方法名
+                                    ->label('关联商品')
+                                    ->relationship('relatedProducts', 'title') // 关联名, 显示字段(如 title)
+                                    ->multiple() // 允许多选
+                                    ->searchable() // 可搜索
+                                    ->preload() // 如果数据量不大，预加载所有选项
+                                    // 关键优化：在列表中排除当前商品自己（避免死循环）
+                                    ->getOptionLabelFromRecordUsing(fn(Model $record) => "{$record->name} (ID: {$record->id})")
+                                    ->relationship(
+                                        name: 'relatedProducts',
+                                        titleAttribute: 'title',
+                                        modifyQueryUsing: fn(Builder $query, $get) => $query->where('id', '!=', $get('id')),
+                                    ),
                             ]),
                     ])
                     ->columnSpanFull(),
