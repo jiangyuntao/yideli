@@ -19,7 +19,7 @@ class Category extends Model
     protected static function booted()
     {
         static::saving(function ($model) {
-            if ($model->isDirty('name') || $model->isDirty('description')) {
+            if ($model->isDirty($model->translatable)) {
                 $model->translation_status = 'pending';
             }
 
