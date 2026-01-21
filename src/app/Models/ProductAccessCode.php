@@ -12,6 +12,12 @@ class ProductAccessCode extends Model
 
     protected $guarded = [];
 
+    protected $casts = [
+        'expires_at' => 'datetime', // 自动转换为 Carbon 对象
+        'usage_limit' => 'integer',
+        'used_count' => 'integer',
+    ];
+
     public function products(): BelongsToMany
     {
         return $this->belongsToMany(Product::class, 'product_access_code_product');

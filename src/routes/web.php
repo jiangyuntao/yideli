@@ -8,6 +8,7 @@ use App\Http\Controllers\Index\ProductController;
 use App\Http\Controllers\Index\NewsController;
 use App\Http\Controllers\Index\PageController;
 use App\Http\Controllers\Index\InquireController;
+use App\Http\Controllers\Api\ProductAccessController;
 use App\Http\Controllers\Index\ProductionProcessController;
 
 // 1. 根目录自动跳转到默认语言
@@ -18,25 +19,28 @@ Route::get('/', function () {
 // 2. 带语言前缀的路由组
 Route::prefix('{lang}')
     ->where(['lang' => 'en|zh|fr|es|ru|ar'])
-    ->group(function () {
-        // 首页
-        Route::get('/', [IndexController::class, 'index'])->name('index');
+    ->group(
+        function () {
+            // 首页
+            Route::get('/', [IndexController::class, 'index'])->name('index');
 
-        // 产品相关
-        Route::get('/products/{slug?}', [ProductController::class, 'index'])->name('product.index');
-        Route::get('/product/{slug}', [ProductController::class, 'show'])->name('product.show');
+            // 产品相关
+            Route::get('/products/{slug?}', [ProductController::class, 'index'])->name('product.index');
+            Route::get('/product/{slug}', [ProductController::class, 'show'])->name('product.show');
 
-        // 新闻相关
-        Route::get('/news/{slug?}', [NewsController::class, 'index'])->name('news.index');
-        Route::get('/news/show/{slug}', [NewsController::class, 'show'])->name('news.show');
+            // 新闻相关
+            Route::get('/news/{slug?}', [NewsController::class, 'index'])->name('news.index');
+            Route::get('/news/show/{slug}', [NewsController::class, 'show'])->name('news.show');
 
-        // 单页 (关于我们等)
-        Route::get('/page/{slug}', [PageController::class, 'show'])->name('page.show');
+            // 单页 (关于我们等)
+            Route::get('/page/{slug}', [PageController::class, 'show'])->name('page.show');
 
-        // 询盘/联系我们
-        Route::get('/inquire', [InquireController::class, 'form'])->name('inquire.form');
+            // 询盘/联系我们
+            Route::get('/inquire', [InquireController::class, 'form'])->name('inquire.form');
 
-        // 生产流程
-        Route::get('/production-process', [ProductionProcessController::class, 'index'])->name('production-process');
-    }
-);
+            // 生产流程
+            Route::get('/production-process', [ProductionProcessController::class, 'index'])->name('production-process');
+        }
+    );
+
+Route::post('/api/verify-access-code', [ProductAccessController::class, 'verify'])->name('api.verify-access');
