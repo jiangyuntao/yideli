@@ -72,8 +72,32 @@ class ProductController extends BaseController
         return view('index.product.index', $this->data);
     }
 
-    public function show(Request $request)
+    public function show(Request $request, $lang, $slug)
     {
+        $locale = App::getLocale();
+
+        // 1. 查找产品 (包含关联分类和关联商品)
+        $product = Product::where("slug->{$locale}", $slug)
+            ->orWhere('slug->en', $slug)
+            ->where('is_visible', true)
+            ->with(['category', 'relatedProducts'])
+            ->firstOrFail();
+
+        // 2. 权限判断逻辑
+        // 检查该产品是否被任何 Access Code 锁定
+        $isPrivate = $product->accessCodes()->exists();
+
+        // 获取当前用户 Session 中已解锁的 ID
+        $unlockedIds = session('unlocked_product_ids', []);
+
+        // 最终判断：如果不是私有的，或者 ID 在解锁列表中，则为 true
+        $hasAccess = !$isPrivate || in_array($product->id, $unlockedIds);
+
+        // 3. 传递数据
+        $this->data['product'] = $product;
+        $this->data['hasAccess'] = $hasAccess;
+        $this->data['relatedProducts'] = $product->relatedProducts; // 获取关联商品
+
         return view('index.product.show', $this->data);
     }
 }

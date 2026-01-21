@@ -30,8 +30,8 @@
            mobileFilterOpen: false,
            productAccessModal: {
                show: false,
-               url: '',
-               productId: null, // 新增：记录当前正在操作的产品 ID
+               url: '', // 存储目标产品的详情页 URL
+               productId: null,
                password: '',
                error: false,
                errorMessage: ''
@@ -39,11 +39,12 @@
            // 打开密码框：接收 url 和 id
            promptAccess(url, id) {
                this.productAccessModal.url = url;
-               this.productAccessModal.productId = id; // 存入 ID
+               this.productAccessModal.productId = id;
                this.productAccessModal.show = true;
                this.productAccessModal.password = '';
                this.productAccessModal.error = false;
                this.productAccessModal.errorMessage = '';
+               // 延时聚焦，提升体验
                setTimeout(() => $refs.passInput.focus(), 100);
            },
            // 提交验证
@@ -62,13 +63,16 @@
                        },
                        body: JSON.stringify({
                            code: this.productAccessModal.password,
-                           product_id: this.productAccessModal.productId // 发送 ID 给后端比对
+                           product_id: this.productAccessModal.productId
                        })
                    })
                    .then(response => response.json())
                    .then(data => {
                        if (data.valid) {
-                           window.location.reload();
+                           // ============================================================
+                           // 修改点：验证成功后，直接跳转到该产品的详情页 URL
+                           // ============================================================
+                           window.location.href = this.productAccessModal.url;
                        } else {
                            this.productAccessModal.error = true;
                            this.productAccessModal.errorMessage = data.message || 'Incorrect access code.';
@@ -187,10 +191,11 @@
             @endphp
 
             @if ($hasAccess)
+              {{-- 已解锁：直接跳转 --}}
               <a href="{{ route('product.show', ['lang' => $lang, 'slug' => $product->slug]) }}"
                  class="product-card group cursor-pointer block">
               @else
-                {{-- 关键修改：promptAccess 传入第二个参数 $product->id --}}
+                {{-- 未解锁：点击触发弹窗，并传入目标 URL 和 产品 ID --}}
                 <div @click="promptAccess('{{ route('product.show', ['lang' => $lang, 'slug' => $product->slug]) }}', {{ $product->id }})"
                      class="product-card group cursor-pointer">
             @endif

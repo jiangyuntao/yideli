@@ -44,3 +44,13 @@ Route::prefix('{lang}')
     );
 
 Route::post('/api/verify-access-code', [ProductAccessController::class, 'verify'])->name('api.verify-access');
+// 临时调试用：清除解锁状态
+Route::get('/api/reset-access', function () {
+    // 清除记录已解锁产品ID的 Session
+    session()->forget('unlocked_product_ids');
+
+    // 如果之前用过旧逻辑，也顺手清一下
+    session()->forget('product_access_granted');
+
+    return redirect('/en/products')->with('message', '测试状态已重置，产品已重新锁定！');
+});
