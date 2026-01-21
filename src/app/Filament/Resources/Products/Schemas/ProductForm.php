@@ -101,6 +101,14 @@ class ProductForm
                                 TagsInput::make('tags')
                                     ->label('标签')
                                     ->translatable(),
+
+                                Select::make('flags')
+                                    ->label('标记')
+                                    ->options([
+                                        'new' => '最新',
+                                        'best_seller' => '热销',
+                                    ])
+                                    ->native(false),
                                 Select::make('relatedProducts') // 对应模型中的关联方法名
                                     ->label('关联商品')
                                     ->relationship('relatedProducts', 'title') // 关联名, 显示字段(如 title)
