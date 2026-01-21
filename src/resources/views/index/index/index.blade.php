@@ -157,7 +157,7 @@
          class="btn-minimal text-sm font-medium text-yideli-dark pb-1">View All Products</a>
     </div>
 
-    <div class="w-full flex flex-col lg:flex-row justify-center items-center gap-4">
+    <div class="max-w-[1200px] mx-auto flex flex-col lg:flex-row justify-center items-center gap-4">
 
       @foreach ($categories as $category)
         <a href="{{ route('product.index', ['lang' => $lang, 'slug' => $category->slug]) }}"
