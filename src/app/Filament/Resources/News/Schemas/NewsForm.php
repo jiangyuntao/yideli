@@ -7,6 +7,8 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TagsInput;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
@@ -44,6 +46,11 @@ class NewsForm
                                 TextInput::make('slug')
                                     ->label('美化URL')
                                     ->maxLength(255)
+                                    ->translatable(),
+
+                                Textarea::make('excerpt')
+                                    ->label('简介')
+                                    ->rows(5)
                                     ->translatable(),
 
                                 RichEditor::make('content')
@@ -97,6 +104,13 @@ class NewsForm
                                     ->native(false) // 使用漂亮的 JS日期选择器
                                     ->seconds(false) // 通常新闻不需要精确到秒
                                     ->default(now()),
+
+                                TextInput::make('author')
+                                    ->label('作者'),
+
+                                TagsInput::make('tags')
+                                    ->label('标签')
+                                    ->translatable(),
                             ]),
                     ])
                     ->columnSpanFull(),

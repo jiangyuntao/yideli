@@ -14,7 +14,7 @@ class NewsCategory extends Model
 
     protected $guarded = [];
 
-    public $translatable = ['name', 'slug', 'description'];
+    public $translatable = ['name', 'slug', 'description', 'seo_title', 'seo_keywords'];
 
     protected static function booted()
     {

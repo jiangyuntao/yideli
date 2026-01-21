@@ -14,7 +14,23 @@ class News extends Model
 
     protected $guarded = [];
 
-    public $translatable = ['title', 'slug', 'content'];
+    protected $casts = [
+        'is_featured' => 'boolean',
+        'published_at' => 'datetime',
+        'tags' => 'array', // 自动转为数组
+    ];
+
+    // 定义多语言字段
+    public $translatable = [
+        'title',
+        'slug',
+        'excerpt',
+        'content',
+        'tags',
+        'seo_title',
+        'seo_description',
+        'seo_keywords',
+    ];
 
     protected static function booted()
     {
