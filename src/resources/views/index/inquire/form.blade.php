@@ -2,7 +2,8 @@
 
 @section('main')
   <div class="bg-yideli-base py-20 border-b border-yideli-line">
-    <div class="max-w-[1200px] mx-auto px-6 lg:px-12 text-center">
+    {{-- 修改：宽度适配 --}}
+    <div class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 lg:px-12 text-center">
       <span class="text-xs font-bold tracking-[0.2em] uppercase text-yideli-dark mb-4 block">Get In Touch</span>
       <h1 class="text-4xl lg:text-5xl font-serif text-yideli-dark mb-6">Start Your Project With Us</h1>
       <p class="text-gray-600 max-w-2xl mx-auto font-light text-lg">
@@ -12,7 +13,8 @@
     </div>
   </div>
 
-  <section class="max-w-[1200px] mx-auto px-6 lg:px-12 py-20">
+  {{-- 修改：宽度适配 --}}
+  <section class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 lg:px-12 py-20">
     <div class="grid lg:grid-cols-12 gap-16 lg:gap-24">
 
       <div class="lg:col-span-5 space-y-12">
@@ -236,7 +238,8 @@
   </section>
 
   <section class="bg-yideli-base border-t border-yideli-line py-20">
-    <div class="max-w-[1000px] mx-auto px-6 lg:px-12">
+    {{-- 修改：宽度适配 --}}
+    <div class="max-w-[1000px] min-[1921px]:max-w-[1000px] min-[2561px]:max-w-[1400px] mx-auto px-6 lg:px-12">
       <div class="text-center mb-16">
         <h2 class="text-3xl font-serif text-yideli-dark mb-4">Frequently Asked Questions</h2>
         <p class="text-gray-500 font-light">Common questions from our global partners.</p>
@@ -244,20 +247,20 @@
 
       <div class="space-y-4" x-data="{ active: 0 }">
         @if ($settings->faqs)
-        @foreach ($settings->faqs as $k => $faq)
-        <div class="bg-white border border-yideli-line">
-          <button class="w-full flex justify-between items-center p-6 text-start"
-            @click="active = (active === {{ $k }} ? null : {{ $k }})">
-            <span class="font-medium text-yideli-dark">{{ $faq['question'] }}</span>
-            <span class="text-xl" x-text="active === {{ $k }} ? '−' : '+'"></span>
-          </button>
-          <div x-show="active === {{ $k }}" x-collapse>
-            <div class="px-6 pb-6 text-gray-600 font-light text-sm leading-relaxed">
-              {{ $faq['answer'] }}
+          @foreach ($settings->faqs as $k => $faq)
+            <div class="bg-white border border-yideli-line">
+              <button class="w-full flex justify-between items-center p-6 text-start"
+                @click="active = (active === {{ $k }} ? null : {{ $k }})">
+                <span class="font-medium text-yideli-dark">{{ $faq['question'] }}</span>
+                <span class="text-xl" x-text="active === {{ $k }} ? '−' : '+'"></span>
+              </button>
+              <div x-show="active === {{ $k }}" x-collapse>
+                <div class="px-6 pb-6 text-gray-600 font-light text-sm leading-relaxed">
+                  {{ $faq['answer'] }}
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-        @endforeach
+          @endforeach
         @endif
 
       </div>
