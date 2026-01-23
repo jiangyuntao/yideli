@@ -2,7 +2,6 @@
 
 @section('main')
   <div class="bg-gray-50 py-4 border-b border-gray-100">
-    {{-- 修改：宽度适配 --}}
     <div class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 lg:px-12">
       <nav class="flex text-xs text-gray-500 uppercase tracking-widest gap-2">
         <a class="hover:text-yideli-dark" href="{{ route('index', ['lang' => $lang]) }}">Home</a>
@@ -15,7 +14,6 @@
     </div>
   </div>
 
-  {{-- 修改：宽度适配 --}}
   <div class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 lg:px-12 py-16 lg:py-24">
     <div class="grid lg:grid-cols-12 gap-16">
 
@@ -48,7 +46,6 @@
               By <span class="text-yideli-dark font-bold">{{ $entry->author ?? 'Yideli Media Team' }}</span>
             </div>
 
-            {{-- 分享按钮 (前端实现即可，或使用 ShareThis 等插件) --}}
             <div class="flex gap-3">
               <button class="text-gray-400 hover:text-yideli-dark"
                 onclick="window.open('https://www.facebook.com/sharer/sharer.php?u={{ urlencode(request()->fullUrl()) }}', '_blank')">
@@ -123,7 +120,6 @@
       <aside class="lg:col-span-4 space-y-12">
         <div class="sticky top-32">
 
-          {{-- 相关新闻 --}}
           <div>
             <h4 class="font-serif text-lg text-yideli-dark mb-6 pb-2 border-b border-gray-100">Related News</h4>
             <div class="space-y-6">
@@ -149,7 +145,6 @@
             </div>
           </div>
 
-          {{-- 搜索框 (复用) --}}
           <div class="mt-12">
             <h4 class="font-serif text-lg text-yideli-dark mb-4">Search</h4>
             <form class="relative" action="{{ route('news.index', ['lang' => $lang]) }}" method="GET">

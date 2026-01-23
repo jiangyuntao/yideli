@@ -24,11 +24,9 @@
 @endsection
 
 @section('main')
-  {{-- 修改：宽度适配 (1200px / 1600px / 2400px) --}}
   <main
     class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 py-12 md:py-20 font-serif">
 
-    {{-- 顶部视频 --}}
     <section class="w-full mb-16">
       <video class="inset-0 w-full h-full object-cover shadow-2xl" autoplay loop muted playsinline>
         <source src="{{ asset('videos/about-us-top.mp4') }}" type="video/mp4">
@@ -36,7 +34,6 @@
       </video>
     </section>
 
-    {{-- Heritage & Commitment --}}
     <section class="grid grid-cols-1 md:grid-cols-12 gap-6 mb-16 items-start">
       <div class="md:col-span-5 flex flex-col items-start">
         <div class="mb-4">
@@ -62,7 +59,6 @@
       </div>
     </section>
 
-    {{-- 工厂大图 --}}
     <section class="w-full mb-24">
       <div class="relative w-full h-64 md:h-96 bg-gray-300 overflow-hidden rounded-sm shadow-sm">
         <img class="w-full h-full object-cover opacity-90" src="{{ asset('images/about-us/Heritage-Commitment.png') }}"
@@ -71,7 +67,6 @@
       </div>
     </section>
 
-    {{-- Integrated Manufacturing (文字 + 4小图) --}}
     <section class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-24 items-center">
       <div class="order-2 md:col-span-7 md:order-1">
         <h2 class="text-2xl md:text-4xl font-black text-[#1F5F53] mb-12">Integrated Manufacturing</h2>
@@ -109,7 +104,6 @@
       </div>
     </section>
 
-    {{-- 设备列表 (6小图 + 列表) --}}
     <section class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-24 items-center">
       <div class="grid grid-cols-2 md:col-span-6 gap-3">
         <div class="rounded-sm overflow-hidden aspect-[16/9]">
@@ -177,7 +171,6 @@
       </div>
     </section>
 
-    {{-- Quality & Compliance + Marquee --}}
     <section class="mb-12">
       <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center mb-12">
         <div class="md:col-span-7">
@@ -207,7 +200,6 @@
         </div>
       </div>
 
-      {{-- Marquee Slides --}}
       <div class="mb-6">
         <div class="flex flex-col items-center">
           <div class="w-full overflow-hidden relative group">
@@ -236,7 +228,6 @@
       </div>
     </section>
 
-    {{-- Global Reach --}}
     <section class="grid grid-cols-1 md:grid-cols-12 gap-24 items-center mb-20">
       <div class="md:col-span-6 order-2 md:order-1">
         <div class="flex flex-col gap-4">
@@ -273,7 +264,6 @@
       </div>
     </section>
 
-    {{-- R&D & Innovation --}}
     <section class="grid grid-cols-1 md:grid-cols-12 gap-24 items-center mb-20">
       <div class="md:col-span-6">
         <h2 class="text-2xl md:text-4xl font-black text-[#1F5F53] mb-12">R&D & Innovation</h2>
@@ -304,7 +294,6 @@
       </div>
     </section>
 
-    {{-- Your Strategic Partner --}}
     <section class="mb-12">
       <div class="grid grid-cols-1 md:grid-cols-12 gap-24 items-center mb-3">
         <div class="md:col-span-6 order-2 md:order-1 grid grid-cols-1 gap-3">

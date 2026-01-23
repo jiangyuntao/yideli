@@ -2,7 +2,6 @@
 
 @section('main')
   <div class="bg-yideli-base py-20 border-b border-yideli-line">
-    {{-- 修改：宽度适配 --}}
     <div class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 lg:px-12 text-center">
       <span class="text-xs font-bold tracking-[0.2em] uppercase text-yideli-dark mb-4 block">Get In Touch</span>
       <h1 class="text-4xl lg:text-5xl font-serif text-yideli-dark mb-6">Start Your Project With Us</h1>
@@ -13,7 +12,6 @@
     </div>
   </div>
 
-  {{-- 修改：宽度适配 --}}
   <section class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 lg:px-12 py-20">
     <div class="grid lg:grid-cols-12 gap-16 lg:gap-24">
 
@@ -238,7 +236,6 @@
   </section>
 
   <section class="bg-yideli-base border-t border-yideli-line py-20">
-    {{-- 修改：宽度适配 --}}
     <div class="max-w-[1000px] min-[1921px]:max-w-[1000px] min-[2561px]:max-w-[1400px] mx-auto px-6 lg:px-12">
       <div class="text-center mb-16">
         <h2 class="text-3xl font-serif text-yideli-dark mb-4">Frequently Asked Questions</h2>

@@ -2,7 +2,6 @@
 
 @section('main')
   <div class="bg-yideli-base py-20">
-    {{-- 修改：宽度适配 --}}
     <div class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 lg:px-12 text-center">
       <span class="text-xs font-bold tracking-[0.2em] uppercase text-yideli-dark mb-4 block">Updates From Factory</span>
       <h1 class="text-4xl lg:text-5xl font-serif text-yideli-dark mb-0">
@@ -14,9 +13,7 @@
     </div>
   </div>
 
-  {{-- 1. 置顶新闻 (Featured) --}}
   @if ($featured_news)
-    {{-- 修改：宽度适配 --}}
     <section
       class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 lg:px-12 -mt-10 relative z-10 mb-20">
       <div
@@ -46,7 +43,6 @@
             {{ $featured_news->title }}
           </h2>
           <p class="text-gray-600 mb-8 font-light leading-relaxed line-clamp-3">
-            {{-- 优先显示摘要，没有则截取内容 --}}
             {{ $featured_news->excerpt ?: Str::limit(strip_tags($featured_news->content), 150) }}
           </p>
           <div class="flex items-center text-sm font-bold text-yideli-dark uppercase tracking-widest">
@@ -58,8 +54,6 @@
     </section>
   @endif
 
-  {{-- 2. 新闻列表与侧边栏 --}}
-  {{-- 修改：宽度适配 --}}
   <div class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 lg:px-12 pb-24">
     <div class="grid lg:grid-cols-12 gap-12">
 
@@ -111,7 +105,6 @@
           </div>
         @endforelse
 
-        {{-- 分页 --}}
         <div class="pt-4">
           {{ $entries->onEachSide(1)->links() }}
         </div>
@@ -120,7 +113,6 @@
 
       <aside class="lg:col-span-4 ps-0 lg:ps-12 space-y-12">
 
-        {{-- 搜索 --}}
         <div>
           <h4 class="font-serif text-lg text-yideli-dark mb-4">Search</h4>
           <form class="relative" action="{{ route('news.index', ['lang' => $lang]) }}" method="GET">
@@ -136,11 +128,9 @@
           </form>
         </div>
 
-        {{-- 分类 --}}
         <div>
           <h4 class="font-serif text-lg text-yideli-dark mb-4">Categories</h4>
           <ul class="space-y-3 text-sm font-light text-gray-600">
-            {{-- 'All' Link --}}
             <li>
               <a class="flex justify-between items-center hover:text-yideli-dark group"
                 href="{{ route('news.index', ['lang' => $lang]) }}">

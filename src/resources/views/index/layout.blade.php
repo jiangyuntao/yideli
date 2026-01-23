@@ -112,8 +112,10 @@
       transform: scaleX(1);
       transform-origin: left;
     }
+  </style>
 
-    @unless (app()->environment('local'))
+  @unless (app()->environment('local'))
+    <style>
       body {
         -webkit-user-select: none;
         /* Safari */
@@ -132,8 +134,8 @@
         -ms-user-select: text;
         user-select: text;
       }
-    @endunless
-  </style>
+    </style>
+  @endunless
 
   @yield('head')
 </head>
@@ -144,7 +146,6 @@
   <header class="sticky bg-yideli-dark top-0 z-50 backdrop-blur-sm transition-all duration-300 shadow-md"
     x-data="{ mobileMenu: false, searchOpen: false }">
 
-    {{-- Header 宽度适配 --}}
     <div
       class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 lg:px-12 h-20 flex justify-between items-center">
       <div class="flex-shrink-0 me-8">
@@ -257,7 +258,6 @@
 
   <footer class="bg-yideli-dark text-white pt-20 pb-10">
 
-    {{-- Footer 上半部分宽度适配 --}}
     <div
       class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 lg:px-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 border-b border-white/20 pb-16">
 
@@ -360,7 +360,6 @@
       </div>
     </div>
 
-    {{-- Footer 底部版权部分宽度适配 --}}
     <div
       class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 lg:px-12 mt-8 flex flex-col md:flex-row justify-between items-center text-xs text-white/40">
       <p>&copy; 2025 Yideli Stationery. All rights reserved.</p>

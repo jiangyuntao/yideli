@@ -5,7 +5,6 @@
 @endsection
 
 @section('main')
-  {{-- 轮播图部分：保持全屏，不限制宽度 --}}
   <section class="relative w-full mx-auto overflow-hidden shadow-2xl group" x-data="carousel()" x-init="init()"
     @mouseenter="stopAutoplay()" @mouseleave="startAutoplay()" x-cloak>
 
@@ -71,14 +70,7 @@
     </div>
   </section>
 
-  {{-- Factory Section --}}
   <section class="py-24 lg:py-32 px-6 lg:px-12">
-    {{--
-        适配逻辑：
-        1. 默认: max-w-[1200px] (涵盖 1024x768, 1366x768, 1920x1080)
-        2. 超过1921px (2K屏): max-w-[1600px]
-        3. 超过2561px (4K屏): max-w-[2400px]
-    --}}
     <div
       class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto grid lg:grid-cols-12 gap-12 lg:gap-24">
 
@@ -118,7 +110,6 @@
     </div>
   </section>
 
-  {{-- Certificates Section --}}
   <section class="px-6 lg:px-12 bg-[#347e73]">
     <img class="w-full lg:max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto"
       src="{{ asset('images/cert-1-big-0-0.webp') }}" alt="">
@@ -128,9 +119,7 @@
       src="{{ asset('images/cert-1-big-0-1.webp') }}" alt="">
   </section>
 
-  {{-- Categories Section --}}
   <section class="py-20 bg-yideli-base border-t border-yideli-line overflow-hidden">
-    {{-- 标题区域适配 --}}
     <div
       class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 lg:px-12 mb-12 flex justify-between items-end">
       <div>
@@ -141,11 +130,6 @@
         href="{{ route('product.index', ['lang' => $lang]) }}">View All Products</a>
     </div>
 
-    {{--
-        Grid 布局适配：
-        普通/2K: 3列 (lg:grid-cols-3)
-        4K (>2561px): 4列 (min-[2561px]:grid-cols-4)
-    --}}
     <div
       class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 lg:px-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 min-[2561px]:grid-cols-4 gap-8">
 

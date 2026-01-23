@@ -24,7 +24,6 @@
 @endsection
 
 @section('main')
-  {{-- 修改：将 max-w-[1200px] 替换为响应式断点组合 --}}
   <main
     class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto  px-6 py-12 md:py-20 font-serif">
     <section class="w-full mb-16">

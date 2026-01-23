@@ -1,9 +1,7 @@
 @extends('index.layout')
 
 @section('main')
-  {{-- 顶部面包屑导航 --}}
   <div class="bg-gray-50 py-4 border-b border-gray-100">
-    {{-- 修改：宽度适配 --}}
     <div class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 lg:px-12">
       <nav class="flex text-xs text-gray-500 uppercase tracking-widest gap-2">
         <a class="hover:text-yideli-dark" href="{{ route('index', ['lang' => $lang]) }}">Home</a>
@@ -20,21 +18,16 @@
     </div>
   </div>
 
-  {{--
-    Alpine Context (提升到最外层 div，包裹所有区域)
-    包含：主图切换逻辑、密码验证逻辑
-    --}}
   <div x-data="{
       activeImage: '{{ $product->cover_image ? asset('storage/' . $product->cover_image) : asset('images/placeholder.jpg') }}',
       productAccessModal: {
           show: false,
-          url: '', // 目标跳转地址
+          url: '',
           productId: null,
           password: '',
           error: false,
           errorMessage: ''
       },
-      // 打开密码框：接收 目标URL 和 产品ID
       promptAccess(url, id) {
           this.productAccessModal.url = url;
           this.productAccessModal.productId = id;
@@ -64,7 +57,6 @@
               .then(response => response.json())
               .then(data => {
                   if (data.valid) {
-                      // 验证成功，跳转到对应 URL (如果是主产品则是刷新，如果是关联产品则是跳转)
                       window.location.href = this.productAccessModal.url;
                   } else {
                       this.productAccessModal.error = true;
@@ -79,26 +71,20 @@
       }
   }">
 
-    {{-- 主产品区域 --}}
-    {{-- 修改：宽度适配 --}}
     <section
       class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 lg:px-12 py-12 lg:py-20">
       <div class="grid lg:grid-cols-2 gap-12 lg:gap-20">
 
-        {{-- 左侧：图片相册 --}}
         <div class="space-y-6">
-          {{-- 主图显示区域 --}}
           <div
             class="aspect-[4/5] bg-gray-50 flex items-center justify-center border border-gray-100 p-8 overflow-hidden relative group cursor-pointer"
-            @if (!$hasAccess) {{-- 如果未授权，点击触发弹窗，传入当前页 URL 和 ID --}}
+            @if (!$hasAccess)
              @click="promptAccess('{{ request()->fullUrl() }}', {{ $product->id }})" @endif>
 
-            {{-- 图片：根据 hasAccess 判断是否模糊 --}}
             <img
               class="w-full h-full object-contain transition-all duration-500 {{ $hasAccess ? 'mix-blend-multiply' : 'blur-xl opacity-70 pointer-events-none' }}"
               alt="{{ $product->name }}" :src="activeImage">
 
-            {{-- 锁图标层：未授权时显示 --}}
             @if (!$hasAccess)
               <div class="absolute inset-0 bg-yideli-text/10 group-hover:bg-yideli-text/20 transition-colors"></div>
               <div class="absolute inset-0 flex flex-col items-center justify-center text-yideli-dark">
@@ -116,7 +102,6 @@
               </div>
             @endif
 
-            {{-- 标记 (New/Best Seller) --}}
             @if (is_array($product->flags) && in_array('hot', $product->flags))
               <div
                 class="absolute top-4 start-4 bg-[#D4A373] text-white text-[10px] font-bold px-2 py-1 uppercase tracking-widest">
@@ -130,7 +115,6 @@
             @endif
           </div>
 
-          {{-- 缩略图列表 --}}
           @if ($product->images && count($product->images) > 1)
             <div class="grid grid-cols-4 gap-4">
               @foreach ($product->images as $image)
@@ -139,7 +123,6 @@
                   class="aspect-square bg-gray-50 border-transparent hover:border-yideli-dark p-2 transition border-2"
                   @click="activeImage = '{{ $imgUrl }}'"
                   :class="activeImage === '{{ $imgUrl }}' ? 'border-yideli-dark' : 'border-transparent'">
-                  {{-- 缩略图也需要判断权限，如果未解锁，缩略图也模糊 --}}
                   <img class="w-full h-full object-contain mix-blend-multiply {{ !$hasAccess ? 'blur-sm' : '' }}"
                     src="{{ $imgUrl }}">
                 </button>
@@ -148,7 +131,6 @@
           @endif
         </div>
 
-        {{-- 右侧：产品信息 --}}
         <div>
           @if ($product->code)
             <span class="text-sm text-yideli-dark font-bold uppercase tracking-widest mb-2 block">Model:
@@ -157,14 +139,12 @@
 
           <h1 class="text-3xl lg:text-4xl font-serif text-yideli-text mb-6">{{ $product->name }}</h1>
 
-          {{-- 简短描述 --}}
           @if ($product->description)
             <div class="text-gray-600 leading-relaxed font-light mb-8">
               {!! nl2br(e($product->description)) !!}
             </div>
           @endif
 
-          {{-- 标签/特性图标 --}}
           @if ($product->tags)
             <div class="grid grid-cols-2 gap-4 mb-8">
               @foreach ($product->tags as $tag)
@@ -178,7 +158,6 @@
             </div>
           @endif
 
-          {{-- 规格表 --}}
           <div class="mb-10">
             <h3 class="font-serif text-lg text-yideli-dark mb-4 border-b border-gray-200 pb-2">Specifications</h3>
             <table class="w-full text-sm spec-table text-left">
@@ -199,7 +178,6 @@
             </table>
           </div>
 
-          {{-- 询盘按钮 --}}
           <div class="bg-gray-50 p-6 border border-gray-100 rounded-sm">
             <p class="text-xs text-gray-500 mb-4 uppercase tracking-widest font-bold">Interested in this product?</p>
             <div class="flex flex-col sm:flex-row gap-4">
@@ -216,7 +194,6 @@
       </div>
     </section>
 
-    {{-- 详情内容区域 (富文本) --}}
     @if ($product->content)
       <section class="bg-yideli-base border-t border-yideli-line py-16">
         <div class=" max-w-[1000px] mx-auto px-6 lg:px-12">
@@ -227,9 +204,7 @@
       </section>
     @endif
 
-    {{-- 关联商品 (You May Also Like) --}}
     @if ($relatedProducts->isNotEmpty())
-      {{-- 修改：宽度适配 --}}
       <section class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 lg:px-12 py-20">
         <div class="flex justify-between items-end mb-10 border-b border-gray-100 pb-4">
           <h2 class="text-2xl font-serif text-yideli-dark">You May Also Like</h2>
@@ -237,12 +212,10 @@
             href="{{ route('product.index', ['lang' => $lang]) }}">View All</a>
         </div>
 
-        {{-- 修改：Grid 适配，大屏下显示更多列 (5列/6列) --}}
         <div
           class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 min-[1921px]:grid-cols-5 min-[2561px]:grid-cols-6 gap-8">
           @foreach ($relatedProducts as $related)
             @php
-              // 获取关联商品的授权状态
               $unlockedIds = session('unlocked_product_ids', []);
               $isRelatedPrivate = $related->accessCodes()->exists();
               $hasRelatedAccess = !$isRelatedPrivate || in_array($related->id, $unlockedIds);
@@ -252,11 +225,6 @@
                   : asset('images/placeholder.jpg');
             @endphp
 
-            {{--
-           交互逻辑：
-           - 已解锁：直接 onclick 跳转
-           - 未解锁：@click 调用 promptAccess，传入 目标URL 和 关联商品ID
-           --}}
             <div class="group block cursor-pointer"
               @if ($hasRelatedAccess) onclick="window.location.href='{{ route('product.show', ['lang' => $lang, 'slug' => $related->slug]) }}'" @else
                @click="promptAccess('{{ route('product.show', ['lang' => $lang, 'slug' => $related->slug]) }}', {{ $related->id }})" @endif>
@@ -266,7 +234,6 @@
                                 {{ $hasRelatedAccess ? 'group-hover:scale-105' : 'blur-md opacity-70' }}"
                   src="{{ $relImg }}">
 
-                {{-- 锁图标 --}}
                 @if (!$hasRelatedAccess)
                   <div class="absolute inset-0 flex items-center justify-center">
                     <div class="bg-white/80 p-2 rounded-full shadow-sm">
@@ -290,16 +257,10 @@
       </section>
     @endif
 
-    {{--
-   密码弹窗 Modal
-   放置在最外层 x-data 内部底部，以确保覆盖所有内容
-   --}}
     <div class="fixed inset-0 z-[100] flex items-center justify-center px-4" style="display: none;"
       x-show="productAccessModal.show">
-      {{-- 背景遮罩 --}}
       <div class="absolute inset-0 bg-yideli-dark/60 backdrop-blur-sm" @click="productAccessModal.show = false"></div>
 
-      {{-- 弹窗主体 --}}
       <div class="relative bg-white w-full max-w-md p-8 rounded-lg shadow-2xl text-center">
         <div class="mb-6 flex justify-center text-yideli-dark">
           <svg class="w-12 h-12" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
@@ -324,7 +285,6 @@
             @click="submitAccess()">Unlock
             Product</button>
         </div>
-        {{-- 关闭按钮 --}}
         <button class="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
           @click="productAccessModal.show = false">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -334,6 +294,6 @@
       </div>
     </div>
 
-  </div> {{-- End x-data --}}
+  </div>
 
 @endsection

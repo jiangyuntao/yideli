@@ -1,9 +1,7 @@
 @extends('index.layout')
 
 @section('main')
-  {{-- 1. 顶部文字区域 --}}
   <div class="bg-yideli-base py-16 lg:py-24">
-    {{-- 修改：宽度适配 --}}
     <div class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 lg:px-12 text-center">
       <span class="text-xs font-bold tracking-[0.2em] uppercase text-yideli-dark mb-4 block">Our Collections</span>
 
@@ -17,16 +15,12 @@
     </div>
   </div>
 
-  {{-- 2. Banner 图片 --}}
   <div class="bg-yideli-base bg-[#86806e]">
-    {{-- 修改：允许在 2K/4K 屏下突破 1920 限制 --}}
     <div class="w-full max-w-[1920px] min-[1921px]:max-w-full mx-auto">
       <img class="w-full h-auto" src="{{ asset('images/product-index-banner.jpg') }}">
     </div>
   </div>
 
-  {{-- 3. 主要内容区域 --}}
-  {{-- 修改：宽度适配 --}}
   <div class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 lg:px-12 py-12 lg:py-20"
     x-data="{
         mobileFilterOpen: false,
@@ -90,7 +84,6 @@
 
     <div class="flex flex-col lg:flex-row gap-12">
 
-      {{-- 侧边栏 --}}
       <aside class="hidden lg:block w-64 flex-shrink-0">
         <div class="sticky top-32 space-y-10">
           <div>
@@ -152,7 +145,6 @@
         </div>
       </aside>
 
-      {{-- 移动端 Filter --}}
       <div class="lg:hidden w-full mb-8">
         <button class="w-full flex justify-between items-center px-4 py-3 border border-gray-200 text-sm font-medium"
           @click="mobileFilterOpen = !mobileFilterOpen"><span>Filter
@@ -168,9 +160,7 @@
         </div>
       </div>
 
-      {{-- ================= 产品列表 ================= --}}
       <div class="flex-1">
-        {{-- 修改：Grid 适配 4K (min-[2561px]:grid-cols-4) --}}
         <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 min-[2561px]:grid-cols-4 gap-x-8 gap-y-12">
 
           @php
@@ -186,11 +176,9 @@
             @endphp
 
             @if ($hasAccess)
-              {{-- 已解锁：直接跳转 --}}
               <a class="product-card group cursor-pointer block"
                 href="{{ route('product.show', ['lang' => $lang, 'slug' => $product->slug]) }}">
               @else
-                {{-- 未解锁：点击触发弹窗，并传入目标 URL 和 产品 ID --}}
                 <div class="product-card group cursor-pointer"
                   @click="promptAccess('{{ route('product.show', ['lang' => $lang, 'slug' => $product->slug]) }}', {{ $product->id }})">
             @endif
@@ -259,7 +247,6 @@
     </div>
   </div>
 
-  {{-- 密码弹窗 --}}
   <div class="fixed inset-0 z-[100] flex items-center justify-center px-4" style="display: none;"
     x-show="productAccessModal.show">
     <div class="absolute inset-0 bg-yideli-dark/60 backdrop-blur-sm" @click="productAccessModal.show = false"></div>
@@ -295,7 +282,6 @@
   </div>
   </div>
 
-  {{-- 底部服务 --}}
   <section class="bg-yideli-dark text-white py-16">
     <div class="max-w-4xl mx-auto px-6 text-center">
       <h2 class="text-3xl font-serif mb-4">Custom OEM/ODM Services</h2>

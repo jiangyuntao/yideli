@@ -4,7 +4,6 @@
   <div class="relative bg-yideli-base py-12 md:py-12 overflow-hidden">
     <div class="absolute top-0 end-0 w-1/3 h-full bg-yideli-dark/5 skew-x-12 translate-x-1/2"></div>
 
-    {{-- 修改：头部区域适配 1200/1600/2400 --}}
     <div
       class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 md:px-12 text-center relative z-10">
       <h1 class="text-4xl md:text-5xl font-serif font-bold text-yideli-dark mb-6">Customize from Concept</h1>
@@ -19,7 +18,6 @@
     </div>
   </div>
 
-  {{-- 修改：主要内容区域适配 --}}
   <section
     class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 md:px-12 py-12 md:py-12 space-y-24">
 
@@ -77,21 +75,18 @@
   </section>
 
   <section class="bg-yideli-dark text-white py-10 md:py-18">
-    {{-- 修改：标题条适配 --}}
     <div class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 md:px-12 text-center">
       <h2 class="text-3xl md:text-4xl font-serif">Custom Proposal</h2>
     </div>
   </section>
 
   <section class="px-6 md:px-12 bg-[#f6fff4]">
-    {{-- 修改：大图区域适配 --}}
     <div class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto">
       <img class="w-full h-auto" src="{{ asset('images/custom-1-big.jpg') }}">
     </div>
   </section>
 
   <section class="py-24 bg-yideli-base">
-    {{-- 保持 800px：文本阅读区域不宜过宽，否则换行太长难以阅读 --}}
     <div class="max-w-[800px] mx-auto text-center px-6">
       <h2 class="text-3xl font-serif text-yideli-dark mb-6">See It For Yourself</h2>
       <p class="text-gray-600 mb-8 font-light">
