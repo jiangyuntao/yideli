@@ -331,12 +331,9 @@
       <div>
         <h4 class="font-bold mb-6 text-sm uppercase tracking-widest">PRODUCTS</h4>
         <ul class="space-y-4 text-sm text-white/70">
-          <li><a class="hover:text-white transition" href="#">Planner & Diaries</a></li>
-          <li><a class="hover:text-white transition" href="#">Spiral Notebook</a></li>
-          <li><a class="hover:text-white transition" href="#">Notebook</a></li>
-          <li><a class="hover:text-white transition" href="#">Elastic band notebook</a></li>
-          <li><a class="hover:text-white transition" href="#">Address book</a></li>
-          <li><a class="hover:text-white transition" href="#">Folders &amp; Organizers</a></li>
+          @foreach ($nav_categories as $category)
+          <li><a class="hover:text-white transition" href="{{ route('product.index', ['lang' => $lang, 'slug' => $category->slug]) }}">{{ $category->name }}</a></li>
+          @endforeach
         </ul>
       </div>
 
