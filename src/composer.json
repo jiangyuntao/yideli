@@ -12,6 +12,7 @@
         "filament/spatie-laravel-settings-plugin": "^4.0",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",
+        "league/csv": "^9.28",
         "outerweb/filament-translatable-fields": "^3.0",
         "spatie/laravel-permission": "^6.24",
         "spatie/laravel-settings": "^3.6",
