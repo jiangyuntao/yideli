@@ -15,7 +15,8 @@
         "outerweb/filament-translatable-fields": "^3.0",
         "spatie/laravel-permission": "^6.24",
         "spatie/laravel-settings": "^3.6",
-        "spatie/laravel-translatable": "^6.12"
+        "spatie/laravel-translatable": "^6.12",
+        "spatie/laravel-translation-loader": "^2.8"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",

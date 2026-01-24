@@ -8,6 +8,7 @@
   <meta name="description"
     content="Professional Stationery Manufacturer & Exporter. Source factory for OEM/ODM services.">
   <meta name="csrf-token" content="{{ csrf_token() }}">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
 
   <script src="https://cdn.tailwindcss.com"></script>
 

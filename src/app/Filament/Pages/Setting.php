@@ -18,7 +18,7 @@ use Filament\Schemas\Schema;
 class Setting extends SettingsPage
 {
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-cog-6-tooth';
-    protected static ?int $navigationSort = 10;
+    protected static ?int $navigationSort = 11;
     protected static ?string $navigationLabel = '系统设置';
     protected static ?string $title = '系统设置';
 
