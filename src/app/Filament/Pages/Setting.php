@@ -66,11 +66,15 @@ class Setting extends SettingsPage
                                     ->directory('settings')
                                     ->visibility('public'),
 
+                                TextInput::make('company_name')
+                                    ->label('公司名称')
+                                    ->translatable(),
+                                TextInput::make('contact_address')
+                                    ->label('地址')
+                                    ->translatable(),
                                 TextInput::make('contact_email')
                                     ->label('联系邮箱')
                                     ->email(),
-                                TextInput::make('contact_address')
-                                    ->label('地址'),
                                 TextInput::make('contact_tel')
                                     ->label('联系座机'),
                                 TextInput::make('contact_phone')

@@ -45,7 +45,7 @@
                           r="3" />
                 </svg>
               </div>
-              <p>{{ $settings->contact_address }}</p>
+              <p>{{ $settings->contact_address[$lang] }}</p>
             </div>
             <div class="flex gap-4">
               <div class="w-6 h-6 flex-shrink-0 text-yideli-dark">

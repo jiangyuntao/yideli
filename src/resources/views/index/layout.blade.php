@@ -305,7 +305,7 @@
                alt="YIDELI">
         </h3>
         <p class="text-white/70 text-sm leading-relaxed mb-6 pe-8">
-          Taizhou YIDELI Industrial & Trading Co., Ltd.
+          {{ $settings->company_name[$lang] }}
         </p>
         <div class="text-white/70 text-sm space-y-2">
           <p class="flex items-center gap-2">
@@ -327,7 +327,7 @@
                       cy="10"
                       r="3" />
             </svg>
-            {{ $settings->contact_address }}
+            {{ $settings->contact_address[$lang] }}
           </p>
           <p class="flex items-center gap-2">
             <svg class="lucide lucide-phone-icon lucide-phone"
