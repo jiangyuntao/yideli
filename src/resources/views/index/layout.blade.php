@@ -6,14 +6,14 @@
   <meta charset="UTF-8">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0">
-  <title>@yield('title', 'Yideli Stationery - Premium Manufacturer')</title>
+  <title>@yield('title', $settings->site_name[$lang])</title>
   <meta name="description"
-        content="Professional Stationery Manufacturer & Exporter. Source factory for OEM/ODM services.">
+        content="{!! $settings->site_description[$lang] !!}">
   <meta name="csrf-token"
         content="{{ csrf_token() }}">
   <link rel="icon"
         type="image/x-icon"
-        href="/favicon.ico">
+        href="{{ asset('images/logo.ico') }}">
 
   <script src="https://cdn.tailwindcss.com"></script>
 

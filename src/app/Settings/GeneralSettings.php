@@ -6,11 +6,9 @@ use Spatie\LaravelSettings\Settings;
 
 class GeneralSettings extends Settings
 {
-    public string $site_name;
-    public ?string $site_logo;
-    public ?string $site_favicon;
-    public ?string $site_description;
-    public ?string $site_keywords;
+    public ?array $site_name;
+    public ?array $site_description;
+    public ?array $site_keywords;
     public ?array $company_name;
     public ?string $contact_email;
     public ?array $contact_address;

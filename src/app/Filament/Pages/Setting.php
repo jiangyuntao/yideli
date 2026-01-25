@@ -35,16 +35,18 @@ class Setting extends SettingsPage
                             ->schema([
                                 TextInput::make('site_name')
                                     ->label('网站名称')
-                                    ->required(),
+                                    ->translatable(),
 
                                 Textarea::make('site_description')
                                     ->label('网站描述')
                                     ->rows(3)
-                                    ->helperText('用于 SEO Meta Description'),
+                                    ->helperText('用于 SEO Meta Description')
+                                    ->translatable(),
 
                                 TextInput::make('site_keywords')
                                     ->label('SEO 关键词')
-                                    ->placeholder('笔记本, 销售, 服务'),
+                                    ->placeholder('笔记本, 销售, 服务')
+                                    ->translatable(),
 
                                 Toggle::make('is_active')
                                     ->label('网站开启状态')
@@ -54,18 +56,6 @@ class Setting extends SettingsPage
 
                         Tab::make('外观与联系')
                             ->schema([
-                                FileUpload::make('site_logo')
-                                    ->label('网站 Logo')
-                                    ->image()
-                                    ->directory('settings') // 图片存放在 storage/app/public/settings
-                                    ->visibility('public'), // 确保公开可见
-
-                                FileUpload::make('site_favicon')
-                                    ->label('浏览器图标 (Favicon)')
-                                    ->image()
-                                    ->directory('settings')
-                                    ->visibility('public'),
-
                                 TextInput::make('company_name')
                                     ->label('公司名称')
                                     ->translatable(),
