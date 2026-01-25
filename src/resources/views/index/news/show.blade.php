@@ -4,12 +4,14 @@
   <div class="bg-gray-50 py-4 border-b border-gray-100">
     <div class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 lg:px-12">
       <nav class="flex text-xs text-gray-500 uppercase tracking-widest gap-2">
-        <a class="hover:text-yideli-dark" href="{{ route('index', ['lang' => $lang]) }}">Home</a>
+        <a class="hover:text-yideli-dark"
+           href="{{ route('index', ['lang' => $lang]) }}">{{ __('layout.nav_home') }}</a>
         <span>/</span>
-        <a class="hover:text-yideli-dark" href="{{ route('news.index', ['lang' => $lang]) }}">News</a>
+        <a class="hover:text-yideli-dark"
+           href="{{ route('news.index', ['lang' => $lang]) }}">{{ __('layout.nav_news') }}</a>
         <span>/</span>
         <span
-          class="text-yideli-dark font-bold truncate">{{ $entry->category ? $entry->category->name : 'Article' }}</span>
+              class="text-yideli-dark font-bold truncate">{{ $entry->category ? $entry->category->name : __('news.breadcrumb_article') }}</span>
       </nav>
     </div>
   </div>
@@ -26,12 +28,19 @@
             @endif
             <span>{{ $entry->published_at->format('M d, Y') }}</span>
             <span class="ms-auto flex items-center gap-1">
-              <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+              <svg class="w-4 h-4"
+                   xmlns="http://www.w3.org/2000/svg"
+                   fill="none"
+                   viewBox="0 0 24 24"
+                   stroke="currentColor">
+                <path stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
               </svg>
               {{ $entry->views }}
             </span>
@@ -43,22 +52,27 @@
 
           <div class="flex justify-between items-center border-b border-gray-100 pb-6">
             <div class="text-sm text-gray-500">
-              By <span class="text-yideli-dark font-bold">{{ $entry->author ?? 'Yideli Media Team' }}</span>
+              {{ __('news.meta_by') }} <span
+                    class="text-yideli-dark font-bold">{{ $entry->author ?? 'Yideli Media Team' }}</span>
             </div>
 
             <div class="flex gap-3">
               <button class="text-gray-400 hover:text-yideli-dark"
-                onclick="window.open('https://www.facebook.com/sharer/sharer.php?u={{ urlencode(request()->fullUrl()) }}', '_blank')">
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                      onclick="window.open('https://www.facebook.com/sharer/sharer.php?u={{ urlencode(request()->fullUrl()) }}', '_blank')">
+                <svg class="w-5 h-5"
+                     fill="currentColor"
+                     viewBox="0 0 24 24">
                   <path
-                    d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z" />
+                        d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z" />
                 </svg>
               </button>
               <button class="text-gray-400 hover:text-yideli-dark"
-                onclick="window.open('https://www.linkedin.com/sharing/share-offsite/?url={{ urlencode(request()->fullUrl()) }}', '_blank')">
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                      onclick="window.open('https://www.linkedin.com/sharing/share-offsite/?url={{ urlencode(request()->fullUrl()) }}', '_blank')">
+                <svg class="w-5 h-5"
+                     fill="currentColor"
+                     viewBox="0 0 24 24">
                   <path
-                    d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                        d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
                 </svg>
               </button>
             </div>
@@ -67,8 +81,9 @@
 
         <div class="prose max-w-none">
           @if ($entry->cover_image)
-            <img class="w-full h-auto mb-8 rounded-sm shadow-sm" src="{{ asset('storage/' . $entry->cover_image) }}"
-              alt="{{ $entry->title }}">
+            <img class="w-full h-auto mb-8 rounded-sm shadow-sm"
+                 src="{{ asset('storage/' . $entry->cover_image) }}"
+                 alt="{{ $entry->title }}">
           @endif
 
           <article>
@@ -78,10 +93,10 @@
 
         @if (!empty($entry->tags))
           <div class="mt-12 pt-8 border-t border-gray-100 flex gap-2 flex-wrap">
-            <span class="text-sm font-bold text-yideli-dark me-2 self-center">Tags:</span>
+            <span class="text-sm font-bold text-yideli-dark me-2 self-center">{{ __('news.tags_label') }}:</span>
             @foreach ($entry->tags as $tag)
               <a class="px-3 py-1 bg-gray-50 text-xs text-gray-600 hover:bg-yideli-dark hover:text-white transition rounded"
-                href="{{ route('news.index', ['lang' => $lang, 'q' => $tag]) }}">
+                 href="{{ route('news.index', ['lang' => $lang, 'q' => $tag]) }}">
                 {{ $tag }}
               </a>
             @endforeach
@@ -92,25 +107,25 @@
           <div>
             @if ($prevEntry)
               <a class="text-sm font-medium text-gray-600 hover:text-yideli-dark flex flex-col sm:flex-row items-start sm:items-center gap-2"
-                href="{{ route('news.show', ['lang' => $lang, 'slug' => $prevEntry->slug]) }}">
-                <span>← Previous</span>
+                 href="{{ route('news.show', ['lang' => $lang, 'slug' => $prevEntry->slug]) }}">
+                <span>← {{ __('news.nav_prev') }}</span>
                 <span class="hidden sm:inline opacity-50">|</span>
                 <span class="text-xs sm:text-sm line-clamp-1 max-w-[150px]">{{ $prevEntry->title }}</span>
               </a>
             @else
-              <span class="text-sm text-gray-400 cursor-not-allowed">← Previous</span>
+              <span class="text-sm text-gray-400 cursor-not-allowed">← {{ __('news.nav_prev') }}</span>
             @endif
           </div>
           <div>
             @if ($nextEntry)
               <a class="text-sm font-medium text-gray-600 hover:text-yideli-dark flex flex-col sm:flex-row-reverse items-end sm:items-center gap-2 text-right"
-                href="{{ route('news.show', ['lang' => $lang, 'slug' => $nextEntry->slug]) }}">
-                <span>Next →</span>
+                 href="{{ route('news.show', ['lang' => $lang, 'slug' => $nextEntry->slug]) }}">
+                <span>{{ __('news.nav_next') }} →</span>
                 <span class="hidden sm:inline opacity-50">|</span>
                 <span class="text-xs sm:text-sm line-clamp-1 max-w-[150px]">{{ $nextEntry->title }}</span>
               </a>
             @else
-              <span class="text-sm text-gray-400 cursor-not-allowed">Next →</span>
+              <span class="text-sm text-gray-400 cursor-not-allowed">{{ __('news.nav_next') }} →</span>
             @endif
           </div>
         </div>
@@ -121,40 +136,52 @@
         <div class="sticky top-32">
 
           <div>
-            <h4 class="font-serif text-lg text-yideli-dark mb-6 pb-2 border-b border-gray-100">Related News</h4>
+            <h4 class="font-serif text-lg text-yideli-dark mb-6 pb-2 border-b border-gray-100">
+              {{ __('news.related_news_title') }}
+            </h4>
             <div class="space-y-6">
               @forelse($relatedNews as $related)
-                <a class="group flex gap-4" href="{{ route('news.show', ['lang' => $lang, 'slug' => $related->slug]) }}">
+                <a class="group flex gap-4"
+                   href="{{ route('news.show', ['lang' => $lang, 'slug' => $related->slug]) }}">
                   <div class="w-20 h-20 flex-shrink-0 overflow-hidden bg-gray-100">
                     @php $relImg = $related->cover_image ? asset('storage/' . $related->cover_image) : asset('images/placeholder.jpg'); @endphp
                     <img class="w-full h-full object-cover group-hover:scale-110 transition duration-500"
-                      src="{{ $relImg }}">
+                         src="{{ $relImg }}">
                   </div>
                   <div>
                     <div class="text-[10px] text-gray-400 uppercase mb-1">{{ $related->published_at->format('M d, Y') }}
                     </div>
                     <h5
-                      class="text-sm font-medium text-yideli-text leading-snug group-hover:text-yideli-dark group-hover:underline line-clamp-2">
+                        class="text-sm font-medium text-yideli-text leading-snug group-hover:text-yideli-dark group-hover:underline line-clamp-2">
                       {{ $related->title }}
                     </h5>
                   </div>
                 </a>
               @empty
-                <p class="text-gray-400 text-sm">No related news available.</p>
+                <p class="text-gray-400 text-sm">{{ __('news.no_related_news') }}</p>
               @endforelse
             </div>
           </div>
 
           <div class="mt-12">
-            <h4 class="font-serif text-lg text-yideli-dark mb-4">Search</h4>
-            <form class="relative" action="{{ route('news.index', ['lang' => $lang]) }}" method="GET">
-              <input
-                class="w-full bg-gray-50 border border-gray-200 px-4 py-3 text-sm focus:outline-none focus:border-yideli-dark transition"
-                name="q" type="text" placeholder="Search...">
-              <button class="absolute end-3 top-3 text-gray-400 hover:text-yideli-dark" type="submit">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            <h4 class="font-serif text-lg text-yideli-dark mb-4">{{ __('news.sidebar_search_placeholder') }}</h4>
+            <form class="relative"
+                  action="{{ route('news.index', ['lang' => $lang]) }}"
+                  method="GET">
+              <input class="w-full bg-gray-50 border border-gray-200 px-4 py-3 text-sm focus:outline-none focus:border-yideli-dark transition"
+                     name="q"
+                     type="text"
+                     placeholder="{{ __('news.sidebar_search_placeholder') }}...">
+              <button class="absolute end-3 top-3 text-gray-400 hover:text-yideli-dark"
+                      type="submit">
+                <svg class="w-5 h-5"
+                     fill="none"
+                     stroke="currentColor"
+                     viewBox="0 0 24 24">
+                  <path stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                 </svg>
               </button>
             </form>

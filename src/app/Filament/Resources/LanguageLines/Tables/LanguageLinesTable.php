@@ -48,15 +48,22 @@ class LanguageLinesTable
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
+                    // 找到原有批量翻译的BulkAction
                     BulkAction::make('batch_translate')
                         ->label('批量 AI 翻译')
                         ->icon('heroicon-o-sparkles')
                         ->color('success')
-                        ->action(function ($records, YoudaoTranslate $translator) {
-                            foreach ($records as $record) {
-                                static::processTranslation($record, $translator);
-                            }
-                            Notification::make()->title('批量翻译完成')->success()->send();
+                        // 替换原来的action闭包为以下代码
+                        ->action(function ($records) {
+                            // 分发异步Job，将翻译记录集合传给Job
+                            \App\Jobs\BatchTranslateLanguageLines::dispatch($records);
+
+                            // 立即给用户发送「任务启动」的提示，无需等待执行完成
+                            Notification::make()
+                                ->title('批量翻译任务已启动')
+                                ->info()
+                                ->body('翻译任务已加入异步队列，完成后将自动发送通知，你可继续操作其他功能')
+                                ->send();
                         }),
                 ]),
             ])
@@ -109,7 +116,7 @@ class LanguageLinesTable
 
     public static function importTranslationsFromCsv(string $filePath): array
     {
-        $reader = Reader::createFromPath(storage_path('app/' . $filePath), 'r');
+        $reader = Reader::createFromPath(storage_path('app/private/' . $filePath), 'r');
         $reader->setHeaderOffset(0); // 第一行作为表头
 
         $headers = [
@@ -196,7 +203,7 @@ class LanguageLinesTable
                     $text[$locale] = $translated;
                     $updated = true;
                     // 稍微停顿防 API 限制
-                    usleep(100000);
+                    sleep(1);
                 }
             }
         }
