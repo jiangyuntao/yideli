@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Index;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Page;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\View;
 use Carbon\Carbon;
@@ -43,6 +44,7 @@ class BaseController extends Controller
         View::share('dir', $direction); // 共享方向变量
         View::share('settings', app(GeneralSettings::class));
         View::share('nav_categories', Category::whereNull('parent_id')->where('is_visible', true)->get());
+        View::share('pages', Page::get());
 
         // 6. 继续执行原本的控制器方法
         return $this->{$method}(...array_values($parameters));

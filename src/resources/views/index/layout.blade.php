@@ -448,10 +448,10 @@
          class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 lg:px-12 mt-8 flex flex-col md:flex-row justify-between items-center text-xs text-white/40">
       <p>&copy; 2025 Yideli Stationery. {{ __('layout.footer_rights_reserved') }}</p>
       <div class="flex gap-6 mt-4 md:mt-0">
+        @foreach ($pages as $page)
         <a class="hover:text-white transition"
-           href="{{ route('page.show', ['lang' => $lang, 'slug' => 'privacy-policy']) }}">{{ __('layout.footer_privacy_policy') }}</a>
-        <a class="hover:text-white transition"
-           href="{{ route('page.show', ['lang' => $lang, 'slug' => 'terms-of-use']) }}">{{ __('layout.footer_terms_of_use') }}</a>
+           href="{{ route('page.show', ['lang' => $lang, 'slug' => $page->slug]) }}">{{ $page->title }}</a>
+        @endforeach
       </div>
     </div>
   </footer>
