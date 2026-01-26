@@ -121,7 +121,7 @@
         <div class="w-full">
           <h3 class="mb-40 text-3xl lg:text-4xl font-[800]">35+</h3>
           <p class="uppercase text-sm tracking-widest leading-relaxed mt-6 font-medium">
-            Years of been in the business <br> since 1989
+            {!! __('home_cert.years_desc') !!}
           </p>
         </div>
       </div>
@@ -132,7 +132,7 @@
           <div class="w-full">
             <h3 class="text-3xl lg:text-4xl font-[800] mb-2">35000+ m²</h3>
             <p class="uppercase text-sm tracking-widest font-normal">
-              Modern production base in <strong>Taizhou</strong>
+              {!! __('home_cert.area_desc') !!}
             </p>
           </div>
         </div>
@@ -141,7 +141,7 @@
           <div class="w-full">
             <h3 class="text-3xl lg:text-4xl font-[800] mb-2">20+</h3>
             <p class="uppercase text-sm tracking-widest text-right font-normal leading-relaxed">
-              <strong>Designers</strong> & <strong>Modelers </strong><br> in Hangzhou R&D Center
+              {!! __('home_cert.designers_desc') !!}
             </p>
           </div>
         </div>
@@ -151,14 +151,14 @@
         <div>
           <h3 class="text-3xl lg:text-4xl font-[800] mb-2">300+</h3>
           <p class="mt-8 uppercase text-sm tracking-widest font-medium leading-relaxed">
-            Dedicated Professionals in our team
+            {!! __('home_cert.team_desc') !!}
           </p>
         </div>
 
         <div class="mt-8 lg:mt-0">
-          <h4 class="font-[800] uppercase text-sm tracking-widest mb-1">Global Network</h4>
+          <h4 class="font-[800] uppercase text-sm tracking-widest mb-1">{!! __('home_cert.global_title') !!}</h4>
           <p class="uppercase text-sm tracking-widest font-normal">
-            We export to over countries
+            {!! __('home_cert.global_desc') !!}
           </p>
         </div>
       </div>
