@@ -449,9 +449,9 @@
       <p>&copy; 2025 Yideli Stationery. {{ __('layout.footer_rights_reserved') }}</p>
       <div class="flex gap-6 mt-4 md:mt-0">
         <a class="hover:text-white transition"
-           href="#">{{ __('layout.footer_privacy_policy') }}</a>
+           href="{{ route('page.show', ['lang' => $lang, 'slug' => 'privacy-policy']) }}">{{ __('layout.footer_privacy_policy') }}</a>
         <a class="hover:text-white transition"
-           href="#">{{ __('layout.footer_terms_of_use') }}</a>
+           href="{{ route('page.show', ['lang' => $lang, 'slug' => 'terms-of-use']) }}">{{ __('layout.footer_terms_of_use') }}</a>
       </div>
     </div>
   </footer>

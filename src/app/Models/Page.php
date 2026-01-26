@@ -14,7 +14,7 @@ class Page extends Model
 
     protected $guarded = [];
 
-    public $translatable = ['title', 'content'];
+    public $translatable = ['title', 'slug', 'content'];
 
     protected static function booted()
     {

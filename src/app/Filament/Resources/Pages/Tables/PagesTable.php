@@ -25,11 +25,6 @@ class PagesTable
                         return $query->whereRaw("LOWER(JSON_UNQUOTE(JSON_EXTRACT(title, '$.\"{$locale}\"'))) LIKE ?", ["%" . strtolower($search) . "%"]);
                     }),
 
-                TextColumn::make('slug')
-                    ->label('美化URL')
-                    ->copyable()
-                    ->searchable(),
-
                 TextColumn::make('created_at')
                     ->label('创建时间')
                     ->dateTime('Y-m-d H:i'),
