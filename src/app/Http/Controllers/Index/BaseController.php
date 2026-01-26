@@ -42,7 +42,7 @@ class BaseController extends Controller
         View::share('lang', $locale);
         View::share('dir', $direction); // 共享方向变量
         View::share('settings', app(GeneralSettings::class));
-        View::share('nav_categories', Category::whereNull('parent_id')->get());
+        View::share('nav_categories', Category::whereNull('parent_id')->where('is_visible', true)->get());
 
         // 6. 继续执行原本的控制器方法
         return $this->{$method}(...array_values($parameters));
