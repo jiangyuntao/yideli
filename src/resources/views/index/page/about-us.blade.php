@@ -51,13 +51,13 @@
       </div>
 
       <div class="md:col-span-7">
-        <h2 class="text-2xl md:text-4xl font-black text-[#1F5F53] mb-12">{{ __('about.heritage_title') }}</h2>
+        <h2 class="text-2xl md:text-4xl font-black text-[#1F5F53] mb-12">{!! nl2br(__('about.heritage_title')) !!}</h2>
         <div class="space-y-4 text-sm md:text-lg leading-relaxed text-gray-800">
           <p>
-            {{ __('about.heritage_text_1') }}
+            {!! nl2br(__('about.heritage_text_1')) !!}
           </p>
           <p>
-            {{ __('about.heritage_text_2') }}
+            {!! nl2br(__('about.heritage_text_2')) !!}
           </p>
         </div>
       </div>
@@ -74,15 +74,15 @@
 
     <section class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-24 items-center">
       <div class="order-2 md:col-span-7 md:order-1">
-        <h2 class="text-2xl md:text-4xl font-black text-[#1F5F53] mb-12">{{ __('about.integrated_title') }}</h2>
+        <h2 class="text-2xl md:text-4xl font-black text-[#1F5F53] mb-12">{!! nl2br(__('about.integrated_title')) !!}</h2>
         <div class="text-sm md:text-lg leading-relaxed text-gray-800 space-y-4">
           <p>
-            {{ __('about.integrated_text') }}
+            {!! nl2br(__('about.integrated_text')) !!}
           </p>
           <ul class="list-disc ps-5 space-y-1">
-            <li>{{ __('about.integrated_list_1') }}</li>
-            <li>{{ __('about.integrated_list_2') }}</li>
-            <li>{{ __('about.integrated_list_3') }}</li>
+            <li>{!! nl2br(__('about.integrated_list_1')) !!}</li>
+            <li>{!! nl2br(__('about.integrated_list_2')) !!}</li>
+            <li>{!! nl2br(__('about.integrated_list_3')) !!}</li>
           </ul>
         </div>
       </div>
@@ -140,43 +140,43 @@
         <ul class="space-y-4 text-[#1F5F53] font-medium text-sm md:text-base pl-24">
           <li class="flex items-center gap-2">
             <span class="w-1.5 h-1.5 bg-[#1F5F53] rounded-full"></span>
-            {{ __('about.machine_1') }}
+            {!! nl2br(__('about.machine_1')) !!}
           </li>
           <li class="flex items-center gap-2">
             <span class="w-1.5 h-1.5 bg-[#1F5F53] rounded-full"></span>
-            {{ __('about.machine_2') }}
+            {!! nl2br(__('about.machine_2')) !!}
           </li>
           <li class="flex items-center gap-2">
             <span class="w-1.5 h-1.5 bg-[#1F5F53] rounded-full"></span>
-            {{ __('about.machine_3') }}
+            {!! nl2br(__('about.machine_3')) !!}
           </li>
           <li class="flex items-center gap-2">
             <span class="w-1.5 h-1.5 bg-[#1F5F53] rounded-full"></span>
-            {{ __('about.machine_4') }}
+            {!! nl2br(__('about.machine_4')) !!}
           </li>
           <li class="flex items-center gap-2">
             <span class="w-1.5 h-1.5 bg-[#1F5F53] rounded-full"></span>
-            {{ __('about.machine_5') }}
+            {!! nl2br(__('about.machine_5')) !!}
           </li>
           <li class="flex items-center gap-2">
             <span class="w-1.5 h-1.5 bg-[#1F5F53] rounded-full"></span>
-            {{ __('about.machine_6') }}
+            {!! nl2br(__('about.machine_6')) !!}
           </li>
           <li class="flex items-center gap-2">
             <span class="w-1.5 h-1.5 bg-[#1F5F53] rounded-full"></span>
-            {{ __('about.machine_7') }}
+            {!! nl2br(__('about.machine_7')) !!}
           </li>
           <li class="flex items-center gap-2">
             <span class="w-1.5 h-1.5 bg-[#1F5F53] rounded-full"></span>
-            {{ __('about.machine_8') }}
+            {!! nl2br(__('about.machine_8')) !!}
           </li>
           <li class="flex items-center gap-2">
             <span class="w-1.5 h-1.5 bg-[#1F5F53] rounded-full"></span>
-            {{ __('about.machine_9') }}
+            {!! nl2br(__('about.machine_9')) !!}
           </li>
           <li class="flex items-center gap-2">
             <span class="w-1.5 h-1.5 bg-[#1F5F53] rounded-full"></span>
-            {{ __('about.machine_10') }}
+            {!! nl2br(__('about.machine_10')) !!}
           </li>
         </ul>
       </div>
@@ -184,10 +184,10 @@
     <section class="mb-12">
       <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center mb-12">
         <div class="md:col-span-7">
-          <h2 class="text-2xl md:text-4xl font-black text-[#1F5F53] mb-6">{{ __('about.quality_title') }}</h2>
+          <h2 class="text-2xl md:text-4xl font-black text-[#1F5F53] mb-6">{!! nl2br(__('about.quality_title')) !!}</h2>
           <div class="text-sm md:text-lg leading-relaxed text-gray-800 space-y-4">
             <p>
-              {{ __('about.quality_text') }}
+              {!! nl2br(__('about.quality_text')) !!}
             </p>
           </div>
         </div>
@@ -267,13 +267,13 @@
       </div>
 
       <div class="md:col-span-6 order-1 md:order-2">
-        <h2 class="text-2xl md:text-4xl font-black text-[#1F5F53] mb-12">{{ __('about.global_title') }}</h2>
+        <h2 class="text-2xl md:text-4xl font-black text-[#1F5F53] mb-12">{!! nl2br(__('about.global_title')) !!}</h2>
         <div class="text-sm md:text-lg leading-relaxed text-gray-800 space-y-4">
           <p>
-            {{ __('about.global_text_1') }}
+            {!! nl2br(__('about.global_text_1')) !!}
           </p>
           <p>
-            {{ __('about.global_text_2') }}
+            {!! nl2br(__('about.global_text_2')) !!}
           </p>
         </div>
       </div>
@@ -281,13 +281,13 @@
 
     <section class="grid grid-cols-1 md:grid-cols-12 gap-24 items-center mb-20">
       <div class="md:col-span-6">
-        <h2 class="text-2xl md:text-4xl font-black text-[#1F5F53] mb-12">{{ __('about.rnd_title') }}</h2>
+        <h2 class="text-2xl md:text-4xl font-black text-[#1F5F53] mb-12">{!! nl2br(__('about.rnd_title')) !!}</h2>
         <div class="text-sm md:text-lg leading-relaxed text-gray-800 space-y-4">
           <p>
-            {{ __('about.rnd_text_1') }}
+            {!! nl2br(__('about.rnd_text_1')) !!}
           </p>
           <p>
-            {{ __('about.rnd_text_2') }}
+            {!! nl2br(__('about.rnd_text_2')) !!}
           </p>
         </div>
         <div class="flex justify-end w-full py-4">
@@ -327,13 +327,13 @@
         </div>
 
         <div class="md:col-span-6 order-1 md:order-2">
-          <h2 class="text-2xl md:text-4xl font-black text-[#1F5F53] mb-12">{{ __('about.partner_title') }}</h2>
+          <h2 class="text-2xl md:text-4xl font-black text-[#1F5F53] mb-12">{!! nl2br(__('about.partner_title')) !!}</h2>
           <div class="text-sm md:text-lg leading-relaxed text-gray-800 space-y-4">
             <p>
-              {{ __('about.partner_text_1') }}
+              {!! nl2br(__('about.partner_text_1')) !!}
             </p>
             <p>
-              {{ __('about.partner_text_2') }}
+              {!! nl2br(__('about.partner_text_2')) !!}
             </p>
           </div>
         </div>
