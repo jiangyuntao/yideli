@@ -98,7 +98,7 @@ class Setting extends SettingsPage
                                         TextInput::make('custom_url')
                                             ->label('输入链接地址')
                                             ->placeholder('https://...')
-                                            ->required()
+                                            ->default('javascript:;')
                                             ->columnSpan(1),
 
                                         Select::make('in_new_windows')

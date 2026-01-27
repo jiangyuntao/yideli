@@ -14,7 +14,7 @@
       <template x-for="(slide, index) in slides" :key="index">
         <div class="w-full flex-shrink-0 relative h-full">
 
-          <a class="block w-full h-full relative cursor-pointer" :href="slide.custom_url || '#'"
+          <a class="block w-full h-full relative cursor-pointer" :href="slide.custom_url || 'javascript:;'"
             :target="slide.in_new_windows == 1 ? '_blank' : '_self'">
 
             <img class="w-full h-full object-cover" :src="getImageUrl(slide.image)" :alt="slide.title">
