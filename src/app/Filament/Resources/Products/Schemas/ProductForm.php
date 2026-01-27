@@ -78,6 +78,7 @@ class ProductForm
 
                                 FileUpload::make('images')
                                     ->label('图片')
+                                    ->helperText('建议上传2M以内图片')
                                     ->multiple()
                                     ->reorderable()
                                     ->appendFiles()
@@ -85,7 +86,7 @@ class ProductForm
                                     ->directory('products')
                                     ->image()
                                     ->imageEditor()
-                                    ->maxSize(1024 * 2) // 10MB
+                                    ->maxSize(1024 * 10) // 10MB
                                     ->acceptedFileTypes(['image/*']),
 
                                 Toggle::make('is_visible')

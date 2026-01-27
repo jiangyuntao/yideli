@@ -83,7 +83,11 @@ class Setting extends SettingsPage
                                         // 1. 上传图片
                                         FileUpload::make('image')
                                             ->label('轮播图片')
+                                            ->helperText('建议上传2M以内图片')
                                             ->image()
+                                            ->imageEditor()
+                                            ->maxSize(1024 * 10) // 10MB
+                                            ->acceptedFileTypes(['image/*'])
                                             ->directory('carousel') // 图片存放在 storage/app/public/carousel
                                             ->disk('public')
                                             ->required()

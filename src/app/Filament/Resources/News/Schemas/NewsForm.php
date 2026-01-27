@@ -91,11 +91,12 @@ class NewsForm
 
                                 FileUpload::make('cover_image')
                                     ->label('封面图')
+                                    ->helperText('建议上传2M以内图片')
                                     ->disk('public')
                                     ->directory('products')
                                     ->image()
                                     ->imageEditor()
-                                    ->maxSize(1024 * 2) // 10MB
+                                    ->maxSize(1024 * 10) // 10MB
                                     ->acceptedFileTypes(['image/*']),
 
                                 DateTimePicker::make('published_at')
