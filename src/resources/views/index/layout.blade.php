@@ -57,9 +57,15 @@
               'sans-serif',
             ],
             serif: [
-              "Lato",
-              'Times New Roman',
-              'serif'
+              // 逻辑：中文->Noto, 阿拉伯->Cairo, 英文->Lato, 其他(俄/法/西)->Inter
+              "{{ $lang === 'zh' ? 'Noto Sans SC' : ($lang === 'ar' ? 'Cairo' : ($lang === 'en' ? 'Lato' : 'Inter')) }}",
+
+              // 备选字体栈
+              'Inter',
+              'Helvetica Neue',
+              'Helvetica',
+              'Arial',
+              'sans-serif',
             ],
           },
           spacing: {
