@@ -37,6 +37,7 @@ Route::prefix('{lang}')
 
             // 询盘/联系我们
             Route::get('/inquire', [InquireController::class, 'form'])->name('inquire.form');
+            Route::post('/inquire', [InquireController::class, 'submit'])->name('inquire.submit');
 
             // 生产流程
             Route::get('/production-process', [ProductionProcessController::class, 'index'])->name('production-process');
