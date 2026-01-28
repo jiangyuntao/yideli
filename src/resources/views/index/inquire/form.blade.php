@@ -243,7 +243,7 @@
               for="message">{!! nl2br(__('inquire.label_message')) !!} *</label>
           </div>
 
-          <div class="flex items-center justify-between pt-4">
+          <div class="flex items-center justify-between gap-4 pt-4">
             <p class="text-xs text-gray-400 max-w-xs">{!! nl2br(__('inquire.privacy_consent')) !!}</p>
             <button
               class="bg-yideli-dark text-white px-10 py-4 text-sm font-bold uppercase tracking-widest hover:bg-yideli-hover transition shadow-lg shadow-yideli-dark/20"
