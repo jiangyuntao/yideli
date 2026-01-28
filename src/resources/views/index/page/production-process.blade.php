@@ -35,7 +35,7 @@
     <div class="grid md:grid-cols-12 gap-12 md:gap-20 items-center">
       <div class="order-1 md:col-span-5 md:grid md:grid-cols-2 md:gap-4">
         <img class="w-full h-full object-cover rounded-sm shadow-xl"
-             src="{{ asset('images/process/2.png') }}">
+             src="{{ asset('images/process/2.jpg') }}">
         <img class="w-full h-full object-cover rounded-sm shadow-xl"
              src="{{ asset('images/process/3.png') }}">
       </div>
