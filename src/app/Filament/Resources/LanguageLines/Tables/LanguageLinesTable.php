@@ -24,10 +24,20 @@ class LanguageLinesTable
     {
         return $table
             ->columns([
-                TextColumn::make('group')->searchable()->label('分组'),
-                TextColumn::make('key')->searchable()->label('键名'),
-                TextColumn::make('text.zh')->label('中文原文')->limit(30),
-                TextColumn::make('text.en')->label('英文预览')->limit(30),
+                TextColumn::make('group')
+                    ->searchable()
+                    ->label('分组'),
+                TextColumn::make('key')
+                    ->searchable()
+                    ->label('键名'),
+                TextColumn::make('text.zh')
+                    ->label('中文原文')
+                    ->limit(30)
+                    ->searchable(),
+                TextColumn::make('text.en')
+                    ->label('英文预览')
+                    ->limit(30)
+                    ->searchable(),
             ])
             ->filters([
                 SelectFilter::make('group')->options(
