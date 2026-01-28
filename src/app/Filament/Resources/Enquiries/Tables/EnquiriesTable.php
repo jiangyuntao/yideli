@@ -2,11 +2,11 @@
 
 namespace App\Filament\Resources\Enquiries\Tables;
 
+use App\Models\Enquiry;
 use Filament\Actions\BulkAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
-use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
@@ -26,7 +26,23 @@ class EnquiriesTable
                 // 状态 (直接在列表切换已读/未读)
                 ToggleColumn::make('is_read')
                     ->label('已读'),
-
+                TextColumn::make('meta_data.interest')
+                    ->label('意向领域')
+                    ->badge() // 核心：将数组显示为多个徽章
+                    ->separator(',') // 某些情况下有助于正确分割
+                    ->color('info') // 设置徽章颜色，如 primary, danger, success, info, gray
+                    // 进阶：汉化显示（将数据库存的英文 key 转为中文）
+                    ->formatStateUsing(fn(string $state): string => match ($state) {
+                        'oem' => 'OEM',
+                        'odm' => 'ODM',
+                        'notebook' => '笔记本',
+                        'diary' => '日记本',
+                        default => $state, // 未知的值直接显示
+                    })
+                    ->searchable(query: function ($query, string $search) {
+                        // 允许搜索 JSON 数组内容 (MySQL 语法示例)
+                        return $query->whereJsonContains('meta_data->interest', $search);
+                    }),
                 // 姓名
                 TextColumn::make('name')
                     ->label('姓名')
@@ -38,11 +54,6 @@ class EnquiriesTable
                     ->searchable()
                     ->copyable()
                     ->icon('heroicon-m-envelope'),
-
-                // 主题
-                TextColumn::make('主题')
-                    ->limit(30)
-                    ->searchable(),
 
                 // 来源 IP
                 TextColumn::make('ip_address')

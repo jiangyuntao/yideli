@@ -207,25 +207,25 @@
             <div class="flex flex-wrap gap-4">
               <label class="inline-flex items-center cursor-pointer">
                 <input class="w-4 h-4 text-yideli-dark border-gray-300 rounded focus:ring-yideli-dark" name="interest[]"
-                  type="checkbox" value="notebooks">
+                  type="checkbox" value="oem">
                 <span class="ms-2 text-sm text-gray-600">{!! nl2br(__('inquire.option_oem')) !!}</span>
               </label>
 
               <label class="inline-flex items-center cursor-pointer">
                 <input class="w-4 h-4 text-yideli-dark border-gray-300 rounded focus:ring-yideli-dark" name="interest[]"
-                  type="checkbox" value="pens">
+                  type="checkbox" value="odm">
                 <span class="ms-2 text-sm text-gray-600">{!! nl2br(__('inquire.option_odm')) !!}</span>
               </label>
 
               <label class="inline-flex items-center cursor-pointer">
                 <input class="w-4 h-4 text-yideli-dark border-gray-300 rounded focus:ring-yideli-dark" name="interest[]"
-                  type="checkbox" value="oem">
+                  type="checkbox" value="notebook">
                 <span class="ms-2 text-sm text-gray-600">{!! nl2br(__('inquire.option_notebook')) !!}</span>
               </label>
 
               <label class="inline-flex items-center cursor-pointer">
                 <input class="w-4 h-4 text-yideli-dark border-gray-300 rounded focus:ring-yideli-dark" name="interest[]"
-                  type="checkbox" value="distributorship">
+                  type="checkbox" value="diary">
                 <span class="ms-2 text-sm text-gray-600">{!! nl2br(__('inquire.option_diary')) !!}</span>
               </label>
             </div>
