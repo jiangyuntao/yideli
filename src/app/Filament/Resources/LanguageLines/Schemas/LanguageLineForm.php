@@ -19,13 +19,17 @@ class LanguageLineForm
                         TextInput::make('group')
                             ->label('分组')
                             ->placeholder('例如: menu, buttons, home_page')
+                            ->helperText('为避免误删，编辑时不可修改分组')
                             ->required()
-                            ->datalist(['menu', 'buttons', 'validation', 'footer']), // 常用提示
+                            ->datalist(['menu', 'buttons', 'validation', 'footer'])
+                            ->readonly(fn (string $operation) => $operation === 'edit'),
 
                         TextInput::make('key')
                             ->label('键名')
                             ->placeholder('例如: contact_us')
-                            ->required(),
+                            ->helperText('为避免误删，编辑时不可修改键名')
+                            ->required()
+                            ->readonly(fn (string $operation) => $operation === 'edit'),
 
                         Textarea::make('text')
                             ->label('翻译')
