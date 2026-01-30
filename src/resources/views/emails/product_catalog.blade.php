@@ -13,7 +13,7 @@
     <p>附件是我们为您准备的产品目录，请查收。</p>
     <p>如果您有任何问题，请随时联系我们。</p>
     <br>
-    <p>祝好，<br>{{ config('app.name') }}</p>
+    <p>祝好，<br>{{ $settings->company_name['zh'] }}</p>
 
     {{-- 法语 --}}
   @elseif($locale == 'fr')
@@ -21,7 +21,7 @@
     <p>Veuillez trouver ci-joint le catalogue de produits que vous avez demandé.</p>
     <p>N'hésitez pas à nous contacter si vous avez des questions.</p>
     <br>
-    <p>Cordialement,<br>{{ config('app.name') }}</p>
+    <p>Cordialement,<br>{{ $settings->company_name['fr'] }}</p>
 
     {{-- 西班牙语 --}}
   @elseif($locale == 'es')
@@ -29,7 +29,7 @@
     <p>Adjunto encontrará el catálogo de productos solicitado.</p>
     <p>No dude en contactarnos si tiene alguna pregunta.</p>
     <br>
-    <p>Saludos cordiales,<br>{{ config('app.name') }}</p>
+    <p>Saludos cordiales,<br>{{ $settings->company_name['es'] }}</p>
 
     {{-- 俄语 --}}
   @elseif($locale == 'ru')
@@ -37,7 +37,7 @@
     <p>Пожалуйста, ознакомьтесь с приложенным каталогом продукции.</p>
     <p>Если у вас возникнут вопросы, пожалуйста, свяжитесь с нами.</p>
     <br>
-    <p>С уважением,<br>{{ config('app.name') }}</p>
+    <p>С уважением,<br>{{ $settings->company_name['ru'] }}</p>
 
     {{-- 阿拉伯语 --}}
   @elseif($locale == 'ar')
@@ -46,7 +46,7 @@
       <p>تجدون مرفقاً كتالوج المنتجات الذي طلبتموه.</p>
       <p>لا تترددوا في الاتصال بنا إذا كان لديكم أي أسئلة.</p>
       <br>
-      <p>مع أطيب التحيات،<br>{{ config('app.name') }}</p>
+      <p>مع أطيب التحيات،<br>{{ $settings->company_name['ar'] }}</p>
     </div>
 
     {{-- 默认：英语 --}}
@@ -55,7 +55,7 @@
     <p>Please find the attached product catalog as requested.</p>
     <p>Feel free to contact us if you have any questions.</p>
     <br>
-    <p>Best regards,<br>{{ config('app.name') }}</p>
+    <p>Best regards,<br>{{ $settings->company_name['en'] }}</p>
   @endif
 
 </body>

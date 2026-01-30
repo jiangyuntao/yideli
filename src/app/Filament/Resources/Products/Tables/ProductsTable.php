@@ -107,7 +107,7 @@ class ProductsTable
 
                                 Mail::to($data['email'])
                                     ->send(new ProductCatalogMail(
-                                        $pdfContent,
+                                        base64_encode($pdfContent),
                                         $data['subject_name'] . '.pdf',
                                         $targetLocale
                                     ));

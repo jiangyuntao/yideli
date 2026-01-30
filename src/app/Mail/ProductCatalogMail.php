@@ -2,9 +2,11 @@
 
 namespace App\Mail;
 
+use App\Settings\GeneralSettings;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
@@ -27,17 +29,19 @@ class ProductCatalogMail extends Mailable implements ShouldQueue
 
     public function envelope(): Envelope
     {
-        // 6 种语言的邮件标题
+        $settings = app(GeneralSettings::class);
+
         $subject = match ($this->locale) {
-            'zh' => '产品目录 - ' . config('app.name'),
-            'fr' => 'Catalogue de produits - ' . config('app.name'),
-            'es' => 'Catálogo de productos - ' . config('app.name'),
-            'ru' => 'Каталог продукции - ' . config('app.name'),
-            'ar' => 'كتالوج المنتجات - ' . config('app.name'),
-            default => 'Product Catalog - ' . config('app.name'), // en
+            'zh' => '产品目录 - ' . $settings->company_name['zh'],
+            'fr' => 'Catalogue de produits - ' . $settings->company_name['fr'],
+            'es' => 'Catálogo de productos - ' . $settings->company_name['es'],
+            'ru' => 'Каталог продукции - ' . $settings->company_name['ru'],
+            'ar' => 'كتالوج المنتجات - ' . $settings->company_name['ar'],
+            default => 'Product Catalog - ' . $settings->company_name['en'],
         };
 
         return new Envelope(
+            from: new Address($settings->contact_email, $settings->company_name[$this->locale]),
             subject: $subject,
         );
     }
@@ -46,14 +50,14 @@ class ProductCatalogMail extends Mailable implements ShouldQueue
     {
         return new Content(
             view: 'emails.product_catalog',
-            with: ['locale' => $this->locale],
+            with: ['locale' => $this->locale, 'settings' => app(GeneralSettings::class)],
         );
     }
 
     public function attachments(): array
     {
         return [
-            Attachment::fromData(fn() => $this->pdfContent, $this->fileName)
+            Attachment::fromData(fn() => base64_decode($this->pdfContent), $this->fileName)
                 ->withMime('application/pdf'),
         ];
     }
