@@ -47,7 +47,8 @@ class AutoTranslateJob implements ShouldQueue
             foreach ($this->targetLocales as $locale) {
                 $fields = $this->model->getTranslatableAttributes();
                 foreach ($fields as $field) {
-                    if ($field == 'slug') {
+                    // 跳过 slug 和已经翻译过的字段
+                    if ($field == 'slug' || !empty($this->model->getTranslation($field, $locale, false))) {
                         continue;
                     }
 

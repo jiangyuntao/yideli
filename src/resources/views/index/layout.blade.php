@@ -170,7 +170,7 @@
       <div class="flex-shrink-0 me-8">
         <a class="block"
            href="{{ route('index', ['lang' => $lang]) }}">
-          <img class="h-20 w-auto object-contain"
+          <img class="h-28 w-auto object-contain"
                src="{{ asset('images/logo_big.jpg') }}"
                alt="Yideli Logo">
         </a>
