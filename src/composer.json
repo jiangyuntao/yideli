@@ -15,6 +15,7 @@
         "laravel/tinker": "^2.10.1",
         "league/csv": "^9.28",
         "outerweb/filament-translatable-fields": "^3.0",
+        "resend/resend-laravel": "^1.1",
         "spatie/laravel-permission": "^6.24",
         "spatie/laravel-settings": "^3.6",
         "spatie/laravel-translatable": "^6.12",

@@ -31,8 +31,8 @@ class NewInquiryNotification extends Mailable implements ShouldQueue
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address($this->enquiry->email, $this->enquiry->name),
-            subject: '【网站询盘】来自 ' . $this->enquiry->name . ' 的新留言',
+            from: new Address('inquiry@yierli.com', $this->enquiry->name),
+            subject: '【网站询盘】来自 ' . $this->enquiry->email . '(' . $this->enquiry->name . ')' . ' 的新留言',
         );
     }
 
