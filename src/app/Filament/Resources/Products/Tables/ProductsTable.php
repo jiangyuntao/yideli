@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\Products\Tables;
 
 use App\Mail\ProductCatalogMail;
-use Barryvdh\DomPDF\Facade\Pdf;
 use Filament\Actions\BulkAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
@@ -11,15 +10,15 @@ use Filament\Actions\EditAction;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
-use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\MaintenanceMode;
+use TCPDF;
 
 class ProductsTable
 {
@@ -98,16 +97,11 @@ class ProductsTable
                             try {
                                 $products = $records->load('category');
 
-                                $pdf = Pdf::loadView('pdf.product_catalog', [
-                                    'products' => $products,
-                                    'locale' => $targetLocale
-                                ]);
-
-                                $pdfContent = $pdf->output();
+                                $pdfContent = self::generatePdfContent($targetLocale, $products);
 
                                 Mail::to($data['email'])
                                     ->send(new ProductCatalogMail(
-                                        base64_encode($pdfContent),
+                                        $pdfContent,
                                         $data['subject_name'] . '.pdf',
                                         $targetLocale
                                     ));
@@ -126,5 +120,52 @@ class ProductsTable
                         ->deselectRecordsAfterCompletion(),
                 ]),
             ]);
+    }
+
+    /**
+     * Summary of generatePdfContent
+     * @param mixed $locale
+     * @param mixed $products
+     * @return string
+     */
+    protected static function generatePdfContent($locale, $products)
+    {
+        try {
+            // 参数: 页面方向 (P=纵向), 单位 (mm), 纸张 (A4), Unicode (true), 编码 (UTF-8)
+            $pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8', false);
+
+            // 关键：设置中文字体
+            // 'stsongstdlight' 是 TCPDF 内置的简体中文字体 (宋体)
+            // 如果需要繁体，可以使用 'msungstdlight'
+            $pdf->SetFont('stsongstdlight', '', 14);
+
+            // 添加页面
+            $pdf->AddPage();
+
+            $html = view('pdf.product_catalog', [
+                'products' => $products,
+                'locale' => $locale
+            ])->render();
+
+            // 使用 writeHTML 方法支持 HTML 标签
+            $pdf->writeHTML($html, true, false, true, false, '');
+
+            // 确定保存路径
+            // 确保 storage/app/public/pdfs 目录存在
+            $path = storage_path('app/public/pdfs/test.pdf');
+
+            // 输出
+            // 参数1: 文件名 (在使用 'S' 模式时，这个名字会被忽略，但必须填)
+            // 参数2:
+            // 'S': 返回文档内容字符串 (String)。
+            // 'F': 保存到本地文件 (File)。
+            // 'I': 直接在浏览器中显示 (Inline)。
+            // 'D': 强制浏览器下载 (Download)。
+            // 'E': 返回 base64 编码的邮件附件格式。
+            return base64_encode($pdf->Output($path, 'S'));
+        } catch (\Exception $e) {
+            Log::error('PDF 生成失败: ' . $e->getMessage());
+            return false;
+        }
     }
 }

@@ -17,10 +17,7 @@
     @if($locale == 'zh')
       /* 中文：使用支持中文的字体 */
       body {
-        font-family: 'Noto Sans SC', 'msyh', 'DejaVu Sans', sans-serif;
-        src: url('{{ storage_path('fonts/NotoSansSC-Regular.ttf') }}') format('truetype');
-        font-weight: normal;
-        font-style: normal;
+        font-family: 'stsongstdlight', sans-serif;
       }
 
     @elseif($locale == 'ru')
