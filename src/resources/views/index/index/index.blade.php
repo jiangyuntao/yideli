@@ -108,11 +108,6 @@
     </div>
   </section>
 
-  {{-- <section class="px-6 lg:px-12 bg-[#347e73]">
-    <img class="w-full lg:max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto"
-      src="{{ asset('images/cert-1-big-0-0.webp') }}" alt="">
-  </section> --}}
-
   <section class="w-full bg-[#347e73] font-sans">
     <div
       class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto grid grid-cols-1 lg:grid-cols-[2fr_3fr_2fr] text-white">
@@ -164,6 +159,11 @@
       </div>
 
     </div>
+  </section>
+
+  <section class="px-6 lg:px-12 bg-[#fcfcef]">
+    <img class="w-full lg:max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto"
+      src="{{ asset('images/cert-1-big-0-1.webp') }}" alt="">
   </section>
 
   <section class="py-20 bg-yideli-base border-t border-yideli-line overflow-hidden">
