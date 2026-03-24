@@ -15,10 +15,7 @@
         href="{{ asset('images/logo.ico') }}"
         rel="icon">
 
-  <script src="https://cdn.tailwindcss.com"></script>
-
-  <script defer
-          src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  @vite(['resources/css/app.css', 'resources/js/app.js'])
 
   <link href="https://fonts.googleapis.com/css2"
         rel="preconnect">
@@ -39,103 +36,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
           rel="stylesheet">
   @endif
-
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            yideli: {
-              base: '#ECF2E8',
-              dark: '#006B5F',
-              text: '#1C3330',
-              hover: '#005248',
-              line: '#D1DBD0',
-            }
-          },
-          fontFamily: {
-            sans: [
-              "{{ $lang === 'zh' ? 'Noto Sans SC' : ($lang === 'ar' ? 'Cairo' : ($lang === 'en' ? 'Lato' : 'Inter')) }}",
-              'Inter',
-              'Helvetica Neue',
-              'Helvetica',
-              'Arial',
-              'sans-serif',
-            ],
-            serif: [
-              "{{ $lang === 'zh' ? 'Noto Sans SC' : ($lang === 'ar' ? 'Cairo' : ($lang === 'en' ? 'Lato' : 'Inter')) }}",
-              'Inter',
-              'Helvetica Neue',
-              'Helvetica',
-              'Arial',
-              'sans-serif',
-            ],
-          },
-          spacing: {
-            '128': '32rem',
-          }
-        }
-      }
-    }
-  </script>
-
-  <style>
-    @layer base {
-      html {
-        font-family: 'Inter', 'Cairo', 'Noto Sans SC', sans-serif;
-      }
-
-      html[lang^="zh"] {
-        font-family: 'Inter', 'Noto Sans SC', sans-serif;
-        letter-spacing: 0.02em;
-      }
-
-      html[lang="ar"] {
-        font-family: 'Cairo', 'Inter', sans-serif;
-        font-size: 110%;
-      }
-
-      html[lang="ru"] {
-        font-family: 'Inter', sans-serif;
-      }
-    }
-
-    [x-cloak] {
-      display: none !important;
-    }
-
-    .no-scrollbar::-webkit-scrollbar {
-      display: none;
-    }
-
-    .no-scrollbar {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-    }
-
-    .btn-minimal {
-      position: relative;
-      transition: all 0.3s ease;
-    }
-
-    .btn-minimal::after {
-      content: '';
-      position: absolute;
-      bottom: -2px;
-      left: 0;
-      width: 100%;
-      height: 1px;
-      background-color: currentColor;
-      transform: scaleX(0);
-      transform-origin: right;
-      transition: transform 0.3s ease;
-    }
-
-    .btn-minimal:hover::after {
-      transform: scaleX(1);
-      transform-origin: left;
-    }
-  </style>
 
   @unless (app()->environment('local'))
     <style>

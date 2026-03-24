@@ -5,7 +5,99 @@
 @source '../**/*.blade.php';
 @source '../**/*.js';
 
+/* 主题令牌：颜色、spacing、断点等 */
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+  --color-yideli-base: #ECF2E8;
+  --color-yideli-dark: #006B5F;
+  --color-yideli-text: #1C3330;
+  --color-yideli-hover: #005248;
+  --color-yideli-line: #D1DBD0;
+
+  --spacing-128: 32rem;
+
+  /* 如果你不想一直写 min-[1921px] 这种任意断点，可以自定义断点 */
+  --breakpoint-3xl: 120.0625rem;  /* 1921px */
+  --breakpoint-4xl: 160.0625rem;  /* 2561px */
+}
+
+/* 字体：因为你是按 lang 动态切换，所以更适合用 CSS 变量 */
+@theme inline {
+  --font-sans: var(--font-site-sans);
+  --font-serif: var(--font-site-serif);
+}
+
+/* 默认字体 */
+:root {
+  --font-site-sans: Inter, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-site-serif: Inter, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* 按语言覆盖字体 */
+html[lang^="zh"] {
+  --font-site-sans: "Noto Sans SC", Inter, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-site-serif: "Noto Sans SC", Inter, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+html[lang="ar"] {
+  --font-site-sans: Cairo, Inter, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-site-serif: Cairo, Inter, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+html[lang="en"] {
+  --font-site-sans: Lato, Inter, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-site-serif: Lato, Inter, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-site-sans);
+  }
+
+  html[lang^="zh"] {
+    letter-spacing: 0.02em;
+  }
+
+  html[lang="ar"] {
+    font-size: 110%;
+  }
+}
+
+@layer utilities {
+  [x-cloak] {
+    display: none !important;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@layer components {
+  .btn-minimal {
+    position: relative;
+    transition: all 0.3s ease;
+  }
+
+  .btn-minimal::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+  }
+
+  .btn-minimal:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
 }
