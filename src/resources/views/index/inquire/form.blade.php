@@ -1,6 +1,20 @@
 @extends('index.layout')
 
+@section('title', __('inquire.header_title'))
+
 @section('main')
+  @php
+    $t = function (string $key, array $fallbacks) use ($lang) {
+        $translated = __($key);
+
+        if ($translated !== $key) {
+            return $translated;
+        }
+
+        return $fallbacks[$lang] ?? $fallbacks['en'] ?? reset($fallbacks);
+    };
+  @endphp
+
   <div class="bg-yideli-base py-20 border-b border-yideli-line">
     <div class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 lg:px-12 text-center">
       <span class="text-xs font-bold tracking-[0.2em] uppercase text-yideli-dark mb-4 block">{!! nl2br(__('inquire.header_subtitle')) !!}</span>
@@ -231,6 +245,85 @@
             </div>
           </div>
 
+          @php
+            $captchaId = $inquiryCaptcha['id'] ?? null;
+            $captchaImageUrl = $captchaId ? route('inquire.captcha', ['lang' => $lang, 'captchaId' => $captchaId]) . '?v=' . $captchaId : '';
+            $captchaRefreshUrl = route('inquire.captcha.refresh', ['lang' => $lang]);
+          @endphp
+          <div class="grid md:grid-cols-2 gap-8"
+               x-data="{
+                   captchaId: @js($captchaId ?? ''),
+                   captchaImageUrl: @js($captchaImageUrl),
+                   refreshUrl: @js($captchaRefreshUrl),
+                   refreshing: false,
+                   async refreshCaptcha() {
+                       if (this.refreshing) return;
+                       this.refreshing = true;
+                       try {
+                           const res = await fetch(this.refreshUrl, {
+                               headers: {
+                                   'Accept': 'application/json',
+                                   'X-Requested-With': 'XMLHttpRequest'
+                               }
+                           });
+                           if (!res.ok) throw new Error('captcha_refresh_failed');
+                           const data = await res.json();
+                           if (data?.id && data?.image_url) {
+                               this.captchaId = data.id;
+                               const sep = data.image_url.includes('?') ? '&' : '?';
+                               this.captchaImageUrl = `${data.image_url}${sep}v=${Date.now()}`;
+                           }
+                       } catch (e) {
+                           console.error(e);
+                       } finally {
+                           this.refreshing = false;
+                       }
+                   }
+               }">
+            <div>
+              <label class="block text-sm text-gray-400 mb-3">
+                {{ $t('inquire.captcha_image_label', ['en' => 'Math Verification', 'zh' => '加减法验证码', 'fr' => 'Verification mathematique', 'es' => 'Verificacion matematica', 'ru' => 'Математическая проверка', 'ar' => 'تحقق رياضي']) }}
+              </label>
+              <input type="hidden"
+                     name="captcha_id"
+                     :value="captchaId">
+              <div class="w-full px-4 py-3 bg-white border border-yideli-line flex items-center justify-between gap-3">
+                <template x-if="captchaImageUrl">
+                  <img class="h-12 w-auto"
+                       :src="captchaImageUrl"
+                       alt="captcha image">
+                </template>
+                <template x-if="!captchaImageUrl">
+                  <span class="text-sm text-gray-500">
+                    {{ $t('inquire.captcha_unavailable', ['en' => 'Captcha unavailable', 'zh' => '验证码暂不可用', 'fr' => 'Captcha indisponible', 'es' => 'Captcha no disponible', 'ru' => 'Капча недоступна', 'ar' => 'رمز التحقق غير متاح']) }}
+                  </span>
+                </template>
+                <button class="text-xs text-yideli-dark underline hover:text-yideli-hover cursor-pointer"
+                        type="button"
+                        :class="refreshing ? 'opacity-60 cursor-not-allowed' : 'cursor-pointer'"
+                        @click.prevent="refreshCaptcha">
+                  {{ $t('inquire.captcha_refresh', ['en' => 'Refresh', 'zh' => '看不清？换一张', 'fr' => 'Rafraichir', 'es' => 'Actualizar', 'ru' => 'Обновить', 'ar' => 'تحديث']) }}
+                </button>
+              </div>
+            </div>
+
+            <div class="relative">
+              <input
+                class="input-field peer block w-full px-0 py-2 bg-transparent border-b border-gray-300 focus:outline-none focus:border-yideli-dark transition text-gray-900 placeholder-transparent"
+                id="captcha_answer" name="captcha_answer" type="text" value="{{ old('captcha_answer') }}" placeholder=" "
+                required>
+              <label
+                class="absolute start-0 top-2 text-gray-400 text-sm transition-all duration-300 origin-left cursor-text
+                            peer-placeholder-shown:top-2
+                            peer-focus:-top-4 peer-focus:text-xs peer-focus:text-yideli-dark
+                            peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:text-yideli-dark"
+                for="captcha_answer">{{ $t('inquire.captcha_input_label', ['en' => 'Enter Captcha', 'zh' => '请输入验证码', 'fr' => 'Saisissez le code', 'es' => 'Ingrese el codigo', 'ru' => 'Введите код', 'ar' => 'ادخل الرمز']) }} *</label>
+              @error('captcha_answer')
+                <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
+              @enderror
+            </div>
+          </div>
+
           <div class="relative mt-8">
             <textarea
               class="input-field peer block w-full px-0 py-2 bg-transparent border-b border-gray-300 focus:outline-none focus:border-yideli-dark transition text-gray-900 placeholder-transparent resize-none"
@@ -257,35 +350,6 @@
         </form>
       </div>
 
-    </div>
-  </section>
-
-  <section class="bg-yideli-base border-t border-yideli-line py-20">
-    <div class="max-w-[1000px] min-[1921px]:max-w-[1000px] min-[2561px]:max-w-[1400px] mx-auto px-6 lg:px-12">
-      <div class="text-center mb-16">
-        <h2 class="text-3xl font-serif text-yideli-dark mb-4">{!! nl2br(__('inquire.faq_title')) !!}</h2>
-        <p class="text-gray-500 font-light">{!! nl2br(__('inquire.faq_subtitle')) !!}</p>
-      </div>
-
-      <div class="space-y-4" x-data="{ active: 0 }">
-        @if ($settings->faqs)
-          @foreach ($settings->faqs as $k => $faq)
-            <div class="bg-white border border-yideli-line">
-              <button class="w-full flex justify-between items-center p-6 text-start"
-                @click="active = (active === {{ $k }} ? null : {{ $k }})">
-                <span class="font-medium text-yideli-dark">{{ $faq['question'] }}</span>
-                <span class="text-xl" x-text="active === {{ $k }} ? '−' : '+'"></span>
-              </button>
-              <div x-show="active === {{ $k }}" x-collapse>
-                <div class="px-6 pb-6 text-gray-600 font-light text-sm leading-relaxed">
-                  {!! nl2br($faq['answer']) !!}
-                </div>
-              </div>
-            </div>
-          @endforeach
-        @endif
-
-      </div>
     </div>
   </section>
 @endsection

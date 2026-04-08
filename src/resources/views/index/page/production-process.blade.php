@@ -1,5 +1,7 @@
 @extends('index.layout')
 
+@section('title', __('process.hero_title'))
+
 @section('main')
   <div class="relative bg-yideli-base py-12 md:py-12 overflow-hidden">
     <div class="absolute top-0 end-0 w-1/3 h-full bg-yideli-dark/5 skew-x-12 translate-x-1/2"></div>

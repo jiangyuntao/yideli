@@ -1,5 +1,7 @@
 @extends('index.layout')
 
+@section('title', $entry->title)
+
 @section('main')
   <div class="bg-gray-50 py-4 border-b border-gray-100">
     <div class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 lg:px-12">

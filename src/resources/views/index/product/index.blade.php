@@ -1,5 +1,7 @@
 @extends('index.layout')
 
+@section('title', $currentCategory ? $currentCategory->name : __('product.default_collection_title'))
+
 @section('main')
   <div class="bg-yideli-base py-16 lg:py-24">
     <div class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 lg:px-12 text-center">

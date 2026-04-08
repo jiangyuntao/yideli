@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Index;
 use App\Mail\NewInquiryNotification;
 use App\Models\Enquiry;
 use App\Settings\GeneralSettings;
+use App\Support\InquiryCaptcha;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
@@ -13,6 +14,8 @@ class InquireController extends BaseController
 {
     public function form(Request $request)
     {
+        $this->data['inquiryCaptcha'] = InquiryCaptcha::generate($request->session());
+
         return view('index.inquire.form', $this->data);
     }
 
@@ -27,7 +30,20 @@ class InquireController extends BaseController
             // 注意：interest 在表单中是多选，验证为数组
             'interest' => 'nullable|array',
             'message' => 'required|string',
+            'captcha_id' => 'required|string',
+            'captcha_answer' => 'required|string|max:32',
         ]);
+
+        if (!InquiryCaptcha::validate(
+            $request->session(),
+            $validated['captcha_id'] ?? null,
+            $validated['captcha_answer'] ?? null
+        )) {
+            return redirect()
+                ->back()
+                ->withErrors(['captcha_answer' => $this->captchaInvalidMessage()])
+                ->withInput();
+        }
 
         // 2. 整理元数据 (存入 meta_data JSON 字段)
         $metaData = [
@@ -79,5 +95,54 @@ class InquireController extends BaseController
         // 4. 返回成功信息
         // 这里的提示语建议放入语言包 resources/lang/en/inquire.php
         return redirect()->back()->with('success', __('inquire.submit_success'));
+    }
+
+    public function captchaImage(Request $request, string $lang, string $captchaId)
+    {
+        $binary = InquiryCaptcha::renderPng($request->session(), $captchaId);
+
+        if (!$binary) {
+            abort(404);
+        }
+
+        return response($binary, 200, [
+            'Content-Type' => 'image/png',
+            'Cache-Control' => 'no-store, no-cache, must-revalidate, max-age=0',
+            'Pragma' => 'no-cache',
+            'Expires' => '0',
+        ]);
+    }
+
+    public function captchaRefresh(Request $request, string $lang)
+    {
+        $captcha = InquiryCaptcha::generate($request->session());
+        $captchaId = $captcha['id'] ?? null;
+
+        if (!$captchaId) {
+            return response()->json([
+                'message' => 'captcha_generate_failed',
+            ], 500);
+        }
+
+        return response()->json([
+            'id' => $captchaId,
+            'image_url' => route('inquire.captcha', ['lang' => $lang, 'captchaId' => $captchaId]),
+        ]);
+    }
+
+    private function captchaInvalidMessage(): string
+    {
+        $messages = [
+            'en' => 'Captcha is incorrect or expired. Please try again.',
+            'zh' => '图形验证码错误或已过期，请重新填写。',
+            'fr' => 'Le captcha est incorrect ou expire. Veuillez reessayer.',
+            'es' => 'El captcha es incorrecto o ha expirado. Intentalo de nuevo.',
+            'ru' => 'Капча неверна или истекла. Пожалуйста, попробуйте снова.',
+            'ar' => 'رمز التحقق غير صحيح او منتهي الصلاحية. يرجى المحاولة مرة اخرى.',
+        ];
+
+        $locale = app()->getLocale();
+
+        return $messages[$locale] ?? $messages['en'];
     }
 }

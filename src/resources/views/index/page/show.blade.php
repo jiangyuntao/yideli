@@ -1,7 +1,8 @@
 @extends('index.layout')
 
+@section('title', $page->title)
+
 @section('head')
-  <title>About Us - Yideli Stationery</title>
   <style>
     @keyframes marquee {
       0% {

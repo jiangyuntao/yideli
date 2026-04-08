@@ -9,6 +9,8 @@ class Enquiry extends Model
 {
     use SoftDeletes;
 
+    protected $table = 'inquires';
+
     protected $guarded = [];
 
     protected $casts = [

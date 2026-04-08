@@ -8,6 +8,7 @@ use App\Http\Controllers\Index\ProductController;
 use App\Http\Controllers\Index\NewsController;
 use App\Http\Controllers\Index\PageController;
 use App\Http\Controllers\Index\InquireController;
+use App\Http\Controllers\Index\FaqController;
 use App\Http\Controllers\Api\ProductAccessController;
 use App\Http\Controllers\Index\ProductionProcessController;
 
@@ -38,6 +39,11 @@ Route::prefix('{lang}')
             // 询盘/联系我们
             Route::get('/inquire', [InquireController::class, 'form'])->name('inquire.form');
             Route::post('/inquire', [InquireController::class, 'submit'])->name('inquire.submit');
+            Route::get('/inquire/captcha/refresh', [InquireController::class, 'captchaRefresh'])->name('inquire.captcha.refresh');
+            Route::get('/inquire/captcha/{captchaId}', [InquireController::class, 'captchaImage'])->name('inquire.captcha');
+
+            // FAQ 页面
+            Route::get('/faq', [FaqController::class, 'index'])->name('faq.index');
 
             // 生产流程
             Route::get('/production-process', [ProductionProcessController::class, 'index'])->name('production-process');

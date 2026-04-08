@@ -127,10 +127,12 @@ class Setting extends SettingsPage
                                     ->label('常见问题')
                                     ->schema([
                                         TextInput::make('question')
-                                            ->label('问题'),
+                                            ->label('问题')
+                                            ->translatable(),
                                         Textarea::make('answer')
                                             ->label('答案')
-                                            ->rows(5),
+                                            ->rows(5)
+                                            ->translatable(),
                                     ])
                             ],)
                     ]),

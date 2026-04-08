@@ -20,14 +20,15 @@ use Illuminate\Database\Eloquent\Model;
 class EnquiryResource extends Resource
 {
     protected static ?string $model = Enquiry::class;
+    protected static ?string $slug = 'inquires';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedPencilSquare;
 
     protected static ?int $navigationSort = 7;
 
-    protected static ?string $navigationLabel = '询价管理';
-    protected static ?string $pluralModelLabel = '询价管理';
-    protected static ?string $modelLabel = '询价';
+    protected static ?string $navigationLabel = '询盘管理';
+    protected static ?string $pluralModelLabel = '询盘管理';
+    protected static ?string $modelLabel = '询盘';
 
     public static function canCreate(): bool
     {

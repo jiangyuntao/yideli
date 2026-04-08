@@ -1,7 +1,8 @@
 @extends('index.layout')
 
+@section('title', __('layout.nav_about_us'))
+
 @section('head')
-  <title>{{ __('layout.nav_about_us') }} - Yideli Stationery</title>
   <style>
     @keyframes marquee {
       0% {
@@ -40,17 +41,7 @@
     </section>
 
     <section class="grid grid-cols-1 md:grid-cols-12 gap-6 mb-16 items-start">
-      <div class="md:col-span-5 flex flex-col items-start">
-        <div class="mb-4">
-          <div class="flex items-center gap-2 pt-8">
-            <img class="h-60 w-auto object-contain"
-                 src="{{ asset('images/start-2.webp') }}"
-                 alt="Yierli Logo">
-          </div>
-        </div>
-      </div>
-
-      <div class="md:col-span-7">
+      <div class="md:col-span-12">
         <h2 class="text-2xl md:text-4xl font-black text-[#1F5F53] mb-12">{!! nl2br(__('about.heritage_title')) !!}</h2>
         <div class="space-y-4 text-sm md:text-lg leading-relaxed text-gray-800">
           <p>

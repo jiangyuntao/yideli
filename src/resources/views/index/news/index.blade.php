@@ -1,5 +1,7 @@
 @extends('index.layout')
 
+@section('title', $currentCategory ? $currentCategory->name : __('news.header_title_default'))
+
 @section('main')
   <div class="bg-yideli-base py-20">
     <div class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 lg:px-12 text-center">

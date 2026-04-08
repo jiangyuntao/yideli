@@ -8,6 +8,7 @@ class ProductionProcessController extends BaseController
 {
     public function index(Request $request)
     {
-        return view('index.production-process.index', $this->data);
+        // Keep the original /production-process URL while rendering the existing page template.
+        return view('index.page.production-process', $this->data);
     }
 }

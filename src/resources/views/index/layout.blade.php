@@ -6,9 +6,21 @@
   <meta charset="UTF-8">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0">
-  <title>@yield('title', $settings->site_name[$lang])</title>
+  @php
+    $siteName = data_get($settings->site_name ?? [], $lang)
+        ?? data_get($settings->site_name ?? [], 'en')
+        ?? (is_array($settings->site_name ?? null) ? (reset($settings->site_name) ?: '') : '');
+    $pageTitle = trim((string) $__env->yieldContent('title'));
+    $fullTitle = $pageTitle !== ''
+        ? ($siteName !== '' ? "{$pageTitle} | {$siteName}" : $pageTitle)
+        : $siteName;
+    $siteDescription = data_get($settings->site_description ?? [], $lang)
+        ?? data_get($settings->site_description ?? [], 'en')
+        ?? '';
+  @endphp
+  <title>{{ $fullTitle }}</title>
   <meta name="description"
-        content="{!! $settings->site_description[$lang] !!}">
+        content="{!! $siteDescription !!}">
   <meta name="csrf-token"
         content="{{ csrf_token() }}">
   <link type="image/x-icon"
@@ -61,6 +73,75 @@
 
 <body
       class="bg-yideli-base text-yideli-text font-sans antialiased selection:bg-yideli-dark selection:text-white overflow-x-hidden">
+  @php
+    $localizedText = function (string $key, array $fallbacks) use ($lang) {
+        $translated = __($key);
+
+        if ($translated !== $key) {
+            return $translated;
+        }
+
+        return $fallbacks[$lang] ?? $fallbacks['en'] ?? reset($fallbacks);
+    };
+
+    $primaryNavLinks = [
+        [
+            'label' => $localizedText('layout.nav_oem_odm_service', [
+                'en' => 'OEM/ODM Service',
+                'zh' => 'OEM/ODM 服务',
+                'fr' => 'Service OEM/ODM',
+                'es' => 'Servicio OEM/ODM',
+                'ru' => 'Услуги OEM/ODM',
+                'ar' => 'خدمة OEM/ODM',
+            ]),
+            'href' => route('production-process', ['lang' => $lang]),
+        ],
+        [
+            'label' => $localizedText('layout.nav_factory_capability', [
+                'en' => 'Factory Capability',
+                'zh' => '工厂实力',
+                'fr' => "Capacite de l'usine",
+                'es' => 'Capacidad de Fabrica',
+                'ru' => 'Возможности фабрики',
+                'ar' => 'قدرات المصنع',
+            ]),
+            'href' => route('page.show', ['lang' => $lang, 'slug' => 'about-us']),
+        ],
+        [
+            'label' => $localizedText('layout.nav_case_studies', [
+                'en' => 'Case Studies',
+                'zh' => '客户案例',
+                'fr' => 'Etudes de cas',
+                'es' => 'Casos de estudio',
+                'ru' => 'Кейсы',
+                'ar' => 'دراسات الحالة',
+            ]),
+            'href' => route('news.index', ['lang' => $lang]),
+        ],
+        [
+            'label' => $localizedText('layout.nav_faq', [
+                'en' => 'FAQ',
+                'zh' => '常见问题',
+                'fr' => 'FAQ',
+                'es' => 'FAQ',
+                'ru' => 'FAQ',
+                'ar' => 'الاسئلة الشائعة',
+            ]),
+            'href' => route('faq.index', ['lang' => $lang]),
+        ],
+        [
+            'label' => $localizedText('layout.nav_contact_us_b2b', [
+                'en' => 'Contact Us',
+                'zh' => '联系我们',
+                'fr' => 'Contactez-nous',
+                'es' => 'Contactenos',
+                'ru' => 'Свяжитесь с нами',
+                'ar' => 'اتصل بنا',
+            ]),
+            'href' => route('inquire.form', ['lang' => $lang]),
+        ],
+    ];
+  @endphp
 
   <header class="sticky bg-yideli-dark top-0 z-50 backdrop-blur-sm transition-all duration-300 shadow-md"
           x-data="{ mobileMenu: false, searchOpen: false }">
@@ -76,20 +157,12 @@
         </a>
       </div>
 
-      <nav class="hidden lg:flex text-sm font-medium {{ in_array($lang, ['zh', 'ar']) ? 'gap-16 tracking-widest' : 'gap-6 tracking-wide' }}"
+      <nav class="hidden lg:flex text-sm font-medium {{ in_array($lang, ['zh', 'ar']) ? 'gap-12 tracking-widest' : 'gap-6 tracking-wide' }}"
            style="margin-top:32px; color: rgb(239 245 230);">
-        <a class="hover:text-gray-300 transition uppercase"
-           href="{{ route('index', ['lang' => $lang]) }}">{!! nl2br(__('layout.nav_home')) !!}</a>
-        <a class="hover:text-gray-300 transition uppercase"
-           href="{{ route('page.show', ['lang' => $lang, 'slug' => 'about-us']) }}">{!! nl2br(__('layout.nav_about_us')) !!}</a>
-        <a class="hover:text-gray-300 transition uppercase"
-           href="{{ route('page.show', ['lang' => $lang, 'slug' => 'production-process']) }}">{!! nl2br(__('layout.nav_production_process')) !!}</a>
-        <a class="hover:text-gray-300 transition uppercase"
-           href="{{ route('product.index', ['lang' => $lang]) }}">{!! nl2br(__('layout.nav_product_display')) !!}</a>
-        <a class="hover:text-gray-300 transition uppercase"
-           href="{{ route('news.index', ['lang' => $lang]) }}">{!! nl2br(__('layout.nav_news')) !!}</a>
-        <a class="hover:text-gray-300 transition uppercase"
-           href="{{ route('inquire.form', ['lang' => $lang]) }}">{!! nl2br(__('layout.nav_contact_us')) !!}</a>
+        @foreach ($primaryNavLinks as $link)
+          <a class="hover:text-gray-300 transition uppercase"
+             href="{{ $link['href'] }}">{{ $link['label'] }}</a>
+        @endforeach
       </nav>
 
       <div class="flex items-center gap-6"
@@ -185,18 +258,10 @@
          x-transition
          x-cloak>
       <div class="flex flex-col p-6 gap-4 text-lg font-serif text-yideli-dark">
-        <a class="py-2 border-b border-yideli-line/30 uppercase"
-           href="{{ route('index', ['lang' => $lang]) }}">{!! nl2br(__('layout.nav_home')) !!}</a>
-        <a class="py-2 border-b border-yideli-line/30 uppercase"
-           href="{{ route('page.show', ['lang' => $lang, 'slug' => 'about-us']) }}">{!! nl2br(__('layout.nav_about_us')) !!}</a>
-        <a class="py-2 border-b border-yideli-line/30 uppercase"
-           href="{{ route('product.index', ['lang' => $lang]) }}">{!! nl2br(__('layout.nav_product_display')) !!}</a>
-        <a class="py-2 border-b border-yideli-line/30 uppercase"
-           href="{{ route('page.show', ['lang' => $lang, 'slug' => 'production-process']) }}">{!! nl2br(__('layout.nav_production_process')) !!}</a>
-        <a class="py-2 border-b border-yideli-line/30 uppercase"
-           href="{{ route('news.index', ['lang' => $lang]) }}">{!! nl2br(__('layout.nav_news')) !!}</a>
-        <a class="py-2 border-b border-yideli-line/30 uppercase"
-           href="{{ route('inquire.form', ['lang' => $lang]) }}">{!! nl2br(__('layout.nav_contact_us')) !!}</a>
+        @foreach ($primaryNavLinks as $link)
+          <a class="py-2 border-b border-yideli-line/30 uppercase"
+             href="{{ $link['href'] }}">{{ $link['label'] }}</a>
+        @endforeach
       </div>
     </div>
   </header>
@@ -302,20 +367,11 @@
       <div>
         <h4 class="font-bold mb-6 text-sm uppercase tracking-widest">{!! nl2br(__('layout.footer_categories')) !!}</h4>
         <ul class="space-y-4 text-sm text-white/70">
-          <li><a class="hover:text-white transition uppercase"
-               href="{{ route('page.show', ['lang' => $lang, 'slug' => 'about-us']) }}">{!! nl2br(__('layout.nav_about_us')) !!}</a>
-          </li>
-          <li><a class="hover:text-white transition uppercase"
-               href="{{ route('page.show', ['lang' => $lang, 'slug' => 'production-process']) }}">{!! nl2br(__('layout.nav_production_process')) !!}</a>
-          </li>
-          <li><a class="hover:text-white transition uppercase"
-               href="{{ route('product.index', ['lang' => $lang]) }}">{!! nl2br(__('layout.nav_product_display')) !!}</a>
-          </li>
-          <li><a class="hover:text-white transition uppercase"
-               href="{{ route('news.index', ['lang' => $lang]) }}">{!! nl2br(__('layout.nav_news')) !!}</a>
-          </li>
-          <li><a class="hover:text-white transition uppercase"
-               href="{{ route('inquire.form', ['lang' => $lang]) }}">{!! nl2br(__('layout.nav_contact_us')) !!}</a></li>
+          @foreach ($primaryNavLinks as $link)
+            <li><a class="hover:text-white transition uppercase"
+                 href="{{ $link['href'] }}">{{ $link['label'] }}</a>
+            </li>
+          @endforeach
         </ul>
       </div>
 
@@ -366,6 +422,13 @@
       </div>
     </div>
   </footer>
+
+  <div class="fixed end-4 bottom-6 z-50 flex flex-col gap-3">
+    <a class="inline-flex items-center justify-center rounded-full bg-yideli-dark text-white px-5 py-3 text-xs font-bold uppercase tracking-wider shadow-lg hover:bg-yideli-hover transition"
+       href="{{ route('inquire.form', ['lang' => $lang]) }}">
+      {{ $localizedText('layout.nav_contact_us_b2b', ['en' => 'Contact Us', 'zh' => '联系我们', 'fr' => 'Contactez-nous', 'es' => 'Contactenos', 'ru' => 'Свяжитесь с нами', 'ar' => 'اتصل بنا']) }}
+    </a>
+  </div>
 
   @unless (app()->environment('local'))
     <script>
