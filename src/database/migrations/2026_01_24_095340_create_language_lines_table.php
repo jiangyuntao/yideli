@@ -13,6 +13,10 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if (Schema::hasTable('language_lines')) {
+            return;
+        }
+
         Schema::create('language_lines', function (Blueprint $table) {
             $table->id();
             $table->string('group')->index();
