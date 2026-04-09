@@ -41,6 +41,13 @@
         ->filter()
         ->take(4)
         ->values();
+
+    $caseCoverGallery = [
+        asset('images/notebook-1.jpg'),
+        asset('images/notebook-2.jpg'),
+        asset('images/notebook-3.jpg'),
+        asset('images/notebook-4.jpg'),
+    ];
   @endphp
 
   <section class="relative w-full mx-auto overflow-hidden shadow-2xl group"
@@ -55,7 +62,7 @@
       <template x-for="(slide, index) in slides"
                 :key="index">
         <div class="w-full flex-shrink-0 relative h-full">
-          <img class="w-full h-full object-cover"
+          <img class="w-full h-full object-cover scale-110 blur-[3px] md:blur-[2px]"
                :src="getImageUrl(slide.image)"
                :alt="slide.title || 'Factory Slide'">
 
@@ -87,7 +94,7 @@
           </span>
 
           <h1 class="text-white text-2xl md:text-4xl lg:text-5xl font-bold leading-tight drop-shadow-[0_4px_18px_rgba(0,0,0,0.55)]">
-            {{ $t('home_b2b.hero_title', ['en' => '35+ Year Notebook OEM Factory For US & EU Brands', 'zh' => '35年以上笔记本 OEM 工厂，服务欧美品牌', 'fr' => 'Usine OEM de carnets depuis plus de 35 ans pour les marques US et UE', 'es' => 'Fabrica OEM de cuadernos con mas de 35 anos para marcas de EE.UU. y UE', 'ru' => 'OEM фабрика блокнотов с опытом 35+ лет для брендов США и ЕС', 'ar' => 'مصنع دفاتر OEM بخبرة 35+ سنة لعلامات امريكا واوروبا']) }}
+            {{ $t('home_b2b.hero_title', ['en' => '35+ Years Diary & Notebook OEM Factory for Worldwide Market', 'zh' => '35年以上日记本与笔记本 OEM 工厂，服务全球市场', 'fr' => 'Usine OEM de journaux et carnets avec plus de 35 ans pour le marche mondial', 'es' => 'Fabrica OEM de diarios y cuadernos con mas de 35 anos para el mercado global', 'ru' => 'OEM фабрика ежедневников и блокнотов с опытом 35+ лет для мирового рынка', 'ar' => 'مصنع OEM للمفكرات والدفاتر بخبرة 35+ سنة للسوق العالمي']) }}
           </h1>
 
           <p class="mt-4 text-yideli-base/95 text-sm md:text-lg leading-relaxed drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]">
@@ -148,54 +155,48 @@
     </div>
   </section>
 
-  <section class="w-full bg-[#347e73] font-sans">
+  <section class="py-14 bg-yideli-base border-t border-yideli-line/70">
     <div
-         class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto grid grid-cols-1 lg:grid-cols-[2fr_3fr_2fr] text-white">
+         class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 lg:px-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <article class="bg-white border border-yideli-line p-6 text-center">
+        <p class="text-4xl font-bold text-yideli-dark">35+</p>
+        <h3 class="mt-2 text-sm uppercase tracking-[0.18em] text-yideli-dark">
+          {{ $t('home_b2b.metric_card_1_title', ['en' => 'Years in the Industry', 'zh' => '行业经验', 'fr' => 'Annees dans l industrie', 'es' => 'Anos en la industria', 'ru' => 'Лет в отрасли', 'ar' => 'سنوات في القطاع']) }}
+        </h3>
+        <p class="mt-3 text-xs text-gray-600 leading-relaxed">
+          {{ $t('home_b2b.metric_card_1_desc', ['en' => 'Since 1989', 'zh' => '自 1989 年起', 'fr' => 'Depuis 1989', 'es' => 'Desde 1989', 'ru' => 'С 1989 года', 'ar' => 'منذ عام 1989']) }}
+        </p>
+      </article>
 
-      <div class="bg-[#347e73] ps-10 pe-4 py-8 flex flex-col justify-center min-h-[280px]">
-        <div class="w-full">
-          <h3 class="mb-40 text-3xl lg:text-4xl font-[800]">35+</h3>
-          <p class="uppercase text-sm tracking-widest leading-relaxed mt-6 font-medium">
-            {!! nl2br(__('home_cert.years_desc')) !!}
-          </p>
-        </div>
-      </div>
+      <article class="bg-white border border-yideli-line p-6 text-center">
+        <p class="text-4xl font-bold text-yideli-dark">35000+ ㎡</p>
+        <h3 class="mt-2 text-sm uppercase tracking-[0.18em] text-yideli-dark">
+          {{ $t('home_b2b.metric_card_2_title', ['en' => 'Modern Production Base', 'zh' => '现代化生产基地', 'fr' => 'Base de production moderne', 'es' => 'Base de produccion moderna', 'ru' => 'Современная производственная база', 'ar' => 'قاعدة انتاج حديثة']) }}
+        </h3>
+        <p class="mt-3 text-xs text-gray-600 leading-relaxed">
+          {{ $t('home_b2b.metric_card_2_desc', ['en' => 'In Taizhou, China', 'zh' => '位于中国台州', 'fr' => 'A Taizhou, Chine', 'es' => 'En Taizhou, China', 'ru' => 'В Тайчжоу, Китай', 'ar' => 'في تايتشو، الصين']) }}
+        </p>
+      </article>
 
-      <div class="flex flex-col text-[#347e73]">
-        <div class="bg-[#fcfcef] p-10 lg:p-12 flex flex-col justify-center flex-1">
-          <div class="w-full">
-            <h3 class="text-3xl lg:text-4xl font-[800] mb-2">35000+ m²</h3>
-            <p class="uppercase text-sm tracking-widest font-normal">
-              {!! nl2br(__('home_cert.area_desc')) !!}
-            </p>
-          </div>
-        </div>
+      <article class="bg-white border border-yideli-line p-6 text-center">
+        <p class="text-4xl font-bold text-yideli-dark">20+</p>
+        <h3 class="mt-2 text-sm uppercase tracking-[0.18em] text-yideli-dark">
+          {{ $t('home_b2b.metric_card_3_title', ['en' => 'Professional Designers', 'zh' => '专业设计师', 'fr' => 'Designers professionnels', 'es' => 'Disenadores profesionales', 'ru' => 'Профессиональные дизайнеры', 'ar' => 'مصممون محترفون']) }}
+        </h3>
+        <p class="mt-3 text-xs text-gray-600 leading-relaxed">
+          {{ $t('home_b2b.metric_card_3_desc', ['en' => 'In Hangzhou R&D Center', 'zh' => '位于杭州研发中心', 'fr' => 'Au centre R&D de Hangzhou', 'es' => 'En el centro de I+D de Hangzhou', 'ru' => 'В R&D центре Ханчжоу', 'ar' => 'في مركز البحث والتطوير في هانغتشو']) }}
+        </p>
+      </article>
 
-        <div class="bg-yideli-base p-10 lg:p-12 flex flex-col justify-center flex-1">
-          <div class="w-full">
-            <h3 class="text-3xl lg:text-4xl font-[800] mb-2">20+</h3>
-            <p class="uppercase text-sm tracking-widest text-right font-normal leading-relaxed">
-              {!! nl2br(__('home_cert.designers_desc')) !!}
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div class="bg-[#347e73] ps-12 pe-4 py-8 flex flex-col justify-between min-h-[280px]">
-        <div>
-          <h3 class="text-3xl lg:text-4xl font-[800] mb-2">300+</h3>
-          <p class="mt-8 uppercase text-sm tracking-widest font-medium leading-relaxed">
-            {!! nl2br(__('home_cert.team_desc')) !!}
-          </p>
-        </div>
-
-        <div class="mt-8 lg:mt-0">
-          <h4 class="font-[800] uppercase text-sm tracking-widest mb-1">{!! nl2br(__('home_cert.global_title')) !!}</h4>
-          <p class="uppercase text-sm tracking-widest font-normal">
-            {!! nl2br(__('home_cert.global_desc')) !!}
-          </p>
-        </div>
-      </div>
+      <article class="bg-white border border-yideli-line p-6 text-center">
+        <p class="text-4xl font-bold text-yideli-dark">30+</p>
+        <h3 class="mt-2 text-sm uppercase tracking-[0.18em] text-yideli-dark">
+          {{ $t('home_b2b.metric_card_4_title', ['en' => 'Export Countries', 'zh' => '出口国家', 'fr' => 'Pays d exportation', 'es' => 'Paises de exportacion', 'ru' => 'Стран экспорта', 'ar' => 'دول التصدير']) }}
+        </h3>
+        <p class="mt-3 text-xs text-gray-600 leading-relaxed">
+          {{ $t('home_b2b.metric_card_4_desc', ['en' => 'Global Distribution Network', 'zh' => '全球分销网络', 'fr' => 'Reseau mondial de distribution', 'es' => 'Red global de distribucion', 'ru' => 'Глобальная сеть дистрибуции', 'ar' => 'شبكة توزيع عالمية']) }}
+        </p>
+      </article>
     </div>
   </section>
 
@@ -308,6 +309,35 @@
     </div>
   </section>
 
+  <section class="px-6 lg:px-12 bg-[#fcfcef] border-t border-yideli-line/70 py-16">
+    <div class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto">
+      <div class="text-center mb-10">
+        <span class="text-xs font-bold tracking-[0.2em] uppercase text-yideli-dark mb-3 block">
+          {{ $t('home_b2b.compliance_kicker', ['en' => 'Compliance & Certifications', 'zh' => '合规与资质', 'fr' => 'Conformite et certifications', 'es' => 'Cumplimiento y certificaciones', 'ru' => 'Соответствие и сертификация', 'ar' => 'الامتثال والشهادات']) }}
+        </span>
+        <h3 class="font-serif text-3xl text-yideli-dark">
+          {{ $t('home_b2b.compliance_title', ['en' => 'REACH, FSC and Customs-Cleared Documentation Support', 'zh' => 'REACH、FSC 与清关合规文件支持', 'fr' => 'REACH, FSC et support documentaire douanier', 'es' => 'REACH, FSC y soporte documental para aduanas', 'ru' => 'REACH, FSC и поддержка таможенных документов', 'ar' => 'REACH وFSC ودعم مستندات التخليص الجمركي']) }}
+        </h3>
+      </div>
+
+      <div>
+        <article class="w-full bg-white border border-yideli-line p-6 text-center">
+          <img class="w-full h-auto object-contain"
+               src="{{ asset('images/cert-1-big-0-1.webp') }}"
+               alt="FSC certification">
+          <h4 class="mt-4 text-sm uppercase tracking-[0.16em] text-yideli-dark">FSC</h4>
+          <p class="mt-2 text-xs text-gray-600">
+            {{ $t('home_b2b.compliance_fsc_desc', ['en' => 'FSC-certified paper options are available for sustainable brand programs.', 'zh' => '支持 FSC 认证纸张方案，满足可持续品牌采购需求。', 'fr' => 'Options papier certifie FSC pour les programmes de marque durables.', 'es' => 'Opciones de papel certificado FSC para programas de marca sostenible.', 'ru' => 'Доступна бумага с сертификатом FSC для устойчивых бренд-программ.', 'ar' => 'خيارات ورق معتمد من FSC متاحة لبرامج العلامات التجارية المستدامة.']) }}
+          </p>
+        </article>
+      </div>
+
+      <div class="mt-8 bg-yideli-dark text-white px-6 py-4 text-center text-sm uppercase tracking-wide">
+        {{ $t('home_b2b.compliance_promise', ['en' => 'Customs-compliant files available for shipment clearance with a zero customs-risk commitment.', 'zh' => '可提供清关合规文件，支持零海关风险承诺。', 'fr' => 'Des dossiers conformes sont disponibles pour le dedouanement avec un engagement de risque douanier zero.', 'es' => 'Archivos conformes disponibles para despacho con compromiso de riesgo aduanero cero.', 'ru' => 'Предоставляем комплект документов для оформления с обязательством нулевого таможенного риска.', 'ar' => 'ملفات امتثال متاحة للتخليص مع التزام بمخاطر جمركية صفرية.']) }}
+      </div>
+    </div>
+  </section>
+
   <section class="py-20 bg-yideli-base border-t border-yideli-line overflow-hidden">
     <div
          class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 lg:px-12 mb-12 flex justify-between items-end">
@@ -346,23 +376,6 @@
     </div>
   </section>
 
-  <section class="px-6 lg:px-12 bg-[#fcfcef] border-y border-yideli-line/70 py-14">
-    <div class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto">
-      <div class="text-center mb-8">
-        <span class="text-xs font-bold tracking-[0.2em] uppercase text-yideli-dark mb-3 block">
-          {{ $t('home_b2b.compliance_kicker', ['en' => 'Compliance & Certifications', 'zh' => '合规与资质', 'fr' => 'Conformite et certifications', 'es' => 'Cumplimiento y certificaciones', 'ru' => 'Соответствие и сертификация', 'ar' => 'الامتثال والشهادات']) }}
-        </span>
-        <h3 class="font-serif text-3xl text-yideli-dark">
-          {{ $t('home_b2b.compliance_title', ['en' => 'REACH, FSC and Quality-Controlled Production', 'zh' => 'REACH、FSC 与严格质控的生产体系', 'fr' => 'REACH, FSC et production sous controle qualite', 'es' => 'REACH, FSC y produccion con control de calidad', 'ru' => 'REACH, FSC и производство под строгим контролем качества', 'ar' => 'REACH وFSC وانتاج تحت رقابة جودة صارمة']) }}
-        </h3>
-      </div>
-
-      <img class="w-full"
-           src="{{ asset('images/cert-1-big-0-1.webp') }}"
-           alt="Compliance certificates">
-    </div>
-  </section>
-
   <section class="py-20 bg-yideli-base border-t border-yideli-line overflow-hidden">
     <div
          class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 lg:px-12 mb-10 flex justify-between items-end gap-6 flex-wrap">
@@ -382,7 +395,7 @@
          class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 lg:px-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
       @forelse ($caseStudies as $entry)
         @php
-          $cover = $entry['cover_image'] ? asset('storage/' . $entry['cover_image']) : asset('images/placeholder.jpg');
+          $cover = $caseCoverGallery[$loop->index % max(count($caseCoverGallery), 1)] ?? asset('images/notebook-1.jpg');
         @endphp
         <article class="bg-white border border-yideli-line overflow-hidden group">
           <a class="block aspect-[16/10] overflow-hidden"
@@ -715,7 +728,7 @@
         active: 0,
         interval: null,
         slides: @json($settings->home_carousel ?? []),
-        fallbackSlideImage: @json(asset('images/about-us/Heritage-Commitment.png')),
+        fallbackSlideImage: @json(asset('images/working-1.webp')),
 
         init() {
           if (!Array.isArray(this.slides) || this.slides.length === 0) {
