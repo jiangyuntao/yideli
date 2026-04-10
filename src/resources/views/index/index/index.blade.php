@@ -321,18 +321,60 @@
       </div>
 
       <div>
-        <article class="w-full bg-white border border-yideli-line p-6 text-center">
+        <article class="w-full p-6 text-center">
           <img class="w-full h-auto object-contain"
                src="{{ asset('images/cert-1-big-0-1.webp') }}"
-               alt="FSC certification">
-          <h4 class="mt-4 text-sm uppercase tracking-[0.16em] text-yideli-dark">FSC</h4>
-          <p class="mt-2 text-xs text-gray-600">
-            {{ $t('home_b2b.compliance_fsc_desc', ['en' => 'FSC-certified paper options are available for sustainable brand programs.', 'zh' => '支持 FSC 认证纸张方案，满足可持续品牌采购需求。', 'fr' => 'Options papier certifie FSC pour les programmes de marque durables.', 'es' => 'Opciones de papel certificado FSC para programas de marca sostenible.', 'ru' => 'Доступна бумага с сертификатом FSC для устойчивых бренд-программ.', 'ar' => 'خيارات ورق معتمد من FSC متاحة لبرامج العلامات التجارية المستدامة.']) }}
-          </p>
+               alt="{{ $t('home_b2b.compliance_image_alt', ['en' => 'Compliance and certifications overview', 'zh' => '合规与资质总览', 'fr' => 'Vue d ensemble conformite et certifications', 'es' => 'Resumen de cumplimiento y certificaciones', 'ru' => 'Обзор соответствия и сертификаций', 'ar' => 'نظرة عامة على الامتثال والشهادات']) }}">
         </article>
       </div>
 
-      <div class="mt-8 bg-yideli-dark text-white px-6 py-4 text-center text-sm uppercase tracking-wide">
+      @php
+        $complianceItems = [
+            [
+                'title' => $t('home_b2b.compliance_item_1_title', ['en' => 'FSC Material Support', 'zh' => 'FSC 纸材支持', 'fr' => 'Support FSC', 'es' => 'Soporte FSC', 'ru' => 'Поддержка FSC', 'ar' => 'دعم FSC']),
+                'desc' => $t('home_b2b.compliance_item_1_desc', ['en' => 'Certified paper options for sustainable notebook programs.', 'zh' => '支持可持续笔记本项目的 FSC 认证纸张方案。', 'fr' => 'Options papier certifie pour des programmes durables.', 'es' => 'Opciones de papel certificado para programas sostenibles.', 'ru' => 'Сертифицированная бумага для устойчивых программ.', 'ar' => 'خيارات ورق معتمد لبرامج دفاتر مستدامة.']),
+            ],
+            [
+                'title' => $t('home_b2b.compliance_item_2_title', ['en' => 'BSCI Audit Readiness', 'zh' => 'BSCI 审核支持', 'fr' => 'Preparation BSCI', 'es' => 'Preparacion BSCI', 'ru' => 'Подготовка к BSCI', 'ar' => 'جاهزية BSCI']),
+                'desc' => $t('home_b2b.compliance_item_2_desc', ['en' => 'Factory social compliance records prepared for buyer review.', 'zh' => '工厂社会责任合规资料可供采购方审核。', 'fr' => 'Documents de conformite sociale prets pour audit client.', 'es' => 'Registros de cumplimiento social listos para revision.', 'ru' => 'Социальная комплаенс-документация подготовлена для проверки.', 'ar' => 'سجلات الامتثال الاجتماعي جاهزة لمراجعة المشترين.']),
+            ],
+            [
+                'title' => $t('home_b2b.compliance_item_3_title', ['en' => 'Material Safety Files', 'zh' => '材料安全文件', 'fr' => 'Dossiers de securite matiere', 'es' => 'Archivos de seguridad de materiales', 'ru' => 'Документы по безопасности материалов', 'ar' => 'ملفات سلامة المواد']),
+                'desc' => $t('home_b2b.compliance_item_3_desc', ['en' => 'Core compliance files can be matched to your target market.', 'zh' => '核心合规文件可按目标市场要求匹配准备。', 'fr' => 'Les dossiers essentiels sont adaptes a votre marche cible.', 'es' => 'Los archivos clave se adaptan a su mercado objetivo.', 'ru' => 'Основные документы подготавливаются под ваш рынок.', 'ar' => 'يمكن تجهيز ملفات الامتثال الاساسية حسب السوق المستهدف.']),
+            ],
+            [
+                'title' => $t('home_b2b.compliance_item_4_title', ['en' => 'Supplier Qualification', 'zh' => '供应商资质程序', 'fr' => 'Qualification fournisseur', 'es' => 'Cualificacion de proveedor', 'ru' => 'Квалификация поставщика', 'ar' => 'تأهيل المورد']),
+                'desc' => $t('home_b2b.compliance_item_4_desc', ['en' => 'Structured qualification flow supports stable long-term cooperation.', 'zh' => '通过标准化资质流程支持长期稳定合作。', 'fr' => 'Flux de qualification structure pour cooperation durable.', 'es' => 'Proceso estructurado para cooperacion estable a largo plazo.', 'ru' => 'Структурированный процесс для стабильного долгосрочного сотрудничества.', 'ar' => 'مسار تأهيل منظم يدعم التعاون المستقر طويل المدى.']),
+            ],
+            [
+                'title' => $t('home_b2b.compliance_item_5_title', ['en' => 'Export Document Pack', 'zh' => '出口文件包', 'fr' => 'Pack documents export', 'es' => 'Paquete documental de exportacion', 'ru' => 'Пакет экспортных документов', 'ar' => 'حزمة مستندات التصدير']),
+                'desc' => $t('home_b2b.compliance_item_5_desc', ['en' => 'Shipment paperwork can be assembled for routine customs clearance.', 'zh' => '可按出货需求整理常规清关所需文件。', 'fr' => 'Documents d expedition prepares pour le dedouanement courant.', 'es' => 'Documentacion preparada para despacho aduanero habitual.', 'ru' => 'Комплект документов собирается для стандартного таможенного оформления.', 'ar' => 'يمكن تجهيز مستندات الشحن للتخليص الجمركي المعتاد.']),
+            ],
+            [
+                'title' => $t('home_b2b.compliance_item_6_title', ['en' => 'REACH Support', 'zh' => 'REACH 支持', 'fr' => 'Support REACH', 'es' => 'Soporte REACH', 'ru' => 'Поддержка REACH', 'ar' => 'دعم REACH']),
+                'desc' => $t('home_b2b.compliance_item_6_desc', ['en' => 'EU-facing projects can be supported with REACH-related material files.', 'zh' => '面向欧盟市场的项目可配套 REACH 相关材料文件。', 'fr' => 'Les projets UE peuvent etre soutenus avec des dossiers REACH.', 'es' => 'Los proyectos para la UE pueden contar con archivos REACH.', 'ru' => 'Проекты для ЕС поддерживаются материалами по REACH.', 'ar' => 'يمكن دعم مشاريع الاتحاد الاوروبي بملفات مواد مرتبطة بـ REACH.']),
+            ],
+            [
+                'title' => $t('home_b2b.compliance_item_7_title', ['en' => 'Inspection Records', 'zh' => '检验记录支持', 'fr' => 'Support dossiers d inspection', 'es' => 'Soporte de registros de inspeccion', 'ru' => 'Поддержка инспекционных записей', 'ar' => 'دعم سجلات الفحص']),
+                'desc' => $t('home_b2b.compliance_item_7_desc', ['en' => 'Key QC and inspection records can be shared for order review.', 'zh' => '关键质检与验货记录可配合订单审核提供。', 'fr' => 'Les principaux dossiers QC peuvent etre partages pour revue.', 'es' => 'Los registros clave de QC pueden compartirse para revision.', 'ru' => 'Ключевые QC и инспекционные записи доступны для проверки заказа.', 'ar' => 'يمكن مشاركة سجلات الجودة والفحص الرئيسية لمراجعة الطلب.']),
+            ],
+            [
+                'title' => $t('home_b2b.compliance_item_8_title', ['en' => 'Customs Risk Control', 'zh' => '清关风险控制', 'fr' => 'Controle du risque douanier', 'es' => 'Control de riesgo aduanero', 'ru' => 'Контроль таможенных рисков', 'ar' => 'التحكم في مخاطر الجمارك']),
+                'desc' => $t('home_b2b.compliance_item_8_desc', ['en' => 'Document preparation helps reduce clearance delays and customs risk.', 'zh' => '通过完整文件准备，降低清关延误与海关风险。', 'fr' => 'La preparation documentaire reduit retards et risques douaniers.', 'es' => 'La preparacion documental reduce retrasos y riesgos aduaneros.', 'ru' => 'Подготовка документов снижает задержки и таможенные риски.', 'ar' => 'يساعد تجهيز المستندات على تقليل التأخير ومخاطر الجمارك.']),
+            ],
+        ];
+      @endphp
+
+      <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 px-6">
+        @foreach ($complianceItems as $item)
+          <div class="text-center">
+            <h4 class="text-sm uppercase tracking-[0.16em] text-yideli-dark">{{ $item['title'] }}</h4>
+            <p class="mt-2 text-xs text-gray-600 leading-relaxed">{{ $item['desc'] }}</p>
+          </div>
+        @endforeach
+      </div>
+
+      <div class="mt-8 bg-yideli-dark px-6 py-4 text-center text-sm uppercase tracking-wide text-yideli-base">
         {{ $t('home_b2b.compliance_promise', ['en' => 'Customs-compliant files available for shipment clearance with a zero customs-risk commitment.', 'zh' => '可提供清关合规文件，支持零海关风险承诺。', 'fr' => 'Des dossiers conformes sont disponibles pour le dedouanement avec un engagement de risque douanier zero.', 'es' => 'Archivos conformes disponibles para despacho con compromiso de riesgo aduanero cero.', 'ru' => 'Предоставляем комплект документов для оформления с обязательством нулевого таможенного риска.', 'ar' => 'ملفات امتثال متاحة للتخليص مع التزام بمخاطر جمركية صفرية.']) }}
       </div>
     </div>
