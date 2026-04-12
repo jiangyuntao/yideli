@@ -74,78 +74,87 @@
 <body
       class="bg-yideli-base text-yideli-text font-sans antialiased selection:bg-yideli-dark selection:text-white overflow-x-hidden">
   @php
-    $localizedText = function (string $key, array $fallbacks) use ($lang) {
-        $translated = __($key);
+        $localizedText = function (string $key, array $fallbacks) use ($lang) {
+            $translated = __($key);
 
-        if ($translated !== $key) {
-            return $translated;
+            if ($translated !== $key) {
+                return $translated;
+            }
+
+            return $fallbacks[$lang] ?? $fallbacks['en'] ?? reset($fallbacks);
+        };
+
+        $primaryNavLinks = [
+            [
+                'label' => $localizedText('layout.nav_factory_capability', [
+                    'en' => 'Factory Capability',
+                    'zh' => '工厂实力',
+                    'fr' => "Capacite de l'usine",
+                    'es' => 'Capacidad de Fabrica',
+                    'ru' => 'Возможности фабрики',
+                    'ar' => 'قدرات المصنع',
+                ]),
+                'href' => route('page.show', ['lang' => $lang, 'slug' => 'about-us']),
+            ],
+            [
+                'label' => $localizedText('layout.nav_oem_odm_service', [
+                    'en' => 'OEM/ODM Service',
+                    'zh' => 'OEM/ODM 服务',
+                    'fr' => 'Service OEM/ODM',
+                    'es' => 'Servicio OEM/ODM',
+                    'ru' => 'Услуги OEM/ODM',
+                    'ar' => 'خدمة OEM/ODM',
+                ]),
+                'href' => route('production-process', ['lang' => $lang]),
+            ],
+            [
+                'label' => $localizedText('layout.nav_case_studies', [
+                    'en' => 'Products',
+                    'zh' => '产品',
+                    'fr' => 'Produits',
+                    'es' => 'Productos',
+                    'ru' => 'Продукты',
+                    'ar' => 'المنتجات',
+                ]),
+                'href' => route('product.index', ['lang' => $lang]),
+            ],
+            [
+                'label' => $localizedText('layout.nav_faq', [
+                    'en' => 'News',
+                    'zh' => '新闻',
+                    'fr' => 'Actualites',
+                    'es' => 'Noticias',
+                    'ru' => 'Новости',
+                    'ar' => 'الاخبار',
+                ]),
+                'href' => route('news.index', ['lang' => $lang]),
+            ],
+            [
+                'label' => $localizedText('layout.nav_contact_us_b2b', [
+                    'en' => 'Contact Us',
+                    'zh' => '联系我们',
+                    'fr' => 'Contactez-nous',
+                    'es' => 'Contactenos',
+                    'ru' => 'Свяжитесь с нами',
+                    'ar' => 'اتصل بنا',
+                ]),
+                'href' => route('inquire.form', ['lang' => $lang]),
+            ],
+        ];
+
+        $rawLinkedin = trim((string) ($settings->contact_linkedin ?? ''));
+        if ($rawLinkedin === '') {
+            $linkedinHref = null;
+        } elseif (preg_match('/^https?:\/\//i', $rawLinkedin)) {
+            $linkedinHref = $rawLinkedin;
+        } elseif (str_contains(strtolower($rawLinkedin), 'linkedin.com')) {
+            $linkedinHref = 'https://' . ltrim($rawLinkedin, '/');
+        } else {
+            $linkedinHref = 'https://www.linkedin.com/in/' . ltrim($rawLinkedin, '@/');
         }
 
-        return $fallbacks[$lang] ?? $fallbacks['en'] ?? reset($fallbacks);
-    };
-
-    $primaryNavLinks = [
-        [
-            'label' => $localizedText('layout.nav_factory_capability', [
-                'en' => 'Factory Capability',
-                'zh' => '工厂实力',
-                'fr' => "Capacite de l'usine",
-                'es' => 'Capacidad de Fabrica',
-                'ru' => 'Возможности фабрики',
-                'ar' => 'قدرات المصنع',
-            ]),
-            'href' => route('page.show', ['lang' => $lang, 'slug' => 'about-us']),
-        ],
-        [
-            'label' => $localizedText('layout.nav_oem_odm_service', [
-                'en' => 'OEM/ODM Service',
-                'zh' => 'OEM/ODM 服务',
-                'fr' => 'Service OEM/ODM',
-                'es' => 'Servicio OEM/ODM',
-                'ru' => 'Услуги OEM/ODM',
-                'ar' => 'خدمة OEM/ODM',
-            ]),
-            'href' => route('production-process', ['lang' => $lang]),
-        ],
-        [
-            'label' => $localizedText('layout.nav_case_studies', [
-                'en' => 'Case Studies',
-                'zh' => '客户案例',
-                'fr' => 'Etudes de cas',
-                'es' => 'Casos de estudio',
-                'ru' => 'Кейсы',
-                'ar' => 'دراسات الحالة',
-            ]),
-            'href' => route('news.index', ['lang' => $lang]),
-        ],
-        [
-            'label' => $localizedText('layout.nav_faq', [
-                'en' => 'FAQ',
-                'zh' => '常见问题',
-                'fr' => 'FAQ',
-                'es' => 'FAQ',
-                'ru' => 'FAQ',
-                'ar' => 'الاسئلة الشائعة',
-            ]),
-            'href' => route('faq.index', ['lang' => $lang]),
-        ],
-        [
-            'label' => $localizedText('layout.nav_contact_us_b2b', [
-                'en' => 'Contact Us',
-                'zh' => '联系我们',
-                'fr' => 'Contactez-nous',
-                'es' => 'Contactenos',
-                'ru' => 'Свяжитесь с нами',
-                'ar' => 'اتصل بنا',
-            ]),
-            'href' => route('inquire.form', ['lang' => $lang]),
-        ],
-    ];
-
-    $quoteHref = route('inquire.form', ['lang' => $lang]);
-    $rawWhatsapp = (string) ($settings->contact_whatsapp ?? '');
-    $whatsappNumber = preg_replace('/[^0-9]/', '', $rawWhatsapp);
-    $whatsappHref = $whatsappNumber ? 'https://wa.me/' . $whatsappNumber : null;
+        $rawWhatsapp = (string) ($settings->contact_whatsapp ?? '');
+        $whatsappHref = $rawWhatsapp ? 'https://wa.me/' . $rawWhatsapp : null;
   @endphp
 
   <header class="sticky bg-yideli-dark top-0 z-50 backdrop-blur-sm transition-all duration-300 shadow-md"
@@ -172,18 +181,6 @@
 
       <div class="flex items-center gap-4"
            style="margin-top:32px;color:rgb(239 245 230);">
-        <a class="hidden lg:inline-flex items-center justify-center rounded-full bg-yideli-base text-yideli-dark px-4 py-2 text-xs font-bold uppercase tracking-wider shadow hover:bg-white transition"
-           href="{{ $quoteHref }}">
-          {{ $localizedText('layout.get_free_quote', ['en' => 'Get Free Quote', 'zh' => '获取免费报价', 'fr' => 'Devis gratuit', 'es' => 'Cotizacion gratis', 'ru' => 'Получить расчет', 'ar' => 'احصل على عرض سعر']) }}
-        </a>
-        @if ($whatsappHref)
-          <a class="hidden lg:inline-flex items-center justify-center rounded-full bg-[#25D366] text-white px-4 py-2 text-xs font-bold uppercase tracking-wider shadow hover:brightness-95 transition"
-             href="{{ $whatsappHref }}"
-             target="_blank"
-             rel="noopener noreferrer">
-            WhatsApp
-          </a>
-        @endif
         <div class="relative"
              x-data="{
                  open: false,
@@ -275,18 +272,6 @@
          x-transition
          x-cloak>
       <div class="flex flex-col p-6 gap-4 text-lg font-serif text-yideli-dark">
-        <a class="inline-flex items-center justify-center rounded-full bg-yideli-dark text-white px-5 py-3 text-xs font-bold uppercase tracking-wider shadow-lg hover:bg-yideli-hover transition"
-           href="{{ $quoteHref }}">
-          {{ $localizedText('layout.get_free_quote', ['en' => 'Get Free Quote', 'zh' => '获取免费报价', 'fr' => 'Devis gratuit', 'es' => 'Cotizacion gratis', 'ru' => 'Получить расчет', 'ar' => 'احصل على عرض سعر']) }}
-        </a>
-        @if ($whatsappHref)
-          <a class="inline-flex items-center justify-center rounded-full bg-[#25D366] text-white px-5 py-3 text-xs font-bold uppercase tracking-wider shadow-lg hover:brightness-95 transition"
-             href="{{ $whatsappHref }}"
-             target="_blank"
-             rel="noopener noreferrer">
-            WhatsApp
-          </a>
-        @endif
         @foreach ($primaryNavLinks as $link)
           <a class="py-2 border-b border-yideli-line/30 uppercase"
              href="{{ $link['href'] }}">{{ $link['label'] }}</a>
@@ -424,7 +409,14 @@
             <path
                   d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
           </svg>
-          <div>{{ $settings->contact_linkedin }}</div>
+          @if ($linkedinHref)
+            <a class="hover:text-white transition"
+               href="{{ $linkedinHref }}"
+               target="_blank"
+               rel="noopener noreferrer">{{ $settings->contact_linkedin }}</a>
+          @else
+            <div>{{ $settings->contact_linkedin }}</div>
+          @endif
         </div>
         <div class="flex items-center gap-2 text-sm">
           <svg class="w-4 h-4"
@@ -451,10 +443,6 @@
          class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 lg:px-12 mt-8 flex flex-col md:flex-row justify-between items-center text-xs text-white/40">
       <p>&copy; 2025 Yideli Stationery. {!! nl2br(__('layout.footer_rights_reserved')) !!}</p>
       <div class="flex gap-6 mt-4 md:mt-0">
-        <a class="hover:text-white transition"
-           href="{{ route('privacy-policy', ['lang' => $lang]) }}">{{ $localizedText('layout.privacy_policy', ['en' => 'Privacy Policy', 'zh' => '隐私政策', 'fr' => 'Politique de confidentialite', 'es' => 'Politica de privacidad', 'ru' => 'Политика конфиденциальности', 'ar' => 'سياسة الخصوصية']) }}</a>
-        <a class="hover:text-white transition"
-           href="{{ route('terms-of-use', ['lang' => $lang]) }}">{{ $localizedText('layout.terms_of_use', ['en' => 'Terms of Use', 'zh' => '使用条款', 'fr' => "Conditions d'utilisation", 'es' => 'Terminos de uso', 'ru' => 'Условия использования', 'ar' => 'شروط الاستخدام']) }}</a>
         @foreach ($pages as $page)
           <a class="hover:text-white transition"
              href="{{ route('page.show', ['lang' => $lang, 'slug' => $page->slug]) }}">{!! nl2br($page->title) !!}</a>
@@ -462,21 +450,6 @@
       </div>
     </div>
   </footer>
-
-  <div class="fixed end-4 bottom-6 z-50 flex flex-col gap-3">
-    @if ($whatsappHref)
-      <a class="inline-flex items-center justify-center rounded-full bg-[#25D366] text-white px-5 py-3 text-xs font-bold uppercase tracking-wider shadow-lg hover:brightness-95 transition"
-         href="{{ $whatsappHref }}"
-         target="_blank"
-         rel="noopener noreferrer">
-        WhatsApp
-      </a>
-    @endif
-    <a class="inline-flex items-center justify-center rounded-full bg-yideli-dark text-white px-5 py-3 text-xs font-bold uppercase tracking-wider shadow-lg hover:bg-yideli-hover transition"
-       href="{{ route('inquire.form', ['lang' => $lang]) }}">
-      {{ $localizedText('layout.get_free_quote', ['en' => 'Get Free Quote', 'zh' => '获取免费报价', 'fr' => 'Devis gratuit', 'es' => 'Cotizacion gratis', 'ru' => 'Получить расчет', 'ar' => 'احصل على عرض سعر']) }}
-    </a>
-  </div>
 
   @unless (app()->environment('local'))
     <script>

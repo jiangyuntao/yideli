@@ -9,7 +9,6 @@ use App\Http\Controllers\Index\NewsController;
 use App\Http\Controllers\Index\PageController;
 use App\Http\Controllers\Index\InquireController;
 use App\Http\Controllers\Index\FaqController;
-use App\Http\Controllers\Index\LegalController;
 use App\Http\Controllers\Api\ProductAccessController;
 use App\Http\Controllers\Index\ProductionProcessController;
 
@@ -45,10 +44,6 @@ Route::prefix('{lang}')
 
             // FAQ 页面
             Route::get('/faq', [FaqController::class, 'index'])->name('faq.index');
-
-            // 合规页面
-            Route::get('/privacy-policy', [LegalController::class, 'privacyPolicy'])->name('privacy-policy');
-            Route::get('/terms-of-use', [LegalController::class, 'termsOfUse'])->name('terms-of-use');
 
             // 生产流程
             Route::get('/production-process', [ProductionProcessController::class, 'index'])->name('production-process');
