@@ -74,6 +74,13 @@
         asset('images/index-cert-slides/6.png'),
         asset('images/index-cert-slides/7.png'),
     ];
+
+    $productCategorySlices = [
+        asset('images/index-product-categories-1.jpg'),
+        asset('images/index-product-categories-2.jpg'),
+        asset('images/index-product-categories-3.jpg'),
+        asset('images/index-product-categories-4.jpg'),
+    ];
   @endphp
 
   <section class="relative w-full mx-auto overflow-hidden shadow-2xl group"
@@ -200,11 +207,20 @@
     </div>
   </section>
 
-  <section class="bg-gradient-to-b from-[#307870] via-[#4d8d84] to-[#98b8b0]">
+  <section class="overflow-hidden bg-[#118983]"
+           style="background-image: url('{{ asset('images/index-product-categories-bg-5px.png') }}'); background-repeat: repeat-x; background-size: auto 100%; background-position: left top;">
     <div class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto">
-      <img class="block w-full h-auto object-cover"
-           src="{{ asset('images/index-product-categories.jpg') }}"
-           alt="Product categories overview">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+        @foreach ($categories->take(count($productCategorySlices)) as $index => $category)
+          <a class="block"
+             href="{{ route('product.index', ['lang' => $lang, 'slug' => $category->slug]) }}"
+             aria-label="{{ $category->name }}">
+            <img class="block w-full h-auto object-cover"
+                 src="{{ $productCategorySlices[$index] }}"
+                 alt="{{ $category->name }}">
+          </a>
+        @endforeach
+      </div>
     </div>
   </section>
 

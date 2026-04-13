@@ -15,6 +15,8 @@ class IndexController extends BaseController
         $this->data['inquiryCaptcha'] = InquiryCaptcha::generate($request->session());
 
         $this->data['categories'] = Category::whereNull('parent_id')
+            ->where('is_visible', true)
+            ->orderBy('sort_order')
             ->limit(4)
             ->get();
 
