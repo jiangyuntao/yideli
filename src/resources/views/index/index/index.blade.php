@@ -686,7 +686,7 @@
                         type="button"
                         :class="refreshing ? 'opacity-60 cursor-not-allowed' : 'cursor-pointer'"
                         @click.prevent="refreshCaptcha">
-                  {{ $t('inquire.captcha_refresh', ['en' => 'Refresh', 'zh' => '看不清？换一张', 'fr' => 'Rafraichir', 'es' => 'Actualizar', 'ru' => 'Обновить', 'ar' => 'تحديث']) }}
+                  {{ $t('inquire.captcha_refresh', ['en' => 'Refresh', 'zh' => '刷新', 'fr' => 'Rafraichir', 'es' => 'Actualizar', 'ru' => 'Обновить', 'ar' => 'تحديث']) }}
                 </button>
               </div>
             </div>
