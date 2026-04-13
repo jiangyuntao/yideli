@@ -81,6 +81,8 @@
         asset('images/index-product-categories-3.jpg'),
         asset('images/index-product-categories-4.jpg'),
     ];
+
+    $productCategoryLinkOrder = [0, 2, 1, 3];
   @endphp
 
   <section class="relative w-full mx-auto overflow-hidden shadow-2xl group"
@@ -207,17 +209,20 @@
     </div>
   </section>
 
-  <section class="overflow-hidden bg-[#118983]"
-           style="background-image: url('{{ asset('images/index-product-categories-bg-5px.png') }}'); background-repeat: repeat-x; background-size: auto 100%; background-position: left top;">
+  <section class="overflow-hidden"
+           style="background-image: url('{{ asset('images/index-product-categories-5.jpg') }}'); background-repeat: repeat-x; background-size: auto 100%; background-position: center top;">
     <div class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto">
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+      <div class="grid grid-cols-4 gap-0 py-2">
         @foreach ($categories->take(count($productCategorySlices)) as $index => $category)
-          <a class="block"
-             href="{{ route('product.index', ['lang' => $lang, 'slug' => $category->slug]) }}"
-             aria-label="{{ $category->name }}">
-            <img class="block w-full h-auto object-cover"
+          @php
+            $linkedCategory = $categories[$productCategoryLinkOrder[$index] ?? $index] ?? $category;
+          @endphp
+          <a class="flex h-16 items-center justify-center overflow-hidden sm:h-20 md:h-24 lg:h-28"
+             href="{{ route('product.index', ['lang' => $lang, 'slug' => $linkedCategory->slug]) }}"
+             aria-label="{{ $linkedCategory->name }}">
+            <img class="block h-full w-auto max-w-full object-contain"
                  src="{{ $productCategorySlices[$index] }}"
-                 alt="{{ $category->name }}">
+                 alt="{{ $linkedCategory->name }}">
           </a>
         @endforeach
       </div>
@@ -257,16 +262,16 @@
 
         <div class="grid grid-cols-4 gap-3">
           <img class="w-full aspect-[9/16] object-cover rounded-sm"
-               src="{{ asset('images/about-us/Integrated-Manufacturing-1.jpg') }}"
+               src="{{ asset('images/about-us/Your-Strategic-Partner-3.jpg') }}"
                alt="Factory line 1">
           <img class="w-full aspect-[9/16] object-cover rounded-sm"
-               src="{{ asset('images/about-us/Integrated-Manufacturing-2.jpg') }}"
+               src="{{ asset('images/about-us/Your-Strategic-Partner-4.jpg') }}"
                alt="Factory line 2">
           <img class="w-full aspect-[9/16] object-cover rounded-sm"
-               src="{{ asset('images/about-us/Integrated-Manufacturing-3.jpg') }}"
+               src="{{ asset('images/about-us/Your-Strategic-Partner-5.jpg') }}"
                alt="Factory line 3">
           <img class="w-full aspect-[9/16] object-cover rounded-sm"
-               src="{{ asset('images/about-us/Integrated-Manufacturing-4.jpg') }}"
+               src="{{ asset('images/about-us/Your-Strategic-Partner-6.jpg') }}"
                alt="Factory line 4">
         </div>
 
