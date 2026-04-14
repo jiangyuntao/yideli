@@ -120,7 +120,7 @@
 
     <div class="absolute inset-0 z-20 flex items-center pointer-events-none">
       <div class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 lg:px-12 w-full">
-        <div class="max-w-3xl bg-yideli-text/60 backdrop-blur-sm border border-white/20 p-5 md:p-6 shadow-2xl pointer-events-auto lg:fixed lg:top-1/2 lg:start-0 lg:max-w-[400px] xl:max-w-[430px] transition-transform duration-300 ease-out"
+        <div class="w-full max-w-3xl bg-yideli-text/60 backdrop-blur-sm border border-white/20 p-5 md:p-6 shadow-2xl pointer-events-auto lg:fixed lg:top-1/2 lg:start-0 lg:w-[620px] lg:max-w-[620px] xl:w-[660px] xl:max-w-[660px] transition-transform duration-300 ease-out"
              x-data="{ collapsed: false }"
              x-bind:style="collapsed ? 'transform: translate(calc(-100% + 3rem), -50%);' : 'transform: translate(0, -50%);'">
           <button class="hidden lg:inline-flex absolute top-3 end-3 items-center justify-center w-9 h-9 bg-yideli-dark/85 text-white border border-white/20 shadow-xl hover:bg-yideli-dark transition z-10"
@@ -142,25 +142,25 @@
 
           <div class="pe-10 transition-opacity duration-200"
                :class="collapsed ? 'opacity-0 pointer-events-none' : 'opacity-100 delay-100'">
-            <span class="text-yideli-base text-[11px] md:text-xs font-bold tracking-[0.16em] uppercase block mb-3">
+            <span class="text-yideli-base text-[10px] md:text-[11px] font-bold tracking-[0.14em] uppercase block mb-3">
               {{ $t('home_b2b.hero_kicker', ['en' => 'Diary & Notebook OEM/ODM Manufacturing', 'zh' => '日记本与笔记本 OEM/ODM 制造', 'fr' => 'Fabrication OEM/ODM d agendas et de carnets', 'es' => 'Fabricacion OEM/ODM de agendas y cuadernos', 'ru' => 'OEM/ODM производство ежедневников и блокнотов', 'ar' => 'تصنيع اليوميات والدفاتر بنظام OEM/ODM']) }}
             </span>
 
-            <h1 class="text-white text-2xl md:text-4xl lg:text-[2.15rem] font-bold leading-tight drop-shadow-[0_4px_18px_rgba(0,0,0,0.55)]">
+            <h1 class="text-white text-xl md:text-3xl lg:text-[1.9rem] font-bold leading-tight drop-shadow-[0_4px_18px_rgba(0,0,0,0.55)]">
               {{ $t('home_b2b.hero_title', ['en' => '35+ Years Diary & Notebook OEM Factory for Worldwide Market', 'zh' => '35年以上日记本与笔记本 OEM 工厂，服务全球市场', 'fr' => 'Usine OEM de journaux et carnets avec plus de 35 ans pour le marche mondial', 'es' => 'Fabrica OEM de diarios y cuadernos con mas de 35 anos para el mercado global', 'ru' => 'OEM фабрика ежедневников и блокнотов с опытом 35+ лет для мирового рынка', 'ar' => 'مصنع OEM للمفكرات والدفاتر بخبرة 35+ سنة للسوق العالمي']) }}
             </h1>
 
-            <p class="mt-3 text-yideli-base/95 text-sm md:text-base lg:text-[15px] leading-relaxed drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]">
+            <p class="mt-3 text-yideli-base/95 text-xs md:text-sm lg:text-[14px] leading-relaxed drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]">
               {{ $t('home_b2b.hero_subtitle', ['en' => 'Reliable Mass Production | Custom Solutions | Premium Quality | Global Certifications', 'zh' => '可靠量产 | 定制化方案 | 优质品质 | 全球认证', 'fr' => 'Production de masse fiable | Solutions sur mesure | Qualite premium | Certifications mondiales', 'es' => 'Produccion masiva fiable | Soluciones personalizadas | Calidad premium | Certificaciones globales', 'ru' => 'Надежное массовое производство | Индивидуальные решения | Премиальное качество | Международные сертификаты', 'ar' => 'إنتاج ضخم موثوق | حلول مخصصة | جودة فائقة | شهادات عالمية']) }}
             </p>
 
             <div class="mt-6 flex flex-nowrap items-stretch gap-3 px-1">
-              <a class="inline-flex min-w-0 flex-1 items-center justify-center px-4 py-3 bg-white text-center text-yideli-dark font-bold text-[10px] md:text-[11px] leading-tight tracking-[0.06em] shadow-lg hover:bg-yideli-base transition whitespace-normal break-words min-h-[54px]"
+              <a class="inline-flex min-w-0 flex-1 items-center justify-center px-4 py-3 bg-white text-center text-yideli-dark font-bold text-[9px] md:text-[10px] leading-tight tracking-[0.05em] shadow-lg hover:bg-yideli-base transition whitespace-normal break-words min-h-[54px]"
                  href="#contact-us">
                 {{ $t('home_b2b.hero_cta_quote', ['en' => 'Get Free Custom Quote', 'zh' => '获取免费定制报价', 'fr' => 'Obtenir un devis personnalise gratuit', 'es' => 'Obtener cotizacion personalizada gratis', 'ru' => 'Получить бесплатный персональный расчет', 'ar' => 'احصل على عرض سعر مخصص مجانا']) }}
               </a>
 
-              <a class="inline-flex min-w-0 flex-1 items-center justify-center px-4 py-3 border border-white text-center text-white font-bold text-[10px] md:text-[11px] leading-tight tracking-[0.06em] bg-black/20 hover:bg-black/35 transition whitespace-normal break-words min-h-[54px]"
+              <a class="inline-flex min-w-0 flex-1 items-center justify-center px-4 py-3 border border-white text-center text-white font-bold text-[9px] md:text-[10px] leading-tight tracking-[0.05em] bg-black/20 hover:bg-black/35 transition whitespace-normal break-words min-h-[54px]"
                  href="#factory-capability">
                 {{ $t('home_b2b.hero_cta_factory', ['en' => 'View Factory Capability', 'zh' => '查看工厂实力', 'fr' => 'Voir les capacites de l usine', 'es' => 'Ver capacidad de fabrica', 'ru' => 'Смотреть возможности фабрики', 'ar' => 'عرض قدرات المصنع']) }}
               </a>
@@ -230,7 +230,7 @@
   </section>
 
   <section id="factory-capability"
-           class="py-24 lg:py-32 px-6 lg:px-12 bg-yideli-base border-y border-yideli-line/70">
+           class="py-24 lg:py-32 px-6 lg:px-12 bg-yideli-base">
     <div
          class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto grid lg:grid-cols-12 gap-12 lg:gap-24">
       <div class="lg:col-span-5 flex flex-col justify-center">
@@ -286,7 +286,7 @@
     </div>
   </section>
 
-  <section class="py-14 px-6 lg:px-12 bg-yideli-base border-t border-yideli-line/70">
+  <section class="px-6 lg:px-12 bg-yideli-dark">
     <div
          class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-0">
       <article class="bg-yideli-dark p-6 text-center text-white">
@@ -341,7 +341,7 @@
     </div>
   </section>
 
-  <section class="px-6 lg:px-12 bg-yideli-base border-t border-yideli-line/70 py-16">
+  <section class="px-6 lg:px-12 bg-yideli-base py-16">
     <div class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto">
       <div class="text-center mb-10">
         <h3 class="text-xl md:text-2xl lg:text-[1.7rem] uppercase tracking-[0.08em] text-yideli-dark whitespace-nowrap">
@@ -368,7 +368,7 @@
     </div>
   </section>
 
-  <section class="py-20 bg-yideli-base border-t border-yideli-line">
+  <section class="py-20 bg-yideli-base">
     <div class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 lg:px-12">
       <div class="text-center mb-12">
         <h3 class="text-xl md:text-2xl lg:text-[1.7rem] uppercase tracking-[0.08em] text-yideli-dark mb-2 whitespace-nowrap">
@@ -410,7 +410,7 @@
     </div>
   </section>
 
-  <section class="py-20 bg-yideli-base border-t border-yideli-line overflow-hidden">
+  <section class="py-20 bg-yideli-base overflow-hidden">
     <div
          class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 lg:px-12 mb-12 flex justify-between items-end">
       <div>
@@ -448,7 +448,7 @@
     </div>
   </section>
 
-  <section class="bg-yideli-base border-t border-yideli-line py-20">
+  <section class="bg-yideli-base py-20">
     <div class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 lg:px-12 grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
       <div id="home-faq">
         <div class="mb-14">
