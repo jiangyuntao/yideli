@@ -451,11 +451,11 @@
   <section class="bg-yideli-base py-20">
     <div class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 lg:px-12 grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
       <div id="home-faq">
-        <div class="mb-14">
+        <div class="mb-[4rem]">
           <span class="text-xs font-bold tracking-[0.2em] uppercase text-yideli-dark mb-3 block">
             {{ $t('home_b2b.faq_kicker', ['en' => 'FAQ', 'zh' => '常见问题', 'fr' => 'FAQ', 'es' => 'FAQ', 'ru' => 'FAQ', 'ar' => 'الاسئلة الشائعة']) }}
           </span>
-          <h2 class="text-xl md:text-2xl lg:text-[1.7rem] uppercase tracking-[0.08em] text-yideli-dark mb-4">
+          <h2 class="text-xl md:text-2xl lg:text-[1.7rem] uppercase tracking-[0.08em] text-yideli-dark">
             {{ $t('home_b2b.faq_title', ['en' => 'Common Questions from OEM/ODM Buyers', 'zh' => '采购商常见问题', 'fr' => 'Questions frequentes des acheteurs OEM/ODM', 'es' => 'Preguntas frecuentes de compradores OEM/ODM', 'ru' => 'Частые вопросы OEM/ODM покупателей', 'ar' => 'اسئلة شائعة من مشترين OEM/ODM']) }}
           </h2>
         </div>
@@ -463,7 +463,7 @@
         <div class="space-y-4"
              x-data="{ active: 0, toggle(index) { this.active = this.active === index ? null : index } }">
           @forelse ($faqItems->take(5) as $k => $faq)
-            <div class="bg-white border border-yideli-line">
+            <div class="bg-white border border-yideli-line rounded-sm">
               <button class="w-full flex justify-between items-center p-6 text-start"
                       type="button"
                       @click="toggle({{ $k }})"
@@ -515,7 +515,7 @@
           {{ $t('home_b2b.contact_desc', ['en' => 'Tell us your target market, spec request, and expected timeline. Our team will respond with a practical quote plan.', 'zh' => '请告知目标市场、规格需求和计划周期，我们将尽快提供可执行报价方案。', 'fr' => 'Indiquez votre marche cible, vos specifications et votre delai. Notre equipe repondra avec un devis realiste.', 'es' => 'Comparta su mercado objetivo, especificaciones y plazo esperado. Responderemos con una cotizacion practica.', 'ru' => 'Сообщите рынок, требования и сроки, и команда предложит практичный расчет.', 'ar' => 'اخبرنا بالسوق المستهدف والمواصفات والجدول الزمني وسنرد بخطة عرض سعر عملية.']) }}
         </p>
 
-        <div class="bg-gray-50 p-8 lg:p-12 border border-gray-100 rounded-sm">
+        <div class="bg-white p-8 lg:p-12 border border-yideli-line rounded-sm">
         @if (session('success'))
           <div class="mb-6 p-4 bg-green-50 border border-green-200 text-green-700 rounded-sm text-sm">
             {{ session('success') }}
