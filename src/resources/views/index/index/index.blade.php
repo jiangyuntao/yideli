@@ -462,7 +462,7 @@
 
         <div class="space-y-4"
              x-data="{ active: 0, toggle(index) { this.active = this.active === index ? null : index } }">
-          @forelse ($faqItems as $k => $faq)
+          @forelse ($faqItems->take(5) as $k => $faq)
             <div class="bg-white border border-yideli-line">
               <button class="w-full flex justify-between items-center p-6 text-start"
                       type="button"
@@ -491,6 +491,16 @@
             </div>
           @endforelse
         </div>
+
+        @if ($faqItems->isNotEmpty())
+          <div class="mt-8">
+            <a class="inline-flex items-center px-8 py-4 bg-yideli-dark text-white hover:bg-yideli-hover transition duration-300 uppercase text-sm tracking-wide"
+               href="{{ route('faq.index', ['lang' => $lang]) }}">
+              {{ $t('home_b2b.faq_find_out_more', ['en' => 'Find Out More', 'zh' => '了解更多', 'fr' => 'En savoir plus', 'es' => 'Descubrir mas', 'ru' => 'Узнать больше', 'ar' => 'اعرف المزيد']) }}
+              <span class="ms-2">→</span>
+            </a>
+          </div>
+        @endif
       </div>
 
       <div id="contact-us"
