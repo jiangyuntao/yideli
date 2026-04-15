@@ -97,7 +97,7 @@
       <template x-for="(slide, index) in slides"
                 :key="index">
         <div class="w-full flex-shrink-0 relative h-full overflow-hidden">
-          <img class="w-full h-full object-cover scale-110 blur-[3px] md:blur-[2px]"
+          <img class="w-full h-full object-cover"
                :src="getImageUrl(slide.image)"
                :alt="slide.title || 'Factory Slide'">
 
