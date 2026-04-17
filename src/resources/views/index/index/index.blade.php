@@ -120,7 +120,7 @@
 
     <div class="absolute inset-0 z-20 flex items-center pointer-events-none">
       <div class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 lg:px-12 w-full">
-        <div class="w-full max-w-3xl bg-yideli-text/60 backdrop-blur-sm border border-white/20 p-5 md:p-6 shadow-2xl pointer-events-auto lg:fixed lg:top-1/2 lg:start-0 lg:w-[620px] lg:max-w-[620px] xl:w-[660px] xl:max-w-[660px] transition-transform duration-300 ease-out"
+        <div class="w-full max-w-3xl bg-yideli-text/60 backdrop-blur-sm border border-white/20 p-5 md:p-6 shadow-2xl pointer-events-auto lg:fixed lg:top-1/2 lg:start-0 lg:w-[420px] lg:max-w-[420px] xl:w-[460px] xl:max-w-[460px] transition-transform duration-300 ease-out"
              x-data="{ collapsed: false }"
              x-bind:style="collapsed ? 'transform: translate(calc(-100% + 3rem), -50%);' : 'transform: translate(0, -50%);'">
           <button class="hidden lg:inline-flex absolute top-3 end-3 items-center justify-center w-9 h-9 bg-yideli-dark/85 text-white border border-white/20 shadow-xl hover:bg-yideli-dark transition z-10"
@@ -140,7 +140,7 @@
             </svg>
           </button>
 
-          <div class="pe-10 transition-opacity duration-200"
+          <div class="transition-opacity duration-200"
                :class="collapsed ? 'opacity-0 pointer-events-none' : 'opacity-100 delay-100'">
             <span class="text-yideli-base text-[10px] md:text-[11px] font-bold tracking-[0.14em] uppercase block mb-3">
               {{ $t('home_b2b.hero_kicker', ['en' => 'Diary & Notebook OEM/ODM Manufacturing', 'zh' => '日记本与笔记本 OEM/ODM 制造', 'fr' => 'Fabrication OEM/ODM d agendas et de carnets', 'es' => 'Fabricacion OEM/ODM de agendas y cuadernos', 'ru' => 'OEM/ODM производство ежедневников и блокнотов', 'ar' => 'تصنيع اليوميات والدفاتر بنظام OEM/ODM']) }}
@@ -151,16 +151,16 @@
             </h1>
 
             <p class="mt-3 text-yideli-base/95 text-xs md:text-sm lg:text-[14px] leading-relaxed drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]">
-              {{ $t('home_b2b.hero_subtitle', ['en' => 'Reliable Mass Production | Custom Solutions | Premium Quality | Global Certifications', 'zh' => '可靠量产 | 定制化方案 | 优质品质 | 全球认证', 'fr' => 'Production de masse fiable | Solutions sur mesure | Qualite premium | Certifications mondiales', 'es' => 'Produccion masiva fiable | Soluciones personalizadas | Calidad premium | Certificaciones globales', 'ru' => 'Надежное массовое производство | Индивидуальные решения | Премиальное качество | Международные сертификаты', 'ar' => 'إنتاج ضخم موثوق | حلول مخصصة | جودة فائقة | شهادات عالمية']) }}
+              {{ $t('home_b2b.hero_subtitle', ['en' => 'Fast Sampling | Premium Quality | Global Certifications | Stable Delivery', 'zh' => '可靠量产 | 定制化方案 | 优质品质 | 全球认证', 'fr' => 'Production de masse fiable | Solutions sur mesure | Qualite premium | Certifications mondiales', 'es' => 'Produccion masiva fiable | Soluciones personalizadas | Calidad premium | Certificaciones globales', 'ru' => 'Надежное массовое производство | Индивидуальные решения | Премиальное качество | Международные сертификаты', 'ar' => 'إنتاج ضخم موثوق | حلول مخصصة | جودة فائقة | شهادات عالمية']) }}
             </p>
 
             <div class="mt-6 flex flex-nowrap items-stretch gap-3 px-1">
-              <a class="inline-flex min-w-0 flex-1 items-center justify-center px-4 py-3 bg-white text-center text-yideli-dark font-bold text-[9px] md:text-[10px] leading-tight tracking-[0.05em] shadow-lg hover:bg-yideli-base transition whitespace-normal break-words min-h-[54px]"
+              <a class="inline-flex min-w-0 flex-1 items-center justify-center px-4 py-3 bg-white text-center text-yideli-dark font-bold text-[11px] md:text-[12px] leading-tight tracking-[0.05em] shadow-lg hover:bg-yideli-base transition whitespace-normal break-words min-h-[54px]"
                  href="#contact-us">
                 {{ $t('home_b2b.hero_cta_quote', ['en' => 'Get Free Custom Quote', 'zh' => '获取免费定制报价', 'fr' => 'Obtenir un devis personnalise gratuit', 'es' => 'Obtener cotizacion personalizada gratis', 'ru' => 'Получить бесплатный персональный расчет', 'ar' => 'احصل على عرض سعر مخصص مجانا']) }}
               </a>
 
-              <a class="inline-flex min-w-0 flex-1 items-center justify-center px-4 py-3 border border-white text-center text-white font-bold text-[9px] md:text-[10px] leading-tight tracking-[0.05em] bg-black/20 hover:bg-black/35 transition whitespace-normal break-words min-h-[54px]"
+              <a class="inline-flex min-w-0 flex-1 items-center justify-center px-4 py-3 border border-white text-center text-white font-bold text-[11px] md:text-[12px] leading-tight tracking-[0.05em] bg-black/20 hover:bg-black/35 transition whitespace-normal break-words min-h-[54px]"
                  href="#factory-capability">
                 {{ $t('home_b2b.hero_cta_factory', ['en' => 'View Factory Capability', 'zh' => '查看工厂实力', 'fr' => 'Voir les capacites de l usine', 'es' => 'Ver capacidad de fabrica', 'ru' => 'Смотреть возможности фабрики', 'ar' => 'عرض قدرات المصنع']) }}
               </a>
@@ -289,52 +289,52 @@
   <section class="px-6 lg:px-12 bg-yideli-dark">
     <div
          class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-0">
-      <article class="bg-yideli-dark p-6 text-center text-white">
+      <article class="bg-yideli-dark p-6 text-left text-white">
         <p class="text-4xl font-bold text-white">35+</p>
         <h3 class="mt-2 text-sm uppercase tracking-[0.18em] text-white">
           {{ $t('home_b2b.metric_card_1_title', ['en' => 'Years in the Industry', 'zh' => '行业经验', 'fr' => 'Annees dans l industrie', 'es' => 'Anos en la industria', 'ru' => 'Лет в отрасли', 'ar' => 'سنوات في القطاع']) }}
         </h3>
-        <p class="mt-3 text-xs text-white/80 leading-relaxed">
+        <p class="mt-3 text-sm text-white leading-relaxed">
           {{ $t('home_b2b.metric_card_1_desc', ['en' => 'Since 1989', 'zh' => '自 1989 年起', 'fr' => 'Depuis 1989', 'es' => 'Desde 1989', 'ru' => 'С 1989 года', 'ar' => 'منذ عام 1989']) }}
         </p>
       </article>
 
-      <article class="bg-yideli-base p-6 text-center">
+      <article class="bg-yideli-base p-6 text-left">
         <p class="text-4xl font-bold text-yideli-dark">35000+ m²</p>
         <h3 class="mt-2 text-sm uppercase tracking-[0.18em] text-yideli-dark">
           {{ $t('home_b2b.metric_card_2_title', ['en' => 'Modern Production Base', 'zh' => '现代化生产基地', 'fr' => 'Base de production moderne', 'es' => 'Base de produccion moderna', 'ru' => 'Современная производственная база', 'ar' => 'قاعدة انتاج حديثة']) }}
         </h3>
-        <p class="mt-3 text-xs text-gray-600 leading-relaxed">
+        <p class="mt-3 text-sm text-yideli-dark leading-relaxed">
           {{ $t('home_b2b.metric_card_2_desc', ['en' => 'In Taizhou, China', 'zh' => '位于中国台州', 'fr' => 'A Taizhou, Chine', 'es' => 'En Taizhou, China', 'ru' => 'В Тайчжоу, Китай', 'ar' => 'في تايتشو، الصين']) }}
         </p>
       </article>
 
-      <article class="bg-yideli-dark p-6 text-center text-white">
+      <article class="bg-yideli-dark p-6 text-left text-white">
         <p class="text-4xl font-bold text-white">20+</p>
         <h3 class="mt-2 text-sm uppercase tracking-[0.18em] text-white">
           {{ $t('home_b2b.metric_card_3_title', ['en' => 'Professional Designers', 'zh' => '专业设计师', 'fr' => 'Designers professionnels', 'es' => 'Disenadores profesionales', 'ru' => 'Профессиональные дизайнеры', 'ar' => 'مصممون محترفون']) }}
         </h3>
-        <p class="mt-3 text-xs text-white/80 leading-relaxed">
+        <p class="mt-3 text-sm text-white leading-relaxed">
           {{ $t('home_b2b.metric_card_3_desc', ['en' => 'In Hangzhou R&D Center', 'zh' => '位于杭州研发中心', 'fr' => 'Au centre R&D de Hangzhou', 'es' => 'En el centro de I+D de Hangzhou', 'ru' => 'В R&D центре Ханчжоу', 'ar' => 'في مركز البحث والتطوير في هانغتشو']) }}
         </p>
       </article>
 
-      <article class="bg-yideli-base p-6 text-center">
+      <article class="bg-yideli-base p-6 text-left">
         <p class="text-4xl font-bold text-yideli-dark">30+</p>
         <h3 class="mt-2 text-sm uppercase tracking-[0.18em] text-yideli-dark">
           {{ $t('home_b2b.metric_card_4_title', ['en' => 'Export Countries', 'zh' => '出口国家', 'fr' => 'Pays d exportation', 'es' => 'Paises de exportacion', 'ru' => 'Стран экспорта', 'ar' => 'دول التصدير']) }}
         </h3>
-        <p class="mt-3 text-xs text-gray-600 leading-relaxed">
+        <p class="mt-3 text-sm text-yideli-dark leading-relaxed">
           {{ $t('home_b2b.metric_card_4_desc', ['en' => 'Global Distribution Network', 'zh' => '全球分销网络', 'fr' => 'Reseau mondial de distribution', 'es' => 'Red global de distribucion', 'ru' => 'Глобальная сеть дистрибуции', 'ar' => 'شبكة توزيع عالمية']) }}
         </p>
       </article>
 
-      <article class="bg-yideli-dark p-6 text-center text-white">
+      <article class="bg-yideli-dark p-6 text-left text-white">
         <p class="text-4xl font-bold text-white">300+</p>
         <h3 class="mt-2 text-sm uppercase tracking-[0.18em] text-white">
           {{ $t('home_b2b.metric_card_5_title', ['en' => 'Dedicated Professionals', 'zh' => '专业团队成员', 'fr' => 'Professionnels dedies', 'es' => 'Profesionales dedicados', 'ru' => 'Профильные специалисты', 'ar' => 'متخصصون متفرغون']) }}
         </h3>
-        <p class="mt-3 text-xs text-white/80 leading-relaxed">
+        <p class="mt-3 text-sm text-white leading-relaxed">
           {{ $t('home_b2b.metric_card_5_desc', ['en' => 'In Our Team', 'zh' => '团队规模', 'fr' => 'Dans notre equipe', 'es' => 'En nuestro equipo', 'ru' => 'В нашей команде', 'ar' => 'ضمن فريقنا']) }}
         </p>
       </article>

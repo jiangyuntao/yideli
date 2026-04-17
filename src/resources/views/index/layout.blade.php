@@ -301,11 +301,26 @@
 
   @yield('main')
 
-  <div class="fixed end-5 bottom-5 z-40 flex flex-col items-end gap-3">
-    <div class="group flex flex-col items-end">
-      <div class="pointer-events-none mb-3 translate-y-2 opacity-0 transition duration-200 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:translate-y-0 group-focus-within:opacity-100">
+  <div class="fixed end-5 bottom-5 z-40 flex flex-col items-end gap-1.5">
+    <a class="inline-flex w-[180px] items-center justify-center gap-2 rounded-full bg-[#25D366] px-4 py-3 text-xs font-bold uppercase tracking-[0.06em] text-white shadow-[0_14px_40px_rgba(0,0,0,0.22)] transition hover:bg-[#1ebe5d] focus:outline-none focus:ring-2 focus:ring-[#25D366]/30 focus:ring-offset-2"
+       href="{{ $floatingContactHref }}"
+       aria-label="{{ $floatingQuoteLabel }}">
+      <svg class="h-3.5 w-3.5"
+           fill="none"
+           viewBox="0 0 24 24"
+           stroke="currentColor">
+        <path stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M3 5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8l-5 4V5z" />
+      </svg>
+      <span>{{ $floatingQuoteLabel }}</span>
+    </a>
+
+    <div class="group relative flex flex-col items-end">
+      <div class="pointer-events-none absolute bottom-full end-0 mb-2 translate-y-2 opacity-0 transition duration-200 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:translate-y-0 group-focus-within:opacity-100">
         <div class="rounded-2xl bg-white p-2 shadow-[0_14px_40px_rgba(0,0,0,0.18)]">
-          <img class="h-auto w-[180px]"
+          <img class="h-auto w-[210px] max-w-none"
                src="{{ asset('images/whatsapp-qrcode.png') }}"
                alt="WhatsApp QR code">
         </div>
@@ -326,21 +341,6 @@
         <span>{{ $floatingWhatsappLabel }}</span>
       </a>
     </div>
-
-    <a class="inline-flex w-[180px] items-center justify-center gap-2 rounded-full bg-yideli-dark px-4 py-3 text-xs font-bold uppercase tracking-[0.06em] text-white shadow-[0_14px_40px_rgba(0,0,0,0.22)] transition hover:bg-yideli-hover focus:outline-none focus:ring-2 focus:ring-yideli-dark/30 focus:ring-offset-2"
-       href="{{ $floatingContactHref }}"
-       aria-label="{{ $floatingQuoteLabel }}">
-      <svg class="h-3.5 w-3.5"
-           fill="none"
-           viewBox="0 0 24 24"
-           stroke="currentColor">
-        <path stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M3 5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8l-5 4V5z" />
-      </svg>
-      <span>{{ $floatingQuoteLabel }}</span>
-    </a>
   </div>
 
   <footer class="bg-yideli-dark text-white pt-20 pb-10">
