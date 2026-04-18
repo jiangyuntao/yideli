@@ -54,6 +54,16 @@ class Setting extends SettingsPage
                                     ->default(true),
                             ]),
 
+                        Tab::make('统计代码')
+                            ->schema([
+                                Textarea::make('analytics_code')
+                                    ->label('统计代码')
+                                    ->rows(12)
+                                    ->helperText('支持粘贴第三方统计脚本或 HTML 代码，将在前台全站页面的 head 中输出。')
+                                    ->placeholder("<script>\n  // analytics snippet\n</script>")
+                                    ->columnSpanFull(),
+                            ]),
+
                         Tab::make('外观与联系')
                             ->schema([
                                 TextInput::make('company_name')

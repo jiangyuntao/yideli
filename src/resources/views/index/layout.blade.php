@@ -68,6 +68,10 @@
     </style>
   @endunless
 
+  @if (filled($settings->analytics_code ?? null))
+    {!! $settings->analytics_code !!}
+  @endif
+
   @yield('head')
 </head>
 
