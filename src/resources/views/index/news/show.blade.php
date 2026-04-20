@@ -5,7 +5,7 @@
 @section('main')
   <div class="bg-gray-50 py-4 border-b border-gray-100">
     <div class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 lg:px-12">
-      <nav class="flex text-xs text-gray-500 uppercase tracking-widest gap-2">
+      <nav class="flex flex-wrap gap-2 text-xs uppercase tracking-widest text-gray-500">
         <a class="hover:text-yideli-dark"
            href="{{ route('index', ['lang' => $lang]) }}">{{ __('layout.nav_home') }}</a>
         <span>/</span>
@@ -19,12 +19,12 @@
   </div>
 
   <div class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 lg:px-12 py-16 lg:py-24">
-    <div class="grid lg:grid-cols-12 gap-16">
+    <div class="grid gap-12 lg:grid-cols-12 lg:gap-16">
 
       <article class="lg:col-span-8">
 
         <div class="mb-8">
-          <div class="flex items-center gap-3 text-xs text-gray-500 mb-4 uppercase tracking-wide font-medium">
+          <div class="mb-4 flex flex-wrap items-center gap-3 text-xs font-medium uppercase tracking-wide text-gray-500">
             @if ($entry->category)
               <span class="text-yideli-dark bg-yideli-base px-2 py-1">{{ $entry->category->name }}</span>
             @endif
@@ -48,11 +48,11 @@
             </span>
           </div>
 
-          <h1 class="text-3xl lg:text-5xl font-serif text-yideli-dark leading-tight mb-6">
+          <h1 class="mb-6 text-3xl font-serif leading-tight text-yideli-dark lg:text-5xl">
             {{ $entry->title }}
           </h1>
 
-          <div class="flex justify-between items-center border-b border-gray-100 pb-6">
+          <div class="flex flex-col items-start gap-4 border-b border-gray-100 pb-6 sm:flex-row sm:items-center sm:justify-between">
             <div class="text-sm text-gray-500">
               {{ __('news.meta_by') }} <span
                     class="text-yideli-dark font-bold">{{ $entry->author ?? 'Yideli Media Team' }}</span>
@@ -81,7 +81,7 @@
           </div>
         </div>
 
-        <div class="prose max-w-none">
+        <div class="prose responsive-richtext max-w-none">
           @if ($entry->cover_image)
             <img class="w-full h-auto mb-8 rounded-sm shadow-sm"
                  src="{{ asset('storage/' . $entry->cover_image) }}"
@@ -105,7 +105,7 @@
           </div>
         @endif
 
-        <div class="mt-12 flex justify-between items-center bg-gray-50 p-6 border border-gray-100">
+        <div class="mt-12 flex flex-col gap-5 border border-gray-100 bg-gray-50 p-6 sm:flex-row sm:items-center sm:justify-between">
           <div>
             @if ($prevEntry)
               <a class="text-sm font-medium text-gray-600 hover:text-yideli-dark flex flex-col sm:flex-row items-start sm:items-center gap-2"
@@ -134,8 +134,8 @@
 
       </article>
 
-      <aside class="lg:col-span-4 space-y-12">
-        <div class="sticky top-32">
+      <aside class="space-y-12 lg:col-span-4">
+        <div class="lg:sticky lg:top-32">
 
           <div>
             <h4 class="font-serif text-lg text-yideli-dark mb-6 pb-2 border-b border-gray-100">

@@ -53,6 +53,18 @@ html[lang="en"] {
     font-family: var(--font-site-sans);
   }
 
+  body {
+    overflow-x: clip;
+  }
+
+  img,
+  video,
+  canvas,
+  svg,
+  iframe {
+    max-width: 100%;
+  }
+
   html[lang^="zh"] {
     letter-spacing: 0.02em;
   }
@@ -99,5 +111,52 @@ html[lang="en"] {
   .btn-minimal:hover::after {
     transform: scaleX(1);
     transform-origin: left;
+  }
+
+  .responsive-richtext {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .responsive-richtext img,
+  .responsive-richtext iframe,
+  .responsive-richtext video {
+    height: auto;
+    max-width: 100%;
+  }
+
+  .responsive-richtext table {
+    width: 100%;
+  }
+
+  @media (max-width: 1023px) {
+    .responsive-richtext table,
+    .prose table {
+      display: block;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      white-space: nowrap;
+    }
+
+    .spec-table th,
+    .spec-table td {
+      display: block;
+      width: 100%;
+    }
+
+    .spec-table tr {
+      display: block;
+      padding: 0.75rem 0;
+    }
+
+    .spec-table th {
+      padding-top: 0;
+      padding-bottom: 0.25rem;
+    }
+
+    .spec-table td {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
   }
 }

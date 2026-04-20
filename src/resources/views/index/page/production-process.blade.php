@@ -4,26 +4,26 @@
 
 @section('main')
   <div class="relative bg-yideli-base py-12 md:py-12 overflow-hidden">
-    <div class="absolute top-0 end-0 w-1/3 h-full bg-yideli-dark/5 skew-x-12 translate-x-1/2"></div>
+    <div class="absolute top-0 end-0 hidden h-full w-1/3 translate-x-1/2 skew-x-12 bg-yideli-dark/5 md:block"></div>
 
     <div
          class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 md:px-12 text-center relative z-10">
-      <h1 class="text-4xl md:text-5xl font-serif font-bold text-yideli-dark mb-6">{!! nl2br(__('process.hero_title')) !!}
+      <h1 class="mb-6 text-3xl font-serif font-bold text-yideli-dark md:text-5xl">{!! nl2br(__('process.hero_title')) !!}
       </h1>
-      <p class="text-gray-600 max-w-2xl mx-auto space-y-4 text-sm md:text-lg leading-relaxed text-gray-800">
+      <p class="mx-auto max-w-2xl space-y-4 text-sm leading-relaxed text-gray-800 md:text-lg">
         {!! nl2br(__('process.hero_desc')) !!}
       </p>
     </div>
   </div>
 
   <section
-           class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 md:px-12 py-12 md:py-12 space-y-24">
+           class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto space-y-16 px-6 py-12 md:px-12 md:py-12 md:space-y-24">
 
     <div class="grid md:grid-cols-12 gap-12 md:gap-20 items-center">
       <div class="order-2 md:col-span-7 md:order-1 relative">
-        <h2 class="text-4xl font-serif font-bold text-yideli-dark mb-4 relative z-10">
+        <h2 class="relative z-10 mb-4 text-3xl font-serif font-bold text-yideli-dark md:text-4xl">
           {!! nl2br(__('process.step1_title')) !!}</h2>
-        <p class="text-gray-800 text-lg leading-relaxed relative z-10">
+        <p class="relative z-10 text-base leading-relaxed text-gray-800 md:text-lg">
           {!! nl2br(__('process.step1_desc')) !!}
         </p>
       </div>
@@ -35,17 +35,17 @@
     </div>
 
     <div class="grid md:grid-cols-12 gap-12 md:gap-20 items-center">
-      <div class="order-1 md:col-span-5 md:grid md:grid-cols-2 md:gap-4">
+      <div class="order-1 grid grid-cols-1 gap-4 sm:grid-cols-2 md:col-span-5 md:gap-4">
         <img class="w-full h-full object-cover rounded-sm shadow-xl"
              src="{{ asset('images/process/2.jpg') }}">
         <img class="w-full h-full object-cover rounded-sm shadow-xl"
              src="{{ asset('images/process/3.png') }}">
       </div>
       <div class="order-2 md:col-span-7 relative">
-        <h2 class="text-4xl font-serif font-bold text-yideli-dark mb-4 relative z-10 md:text-right">
+        <h2 class="relative z-10 mb-4 text-3xl font-serif font-bold text-yideli-dark md:text-right md:text-4xl">
           {!! nl2br(__('process.step2_title')) !!}
         </h2>
-        <p class="text-gray-800 text-lg leading-relaxed relative z-10">
+        <p class="relative z-10 text-base leading-relaxed text-gray-800 md:text-lg">
           {!! nl2br(__('process.step2_desc')) !!}
         </p>
       </div>
@@ -53,9 +53,9 @@
 
     <div class="grid md:grid-cols-12 gap-12 md:gap-20 items-center">
       <div class="order-2 relative md:col-span-7">
-        <h2 class="text-4xl font-serif font-bold text-yideli-dark mb-4 relative z-10">
+        <h2 class="relative z-10 mb-4 text-3xl font-serif font-bold text-yideli-dark md:text-4xl">
           {!! nl2br(__('process.step3_title')) !!}</h2>
-        <p class="text-gray-800 text-lg leading-relaxed relative z-10">
+        <p class="relative z-10 text-base leading-relaxed text-gray-800 md:text-lg">
           {!! nl2br(__('process.step3_desc')) !!}
         </p>
       </div>
@@ -87,7 +87,7 @@
       <p class="text-gray-600 mb-8 font-light">
         {!! nl2br(__('process.visit_text')) !!}
       </p>
-      <a class="inline-block bg-yideli-dark text-white px-10 py-4 text-sm font-bold uppercase tracking-widest hover:bg-yideli-hover transition shadow-lg shadow-yideli-dark/20"
+      <a class="inline-flex w-full items-center justify-center bg-yideli-dark px-10 py-4 text-sm font-bold uppercase tracking-widest text-white transition shadow-lg shadow-yideli-dark/20 hover:bg-yideli-hover sm:w-auto"
          href="{{ route('inquire.form', ['lang' => $lang]) }}">
         {!! nl2br(__('process.book_tour_btn')) !!}
       </a>

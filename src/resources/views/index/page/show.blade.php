@@ -26,9 +26,9 @@
 
 @section('main')
   <main
-    class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 py-12 md:py-20 text-yideli-text font-sans text-[#1F5F53]">
-    <h1 class="text-4xl font-[800] mb-8 text-center">{{ $page->title }}</h1>
-    <article>
+    class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 py-12 text-yideli-text font-sans text-[#1F5F53] md:py-20">
+    <h1 class="mb-8 text-center text-3xl font-[800] sm:text-4xl">{{ $page->title }}</h1>
+    <article class="responsive-richtext">
       {!! $page->content !!}
     </article>
 

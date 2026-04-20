@@ -15,18 +15,18 @@
     };
   @endphp
 
-  <div class="bg-yideli-base py-20 border-b border-yideli-line">
+  <div class="border-b border-yideli-line bg-yideli-base py-16 sm:py-20">
     <div class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 lg:px-12 text-center">
       <span class="text-xs font-bold tracking-[0.2em] uppercase text-yideli-dark mb-4 block">{!! nl2br(__('inquire.header_subtitle')) !!}</span>
-      <h1 class="text-4xl lg:text-5xl font-serif text-yideli-dark mb-6">{!! nl2br(__('inquire.header_title')) !!}</h1>
-      <p class="text-gray-600 max-w-2xl mx-auto font-light text-lg">
+      <h1 class="mb-6 text-3xl font-serif text-yideli-dark sm:text-4xl lg:text-5xl">{!! nl2br(__('inquire.header_title')) !!}</h1>
+      <p class="mx-auto max-w-2xl text-base font-light text-gray-600 sm:text-lg">
         {!! nl2br(__('inquire.header_desc')) !!}
       </p>
     </div>
   </div>
 
-  <section class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 lg:px-12 py-20">
-    <div class="grid lg:grid-cols-12 gap-16 lg:gap-24">
+  <section class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 py-16 lg:px-12 lg:py-20">
+    <div class="grid gap-12 lg:grid-cols-12 lg:gap-24">
 
       <div class="lg:col-span-5 space-y-12">
 
@@ -116,7 +116,7 @@
         <div>
 
           <h4 class="font-serif text-lg text-yideli-dark mb-4">{!! nl2br(__('inquire.follow_us')) !!}</h4>
-          <div class="flex gap-4">
+          <div class="flex flex-wrap gap-4">
             <a class="w-10 h-10 border border-gray-200 flex items-center justify-center text-gray-500 hover:bg-yideli-dark hover:text-white hover:border-yideli-dark transition rounded-full"
               href="https://linkedin.com/in/{{ $settings->contact_linkedin }}" target="_blank" rel="noopener noreferrer">
               <span class="sr-only">LinkedIn</span>
@@ -142,7 +142,7 @@
         </div>
       </div>
 
-      <div class="lg:col-span-7 bg-gray-50 p-8 lg:p-12 border border-gray-100 rounded-sm">
+      <div class="rounded-sm border border-gray-100 bg-gray-50 p-6 sm:p-8 lg:col-span-7 lg:p-12">
         <h3 class="font-serif text-2xl text-yideli-dark mb-2">{!! nl2br(__('inquire.form_title')) !!}</h3>
         <p class="text-gray-500 font-light mb-8 text-sm">{!! nl2br(__('inquire.form_hint')) !!}</p>
         @if (session('success'))
@@ -287,7 +287,7 @@
               <input type="hidden"
                      name="captcha_id"
                      :value="captchaId">
-              <div class="w-full px-4 py-3 bg-white border border-yideli-line flex items-center justify-between gap-3">
+              <div class="flex w-full flex-col items-start gap-3 border border-yideli-line bg-white px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
                 <template x-if="captchaImageUrl">
                   <img class="h-12 w-auto"
                        :src="captchaImageUrl"
@@ -298,7 +298,7 @@
                     {{ $t('inquire.captcha_unavailable', ['en' => 'Captcha unavailable', 'zh' => '验证码暂不可用', 'fr' => 'Captcha indisponible', 'es' => 'Captcha no disponible', 'ru' => 'Капча недоступна', 'ar' => 'رمز التحقق غير متاح']) }}
                   </span>
                 </template>
-                <button class="text-xs text-yideli-dark underline hover:text-yideli-hover cursor-pointer"
+                <button class="cursor-pointer text-xs text-yideli-dark underline hover:text-yideli-hover"
                         type="button"
                         :class="refreshing ? 'opacity-60 cursor-not-allowed' : 'cursor-pointer'"
                         @click.prevent="refreshCaptcha">
@@ -342,7 +342,7 @@
             </p>
 
             <button
-              class="bg-yideli-dark text-white px-10 py-4 text-sm font-bold uppercase tracking-widest hover:bg-yideli-hover transition shadow-lg shadow-yideli-dark/20"
+              class="w-full bg-yideli-dark px-10 py-4 text-sm font-bold uppercase tracking-widest text-white transition shadow-lg shadow-yideli-dark/20 hover:bg-yideli-hover md:w-auto"
               type="submit">
               {!! nl2br(__('inquire.submit_btn')) !!}
             </button>

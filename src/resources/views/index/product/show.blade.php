@@ -5,7 +5,7 @@
 @section('main')
   <div class="bg-gray-50 py-4 border-b border-gray-100">
     <div class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 lg:px-12">
-      <nav class="flex text-xs text-gray-500 uppercase tracking-widest gap-2">
+      <nav class="flex flex-wrap gap-2 text-xs uppercase tracking-widest text-gray-500">
         <a class="hover:text-yideli-dark"
            href="{{ route('index', ['lang' => $lang]) }}">{{ __('layout.nav_home') }}</a>
         <span>/</span>
@@ -117,19 +117,19 @@
 
             @if (is_array($product->flags) && in_array('hot', $product->flags))
               <div
-                   class="absolute top-4 start-4 bg-[#D4A373] text-white text-[10px] font-bold px-2 py-1 uppercase tracking-widest">
+                   class="absolute start-4 top-4 bg-[#D4A373] px-2 py-1 text-[10px] font-bold uppercase tracking-widest text-white">
                 {{ __('product.badge_best_seller') }}
               </div>
             @elseif(is_array($product->flags) && in_array('new', $product->flags))
               <div
-                   class="absolute top-4 start-4 bg-yideli-dark text-white text-[10px] font-bold px-2 py-1 uppercase tracking-widest">
+                   class="absolute start-4 top-4 bg-yideli-dark px-2 py-1 text-[10px] font-bold uppercase tracking-widest text-white">
                 {{ __('product.detail_badge_new_arrival') }}
               </div>
             @endif
           </div>
 
           @if ($product->images && count($product->images) > 1)
-            <div class="grid grid-cols-4 gap-4">
+            <div class="grid grid-cols-4 gap-2 sm:gap-4">
               @foreach ($product->images as $image)
                 @php $imgUrl = asset('storage/' . $image); @endphp
                 <button class="aspect-square bg-gray-50 border-transparent hover:border-yideli-dark p-2 transition border-2"
@@ -150,7 +150,7 @@
               {{ $product->code }}</span>
           @endif
 
-          <h1 class="text-3xl lg:text-4xl font-serif text-yideli-text mb-6">{{ $product->name }}</h1>
+          <h1 class="mb-6 text-2xl font-serif text-yideli-text sm:text-3xl lg:text-4xl">{{ $product->name }}</h1>
 
           @if ($product->description)
             <div class="text-gray-600 leading-relaxed font-light mb-8">
@@ -159,7 +159,7 @@
           @endif
 
           @if ($product->tags)
-            <div class="grid grid-cols-2 gap-4 mb-8">
+            <div class="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
               @foreach ($product->tags as $tag)
                 <div class="flex items-center gap-3">
                   <svg class="w-5 h-5 text-yideli-dark"
@@ -218,7 +218,7 @@
     @if ($product->content)
       <section class="bg-yideli-base border-t border-yideli-line py-16">
         <div class=" max-w-[1000px] mx-auto px-6 lg:px-12">
-          <div class="prose max-w-none text-center text-gray-600 font-light">
+          <div class="prose responsive-richtext max-w-none text-center text-gray-600 font-light">
             {!! $product->content !!}
           </div>
         </div>
@@ -227,7 +227,7 @@
 
     @if ($relatedProducts->isNotEmpty())
       <section class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 lg:px-12 py-20">
-        <div class="flex justify-between items-end mb-10 border-b border-gray-100 pb-4">
+        <div class="mb-10 flex flex-col items-start gap-3 border-b border-gray-100 pb-4 sm:flex-row sm:items-end sm:justify-between">
           <h2 class="text-2xl font-serif text-yideli-dark">{{ __('product.detail_related_title') }}</h2>
           <a class="text-xs font-bold uppercase tracking-widest text-yideli-dark hover:underline"
              href="{{ route('product.index', ['lang' => $lang]) }}">{{ __('product.detail_view_all_related') }}</a>
@@ -293,7 +293,7 @@
       <div class="absolute inset-0 bg-yideli-dark/60 backdrop-blur-sm"
            @click="productAccessModal.show = false"></div>
 
-      <div class="relative bg-white w-full max-w-md p-8 rounded-lg shadow-2xl text-center">
+      <div class="relative w-full max-w-md rounded-lg bg-white p-6 text-center shadow-2xl sm:p-8">
         <div class="mb-6 flex justify-center text-yideli-dark">
           <svg class="w-12 h-12"
                xmlns="http://www.w3.org/2000/svg"

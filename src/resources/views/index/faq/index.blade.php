@@ -42,27 +42,27 @@
         ->values();
   @endphp
 
-  <div class="bg-yideli-base py-20 border-b border-yideli-line">
+  <div class="border-b border-yideli-line bg-yideli-base py-16 sm:py-20">
     <div class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 lg:px-12 text-center">
       <span class="text-xs font-bold tracking-[0.2em] uppercase text-yideli-dark mb-4 block">
         {{ $t('faq_page.kicker', ['en' => 'FAQ', 'zh' => '常见问题', 'fr' => 'FAQ', 'es' => 'FAQ', 'ru' => 'FAQ', 'ar' => 'الاسئلة الشائعة']) }}
       </span>
-      <h1 class="text-4xl lg:text-5xl font-serif text-yideli-dark mb-6">
+      <h1 class="mb-6 text-3xl font-serif text-yideli-dark sm:text-4xl lg:text-5xl">
         {{ $t('faq_page.title', ['en' => 'Frequently Asked Questions', 'zh' => '常见问题解答', 'fr' => 'Questions frequentes', 'es' => 'Preguntas frecuentes', 'ru' => 'Часто задаваемые вопросы', 'ar' => 'الاسئلة المتكررة']) }}
       </h1>
-      <p class="text-gray-600 max-w-3xl mx-auto font-light text-lg">
+      <p class="mx-auto max-w-3xl text-base font-light text-gray-600 sm:text-lg">
         {{ $t('faq_page.subtitle', ['en' => 'Browse all FAQ items about OEM/ODM notebooks, production, delivery, and compliance.', 'zh' => '查看全部 FAQ，涵盖 OEM/ODM、生产、交付与合规信息。', 'fr' => 'Consultez toutes les FAQ sur OEM/ODM, la production, la livraison et la conformite.', 'es' => 'Consulte todas las FAQ sobre OEM/ODM, produccion, entrega y cumplimiento.', 'ru' => 'Просмотрите все FAQ по OEM/ODM, производству, поставке и соответствию требованиям.', 'ar' => 'استعرض جميع الاسئلة الشائعة حول OEM/ODM والانتاج والتسليم والامتثال.']) }}
       </p>
     </div>
   </div>
 
-  <section class="bg-yideli-base py-20">
+  <section class="bg-yideli-base py-16 sm:py-20">
     <div class="max-w-[1000px] min-[1921px]:max-w-[1200px] min-[2561px]:max-w-[1400px] mx-auto px-6 lg:px-12">
       <div class="space-y-4"
            x-data="{ active: 0, toggle(index) { this.active = this.active === index ? null : index } }">
         @forelse ($faqItems as $k => $faq)
           <div class="bg-white border border-yideli-line">
-            <button class="w-full flex justify-between items-center p-6 text-start"
+            <button class="flex w-full items-start justify-between gap-4 p-5 text-start sm:p-6"
                     type="button"
                     @click="toggle({{ $k }})"
                     :aria-expanded="active === {{ $k }}">
@@ -92,4 +92,3 @@
     </div>
   </section>
 @endsection
-

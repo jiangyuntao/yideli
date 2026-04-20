@@ -3,11 +3,11 @@
 @section('title', $currentCategory ? $currentCategory->name : __('news.header_title_default'))
 
 @section('main')
-  <div class="bg-yideli-base py-20">
+  <div class="bg-yideli-base py-16 sm:py-20">
     <div class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 lg:px-12 text-center">
       <span
             class="text-xs font-bold tracking-[0.2em] uppercase text-yideli-dark mb-4 block">{{ __('news.header_subtitle') }}</span>
-      <h1 class="text-4xl lg:text-5xl font-serif text-yideli-dark mb-0">
+      <h1 class="text-3xl font-serif text-yideli-dark sm:text-4xl lg:text-5xl mb-0">
         {{ $currentCategory ? $currentCategory->name : __('news.header_title_default') }}
       </h1>
       @if (request('q'))
@@ -18,7 +18,7 @@
 
   @if ($featured_news)
     <section
-             class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 lg:px-12 -mt-10 relative z-10 mb-20">
+             class="relative z-10 mx-auto -mt-6 mb-16 max-w-[1200px] px-6 min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] sm:-mt-10 lg:px-12 lg:mb-20">
       <div
            class="bg-white shadow-xl border border-gray-100 grid lg:grid-cols-2 overflow-hidden group cursor-pointer news-card-hover">
         <a class="relative overflow-hidden h-64 lg:h-96"
@@ -36,9 +36,9 @@
             {{ __('news.featured_label') }}
           </div>
         </a>
-        <a class="p-8 lg:p-12 flex flex-col justify-center"
+        <a class="flex flex-col justify-center p-6 sm:p-8 lg:p-12"
            href="{{ route('news.show', ['lang' => $lang, 'slug' => $featured_news->slug]) }}">
-          <div class="flex items-center gap-4 text-xs text-gray-500 mb-4 uppercase tracking-wide font-medium">
+          <div class="mb-4 flex flex-wrap items-center gap-3 text-xs font-medium uppercase tracking-wide text-gray-500 sm:gap-4">
             <span
                   class="text-yideli-dark">{{ $featured_news->category ? $featured_news->category->name : __('news.uncategorized') }}</span>
             <span>|</span>
@@ -60,7 +60,7 @@
   @endif
 
   <div class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 lg:px-12 pb-24">
-    <div class="grid lg:grid-cols-12 gap-12">
+    <div class="grid gap-10 lg:grid-cols-12 lg:gap-12">
 
       <div class="lg:col-span-8 space-y-12">
 
@@ -77,7 +77,7 @@
                    alt="{{ $entry->title }}">
             </a>
             <div class="w-full md:w-2/3 flex flex-col justify-center">
-              <div class="flex items-center gap-3 text-xs text-gray-400 mb-3 uppercase tracking-wide">
+              <div class="mb-3 flex flex-wrap items-center gap-2 text-xs uppercase tracking-wide text-gray-400 sm:gap-3">
                 <span
                       class="text-yideli-dark font-bold">{{ $entry->category ? $entry->category->name : __('news.uncategorized') }}</span>
                 • {{ $entry->published_at->format('M d, Y') }}
@@ -116,7 +116,7 @@
 
       </div>
 
-      <aside class="lg:col-span-4 ps-0 lg:ps-12 space-y-12">
+      <aside class="space-y-12 ps-0 lg:col-span-4 lg:ps-12">
 
         <div>
           <h4 class="font-serif text-lg text-yideli-dark mb-4">{{ __('news.sidebar_search_placeholder') }}</h4>

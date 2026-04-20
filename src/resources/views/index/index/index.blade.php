@@ -92,7 +92,7 @@
            @mouseleave="startAutoplay()"
            x-cloak>
 
-    <div class="flex w-full aspect-[16/9] md:aspect-[21/9] transition-transform duration-700 ease-in-out"
+    <div class="flex w-full aspect-[5/6] sm:aspect-[4/5] md:aspect-[21/9] transition-transform duration-700 ease-in-out"
          :style="`transform: translateX(-${active * 100}%)`">
       <template x-for="(slide, index) in slides"
                 :key="index">
@@ -119,10 +119,11 @@
     </div>
 
     <div class="absolute inset-0 z-20 flex items-center pointer-events-none">
-      <div class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 lg:px-12 w-full">
-        <div class="w-full max-w-3xl bg-yideli-text/60 backdrop-blur-sm border border-white/20 p-5 md:p-6 shadow-2xl pointer-events-auto lg:fixed lg:top-1/2 lg:start-0 lg:w-[420px] lg:max-w-[420px] xl:w-[460px] xl:max-w-[460px] transition-transform duration-300 ease-out"
-             x-data="{ collapsed: false }"
-             x-bind:style="collapsed ? 'transform: translate(calc(-100% + 3rem), -50%);' : 'transform: translate(0, -50%);'">
+      <div class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto w-full px-4 sm:px-6 lg:px-12">
+        <div class="w-full max-w-3xl border border-white/20 bg-yideli-text/60 p-4 shadow-2xl backdrop-blur-sm pointer-events-auto sm:p-5 md:p-6 lg:fixed lg:start-0 lg:top-1/2 lg:w-[420px] lg:max-w-[420px] xl:w-[460px] xl:max-w-[460px] transition-transform duration-300 ease-out"
+             x-data="{ collapsed: false, isDesktop: window.innerWidth >= 1024 }"
+             x-init="window.addEventListener('resize', () => { isDesktop = window.innerWidth >= 1024 })"
+             x-bind:style="!isDesktop ? '' : (collapsed ? 'transform: translate(calc(-100% + 3rem), -50%);' : 'transform: translate(0, -50%);')">
           <button class="hidden lg:inline-flex absolute top-3 end-3 items-center justify-center w-9 h-9 bg-yideli-dark/85 text-white border border-white/20 shadow-xl hover:bg-yideli-dark transition z-10"
                   type="button"
                   @click="collapsed = !collapsed"
@@ -154,7 +155,7 @@
               {{ $t('home_b2b.hero_subtitle', ['en' => 'Fast Sampling | Premium Quality | Global Certifications | Stable Delivery', 'zh' => '可靠量产 | 定制化方案 | 优质品质 | 全球认证', 'fr' => 'Production de masse fiable | Solutions sur mesure | Qualite premium | Certifications mondiales', 'es' => 'Produccion masiva fiable | Soluciones personalizadas | Calidad premium | Certificaciones globales', 'ru' => 'Надежное массовое производство | Индивидуальные решения | Премиальное качество | Международные сертификаты', 'ar' => 'إنتاج ضخم موثوق | حلول مخصصة | جودة فائقة | شهادات عالمية']) }}
             </p>
 
-            <div class="mt-6 flex flex-nowrap items-stretch gap-3 px-1">
+            <div class="mt-6 flex flex-col items-stretch gap-3 sm:flex-row sm:px-1">
               <a class="inline-flex min-w-0 flex-1 items-center justify-center px-4 py-3 bg-white text-center text-yideli-dark font-bold text-[11px] md:text-[12px] leading-tight tracking-[0.05em] shadow-lg hover:bg-yideli-base transition whitespace-normal break-words min-h-[54px]"
                  href="#contact-us">
                 {{ $t('home_b2b.hero_cta_quote', ['en' => 'Get Free Custom Quote', 'zh' => '获取免费定制报价', 'fr' => 'Obtenir un devis personnalise gratuit', 'es' => 'Obtener cotizacion personalizada gratis', 'ru' => 'Получить бесплатный персональный расчет', 'ar' => 'احصل على عرض سعر مخصص مجانا']) }}
@@ -171,7 +172,7 @@
     </div>
 
     <button
-            class="absolute z-30 start-4 top-1/2 -translate-y-1/2 p-2 text-yideli-base hover:text-white hover:scale-110 transition-all duration-300 opacity-0 group-hover:opacity-100 focus:outline-none translate-x-4 rtl:translate-x-4 group-hover:translate-x-0 group-hover:rtl:translate-x-0 drop-shadow-[0_0_5px_rgba(0,0,0,0.9)]"
+            class="absolute z-30 start-2 top-1/2 -translate-y-1/2 p-2 text-yideli-base opacity-100 drop-shadow-[0_0_5px_rgba(0,0,0,0.9)] transition-all duration-300 hover:text-white hover:scale-110 focus:outline-none group-hover:opacity-100 group-hover:translate-x-0 rtl:translate-x-0 md:start-4 md:translate-x-4 md:opacity-0 md:rtl:translate-x-4"
             @click="prev()">
       <svg class="w-8 h-8 rtl:rotate-180"
            fill="none"
@@ -185,7 +186,7 @@
     </button>
 
     <button
-            class="absolute z-30 end-4 top-1/2 -translate-y-1/2 p-2 text-yideli-base hover:text-white hover:scale-110 transition-all duration-300 opacity-0 group-hover:opacity-100 focus:outline-none -translate-x-4 rtl:translate-x-4 group-hover:translate-x-0 group-hover:rtl:translate-x-0 drop-shadow-[0_0_5px_rgba(0,0,0,0.9)]"
+            class="absolute z-30 end-2 top-1/2 -translate-y-1/2 p-2 text-yideli-base opacity-100 drop-shadow-[0_0_5px_rgba(0,0,0,0.9)] transition-all duration-300 hover:text-white hover:scale-110 focus:outline-none group-hover:opacity-100 group-hover:translate-x-0 rtl:translate-x-0 md:end-4 md:-translate-x-4 md:opacity-0 md:rtl:translate-x-4"
             @click="next()">
       <svg class="w-8 h-8 rtl:rotate-180"
            fill="none"
@@ -198,7 +199,7 @@
       </svg>
     </button>
 
-    <div class="absolute z-30 bottom-6 end-6 flex space-x-2">
+    <div class="absolute bottom-4 end-4 z-30 flex space-x-2 md:bottom-6 md:end-6">
       <template x-for="(slide, index) in slides"
                 :key="index">
         <button class="h-2 rounded-full transition-all duration-300 focus:outline-none"
@@ -212,7 +213,7 @@
   <section class="overflow-hidden"
            style="background-image: url('{{ asset('images/index-product-categories-5.jpg') }}'); background-repeat: repeat-x; background-size: auto 100%; background-position: center top;">
     <div class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto">
-      <div class="grid grid-cols-4 gap-0 py-2">
+      <div class="grid grid-cols-2 gap-0 py-2 sm:grid-cols-4">
         @foreach ($categories->take(count($productCategorySlices)) as $index => $category)
           @php
             $linkedCategory = $categories[$productCategoryLinkOrder[$index] ?? $index] ?? $category;
@@ -230,7 +231,7 @@
   </section>
 
   <section id="factory-capability"
-           class="py-24 lg:py-32 px-6 lg:px-12 bg-yideli-base">
+           class="bg-yideli-base px-4 py-16 sm:px-6 lg:px-12 lg:py-32">
     <div
          class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto grid lg:grid-cols-12 gap-12 lg:gap-24">
       <div class="lg:col-span-5 flex flex-col justify-center">
@@ -260,7 +261,7 @@
           Your browser does not support HTML5 video playback. Please upgrade your browser.
         </video>
 
-        <div class="grid grid-cols-4 gap-3">
+        <div class="grid grid-cols-2 gap-3 sm:grid-cols-4">
           <img class="w-full aspect-[9/16] object-cover rounded-sm"
                src="{{ asset('images/about-us/Your-Strategic-Partner-3.jpg') }}"
                alt="Factory line 1">
@@ -286,7 +287,7 @@
     </div>
   </section>
 
-  <section class="px-6 lg:px-12 bg-yideli-dark">
+  <section class="bg-yideli-dark px-4 sm:px-6 lg:px-12">
     <div
          class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-0">
       <article class="bg-yideli-dark p-6 text-left text-white">
@@ -341,10 +342,10 @@
     </div>
   </section>
 
-  <section class="px-6 lg:px-12 bg-yideli-base py-16">
+  <section class="bg-yideli-base px-4 py-16 sm:px-6 lg:px-12">
     <div class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto">
       <div class="text-center mb-10">
-        <h3 class="text-xl md:text-2xl lg:text-[1.7rem] uppercase tracking-[0.08em] text-yideli-dark whitespace-nowrap">
+        <h3 class="text-xl uppercase tracking-[0.08em] text-yideli-dark md:text-2xl lg:text-[1.7rem] lg:whitespace-nowrap">
           <span class="font-black">INTERNATIONAL CERTIFICATIONS</span>
           <span class="font-semibold"> FOR GLOBAL TRADE</span>
         </h3>
@@ -355,7 +356,7 @@
           @foreach ([0, 1] as $duplicate)
             <div class="flex shrink-0 gap-0 pe-0 overflow-visible">
               @foreach ($certSlideImages as $index => $image)
-                <article class="flex h-56 w-36 shrink-0 items-center justify-center lg:h-60 lg:w-40 overflow-visible">
+                <article class="flex h-44 w-28 shrink-0 items-center justify-center overflow-visible sm:h-56 sm:w-36 lg:h-60 lg:w-40">
                   <img class="h-full w-auto max-w-none object-contain"
                        src="{{ $image }}"
                        alt="Certification {{ $index + 1 }}">
@@ -368,31 +369,31 @@
     </div>
   </section>
 
-  <section class="py-20 bg-yideli-base">
-    <div class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 lg:px-12">
+  <section class="bg-yideli-base py-20">
+    <div class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-4 sm:px-6 lg:px-12">
       <div class="text-center mb-12">
-        <h3 class="text-xl md:text-2xl lg:text-[1.7rem] uppercase tracking-[0.08em] text-yideli-dark mb-2 whitespace-nowrap">
+        <h3 class="mb-2 text-xl uppercase tracking-[0.08em] text-yideli-dark md:text-2xl lg:text-[1.7rem] lg:whitespace-nowrap">
           <span class="font-black">FROM MATERIAL SELECTION TO</span>
           <span class="font-semibold"> MASS PRODUCTION DELIVERY</span>
         </h3>
       </div>
 
-      <div class="grid md:grid-cols-3 gap-8">
-        <div class="bg-white border border-yideli-line p-8">
+      <div class="grid gap-6 md:grid-cols-3 md:gap-8">
+        <div class="border border-yideli-line bg-white p-6 sm:p-8">
           <h4 class="text-xl font-serif text-yideli-dark mb-3">{{ $t('home_b2b.capability_1_title', ['en' => 'Flexible Specs', 'zh' => '规格灵活定制', 'fr' => 'Specifications flexibles', 'es' => 'Especificaciones flexibles', 'ru' => 'Гибкие спецификации', 'ar' => 'مواصفات مرنة']) }}</h4>
           <p class="text-gray-600 text-sm leading-relaxed">
             {{ $t('home_b2b.capability_1_desc', ['en' => 'Cover material, inner paper, binding, size, printing, and packaging can be customized for your market.', 'zh' => '封面材质、内页纸张、装订方式、尺寸、印刷与包装均可按市场需求定制。', 'fr' => 'Materiau de couverture, papier interieur, reliure, taille, impression et emballage personnalisables.', 'es' => 'Material de cubierta, papel interior, encuadernacion, tamano, impresion y empaque personalizables.', 'ru' => 'Материал обложки, бумага, переплет, размер, печать и упаковка настраиваются под ваш рынок.', 'ar' => 'يمكن تخصيص مادة الغلاف والورق الداخلي والتجليد والمقاس والطباعة والتغليف حسب سوقك.']) }}
           </p>
         </div>
 
-        <div class="bg-white border border-yideli-line p-8">
+        <div class="border border-yideli-line bg-white p-6 sm:p-8">
           <h4 class="text-xl font-serif text-yideli-dark mb-3">{{ $t('home_b2b.capability_2_title', ['en' => 'Engineering team', 'zh' => '工程团队', 'fr' => 'Equipe d ingenierie', 'es' => 'Equipo de ingenieria', 'ru' => 'Инженерная команда', 'ar' => 'فريق الهندسة']) }}</h4>
           <p class="text-gray-600 text-sm leading-relaxed">
             {{ $t('home_b2b.capability_2_desc', ['en' => 'Engineering team supports artwork review and structural proofing with professional sample development service.', 'zh' => '工程团队支持稿件审核与结构打样，并提供专业样品开发服务。', 'fr' => 'L equipe d ingenierie prend en charge la verification des maquettes, l epreuve structurelle et un service professionnel de developpement d echantillons.', 'es' => 'El equipo de ingenieria respalda la revision de artes, la prueba estructural y un servicio profesional de desarrollo de muestras.', 'ru' => 'Инженерная команда поддерживает проверку макетов, конструктивную отработку и профессиональную разработку образцов.', 'ar' => 'يدعم فريق الهندسة مراجعة التصاميم والفحص الهيكلي مع خدمة احترافية لتطوير العينات.']) }}
           </p>
         </div>
 
-        <div class="bg-white border border-yideli-line p-8">
+        <div class="border border-yideli-line bg-white p-6 sm:p-8">
           <h4 class="text-xl font-serif text-yideli-dark mb-3">{{ $t('home_b2b.capability_3_title', ['en' => 'Stable Delivery', 'zh' => '稳定交付', 'fr' => 'Livraison stable', 'es' => 'Entrega estable', 'ru' => 'Стабильная поставка', 'ar' => 'تسليم مستقر']) }}</h4>
           <p class="text-gray-600 text-sm leading-relaxed">
             {{ $t('home_b2b.capability_3_desc', ['en' => 'Reliable production scheduling and stable mass production help you launch SKUs safely and efficiently.', 'zh' => '可靠排产与稳定量产，帮助客户安全高效地推进 SKU 上市。', 'fr' => 'Une planification de production fiable et une production de masse stable vous aident a lancer vos SKU de maniere sure et efficace.', 'es' => 'La planificacion de produccion fiable y la produccion masiva estable le ayudan a lanzar SKU de forma segura y eficiente.', 'ru' => 'Надежное планирование производства и стабильный массовый выпуск помогают безопасно и эффективно выводить SKU на рынок.', 'ar' => 'يساعدك التخطيط الموثوق للانتاج والانتاج الضخم المستقر على طرح وحدات SKU بكفاءة وامان.']) }}
@@ -410,9 +411,9 @@
     </div>
   </section>
 
-  <section class="py-20 bg-yideli-base overflow-hidden">
+  <section class="bg-yideli-base py-20 overflow-hidden">
     <div
-         class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 lg:px-12 mb-12 flex justify-between items-end">
+         class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto mb-12 flex flex-col items-start gap-4 px-4 sm:flex-row sm:items-end sm:justify-between sm:px-6 lg:px-12">
       <div>
         <h3 class="text-xl md:text-2xl lg:text-[1.7rem] uppercase tracking-[0.08em] text-yideli-dark mb-2">{{ __('home.curated_selection') }}</h3>
         <p class="text-gray-500 text-sm">{{ __('home.fine_stationery') }}</p>
@@ -422,7 +423,7 @@
     </div>
 
     <div
-         class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 lg:px-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+         class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto grid grid-cols-1 gap-8 px-4 sm:px-6 md:grid-cols-2 lg:grid-cols-4 lg:px-12">
       @foreach ($categories as $category)
         @php
           $categoryCover = $category->cover_image ? asset('storage/' . $category->cover_image) : asset('images/placeholder.jpg');
@@ -449,7 +450,7 @@
   </section>
 
   <section class="bg-yideli-base py-20">
-    <div class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 lg:px-12 grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+    <div class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto grid items-start gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:gap-16 lg:px-12">
       <div id="home-faq">
         <div class="mb-[4rem]">
           <span class="text-xs font-bold tracking-[0.2em] uppercase text-yideli-dark mb-3 block">
@@ -464,7 +465,7 @@
              x-data="{ active: 0, toggle(index) { this.active = this.active === index ? null : index } }">
           @forelse ($faqItems->take(5) as $k => $faq)
             <div class="bg-white border border-yideli-line rounded-sm">
-              <button class="w-full flex justify-between items-center p-6 text-start"
+              <button class="flex w-full items-start justify-between gap-4 p-5 text-start sm:p-6"
                       type="button"
                       @click="toggle({{ $k }})"
                       :aria-expanded="active === {{ $k }}">
@@ -515,7 +516,7 @@
           {{ $t('home_b2b.contact_desc', ['en' => 'Tell us your target market, spec request, and expected timeline. Our team will respond with a practical quote plan.', 'zh' => '请告知目标市场、规格需求和计划周期，我们将尽快提供可执行报价方案。', 'fr' => 'Indiquez votre marche cible, vos specifications et votre delai. Notre equipe repondra avec un devis realiste.', 'es' => 'Comparta su mercado objetivo, especificaciones y plazo esperado. Responderemos con una cotizacion practica.', 'ru' => 'Сообщите рынок, требования и сроки, и команда предложит практичный расчет.', 'ar' => 'اخبرنا بالسوق المستهدف والمواصفات والجدول الزمني وسنرد بخطة عرض سعر عملية.']) }}
         </p>
 
-        <div class="bg-white p-8 lg:p-12 border border-yideli-line rounded-sm">
+        <div class="rounded-sm border border-yideli-line bg-white p-6 sm:p-8 lg:p-12">
         @if (session('success'))
           <div class="mb-6 p-4 bg-green-50 border border-green-200 text-green-700 rounded-sm text-sm">
             {{ session('success') }}
@@ -681,9 +682,9 @@
               <input type="hidden"
                      name="captcha_id"
                      :value="captchaId">
-              <div class="w-full bg-white border border-yideli-line flex items-center justify-between gap-3 overflow-hidden">
+              <div class="flex w-full flex-col items-start gap-3 overflow-hidden border border-yideli-line bg-white sm:flex-row sm:items-center sm:justify-between">
                 <template x-if="captchaImageUrl">
-                  <img class="h-14 w-auto max-w-[calc(100%-5rem)]"
+                  <img class="h-14 w-auto max-w-full"
                        :src="captchaImageUrl"
                        alt="captcha image">
                 </template>
@@ -692,7 +693,7 @@
                     {{ $t('inquire.captcha_unavailable', ['en' => 'Captcha unavailable', 'zh' => '验证码暂不可用', 'fr' => 'Captcha indisponible', 'es' => 'Captcha no disponible', 'ru' => 'Капча недоступна', 'ar' => 'رمز التحقق غير متاح']) }}
                   </span>
                 </template>
-                <button class="shrink-0 px-3 py-3 text-[11px] leading-none text-yideli-dark underline hover:text-yideli-hover cursor-pointer whitespace-nowrap"
+                <button class="cursor-pointer px-3 py-3 text-[11px] leading-none text-yideli-dark underline hover:text-yideli-hover sm:shrink-0 sm:whitespace-nowrap"
                         type="button"
                         :class="refreshing ? 'opacity-60 cursor-not-allowed' : 'cursor-pointer'"
                         @click.prevent="refreshCaptcha">
@@ -738,7 +739,7 @@
             </p>
 
             <button
-                    class="bg-yideli-dark text-white px-10 py-4 text-sm font-bold uppercase tracking-widest hover:bg-yideli-hover transition shadow-lg shadow-yideli-dark/20"
+                    class="w-full bg-yideli-dark px-10 py-4 text-sm font-bold uppercase tracking-widest text-white transition shadow-lg shadow-yideli-dark/20 hover:bg-yideli-hover md:w-auto"
                     type="submit">
               {!! nl2br(__('inquire.submit_btn')) !!}
             </button>

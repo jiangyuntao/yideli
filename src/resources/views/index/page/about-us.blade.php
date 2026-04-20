@@ -26,8 +26,8 @@
 
 @section('main')
   <main
-        class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto  px-6 py-12 md:py-20 font-serif">
-    <section class="w-full mb-16">
+        class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-4 py-12 font-serif sm:px-6 md:py-20">
+    <section class="mb-12 w-full md:mb-16">
       <video class="w-full h-auto object-contain rounded-lg shadow-lg"
              autoplay
              controls
@@ -54,7 +54,7 @@
       </div>
     </section>
 
-    <section class="w-full mb-24">
+    <section class="mb-16 w-full md:mb-24">
       <div class="relative w-full h-64 md:h-96 bg-gray-300 overflow-hidden rounded-sm shadow-sm">
         <img class="w-full h-full object-cover opacity-90"
              src="{{ asset('images/about-us/Heritage-Commitment.png') }}"
@@ -63,7 +63,7 @@
       </div>
     </section>
 
-    <section class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-24 items-center">
+    <section class="mb-16 grid grid-cols-1 items-center gap-10 md:mb-24 md:grid-cols-12 md:gap-12">
       <div class="order-2 md:col-span-7 md:order-1">
         <h2 class="text-2xl md:text-4xl font-black text-[#1F5F53] mb-12">{!! nl2br(__('about.integrated_title')) !!}</h2>
         <div class="text-sm md:text-lg leading-relaxed text-gray-800 space-y-4">
@@ -78,7 +78,7 @@
         </div>
       </div>
 
-      <div class="order-1 md:col-span-5 md:order-2 h-64 md:h-auto rounded-sm shadow-sm pt-16">
+      <div class="order-1 rounded-sm shadow-sm md:order-2 md:col-span-5 md:h-auto md:pt-16">
         <div class="grid grid-cols-2 gap-3">
           <div class="aspect-[16/10] bg-[#367C6D] rounded-sm">
             <img class="w-full h-full object-cover"
@@ -100,7 +100,7 @@
       </div>
     </section>
 
-    <section class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-24 items-center">
+    <section class="mb-16 grid grid-cols-1 items-center gap-10 md:mb-24 md:grid-cols-12 md:gap-12">
       <div class="grid grid-cols-2 md:col-span-6 gap-3">
         <div class="rounded-sm overflow-hidden aspect-[16/9]">
           <img class="w-full h-full object-cover"
@@ -128,44 +128,44 @@
         </div>
       </div>
       <div class="md:col-span-6">
-        <ul class="space-y-4 text-[#1F5F53] font-medium text-sm md:text-base pl-24">
-          <li class="flex items-center gap-2">
+        <ul class="space-y-4 ps-0 text-sm font-medium text-[#1F5F53] md:ps-24 md:text-base">
+          <li class="flex items-start gap-2">
             <span class="w-1.5 h-1.5 bg-[#1F5F53] rounded-full"></span>
             {!! nl2br(__('about.machine_1')) !!}
           </li>
-          <li class="flex items-center gap-2">
+          <li class="flex items-start gap-2">
             <span class="w-1.5 h-1.5 bg-[#1F5F53] rounded-full"></span>
             {!! nl2br(__('about.machine_2')) !!}
           </li>
-          <li class="flex items-center gap-2">
+          <li class="flex items-start gap-2">
             <span class="w-1.5 h-1.5 bg-[#1F5F53] rounded-full"></span>
             {!! nl2br(__('about.machine_3')) !!}
           </li>
-          <li class="flex items-center gap-2">
+          <li class="flex items-start gap-2">
             <span class="w-1.5 h-1.5 bg-[#1F5F53] rounded-full"></span>
             {!! nl2br(__('about.machine_4')) !!}
           </li>
-          <li class="flex items-center gap-2">
+          <li class="flex items-start gap-2">
             <span class="w-1.5 h-1.5 bg-[#1F5F53] rounded-full"></span>
             {!! nl2br(__('about.machine_5')) !!}
           </li>
-          <li class="flex items-center gap-2">
+          <li class="flex items-start gap-2">
             <span class="w-1.5 h-1.5 bg-[#1F5F53] rounded-full"></span>
             {!! nl2br(__('about.machine_6')) !!}
           </li>
-          <li class="flex items-center gap-2">
+          <li class="flex items-start gap-2">
             <span class="w-1.5 h-1.5 bg-[#1F5F53] rounded-full"></span>
             {!! nl2br(__('about.machine_7')) !!}
           </li>
-          <li class="flex items-center gap-2">
+          <li class="flex items-start gap-2">
             <span class="w-1.5 h-1.5 bg-[#1F5F53] rounded-full"></span>
             {!! nl2br(__('about.machine_8')) !!}
           </li>
-          <li class="flex items-center gap-2">
+          <li class="flex items-start gap-2">
             <span class="w-1.5 h-1.5 bg-[#1F5F53] rounded-full"></span>
             {!! nl2br(__('about.machine_9')) !!}
           </li>
-          <li class="flex items-center gap-2">
+          <li class="flex items-start gap-2">
             <span class="w-1.5 h-1.5 bg-[#1F5F53] rounded-full"></span>
             {!! nl2br(__('about.machine_10')) !!}
           </li>
@@ -206,11 +206,11 @@
         <div class="flex flex-col items-center">
           <div class="w-full overflow-hidden relative group">
 
-            <div class="flex gap-8 w-max animate-marquee group-hover:pause">
+            <div class="flex w-max gap-4 animate-marquee group-hover:pause md:gap-8">
 
               @for ($i = 0; $i < 3; $i++)
                 @for ($j = 1; $j <= 8; $j++)
-                  <img class="h-64 w-auto shadow-sm rounded-sm"
+                  <img class="h-40 w-auto rounded-sm shadow-sm sm:h-52 md:h-64"
                        src="{{ asset('images/slides/' . $j . '.webp') }}">
                 @endfor
               @endfor
@@ -233,7 +233,7 @@
       </div>
     </section>
 
-    <section class="grid grid-cols-1 md:grid-cols-12 gap-24 items-center mb-20">
+    <section class="mb-16 grid grid-cols-1 items-center gap-12 md:mb-20 md:grid-cols-12 md:gap-24">
       <div class="md:col-span-6 order-2 md:order-1">
         <div class="flex flex-col gap-4">
           <div class="grid grid-cols-2 gap-0">
@@ -270,7 +270,7 @@
       </div>
     </section>
 
-    <section class="grid grid-cols-1 md:grid-cols-12 gap-24 items-center mb-20">
+    <section class="mb-16 grid grid-cols-1 items-center gap-12 md:mb-20 md:grid-cols-12 md:gap-24">
       <div class="md:col-span-6">
         <h2 class="text-2xl md:text-4xl font-black text-[#1F5F53] mb-12">{!! nl2br(__('about.rnd_title')) !!}</h2>
         <div class="text-sm md:text-lg leading-relaxed text-gray-800 space-y-4">
@@ -305,7 +305,7 @@
     </section>
 
     <section class="mb-12">
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-24 items-center mb-3">
+      <div class="mb-3 grid grid-cols-1 items-center gap-12 md:grid-cols-12 md:gap-24">
         <div class="md:col-span-6 order-2 md:order-1 grid grid-cols-1 gap-3">
           <div class="aspect-[32/12] bg-[#367C6D] rounded-sm opacity-90">
             <img class="w-full h-full object-cover"
@@ -330,7 +330,7 @@
         </div>
       </div>
 
-      <div class="md:col-span-12 order-1 md:order-3 grid grid-cols-4 gap-3">
+      <div class="order-1 grid grid-cols-2 gap-3 md:order-3 md:col-span-12 md:grid-cols-4">
         <div class="aspect-[2/3] bg-[#367C6D] rounded-sm opacity-90">
           <img class="w-full h-full object-cover"
                src="{{ asset('images/about-us/Your-Strategic-Partner-3.jpg') }}">
@@ -343,7 +343,7 @@
           <img class="w-full h-full object-cover"
                src="{{ asset('images/about-us/Your-Strategic-Partner-5.jpg') }}">
         </div>
-        <div></div>
+        <div class="hidden md:block"></div>
       </div>
     </section>
 

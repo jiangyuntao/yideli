@@ -3,16 +3,16 @@
 @section('title', $currentCategory ? $currentCategory->name : __('product.default_collection_title'))
 
 @section('main')
-  <div class="bg-yideli-base py-16 lg:py-24">
+  <div class="bg-yideli-base py-14 lg:py-24">
     <div class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 lg:px-12 text-center">
       <span
             class="text-xs font-bold tracking-[0.2em] uppercase text-yideli-dark mb-4 block">{{ __('product.our_collections') }}</span>
 
-      <h1 class="text-4xl lg:text-6xl font-serif text-yideli-dark mb-6">
+      <h1 class="mb-6 text-3xl font-serif text-yideli-dark sm:text-4xl lg:text-6xl">
         {{ $currentCategory ? $currentCategory->name : __('product.default_collection_title') }}
       </h1>
 
-      <p class="text-gray-600 max-w-2xl mx-auto font-light text-lg">
+      <p class="mx-auto max-w-2xl text-base font-light text-gray-600 sm:text-lg">
         {{ $currentCategory ? $currentCategory->description : __('product.default_collection_desc') }}
       </p>
     </div>
@@ -25,7 +25,7 @@
     </div>
   </div>
 
-  <div class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 lg:px-12 py-12 lg:py-20"
+  <div class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 py-12 lg:px-12 lg:py-20"
        x-data="{
            mobileFilterOpen: false,
            productAccessModal: {
@@ -80,7 +80,7 @@
            }
        }">
 
-    <div class="flex flex-col lg:flex-row gap-12">
+    <div class="flex flex-col gap-8 lg:flex-row lg:gap-12">
 
       <aside class="hidden lg:block w-64 flex-shrink-0">
         <div class="sticky top-32 space-y-10">
@@ -151,11 +151,12 @@
         </div>
       </aside>
 
-      <div class="lg:hidden w-full mb-8">
+      <div class="mb-6 w-full lg:hidden">
         <button class="w-full flex justify-between items-center px-4 py-3 border border-gray-200 text-sm font-medium"
                 @click="mobileFilterOpen = !mobileFilterOpen"><span>{{ __('product.filter_btn') }}</span><span>+</span></button>
         <div class="border-x border-b border-gray-200 p-4 space-y-4"
-             x-show="mobileFilterOpen">
+             x-show="mobileFilterOpen"
+             x-cloak>
           <a class="block w-full text-start text-sm py-1 {{ is_null($currentSlug) ? 'font-bold text-yideli-dark' : '' }}"
              href="{{ route('product.index', ['lang' => $lang]) }}">{{ __('product.sidebar_view_all') }}</a>
           @foreach ($categories as $category)
@@ -231,10 +232,10 @@
               @endif
             </div>
 
-            <h3 class="text-lg font-serif text-yideli-dark group-hover:underline underline-offset-4 decoration-1">
+            <h3 class="text-lg font-serif text-yideli-dark underline-offset-4 decoration-1 group-hover:underline">
               {{ $product->name }}
             </h3>
-            <p class="text-sm text-gray-500 mt-1">
+            <p class="mt-1 text-sm text-gray-500">
               {{ $product->material ? $product->material : \Illuminate\Support\Str::limit(strip_tags($product->description), 30) }}
             </p>
 
@@ -267,7 +268,7 @@
        x-show="productAccessModal.show">
     <div class="absolute inset-0 bg-yideli-dark/60 backdrop-blur-sm"
          @click="productAccessModal.show = false"></div>
-    <div class="relative bg-white w-full max-w-md p-8 rounded-lg shadow-2xl text-center">
+      <div class="relative w-full max-w-md rounded-lg bg-white p-6 text-center shadow-2xl sm:p-8">
       <div class="mb-6 flex justify-center text-yideli-dark">
         <svg class="w-12 h-12"
              xmlns="http://www.w3.org/2000/svg"
