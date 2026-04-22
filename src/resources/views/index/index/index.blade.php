@@ -640,85 +640,87 @@
             </div>
           </div>
 
-          @php
-            $captchaId = $inquiryCaptcha['id'] ?? null;
-            $captchaImageUrl = $captchaId ? route('inquire.captcha', ['lang' => $lang, 'captchaId' => $captchaId]) . '?v=' . $captchaId : '';
-            $captchaRefreshUrl = route('inquire.captcha.refresh', ['lang' => $lang]);
-          @endphp
-          <div class="grid md:grid-cols-2 gap-8"
-               x-data="{
-                   captchaId: @js($captchaId ?? ''),
-                   captchaImageUrl: @js($captchaImageUrl),
-                   refreshUrl: @js($captchaRefreshUrl),
-                   refreshing: false,
-                   async refreshCaptcha() {
-                       if (this.refreshing) return;
-                       this.refreshing = true;
-                       try {
-                           const res = await fetch(this.refreshUrl, {
-                               headers: {
-                                   'Accept': 'application/json',
-                                   'X-Requested-With': 'XMLHttpRequest'
-                               }
-                           });
-                           if (!res.ok) throw new Error('captcha_refresh_failed');
-                           const data = await res.json();
-                           if (data?.id && data?.image_url) {
-                               this.captchaId = data.id;
-                               const sep = data.image_url.includes('?') ? '&' : '?';
-                               this.captchaImageUrl = `${data.image_url}${sep}v=${Date.now()}`;
-                           }
-                       } catch (e) {
-                           console.error(e);
-                       } finally {
-                           this.refreshing = false;
-                       }
-                   }
-               }">
-            <div>
-              <label class="block text-sm text-gray-400 mb-3">
-                {{ $t('inquire.captcha_image_label', ['en' => 'Math Verification', 'zh' => '加减法验证码', 'fr' => 'Verification mathematique', 'es' => 'Verificacion matematica', 'ru' => 'Математическая проверка', 'ar' => 'تحقق رياضي']) }}
-              </label>
-              <input type="hidden"
-                     name="captcha_id"
-                     :value="captchaId">
-              <div class="flex w-full flex-col items-start gap-3 overflow-hidden border border-yideli-line bg-white sm:flex-row sm:items-center sm:justify-between">
-                <template x-if="captchaImageUrl">
-                  <img class="h-14 w-auto max-w-full"
-                       :src="captchaImageUrl"
-                       alt="captcha image">
-                </template>
-                <template x-if="!captchaImageUrl">
-                  <span class="text-sm text-gray-500 min-w-0 px-3 py-3">
-                    {{ $t('inquire.captcha_unavailable', ['en' => 'Captcha unavailable', 'zh' => '验证码暂不可用', 'fr' => 'Captcha indisponible', 'es' => 'Captcha no disponible', 'ru' => 'Капча недоступна', 'ar' => 'رمز التحقق غير متاح']) }}
-                  </span>
-                </template>
-                <button class="cursor-pointer px-3 py-3 text-[11px] leading-none text-yideli-dark underline hover:text-yideli-hover sm:shrink-0 sm:whitespace-nowrap"
-                        type="button"
-                        :class="refreshing ? 'opacity-60 cursor-not-allowed' : 'cursor-pointer'"
-                        @click.prevent="refreshCaptcha">
-                  {{ $t('inquire.captcha_refresh', ['en' => 'Refresh', 'zh' => '刷新', 'fr' => 'Rafraichir', 'es' => 'Actualizar', 'ru' => 'Обновить', 'ar' => 'تحديث']) }}
-                </button>
+          @if (($settings->captcha_enabled ?? true))
+            @php
+              $captchaId = $inquiryCaptcha['id'] ?? null;
+              $captchaImageUrl = $captchaId ? route('inquire.captcha', ['lang' => $lang, 'captchaId' => $captchaId]) . '?v=' . $captchaId : '';
+              $captchaRefreshUrl = route('inquire.captcha.refresh', ['lang' => $lang]);
+            @endphp
+            <div class="grid md:grid-cols-2 gap-8"
+                 x-data="{
+                     captchaId: @js($captchaId ?? ''),
+                     captchaImageUrl: @js($captchaImageUrl),
+                     refreshUrl: @js($captchaRefreshUrl),
+                     refreshing: false,
+                     async refreshCaptcha() {
+                         if (this.refreshing) return;
+                         this.refreshing = true;
+                         try {
+                             const res = await fetch(this.refreshUrl, {
+                                 headers: {
+                                     'Accept': 'application/json',
+                                     'X-Requested-With': 'XMLHttpRequest'
+                                 }
+                             });
+                             if (!res.ok) throw new Error('captcha_refresh_failed');
+                             const data = await res.json();
+                             if (data?.id && data?.image_url) {
+                                 this.captchaId = data.id;
+                                 const sep = data.image_url.includes('?') ? '&' : '?';
+                                 this.captchaImageUrl = `${data.image_url}${sep}v=${Date.now()}`;
+                             }
+                         } catch (e) {
+                             console.error(e);
+                         } finally {
+                             this.refreshing = false;
+                         }
+                     }
+                 }">
+              <div>
+                <label class="block text-sm text-gray-400 mb-3">
+                  {{ $t('inquire.captcha_image_label', ['en' => 'Math Verification', 'zh' => '加减法验证码', 'fr' => 'Verification mathematique', 'es' => 'Verificacion matematica', 'ru' => 'Математическая проверка', 'ar' => 'تحقق رياضي']) }}
+                </label>
+                <input type="hidden"
+                       name="captcha_id"
+                       :value="captchaId">
+                <div class="flex w-full flex-col items-start gap-3 overflow-hidden border border-yideli-line bg-white sm:flex-row sm:items-center sm:justify-between">
+                  <template x-if="captchaImageUrl">
+                    <img class="h-14 w-auto max-w-full"
+                         :src="captchaImageUrl"
+                         alt="captcha image">
+                  </template>
+                  <template x-if="!captchaImageUrl">
+                    <span class="text-sm text-gray-500 min-w-0 px-3 py-3">
+                      {{ $t('inquire.captcha_unavailable', ['en' => 'Captcha unavailable', 'zh' => '验证码暂不可用', 'fr' => 'Captcha indisponible', 'es' => 'Captcha no disponible', 'ru' => 'Капча недоступна', 'ar' => 'رمز التحقق غير متاح']) }}
+                    </span>
+                  </template>
+                  <button class="cursor-pointer px-3 py-3 text-[11px] leading-none text-yideli-dark underline hover:text-yideli-hover sm:shrink-0 sm:whitespace-nowrap"
+                          type="button"
+                          :class="refreshing ? 'opacity-60 cursor-not-allowed' : 'cursor-pointer'"
+                          @click.prevent="refreshCaptcha">
+                    {{ $t('inquire.captcha_refresh', ['en' => 'Refresh', 'zh' => '刷新', 'fr' => 'Rafraichir', 'es' => 'Actualizar', 'ru' => 'Обновить', 'ar' => 'تحديث']) }}
+                  </button>
+                </div>
+              </div>
+
+              <div class="relative">
+                <input
+                       class="peer block w-full px-0 py-2 bg-transparent border-b border-gray-300 focus:outline-none focus:border-yideli-dark transition text-gray-900 placeholder-transparent"
+                       id="home-captcha-answer"
+                       name="captcha_answer"
+                       type="text"
+                       value="{{ old('captcha_answer') }}"
+                       placeholder=" "
+                       required>
+                <label
+                       class="absolute start-0 top-2 text-gray-400 text-sm transition-all duration-300 origin-left cursor-text peer-placeholder-shown:top-2 peer-focus:-top-4 peer-focus:text-xs peer-focus:text-yideli-dark peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:text-yideli-dark"
+                       for="home-captcha-answer">{{ $t('inquire.captcha_input_label', ['en' => 'Enter Captcha', 'zh' => '请输入验证码', 'fr' => 'Saisissez le code', 'es' => 'Ingrese el codigo', 'ru' => 'Введите код', 'ar' => 'ادخل الرمز']) }} *</label>
+                @error('captcha_answer')
+                  <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
+                @enderror
               </div>
             </div>
-
-            <div class="relative">
-              <input
-                     class="peer block w-full px-0 py-2 bg-transparent border-b border-gray-300 focus:outline-none focus:border-yideli-dark transition text-gray-900 placeholder-transparent"
-                     id="home-captcha-answer"
-                     name="captcha_answer"
-                     type="text"
-                     value="{{ old('captcha_answer') }}"
-                     placeholder=" "
-                     required>
-              <label
-                     class="absolute start-0 top-2 text-gray-400 text-sm transition-all duration-300 origin-left cursor-text peer-placeholder-shown:top-2 peer-focus:-top-4 peer-focus:text-xs peer-focus:text-yideli-dark peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:text-yideli-dark"
-                     for="home-captcha-answer">{{ $t('inquire.captcha_input_label', ['en' => 'Enter Captcha', 'zh' => '请输入验证码', 'fr' => 'Saisissez le code', 'es' => 'Ingrese el codigo', 'ru' => 'Введите код', 'ar' => 'ادخل الرمز']) }} *</label>
-              @error('captcha_answer')
-                <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
-              @enderror
-            </div>
-          </div>
+          @endif
 
           <div class="relative mt-8">
             <textarea

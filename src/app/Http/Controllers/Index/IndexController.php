@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Index;
 
 use App\Models\Category;
 use App\Models\News;
+use App\Settings\GeneralSettings;
 use App\Support\InquiryCaptcha;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -12,7 +13,8 @@ class IndexController extends BaseController
 {
     public function index(Request $request)
     {
-        $this->data['inquiryCaptcha'] = InquiryCaptcha::generate($request->session());
+        $captchaEnabled = (bool) (app(GeneralSettings::class)->captcha_enabled ?? true);
+        $this->data['inquiryCaptcha'] = $captchaEnabled ? InquiryCaptcha::generate($request->session()) : null;
 
         $this->data['categories'] = Category::whereNull('parent_id')
             ->where('is_visible', true)

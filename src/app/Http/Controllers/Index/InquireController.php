@@ -14,15 +14,18 @@ class InquireController extends BaseController
 {
     public function form(Request $request)
     {
-        $this->data['inquiryCaptcha'] = InquiryCaptcha::generate($request->session());
+        $captchaEnabled = $this->isCaptchaEnabled();
+        $this->data['inquiryCaptcha'] = $captchaEnabled ? InquiryCaptcha::generate($request->session()) : null;
 
         return view('index.inquire.form', $this->data);
     }
 
     public function submit(Request $request, $lang)
     {
+        $captchaEnabled = $this->isCaptchaEnabled();
+
         // 1. 验证数据
-        $validated = $request->validate([
+        $rules = [
             'name' => 'required|string|max:255',
             'company' => 'nullable|string|max:255',
             'email' => 'required|email|max:255',
@@ -30,11 +33,16 @@ class InquireController extends BaseController
             // 注意：interest 在表单中是多选，验证为数组
             'interest' => 'nullable|array',
             'message' => 'required|string',
-            'captcha_id' => 'required|string',
-            'captcha_answer' => 'required|string|max:32',
-        ]);
+        ];
 
-        if (!InquiryCaptcha::validate(
+        if ($captchaEnabled) {
+            $rules['captcha_id'] = 'required|string';
+            $rules['captcha_answer'] = 'required|string|max:32';
+        }
+
+        $validated = $request->validate($rules);
+
+        if ($captchaEnabled && !InquiryCaptcha::validate(
             $request->session(),
             $validated['captcha_id'] ?? null,
             $validated['captcha_answer'] ?? null
@@ -99,6 +107,10 @@ class InquireController extends BaseController
 
     public function captchaImage(Request $request, string $lang, string $captchaId)
     {
+        if (!$this->isCaptchaEnabled()) {
+            abort(404);
+        }
+
         $binary = InquiryCaptcha::renderPng($request->session(), $captchaId);
 
         if (!$binary) {
@@ -115,6 +127,12 @@ class InquireController extends BaseController
 
     public function captchaRefresh(Request $request, string $lang)
     {
+        if (!$this->isCaptchaEnabled()) {
+            return response()->json([
+                'message' => 'captcha_disabled',
+            ], 404);
+        }
+
         $captcha = InquiryCaptcha::generate($request->session());
         $captchaId = $captcha['id'] ?? null;
 
@@ -144,5 +162,10 @@ class InquireController extends BaseController
         $locale = app()->getLocale();
 
         return $messages[$locale] ?? $messages['en'];
+    }
+
+    private function isCaptchaEnabled(): bool
+    {
+        return (bool) (app(GeneralSettings::class)->captcha_enabled ?? true);
     }
 }

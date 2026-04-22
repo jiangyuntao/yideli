@@ -52,6 +52,11 @@ class Setting extends SettingsPage
                                     ->label('网站开启状态')
                                     ->helperText('关闭后前台将显示维护中')
                                     ->default(true),
+
+                                Toggle::make('captcha_enabled')
+                                    ->label('前台询盘验证码')
+                                    ->helperText('关闭后首页与询盘页将不显示验证码，并跳过验证码校验')
+                                    ->default(true),
                             ]),
 
                         Tab::make('统计代码')
