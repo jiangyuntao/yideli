@@ -423,7 +423,7 @@
     </div>
 
     <div
-         class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto grid grid-cols-1 gap-8 px-4 sm:px-6 md:grid-cols-2 lg:grid-cols-4 lg:px-12">
+         class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto grid grid-cols-2 gap-8 px-4 sm:px-6 md:grid-cols-2 lg:grid-cols-4 lg:px-12">
       @foreach ($categories as $category)
         @php
           $categoryCover = $category->cover_image ? asset('storage/' . $category->cover_image) : asset('images/placeholder.jpg');
