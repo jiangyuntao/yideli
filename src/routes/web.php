@@ -39,6 +39,7 @@ Route::prefix('{lang}')
             // 询盘/联系我们
             Route::get('/inquire', [InquireController::class, 'form'])->name('inquire.form');
             Route::post('/inquire', [InquireController::class, 'submit'])->name('inquire.submit');
+            Route::get('/inquire/success', [InquireController::class, 'success'])->name('inquire.success');
             Route::get('/inquire/captcha/refresh', [InquireController::class, 'captchaRefresh'])->name('inquire.captcha.refresh');
             Route::get('/inquire/captcha/{captchaId}', [InquireController::class, 'captchaImage'])->name('inquire.captcha');
 

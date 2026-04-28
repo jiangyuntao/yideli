@@ -20,6 +20,17 @@ class InquireController extends BaseController
         return view('index.inquire.form', $this->data);
     }
 
+    public function success(Request $request, $lang)
+    {
+        $this->data['returnTo'] = $this->sanitizeReturnTo(
+            $request->query('return_to'),
+            route('inquire.form', ['lang' => $lang])
+        );
+        $this->data['autoRedirectSeconds'] = 5;
+
+        return view('index.inquire.success', $this->data);
+    }
+
     public function submit(Request $request, $lang)
     {
         $captchaEnabled = $this->isCaptchaEnabled();
@@ -32,7 +43,10 @@ class InquireController extends BaseController
             'phone' => 'nullable|string|max:50',
             // 注意：interest 在表单中是多选，验证为数组
             'interest' => 'nullable|array',
-            'message' => 'required|string',
+            'message' => 'nullable|string',
+            'captcha_id' => 'required|string',
+            'captcha_answer' => 'required|string|max:32',
+            'return_to' => 'nullable|string|max:2048',
         ];
 
         if ($captchaEnabled) {
@@ -65,7 +79,7 @@ class InquireController extends BaseController
             'name' => $validated['name'],
             'email' => $validated['email'],
             'subject' => 'New Inquiry from Website', // 设置一个默认主题
-            'message' => $validated['message'],
+            'message' => $validated['message'] ?? '',
             'meta_data' => $metaData, // 确保你的 Model casts 中 meta_data 是 'array' 或 'json'
             'ip_address' => $request->ip(),
             'is_read' => false,
@@ -100,9 +114,16 @@ class InquireController extends BaseController
         }
 
         // =======================================================
-        // 4. 返回成功信息
-        // 这里的提示语建议放入语言包 resources/lang/en/inquire.php
-        return redirect()->back()->with('success', __('inquire.submit_success'));
+        // 4. 跳转到成功页，再自动返回来源页面
+        $returnTo = $this->sanitizeReturnTo(
+            $validated['return_to'] ?? null,
+            route('inquire.form', ['lang' => $lang])
+        );
+
+        return redirect()->route('inquire.success', [
+            'lang' => $lang,
+            'return_to' => $returnTo,
+        ]);
     }
 
     public function captchaImage(Request $request, string $lang, string $captchaId)
@@ -167,5 +188,24 @@ class InquireController extends BaseController
     private function isCaptchaEnabled(): bool
     {
         return (bool) (app(GeneralSettings::class)->captcha_enabled ?? true);
+    }
+
+    private function sanitizeReturnTo(?string $returnTo, string $fallback): string
+    {
+        if (!is_string($returnTo) || $returnTo === '') {
+            return $fallback;
+        }
+
+        $parts = parse_url($returnTo);
+
+        if ($parts === false) {
+            return $fallback;
+        }
+
+        if (!isset($parts['scheme'], $parts['host'])) {
+            return str_starts_with($returnTo, '/') ? $returnTo : $fallback;
+        }
+
+        return $parts['host'] === request()->getHost() ? $returnTo : $fallback;
     }
 }

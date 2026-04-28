@@ -517,12 +517,6 @@
         </p>
 
         <div class="rounded-sm border border-yideli-line bg-white p-6 sm:p-8 lg:p-12">
-        @if (session('success'))
-          <div class="mb-6 p-4 bg-green-50 border border-green-200 text-green-700 rounded-sm text-sm">
-            {{ session('success') }}
-          </div>
-        @endif
-
         @if ($errors->any())
           <div class="mb-6 p-4 bg-red-50 border border-red-200 text-red-700 rounded-sm text-sm">
             <ul class="list-disc ps-5">
@@ -537,6 +531,9 @@
               action="{{ route('inquire.submit', ['lang' => $lang]) }}"
               method="POST">
           @csrf
+          <input type="hidden"
+                 name="return_to"
+                 value="{{ old('return_to', route('index', ['lang' => $lang]) . '#contact-us') }}">
 
           <div class="grid md:grid-cols-2 gap-8">
             <div class="relative">
@@ -675,26 +672,28 @@
                              this.refreshing = false;
                          }
                      }
-                 }">
+                }">
               <div>
                 <label class="block text-sm text-gray-400 mb-3">
-                  {{ $t('inquire.captcha_image_label', ['en' => 'Math Verification', 'zh' => '加减法验证码', 'fr' => 'Verification mathematique', 'es' => 'Verificacion matematica', 'ru' => 'Математическая проверка', 'ar' => 'تحقق رياضي']) }}
+                  {{ $t('inquire.captcha_image_label', ['en' => 'Captcha', 'zh' => '验证码', 'fr' => 'Captcha', 'es' => 'Captcha', 'ru' => 'Капча', 'ar' => 'رمز التحقق']) }}
                 </label>
                 <input type="hidden"
                        name="captcha_id"
                        :value="captchaId">
-                <div class="flex w-full flex-col items-start gap-3 overflow-hidden border border-yideli-line bg-white sm:flex-row sm:items-center sm:justify-between">
-                  <template x-if="captchaImageUrl">
-                    <img class="h-14 w-auto max-w-full"
-                         :src="captchaImageUrl"
-                         alt="captcha image">
-                  </template>
-                  <template x-if="!captchaImageUrl">
-                    <span class="text-sm text-gray-500 min-w-0 px-3 py-3">
-                      {{ $t('inquire.captcha_unavailable', ['en' => 'Captcha unavailable', 'zh' => '验证码暂不可用', 'fr' => 'Captcha indisponible', 'es' => 'Captcha no disponible', 'ru' => 'Капча недоступна', 'ar' => 'رمز التحقق غير متاح']) }}
-                    </span>
-                  </template>
-                  <button class="cursor-pointer px-3 py-3 text-[11px] leading-none text-yideli-dark underline hover:text-yideli-hover sm:shrink-0 sm:whitespace-nowrap"
+                <div class="flex w-full flex-col items-start gap-3 border border-yideli-line bg-white px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
+                  <div class="flex min-w-0 flex-1 items-center justify-start">
+                    <template x-if="captchaImageUrl">
+                      <img class="h-12 w-auto"
+                           :src="captchaImageUrl"
+                           alt="captcha image">
+                    </template>
+                    <template x-if="!captchaImageUrl">
+                      <span class="text-sm text-gray-500">
+                        {{ $t('inquire.captcha_unavailable', ['en' => 'Captcha unavailable', 'zh' => '验证码暂不可用', 'fr' => 'Captcha indisponible', 'es' => 'Captcha no disponible', 'ru' => 'Капча недоступна', 'ar' => 'رمز التحقق غير متاح']) }}
+                      </span>
+                    </template>
+                  </div>
+                  <button class="cursor-pointer text-xs text-yideli-dark underline hover:text-yideli-hover"
                           type="button"
                           :class="refreshing ? 'opacity-60 cursor-not-allowed' : 'cursor-pointer'"
                           @click.prevent="refreshCaptcha">
@@ -728,11 +727,10 @@
                       id="home-message"
                       name="message"
                       rows="4"
-                      placeholder=" "
-                      required>{{ old('message') }}</textarea>
+                      placeholder=" ">{{ old('message') }}</textarea>
             <label
                    class="absolute start-0 top-2 text-gray-400 text-sm transition-all duration-300 origin-left cursor-text peer-placeholder-shown:top-2 peer-focus:-top-4 peer-focus:text-xs peer-focus:text-yideli-dark peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:text-yideli-dark"
-                   for="home-message">{!! nl2br(__('inquire.label_message')) !!} *</label>
+                   for="home-message">{!! nl2br(__('inquire.label_message')) !!}</label>
           </div>
 
           <div class="flex flex-col md:flex-row items-center md:justify-between gap-6 md:gap-4 pt-4">
