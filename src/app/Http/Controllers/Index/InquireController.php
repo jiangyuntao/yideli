@@ -34,6 +34,7 @@ class InquireController extends BaseController
     public function submit(Request $request, $lang)
     {
         $captchaEnabled = $this->isCaptchaEnabled();
+        $isHeroForm = $request->input('form_variant') === 'hero';
 
         // 1. 验证数据
         $rules = [
@@ -41,22 +42,30 @@ class InquireController extends BaseController
             'company' => 'nullable|string|max:255',
             'email' => 'required|email|max:255',
             'phone' => 'nullable|string|max:50',
+            'need' => 'nullable|string|max:255',
             // 注意：interest 在表单中是多选，验证为数组
             'interest' => 'nullable|array',
             'message' => 'nullable|string',
-            'captcha_id' => 'required|string',
-            'captcha_answer' => 'required|string|max:32',
+            'captcha_id' => 'nullable|string',
+            'captcha_answer' => 'nullable|string|max:32',
+            'form_variant' => 'nullable|string|max:50',
+            'website' => 'nullable|string|max:0',
             'return_to' => 'nullable|string|max:2048',
         ];
 
-        if ($captchaEnabled) {
+        if ($isHeroForm) {
+            $rules['need'] = 'required|string|max:255';
+            $rules['message'] = 'required|string';
+        }
+
+        if ($captchaEnabled && !$isHeroForm) {
             $rules['captcha_id'] = 'required|string';
             $rules['captcha_answer'] = 'required|string|max:32';
         }
 
         $validated = $request->validate($rules);
 
-        if ($captchaEnabled && !InquiryCaptcha::validate(
+        if ($captchaEnabled && !$isHeroForm && !InquiryCaptcha::validate(
             $request->session(),
             $validated['captcha_id'] ?? null,
             $validated['captcha_answer'] ?? null
@@ -72,14 +81,27 @@ class InquireController extends BaseController
             'company' => $validated['company'] ?? null,
             'phone' => $validated['phone'] ?? null,
             'interest' => $validated['interest'] ?? [],
+            'need' => $validated['need'] ?? null,
+            'source' => $isHeroForm ? 'hero' : 'contact',
         ];
+
+        $message = trim((string) ($validated['message'] ?? ''));
+
+        if ($isHeroForm) {
+            $messageParts = array_filter([
+                filled($validated['need'] ?? null) ? 'Need: ' . $validated['need'] : null,
+                filled($message) ? 'Requirement: ' . $message : null,
+            ]);
+
+            $message = implode("\n", $messageParts);
+        }
 
         // 3. 创建记录
         $enquiry = Enquiry::create([
             'name' => $validated['name'],
             'email' => $validated['email'],
             'subject' => 'New Inquiry from Website', // 设置一个默认主题
-            'message' => $validated['message'] ?? '',
+            'message' => $message,
             'meta_data' => $metaData, // 确保你的 Model casts 中 meta_data 是 'array' 或 'json'
             'ip_address' => $request->ip(),
             'is_read' => false,

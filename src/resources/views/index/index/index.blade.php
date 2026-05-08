@@ -83,131 +83,140 @@
     ];
 
     $productCategoryLinkOrder = [0, 2, 1, 3];
+
+    $heroSlide = collect($settings->home_carousel ?? [])->first();
+    $heroImagePath = data_get($heroSlide, 'image');
+    $heroImage = asset('images/working-1.webp');
+
+    if (is_string($heroImagePath) && $heroImagePath !== '') {
+        $heroImage = str_starts_with($heroImagePath, 'http://') || str_starts_with($heroImagePath, 'https://') || str_starts_with($heroImagePath, '/')
+            ? $heroImagePath
+            : asset('storage/' . ltrim($heroImagePath, '/'));
+    }
+
+    $heroLink = trim((string) data_get($heroSlide, 'custom_url', ''));
+    $heroHasLink = $heroLink !== '' && !in_array($heroLink, ['#', 'javascript:;'], true);
+    $heroTarget = (int) data_get($heroSlide, 'in_new_windows', 0) === 1 ? '_blank' : '_self';
+    $heroTitle = trim((string) data_get($heroSlide, 'title', 'Factory Slide')) ?: 'Factory Slide';
   @endphp
 
-  <section class="relative w-full mx-auto overflow-hidden shadow-2xl group"
-           x-data="homeCarousel()"
-           x-init="init()"
-           @mouseenter="stopAutoplay()"
-           @mouseleave="startAutoplay()"
-           x-cloak>
+  <section class="relative w-full mx-auto overflow-hidden shadow-2xl">
+    <div class="relative h-full w-full overflow-hidden">
+      <img class="h-[980px] w-full object-cover sm:h-[900px] md:h-auto md:aspect-[21/9]"
+           src="{{ $heroImage }}"
+           alt="{{ $heroTitle }}">
 
-    <div class="flex w-full aspect-[5/6] sm:aspect-[4/5] md:aspect-[21/9] transition-transform duration-700 ease-in-out"
-         :style="`transform: translateX(-${active * 100}%)`">
-      <template x-for="(slide, index) in slides"
-                :key="index">
-        <div class="w-full flex-shrink-0 relative h-full overflow-hidden">
-          <img class="w-full h-full object-cover"
-               :src="getImageUrl(slide.image)"
-               :alt="slide.title || 'Factory Slide'">
-
-          <a class="absolute inset-0 z-10"
-             :href="slide.custom_url || 'javascript:;'"
-             :target="slide.in_new_windows == 1 ? '_blank' : '_self'"
-             :aria-label="slide.title || 'slide link'"
-             x-show="slide.custom_url && slide.custom_url !== '#' && slide.custom_url !== 'javascript:;'">
-          </a>
-        </div>
-      </template>
+      @if ($heroHasLink)
+        <a class="absolute inset-0 z-10"
+           href="{{ $heroLink }}"
+           target="{{ $heroTarget }}"
+           aria-label="{{ $heroTitle }}">
+        </a>
+      @endif
     </div>
 
-    <div
-         class="absolute inset-y-0 start-0 w-24 bg-gradient-to-r from-black/40 to-transparent pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-    </div>
-    <div
-         class="absolute inset-y-0 end-0 w-24 bg-gradient-to-l from-black/40 to-transparent pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-    </div>
-
-    <div class="absolute inset-0 z-20 flex items-center pointer-events-none">
+    <div class="absolute inset-0 z-20 flex items-start pt-6 sm:pt-8 md:pt-10 lg:items-center lg:pt-0">
       <div class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto w-full px-4 sm:px-6 lg:px-12">
-        <div class="w-full max-w-3xl border border-white/20 bg-yideli-text/60 p-4 shadow-2xl backdrop-blur-sm pointer-events-auto sm:p-5 md:p-6 lg:fixed lg:start-0 lg:top-1/2 lg:w-[420px] lg:max-w-[420px] xl:w-[460px] xl:max-w-[460px] transition-transform duration-300 ease-out"
-             x-data="{ collapsed: false, isDesktop: window.innerWidth >= 1024 }"
-             x-init="window.addEventListener('resize', () => { isDesktop = window.innerWidth >= 1024 })"
-             x-bind:style="!isDesktop ? '' : (collapsed ? 'transform: translate(calc(-100% + 3rem), -50%);' : 'transform: translate(0, -50%);')">
-          <button class="hidden lg:inline-flex absolute top-3 end-3 items-center justify-center w-9 h-9 bg-yideli-dark/85 text-white border border-white/20 shadow-xl hover:bg-yideli-dark transition z-10"
-                  type="button"
-                  @click="collapsed = !collapsed"
-                  :aria-expanded="(!collapsed).toString()"
-                  :aria-label="collapsed ? 'Expand floating intro panel' : 'Collapse floating intro panel'">
-            <svg class="w-5 h-5 transition-transform duration-300"
-                 :class="collapsed ? 'rotate-180' : ''"
-                 fill="none"
-                 viewBox="0 0 24 24"
-                 stroke="currentColor">
-              <path stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M15 19l-7-7 7-7" />
-            </svg>
-          </button>
+        <div class="grid items-center gap-6 lg:grid-cols-10 lg:gap-8 xl:gap-10">
+          <div class="lg:col-span-6">
+            <div class="max-w-3xl bg-yideli-text/62 p-6 text-white shadow-2xl backdrop-blur-[2px] sm:p-8 lg:p-10">
+              <img class="mb-5 h-14 w-auto object-contain sm:h-16"
+                   src="{{ asset('images/logo-light-bg.png') }}"
+                   alt="Yideli logo">
 
-          <div class="transition-opacity duration-200"
-               :class="collapsed ? 'opacity-0 pointer-events-none' : 'opacity-100 delay-100'">
-            <span class="text-yideli-base text-[10px] md:text-[11px] font-bold tracking-[0.14em] uppercase block mb-3">
-              {{ $t('home_b2b.hero_kicker', ['en' => 'Diary & Notebook OEM/ODM Manufacturing', 'zh' => '日记本与笔记本 OEM/ODM 制造', 'fr' => 'Fabrication OEM/ODM d agendas et de carnets', 'es' => 'Fabricacion OEM/ODM de agendas y cuadernos', 'ru' => 'OEM/ODM производство ежедневников и блокнотов', 'ar' => 'تصنيع اليوميات والدفاتر بنظام OEM/ODM']) }}
-            </span>
+              <p class="text-sm font-semibold uppercase tracking-[0.08em] text-white/90 sm:text-base">
+                {{ $t('home_b2b.hero_intro_line_1', ['en' => "If You're Looking For", 'zh' => '如果您正在寻找', 'fr' => 'Si vous recherchez', 'es' => 'Si esta buscando', 'ru' => 'Если вы ищете', 'ar' => 'إذا كنت تبحث عن']) }}
+              </p>
 
-            <h1 class="text-white text-xl md:text-3xl lg:text-[1.9rem] font-bold leading-tight drop-shadow-[0_4px_18px_rgba(0,0,0,0.55)]">
-              {{ $t('home_b2b.hero_title', ['en' => '35+ Years Diary & Notebook OEM Factory for Worldwide Market', 'zh' => '35年以上日记本与笔记本 OEM 工厂，服务全球市场', 'fr' => 'Usine OEM de journaux et carnets avec plus de 35 ans pour le marche mondial', 'es' => 'Fabrica OEM de diarios y cuadernos con mas de 35 anos para el mercado global', 'ru' => 'OEM фабрика ежедневников и блокнотов с опытом 35+ лет для мирового рынка', 'ar' => 'مصنع OEM للمفكرات والدفاتر بخبرة 35+ سنة للسوق العالمي']) }}
-            </h1>
+              <h1 class="mt-3 text-3xl font-black leading-tight text-white drop-shadow-[0_4px_18px_rgba(0,0,0,0.4)] sm:text-4xl lg:text-5xl">
+                {{ $t('home_b2b.hero_intro_line_2', ['en' => 'A Reliable Manufacturer of', 'zh' => '一家可靠的制造商，专注于', 'fr' => 'Un fabricant fiable de', 'es' => 'Un fabricante confiable de', 'ru' => 'Надежного производителя', 'ar' => 'شركة تصنيع موثوقة لـ']) }}
+                <span class="mt-2 block">
+                  {{ $t('home_b2b.hero_intro_line_3', ['en' => 'Custom Diaries, Notebooks & Planners', 'zh' => '定制日记本、笔记本与计划本', 'fr' => 'Journaux, carnets et planners personnalises', 'es' => 'Diarios, cuadernos y planners personalizados', 'ru' => 'Ежедневников, блокнотов и планеров на заказ', 'ar' => 'اليوميات والدفاتر والمخططات المخصصة']) }}
+                </span>
+              </h1>
 
-            <p class="mt-3 text-yideli-base/95 text-xs md:text-sm lg:text-[14px] leading-relaxed drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]">
-              {{ $t('home_b2b.hero_subtitle', ['en' => 'Fast Sampling | Premium Quality | Global Certifications | Stable Delivery', 'zh' => '可靠量产 | 定制化方案 | 优质品质 | 全球认证', 'fr' => 'Production de masse fiable | Solutions sur mesure | Qualite premium | Certifications mondiales', 'es' => 'Produccion masiva fiable | Soluciones personalizadas | Calidad premium | Certificaciones globales', 'ru' => 'Надежное массовое производство | Индивидуальные решения | Премиальное качество | Международные сертификаты', 'ar' => 'إنتاج ضخم موثوق | حلول مخصصة | جودة فائقة | شهادات عالمية']) }}
-            </p>
+              <p class="mt-4 text-xl font-semibold text-white sm:text-2xl">
+                {{ $t('home_b2b.hero_intro_line_4', ['en' => "Then You've Come To The Right Place.", 'zh' => '那么，您来对地方了。', 'fr' => 'Vous etes au bon endroit.', 'es' => 'Entonces ha llegado al lugar correcto.', 'ru' => 'Тогда вы пришли по адресу.', 'ar' => 'فأنت في المكان الصحيح.']) }}
+              </p>
 
-            <div class="mt-6 flex flex-col items-stretch gap-3 sm:flex-row sm:px-1">
-              <a class="inline-flex min-w-0 flex-1 items-center justify-center px-4 py-3 bg-white text-center text-yideli-dark font-bold text-[11px] md:text-[12px] leading-tight tracking-[0.05em] shadow-lg hover:bg-yideli-base transition whitespace-normal break-words min-h-[54px]"
-                 href="#contact-us">
-                {{ $t('home_b2b.hero_cta_quote', ['en' => 'Get Free Custom Quote', 'zh' => '获取免费定制报价', 'fr' => 'Obtenir un devis personnalise gratuit', 'es' => 'Obtener cotizacion personalizada gratis', 'ru' => 'Получить бесплатный персональный расчет', 'ar' => 'احصل على عرض سعر مخصص مجانا']) }}
-              </a>
+              <p class="mt-6 text-sm leading-relaxed text-white/90 sm:text-base">
+                {{ $t('home_b2b.hero_intro_trust', ['en' => '35+ Years of OEM Experience | BSCI & FSC Certified | 7-Day Fast Sample', 'zh' => '35年以上 OEM 经验 | BSCI 与 FSC 认证 | 7天快速打样', 'fr' => '35+ ans d experience OEM | Certifie BSCI et FSC | Echantillon rapide en 7 jours', 'es' => '35+ anos de experiencia OEM | Certificacion BSCI y FSC | Muestra rapida en 7 dias', 'ru' => '35+ лет OEM опыта | Сертификация BSCI и FSC | Быстрый образец за 7 дней', 'ar' => 'أكثر من 35 عاما من خبرة OEM | معتمد من BSCI وFSC | عينة سريعة خلال 7 أيام']) }}
+              </p>
+            </div>
+          </div>
 
-              <a class="inline-flex min-w-0 flex-1 items-center justify-center px-4 py-3 border border-white text-center text-white font-bold text-[11px] md:text-[12px] leading-tight tracking-[0.05em] bg-black/20 hover:bg-black/35 transition whitespace-normal break-words min-h-[54px]"
-                 href="#factory-capability">
-                {{ $t('home_b2b.hero_cta_factory', ['en' => 'View Factory Capability', 'zh' => '查看工厂实力', 'fr' => 'Voir les capacites de l usine', 'es' => 'Ver capacidad de fabrica', 'ru' => 'Смотреть возможности фабрики', 'ar' => 'عرض قدرات المصنع']) }}
-              </a>
+          <div class="lg:col-span-4">
+            <div id="hero-inquiry"
+                 class="bg-white p-6 shadow-2xl sm:p-8">
+              <h2 class="text-2xl font-black text-yideli-dark sm:text-3xl">
+                {{ $t('home_b2b.hero_form_title', ['en' => 'Get A Quick Custom Quote', 'zh' => '快速获取定制报价', 'fr' => 'Obtenir un devis personnalise rapide', 'es' => 'Obtener una cotizacion personalizada rapida', 'ru' => 'Быстро получить индивидуальный расчет', 'ar' => 'احصل على عرض سعر مخصص بسرعة']) }}
+              </h2>
+
+              @if ($errors->any() && old('form_variant') === 'hero')
+                <div class="mt-4 rounded-sm border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+                  {{ $errors->first() }}
+                </div>
+              @endif
+
+              <form class="mt-6 space-y-4"
+                    action="{{ route('inquire.submit', ['lang' => $lang]) }}"
+                    method="POST">
+                @csrf
+                <input type="hidden"
+                       name="form_variant"
+                       value="hero">
+                <input type="hidden"
+                       name="return_to"
+                       value="{{ route('index', ['lang' => $lang]) . '#hero-inquiry' }}">
+                <input type="text"
+                       name="website"
+                       value=""
+                       tabindex="-1"
+                       autocomplete="off"
+                       class="hidden"
+                       aria-hidden="true">
+
+                <input class="w-full border border-yideli-line bg-white px-4 py-3 text-sm text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-yideli-dark"
+                       type="text"
+                       id="hero-name"
+                       name="name"
+                       value="{{ old('name') }}"
+                       placeholder="{{ $t('home_b2b.hero_form_name', ['en' => 'Your Name', 'zh' => '您的姓名', 'fr' => 'Votre nom', 'es' => 'Su nombre', 'ru' => 'Ваше имя', 'ar' => 'اسمك']) }}"
+                       required>
+
+                <input class="w-full border border-yideli-line bg-white px-4 py-3 text-sm text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-yideli-dark"
+                       type="email"
+                       id="hero-email"
+                       name="email"
+                       value="{{ old('email') }}"
+                       placeholder="{{ $t('home_b2b.hero_form_email', ['en' => 'Business Email', 'zh' => '商务邮箱', 'fr' => 'Email professionnel', 'es' => 'Correo empresarial', 'ru' => '工作邮箱', 'ar' => 'البريد الإلكتروني للعمل']) }}"
+                       required>
+
+                <input class="w-full border border-yideli-line bg-white px-4 py-3 text-sm text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-yideli-dark"
+                       type="text"
+                       id="hero-need"
+                       name="need"
+                       value="{{ old('need') }}"
+                       placeholder="{{ $t('home_b2b.hero_form_need', ['en' => 'Tell Us What You Need', 'zh' => '告诉我们您需要什么', 'fr' => 'Dites-nous ce dont vous avez besoin', 'es' => 'Diganos lo que necesita', 'ru' => 'Расскажите, что вам нужно', 'ar' => 'اخبرنا بما تحتاجه']) }}"
+                       required>
+
+                <textarea class="min-h-[132px] w-full resize-none border border-yideli-line bg-white px-4 py-3 text-sm text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-yideli-dark"
+                          id="hero-message"
+                          name="message"
+                          placeholder="{{ $t('home_b2b.hero_form_requirement', ['en' => 'Your Custom Requirement (Qty, Material, Logo)', 'zh' => '您的定制需求（数量、材质、Logo）', 'fr' => 'Votre exigence personnalisee (quantite, matiere, logo)', 'es' => 'Su requerimiento personalizado (cantidad, material, logo)', 'ru' => 'Ваши требования (тираж, материал, логотип)', 'ar' => 'متطلباتك المخصصة (الكمية، الخامة، الشعار)']) }}"
+                          required>{{ old('message') }}</textarea>
+
+                <button class="inline-flex w-full items-center justify-center bg-yideli-dark px-6 py-4 text-sm font-bold uppercase tracking-[0.08em] text-white transition hover:bg-yideli-hover"
+                        type="submit">
+                  {{ $t('home_b2b.hero_form_submit', ['en' => 'Send My Inquiry', 'zh' => '发送我的询盘', 'fr' => 'Envoyer ma demande', 'es' => 'Enviar mi consulta', 'ru' => 'Отправить запрос', 'ar' => 'أرسل استفساري']) }}
+                </button>
+              </form>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <button
-            class="absolute z-30 start-2 top-1/2 -translate-y-1/2 p-2 text-yideli-base opacity-100 drop-shadow-[0_0_5px_rgba(0,0,0,0.9)] transition-all duration-300 hover:text-white hover:scale-110 focus:outline-none group-hover:opacity-100 group-hover:translate-x-0 rtl:translate-x-0 md:start-4 md:translate-x-4 md:opacity-0 md:rtl:translate-x-4"
-            @click="prev()">
-      <svg class="w-8 h-8 rtl:rotate-180"
-           fill="none"
-           stroke="currentColor"
-           viewBox="0 0 24 24">
-        <path stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2.5"
-              d="M15 19l-7-7 7-7"></path>
-      </svg>
-    </button>
-
-    <button
-            class="absolute z-30 end-2 top-1/2 -translate-y-1/2 p-2 text-yideli-base opacity-100 drop-shadow-[0_0_5px_rgba(0,0,0,0.9)] transition-all duration-300 hover:text-white hover:scale-110 focus:outline-none group-hover:opacity-100 group-hover:translate-x-0 rtl:translate-x-0 md:end-4 md:-translate-x-4 md:opacity-0 md:rtl:translate-x-4"
-            @click="next()">
-      <svg class="w-8 h-8 rtl:rotate-180"
-           fill="none"
-           stroke="currentColor"
-           viewBox="0 0 24 24">
-        <path stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2.5"
-              d="M9 5l7 7-7 7"></path>
-      </svg>
-    </button>
-
-    <div class="absolute bottom-4 end-4 z-30 flex space-x-2 md:bottom-6 md:end-6">
-      <template x-for="(slide, index) in slides"
-                :key="index">
-        <button class="h-2 rounded-full transition-all duration-300 focus:outline-none"
-                @click="active = index"
-                :class="active === index ? 'w-8 bg-white' : 'w-2 bg-white/50 hover:bg-white/80'">
-        </button>
-      </template>
-    </div>
   </section>
 
   <section class="overflow-hidden"
@@ -768,73 +777,3 @@
     }
   </style>
 @endonce
-
-@section('script')
-  <script>
-    function homeCarousel() {
-      return {
-        active: 0,
-        interval: null,
-        slides: @json($settings->home_carousel ?? []),
-        fallbackSlideImage: @json(asset('images/working-1.webp')),
-
-        init() {
-          if (!Array.isArray(this.slides) || this.slides.length === 0) {
-            this.slides = [{
-              image: this.fallbackSlideImage,
-              title: '',
-              custom_url: 'javascript:;',
-              in_new_windows: 0
-            }];
-            return;
-          }
-
-          this.startAutoplay();
-        },
-
-        getImageUrl(path) {
-          if (!path) {
-            return this.fallbackSlideImage;
-          }
-          if (path.startsWith('http') || path.startsWith('/')) {
-            return path;
-          }
-          return '/storage/' + path;
-        },
-
-        next() {
-          if (this.slides.length <= 1) {
-            return;
-          }
-          this.active = this.active === this.slides.length - 1 ? 0 : this.active + 1;
-        },
-
-        prev() {
-          if (this.slides.length <= 1) {
-            return;
-          }
-          this.active = this.active === 0 ? this.slides.length - 1 : this.active - 1;
-        },
-
-        startAutoplay() {
-          if (this.slides.length <= 1 || this.interval) {
-            return;
-          }
-
-          this.interval = setInterval(() => {
-            this.next();
-          }, 5000);
-        },
-
-        stopAutoplay() {
-          if (!this.interval) {
-            return;
-          }
-
-          clearInterval(this.interval);
-          this.interval = null;
-        }
-      }
-    }
-  </script>
-@endsection
