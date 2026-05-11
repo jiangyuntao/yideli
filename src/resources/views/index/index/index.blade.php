@@ -146,72 +146,10 @@
           </div>
 
           <div class="lg:col-span-4">
-            <div id="hero-inquiry"
-                 class="bg-white p-6 shadow-2xl sm:p-8">
-              <h2 class="text-2xl font-black text-yideli-dark sm:text-3xl">
-                {{ $t('home_b2b.hero_form_title', ['en' => 'Get A Quick Custom Quote', 'zh' => '快速获取定制报价', 'fr' => 'Obtenir un devis personnalise rapide', 'es' => 'Obtener una cotizacion personalizada rapida', 'ru' => 'Быстро получить индивидуальный расчет', 'ar' => 'احصل على عرض سعر مخصص بسرعة']) }}
-              </h2>
-
-              @if ($errors->any() && old('form_variant') === 'hero')
-                <div class="mt-4 rounded-sm border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
-                  {{ $errors->first() }}
-                </div>
-              @endif
-
-              <form class="mt-6 space-y-4"
-                    action="{{ route('inquire.submit', ['lang' => $lang]) }}"
-                    method="POST">
-                @csrf
-                <input type="hidden"
-                       name="form_variant"
-                       value="hero">
-                <input type="hidden"
-                       name="return_to"
-                       value="{{ route('index', ['lang' => $lang]) . '#hero-inquiry' }}">
-                <input type="text"
-                       name="website"
-                       value=""
-                       tabindex="-1"
-                       autocomplete="off"
-                       class="hidden"
-                       aria-hidden="true">
-
-                <input class="w-full border border-yideli-line bg-white px-4 py-3 text-sm text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-yideli-dark"
-                       type="text"
-                       id="hero-name"
-                       name="name"
-                       value="{{ old('name') }}"
-                       placeholder="{{ $t('home_b2b.hero_form_name', ['en' => 'Your Name', 'zh' => '您的姓名', 'fr' => 'Votre nom', 'es' => 'Su nombre', 'ru' => 'Ваше имя', 'ar' => 'اسمك']) }}"
-                       required>
-
-                <input class="w-full border border-yideli-line bg-white px-4 py-3 text-sm text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-yideli-dark"
-                       type="email"
-                       id="hero-email"
-                       name="email"
-                       value="{{ old('email') }}"
-                       placeholder="{{ $t('home_b2b.hero_form_email', ['en' => 'Business Email', 'zh' => '商务邮箱', 'fr' => 'Email professionnel', 'es' => 'Correo empresarial', 'ru' => '工作邮箱', 'ar' => 'البريد الإلكتروني للعمل']) }}"
-                       required>
-
-                <input class="w-full border border-yideli-line bg-white px-4 py-3 text-sm text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-yideli-dark"
-                       type="text"
-                       id="hero-need"
-                       name="need"
-                       value="{{ old('need') }}"
-                       placeholder="{{ $t('home_b2b.hero_form_need', ['en' => 'Tell Us What You Need', 'zh' => '告诉我们您需要什么', 'fr' => 'Dites-nous ce dont vous avez besoin', 'es' => 'Diganos lo que necesita', 'ru' => 'Расскажите, что вам нужно', 'ar' => 'اخبرنا بما تحتاجه']) }}"
-                       required>
-
-                <textarea class="min-h-[132px] w-full resize-none border border-yideli-line bg-white px-4 py-3 text-sm text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-yideli-dark"
-                          id="hero-message"
-                          name="message"
-                          placeholder="{{ $t('home_b2b.hero_form_requirement', ['en' => 'Your Custom Requirement (Qty, Material, Logo)', 'zh' => '您的定制需求（数量、材质、Logo）', 'fr' => 'Votre exigence personnalisee (quantite, matiere, logo)', 'es' => 'Su requerimiento personalizado (cantidad, material, logo)', 'ru' => 'Ваши требования (тираж, материал, логотип)', 'ar' => 'متطلباتك المخصصة (الكمية، الخامة، الشعار)']) }}"
-                          required>{{ old('message') }}</textarea>
-
-                <button class="inline-flex w-full items-center justify-center bg-yideli-dark px-6 py-4 text-sm font-bold uppercase tracking-[0.08em] text-white transition hover:bg-yideli-hover"
-                        type="submit">
-                  {{ $t('home_b2b.hero_form_submit', ['en' => 'Send My Inquiry', 'zh' => '发送我的询盘', 'fr' => 'Envoyer ma demande', 'es' => 'Enviar mi consulta', 'ru' => 'Отправить запрос', 'ar' => 'أرسل استفساري']) }}
-                </button>
-              </form>
-            </div>
+            @include('index.inquire.hero-form', [
+                'heroInquiryId' => 'hero-inquiry',
+                'heroInquiryReturnTo' => route('index', ['lang' => $lang]) . '#hero-inquiry',
+            ])
           </div>
         </div>
       </div>
@@ -459,8 +397,9 @@
   </section>
 
   <section class="bg-yideli-base py-20">
-    <div class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto grid items-start gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:gap-16 lg:px-12">
-      <div id="home-faq">
+    <div class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-4 sm:px-6 lg:px-12">
+      <div id="home-faq"
+           class="mx-auto max-w-[1200px]">
         <div class="mb-[4rem]">
           <span class="text-xs font-bold tracking-[0.2em] uppercase text-yideli-dark mb-3 block">
             {{ $t('home_b2b.faq_kicker', ['en' => 'FAQ', 'zh' => '常见问题', 'fr' => 'FAQ', 'es' => 'FAQ', 'ru' => 'FAQ', 'ar' => 'الاسئلة الشائعة']) }}
@@ -470,10 +409,10 @@
           </h2>
         </div>
 
-        <div class="space-y-4"
+        <div class="grid gap-4 md:grid-cols-2"
              x-data="{ active: 0, toggle(index) { this.active = this.active === index ? null : index } }">
           @forelse ($faqItems->take(5) as $k => $faq)
-            <div class="bg-white border border-yideli-line rounded-sm">
+            <div class="h-full bg-white border border-yideli-line rounded-sm">
               <button class="flex w-full items-start justify-between gap-4 p-5 text-start sm:p-6"
                       type="button"
                       @click="toggle({{ $k }})"
@@ -511,250 +450,6 @@
             </a>
           </div>
         @endif
-      </div>
-
-      <div id="contact-us"
-           class="scroll-mt-32">
-        <span class="text-xs font-bold tracking-[0.2em] uppercase text-yideli-dark mb-3 block">
-          {{ $t('home_b2b.contact_kicker', ['en' => 'Contact Us', 'zh' => '联系我们', 'fr' => 'Contactez-nous', 'es' => 'Contactenos', 'ru' => 'Свяжитесь с нами', 'ar' => 'اتصل بنا']) }}
-        </span>
-        <h2 class="text-xl md:text-2xl lg:text-[1.7rem] uppercase tracking-[0.08em] text-yideli-dark mb-4">
-          {{ $t('home_b2b.contact_title', ['en' => 'Start Your OEM/ODM Inquiry', 'zh' => '开启您的 OEM/ODM 询盘', 'fr' => 'Demarrez votre demande OEM/ODM', 'es' => 'Inicie su consulta OEM/ODM', 'ru' => 'Начните ваш OEM/ODM запрос', 'ar' => 'ابدأ استفسار OEM/ODM الخاص بك']) }}
-        </h2>
-        <p class="text-gray-600 font-light leading-relaxed mb-8">
-          {{ $t('home_b2b.contact_desc', ['en' => 'Tell us your target market, spec request, and expected timeline. Our team will respond with a practical quote plan.', 'zh' => '请告知目标市场、规格需求和计划周期，我们将尽快提供可执行报价方案。', 'fr' => 'Indiquez votre marche cible, vos specifications et votre delai. Notre equipe repondra avec un devis realiste.', 'es' => 'Comparta su mercado objetivo, especificaciones y plazo esperado. Responderemos con una cotizacion practica.', 'ru' => 'Сообщите рынок, требования и сроки, и команда предложит практичный расчет.', 'ar' => 'اخبرنا بالسوق المستهدف والمواصفات والجدول الزمني وسنرد بخطة عرض سعر عملية.']) }}
-        </p>
-
-        <div class="rounded-sm border border-yideli-line bg-white p-6 sm:p-8 lg:p-12">
-        @if ($errors->any())
-          <div class="mb-6 p-4 bg-red-50 border border-red-200 text-red-700 rounded-sm text-sm">
-            <ul class="list-disc ps-5">
-              @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-              @endforeach
-            </ul>
-          </div>
-        @endif
-
-        <form class="space-y-8"
-              action="{{ route('inquire.submit', ['lang' => $lang]) }}"
-              method="POST">
-          @csrf
-          <input type="hidden"
-                 name="return_to"
-                 value="{{ old('return_to', route('index', ['lang' => $lang]) . '#contact-us') }}">
-
-          <div class="grid md:grid-cols-2 gap-8">
-            <div class="relative">
-              <input
-                     class="peer block w-full px-0 py-2 bg-transparent border-b border-gray-300 focus:outline-none focus:border-yideli-dark transition text-gray-900 placeholder-transparent"
-                     id="home-name"
-                     name="name"
-                     type="text"
-                     value="{{ old('name') }}"
-                     placeholder=" "
-                     required>
-              <label
-                     class="absolute start-0 top-2 text-gray-400 text-sm transition-all duration-300 origin-left cursor-text peer-placeholder-shown:top-2 peer-focus:-top-4 peer-focus:text-xs peer-focus:text-yideli-dark peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:text-yideli-dark"
-                     for="home-name">{!! nl2br(__('inquire.label_name')) !!} *</label>
-            </div>
-
-            <div class="relative">
-              <input
-                     class="peer block w-full px-0 py-2 bg-transparent border-b border-gray-300 focus:outline-none focus:border-yideli-dark transition text-gray-900 placeholder-transparent"
-                     id="home-company"
-                     name="company"
-                     type="text"
-                     value="{{ old('company') }}"
-                     placeholder=" ">
-              <label
-                     class="absolute start-0 top-2 text-gray-400 text-sm transition-all duration-300 origin-left cursor-text peer-placeholder-shown:top-2 peer-focus:-top-4 peer-focus:text-xs peer-focus:text-yideli-dark peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:text-yideli-dark"
-                     for="home-company">{!! nl2br(__('inquire.label_company')) !!}</label>
-            </div>
-          </div>
-
-          <div class="grid md:grid-cols-2 gap-8">
-            <div class="relative">
-              <input
-                     class="peer block w-full px-0 py-2 bg-transparent border-b border-gray-300 focus:outline-none focus:border-yideli-dark transition text-gray-900 placeholder-transparent"
-                     id="home-email"
-                     name="email"
-                     type="email"
-                     value="{{ old('email') }}"
-                     placeholder=" "
-                     required>
-              <label
-                     class="absolute start-0 top-2 text-gray-400 text-sm transition-all duration-300 origin-left cursor-text peer-placeholder-shown:top-2 peer-focus:-top-4 peer-focus:text-xs peer-focus:text-yideli-dark peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:text-yideli-dark"
-                     for="home-email">{!! nl2br(__('inquire.label_email')) !!} *</label>
-            </div>
-
-            <div class="relative">
-              <input
-                     class="peer block w-full px-0 py-2 bg-transparent border-b border-gray-300 focus:outline-none focus:border-yideli-dark transition text-gray-900 placeholder-transparent"
-                     id="home-phone"
-                     name="phone"
-                     type="tel"
-                     value="{{ old('phone') }}"
-                     placeholder=" ">
-              <label
-                     class="absolute start-0 top-2 text-gray-400 text-sm transition-all duration-300 origin-left cursor-text peer-placeholder-shown:top-2 peer-focus:-top-4 peer-focus:text-xs peer-focus:text-yideli-dark peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:text-yideli-dark"
-                     for="home-phone">{!! nl2br(__('inquire.label_phone')) !!}</label>
-            </div>
-          </div>
-
-          <div>
-            <label class="block text-sm text-gray-400 mb-3">{!! nl2br(__('inquire.label_interest')) !!}</label>
-            @php
-              $oldInterest = old('interest', []);
-            @endphp
-            <div class="flex flex-wrap gap-4">
-              <label class="inline-flex items-center cursor-pointer">
-                <input class="w-4 h-4 text-yideli-dark border-gray-300 rounded focus:ring-yideli-dark"
-                       name="interest[]"
-                       type="checkbox"
-                       value="oem"
-                       {{ in_array('oem', $oldInterest) ? 'checked' : '' }}>
-                <span class="ms-2 text-sm text-gray-600">{!! nl2br(__('inquire.option_oem')) !!}</span>
-              </label>
-
-              <label class="inline-flex items-center cursor-pointer">
-                <input class="w-4 h-4 text-yideli-dark border-gray-300 rounded focus:ring-yideli-dark"
-                       name="interest[]"
-                       type="checkbox"
-                       value="odm"
-                       {{ in_array('odm', $oldInterest) ? 'checked' : '' }}>
-                <span class="ms-2 text-sm text-gray-600">{!! nl2br(__('inquire.option_odm')) !!}</span>
-              </label>
-
-              <label class="inline-flex items-center cursor-pointer">
-                <input class="w-4 h-4 text-yideli-dark border-gray-300 rounded focus:ring-yideli-dark"
-                       name="interest[]"
-                       type="checkbox"
-                       value="notebook"
-                       {{ in_array('notebook', $oldInterest) ? 'checked' : '' }}>
-                <span class="ms-2 text-sm text-gray-600">{!! nl2br(__('inquire.option_notebook')) !!}</span>
-              </label>
-
-              <label class="inline-flex items-center cursor-pointer">
-                <input class="w-4 h-4 text-yideli-dark border-gray-300 rounded focus:ring-yideli-dark"
-                       name="interest[]"
-                       type="checkbox"
-                       value="diary"
-                       {{ in_array('diary', $oldInterest) ? 'checked' : '' }}>
-                <span class="ms-2 text-sm text-gray-600">{!! nl2br(__('inquire.option_diary')) !!}</span>
-              </label>
-            </div>
-          </div>
-
-          @if (($settings->captcha_enabled ?? true))
-            @php
-              $captchaId = $inquiryCaptcha['id'] ?? null;
-              $captchaImageUrl = $captchaId ? route('inquire.captcha', ['lang' => $lang, 'captchaId' => $captchaId]) . '?v=' . $captchaId : '';
-              $captchaRefreshUrl = route('inquire.captcha.refresh', ['lang' => $lang]);
-            @endphp
-            <div class="grid md:grid-cols-2 gap-8"
-                 x-data="{
-                     captchaId: @js($captchaId ?? ''),
-                     captchaImageUrl: @js($captchaImageUrl),
-                     refreshUrl: @js($captchaRefreshUrl),
-                     refreshing: false,
-                     async refreshCaptcha() {
-                         if (this.refreshing) return;
-                         this.refreshing = true;
-                         try {
-                             const res = await fetch(this.refreshUrl, {
-                                 headers: {
-                                     'Accept': 'application/json',
-                                     'X-Requested-With': 'XMLHttpRequest'
-                                 }
-                             });
-                             if (!res.ok) throw new Error('captcha_refresh_failed');
-                             const data = await res.json();
-                             if (data?.id && data?.image_url) {
-                                 this.captchaId = data.id;
-                                 const sep = data.image_url.includes('?') ? '&' : '?';
-                                 this.captchaImageUrl = `${data.image_url}${sep}v=${Date.now()}`;
-                             }
-                         } catch (e) {
-                             console.error(e);
-                         } finally {
-                             this.refreshing = false;
-                         }
-                     }
-                }">
-              <div>
-                <label class="block text-sm text-gray-400 mb-3">
-                  {{ $t('inquire.captcha_image_label', ['en' => 'Captcha', 'zh' => '验证码', 'fr' => 'Captcha', 'es' => 'Captcha', 'ru' => 'Капча', 'ar' => 'رمز التحقق']) }}
-                </label>
-                <input type="hidden"
-                       name="captcha_id"
-                       :value="captchaId">
-                <div class="flex w-full flex-col items-start gap-3 border border-yideli-line bg-white px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
-                  <div class="flex min-w-0 flex-1 items-center justify-start">
-                    <template x-if="captchaImageUrl">
-                      <img class="h-12 w-auto"
-                           :src="captchaImageUrl"
-                           alt="captcha image">
-                    </template>
-                    <template x-if="!captchaImageUrl">
-                      <span class="text-sm text-gray-500">
-                        {{ $t('inquire.captcha_unavailable', ['en' => 'Captcha unavailable', 'zh' => '验证码暂不可用', 'fr' => 'Captcha indisponible', 'es' => 'Captcha no disponible', 'ru' => 'Капча недоступна', 'ar' => 'رمز التحقق غير متاح']) }}
-                      </span>
-                    </template>
-                  </div>
-                  <button class="cursor-pointer text-xs text-yideli-dark underline hover:text-yideli-hover"
-                          type="button"
-                          :class="refreshing ? 'opacity-60 cursor-not-allowed' : 'cursor-pointer'"
-                          @click.prevent="refreshCaptcha">
-                    {{ $t('inquire.captcha_refresh', ['en' => 'Refresh', 'zh' => '刷新', 'fr' => 'Rafraichir', 'es' => 'Actualizar', 'ru' => 'Обновить', 'ar' => 'تحديث']) }}
-                  </button>
-                </div>
-              </div>
-
-              <div class="relative">
-                <input
-                       class="peer block w-full px-0 py-2 bg-transparent border-b border-gray-300 focus:outline-none focus:border-yideli-dark transition text-gray-900 placeholder-transparent"
-                       id="home-captcha-answer"
-                       name="captcha_answer"
-                       type="text"
-                       value="{{ old('captcha_answer') }}"
-                       placeholder=" "
-                       required>
-                <label
-                       class="absolute start-0 top-2 text-gray-400 text-sm transition-all duration-300 origin-left cursor-text peer-placeholder-shown:top-2 peer-focus:-top-4 peer-focus:text-xs peer-focus:text-yideli-dark peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:text-yideli-dark"
-                       for="home-captcha-answer">{{ $t('inquire.captcha_input_label', ['en' => 'Enter Captcha', 'zh' => '请输入验证码', 'fr' => 'Saisissez le code', 'es' => 'Ingrese el codigo', 'ru' => 'Введите код', 'ar' => 'ادخل الرمز']) }} *</label>
-                @error('captcha_answer')
-                  <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
-                @enderror
-              </div>
-            </div>
-          @endif
-
-          <div class="relative mt-8">
-            <textarea
-                      class="peer block w-full px-0 py-2 bg-transparent border-b border-gray-300 focus:outline-none focus:border-yideli-dark transition text-gray-900 placeholder-transparent resize-none"
-                      id="home-message"
-                      name="message"
-                      rows="4"
-                      placeholder=" ">{{ old('message') }}</textarea>
-            <label
-                   class="absolute start-0 top-2 text-gray-400 text-sm transition-all duration-300 origin-left cursor-text peer-placeholder-shown:top-2 peer-focus:-top-4 peer-focus:text-xs peer-focus:text-yideli-dark peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:text-yideli-dark"
-                   for="home-message">{!! nl2br(__('inquire.label_message')) !!}</label>
-          </div>
-
-          <div class="flex flex-col md:flex-row items-center md:justify-between gap-6 md:gap-4 pt-4">
-            <p class="text-xs text-gray-400 max-w-xs text-center md:text-left">
-              {!! nl2br(__('inquire.privacy_consent')) !!}
-            </p>
-
-            <button
-                    class="w-full bg-yideli-dark px-10 py-4 text-sm font-bold uppercase tracking-widest text-white transition shadow-lg shadow-yideli-dark/20 hover:bg-yideli-hover md:w-auto"
-                    type="submit">
-              {!! nl2br(__('inquire.submit_btn')) !!}
-            </button>
-          </div>
-        </form>
-        </div>
       </div>
     </div>
   </section>

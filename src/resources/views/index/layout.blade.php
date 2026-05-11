@@ -159,9 +159,7 @@
 
         $rawWhatsapp = (string) ($settings->contact_whatsapp ?? '');
         $whatsappHref = $rawWhatsapp ? 'https://wa.me/' . $rawWhatsapp : null;
-        $floatingContactHref = request()->routeIs('index')
-            ? '#contact-us'
-            : route('index', ['lang' => $lang]) . '#contact-us';
+        $floatingContactHref = route('inquire.form', ['lang' => $lang]);
         $floatingQuoteLabel = $localizedText('home_b2b.hero_cta_quote', [
             'en' => 'Get Free Quote',
             'zh' => '获取免费报价',

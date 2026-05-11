@@ -7,12 +7,27 @@
     <div class="absolute top-0 end-0 hidden h-full w-1/3 translate-x-1/2 skew-x-12 bg-yideli-dark/5 md:block"></div>
 
     <div
-         class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 md:px-12 text-center relative z-10">
-      <h1 class="mb-6 text-3xl font-serif font-bold text-yideli-dark md:text-5xl">{!! nl2br(__('process.hero_title')) !!}
-      </h1>
-      <p class="mx-auto max-w-2xl space-y-4 text-sm leading-relaxed text-gray-800 md:text-lg">
-        {!! nl2br(__('process.hero_desc')) !!}
-      </p>
+         class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 md:px-12 relative z-10">
+      <div class="grid grid-cols-1 gap-8 lg:grid-cols-10 lg:items-stretch">
+        <div class="lg:col-span-6">
+          <div class="flex h-full flex-col justify-center bg-white/80 p-6 shadow-2xl backdrop-blur-sm sm:p-8 lg:min-h-[560px] lg:p-10">
+            <h1 class="mb-6 text-3xl font-serif font-bold text-yideli-dark md:text-5xl">
+              {!! nl2br(__('process.hero_title')) !!}
+            </h1>
+            <p class="space-y-4 text-sm leading-relaxed text-gray-800 md:text-lg">
+              {!! nl2br(__('process.hero_desc')) !!}
+            </p>
+          </div>
+        </div>
+
+        <div class="lg:col-span-4">
+          @include('index.inquire.hero-form', [
+              'heroInquiryId' => 'production-process-hero-inquiry',
+              'heroInquiryReturnTo' => route('production-process', ['lang' => $lang]) . '#production-process-hero-inquiry',
+              'heroInquiryClass' => 'flex h-full flex-col justify-center bg-white p-6 shadow-2xl sm:p-8 lg:min-h-[560px]',
+          ])
+        </div>
+      </div>
     </div>
   </div>
 

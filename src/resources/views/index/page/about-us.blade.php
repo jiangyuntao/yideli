@@ -27,17 +27,29 @@
 @section('main')
   <main
         class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-4 py-12 font-serif sm:px-6 md:py-20">
-    <section class="mb-12 w-full md:mb-16">
-      <video class="w-full h-auto object-contain rounded-lg shadow-lg"
-             autoplay
-             controls
-             preload="metadata"
-             muted
-             playsinline>
-        <source src="{{ asset('videos/output_720p_crf26.mp4') }}"
-                type="video/mp4">
-        Your browser does not support HTML5 video playback. Please upgrade your browser.
-      </video>
+    <section class="mb-12 grid grid-cols-1 gap-6 md:mb-16 lg:grid-cols-10 lg:items-stretch">
+      <div class="lg:col-span-6">
+        <div class="h-full min-h-[420px] overflow-hidden rounded-lg bg-black shadow-lg lg:min-h-[560px]">
+          <video class="h-full w-full object-cover"
+                 autoplay
+                 controls
+                 preload="metadata"
+                 muted
+                 playsinline>
+            <source src="{{ asset('videos/output_720p_crf26.mp4') }}"
+                    type="video/mp4">
+            Your browser does not support HTML5 video playback. Please upgrade your browser.
+          </video>
+        </div>
+      </div>
+
+      <div class="lg:col-span-4">
+        @include('index.inquire.hero-form', [
+            'heroInquiryId' => 'about-us-hero-inquiry',
+            'heroInquiryReturnTo' => route('page.show', ['lang' => $lang, 'slug' => 'about-us']) . '#about-us-hero-inquiry',
+            'heroInquiryClass' => 'flex h-full flex-col bg-white p-6 shadow-2xl sm:p-8',
+        ])
+      </div>
     </section>
 
     <section class="grid grid-cols-1 md:grid-cols-12 gap-6 mb-16 items-start">
