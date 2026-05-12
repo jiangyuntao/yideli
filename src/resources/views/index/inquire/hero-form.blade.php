@@ -24,7 +24,7 @@
 
 <div id="{{ $heroInquiryId }}"
      class="{{ $heroInquiryClass }}">
-  <h2 class="text-2xl font-black text-yideli-dark sm:text-3xl">
+  <h2 class="overflow-hidden text-ellipsis whitespace-nowrap text-[clamp(1.125rem,4.8vw,1.875rem)] font-black leading-tight tracking-tight text-yideli-dark">
     {{ $heroInquiryTitle }}
   </h2>
 

@@ -100,9 +100,9 @@
     $heroTitle = trim((string) data_get($heroSlide, 'title', 'Factory Slide')) ?: 'Factory Slide';
   @endphp
 
-  <section class="relative w-full mx-auto overflow-hidden shadow-2xl">
-    <div class="relative h-full w-full overflow-hidden">
-      <img class="h-[980px] w-full object-cover sm:h-[900px] md:h-auto md:aspect-[21/9]"
+  <section class="relative mx-auto min-h-[980px] w-full overflow-hidden shadow-2xl sm:min-h-[940px] md:min-h-[1120px] lg:min-h-[760px] xl:min-h-[840px]">
+    <div class="absolute inset-0 overflow-hidden">
+      <img class="h-full w-full object-cover"
            src="{{ $heroImage }}"
            alt="{{ $heroTitle }}">
 
@@ -115,12 +115,12 @@
       @endif
     </div>
 
-    <div class="absolute inset-0 z-20 flex items-start pt-6 sm:pt-8 md:pt-10 lg:items-center lg:pt-0">
+    <div class="absolute inset-0 z-20 flex items-center py-6 sm:py-8 md:py-10 lg:py-12">
       <div class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto w-full px-4 sm:px-6 lg:px-12">
-        <div class="grid items-center gap-6 lg:grid-cols-10 lg:gap-8 xl:gap-10">
-          <div class="lg:col-span-6">
-            <div class="max-w-3xl bg-yideli-text/62 p-6 text-white shadow-2xl backdrop-blur-[2px] sm:p-8 lg:p-10">
-              <img class="mb-5 h-14 w-auto object-contain sm:h-16"
+        <div class="grid gap-6 lg:grid-cols-10 lg:items-stretch lg:gap-8 xl:gap-10">
+          <div class="w-full lg:col-span-6">
+            <div class="flex h-full w-full flex-col justify-center bg-yideli-text/62 p-6 text-white shadow-2xl backdrop-blur-[2px] sm:p-8 lg:max-w-3xl lg:p-10">
+              <img class="mb-5 h-14 w-auto object-contain brightness-0 invert sm:h-16"
                    src="{{ asset('images/logo-light-bg.png') }}"
                    alt="Yideli logo">
 
@@ -128,9 +128,11 @@
                 {{ $t('home_b2b.hero_intro_line_1', ['en' => "If You're Looking For", 'zh' => '如果您正在寻找', 'fr' => 'Si vous recherchez', 'es' => 'Si esta buscando', 'ru' => 'Если вы ищете', 'ar' => 'إذا كنت تبحث عن']) }}
               </p>
 
-              <h1 class="mt-3 text-3xl font-black leading-tight text-white drop-shadow-[0_4px_18px_rgba(0,0,0,0.4)] sm:text-4xl lg:text-5xl">
-                {{ $t('home_b2b.hero_intro_line_2', ['en' => 'A Reliable Manufacturer of', 'zh' => '一家可靠的制造商，专注于', 'fr' => 'Un fabricant fiable de', 'es' => 'Un fabricante confiable de', 'ru' => 'Надежного производителя', 'ar' => 'شركة تصنيع موثوقة لـ']) }}
-                <span class="mt-2 block">
+              <h1 class="mt-3 flex flex-col gap-2 font-black leading-[1.05] text-white drop-shadow-[0_4px_18px_rgba(0,0,0,0.4)]">
+                <span class="block whitespace-nowrap text-[clamp(1.15rem,2.6vw+0.7rem,3.25rem)] tracking-tight">
+                  {{ $t('home_b2b.hero_intro_line_2', ['en' => 'A Reliable Manufacturer of', 'zh' => '一家可靠的制造商，专注于', 'fr' => 'Un fabricant fiable de', 'es' => 'Un fabricante confiable de', 'ru' => 'Надежного производителя', 'ar' => 'شركة تصنيع موثوقة لـ']) }}
+                </span>
+                <span class="block text-[clamp(1.15rem,2.6vw+0.7rem,3.25rem)] tracking-tight">
                   {{ $t('home_b2b.hero_intro_line_3', ['en' => 'Custom Diaries, Notebooks & Planners', 'zh' => '定制日记本、笔记本与计划本', 'fr' => 'Journaux, carnets et planners personnalises', 'es' => 'Diarios, cuadernos y planners personalizados', 'ru' => 'Ежедневников, блокнотов и планеров на заказ', 'ar' => 'اليوميات والدفاتر والمخططات المخصصة']) }}
                 </span>
               </h1>
@@ -145,10 +147,11 @@
             </div>
           </div>
 
-          <div class="lg:col-span-4">
+          <div class="w-full lg:col-span-4">
             @include('index.inquire.hero-form', [
                 'heroInquiryId' => 'hero-inquiry',
                 'heroInquiryReturnTo' => route('index', ['lang' => $lang]) . '#hero-inquiry',
+                'heroInquiryClass' => 'flex h-full flex-col justify-center bg-white p-6 shadow-2xl sm:p-8',
             ])
           </div>
         </div>
