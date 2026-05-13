@@ -3,28 +3,28 @@
 @section('title', __('process.hero_title'))
 
 @section('main')
-  <div class="relative bg-yideli-base py-12 md:py-12 overflow-hidden">
+  <div class="relative overflow-hidden bg-yideli-base pb-10 pt-8 sm:pb-12 sm:pt-10 md:pb-12 md:pt-12 lg:pt-14">
     <div class="absolute top-0 end-0 hidden h-full w-1/3 translate-x-1/2 skew-x-12 bg-yideli-dark/5 md:block"></div>
 
     <div
-         class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 md:px-12 relative z-10">
-      <div class="grid grid-cols-1 gap-8 lg:grid-cols-10 lg:items-stretch">
-        <div class="lg:col-span-6">
-          <div class="flex h-full flex-col justify-center bg-white/80 p-6 shadow-2xl backdrop-blur-sm sm:p-8 lg:min-h-[560px] lg:p-10">
-            <h1 class="mb-6 text-3xl font-serif font-bold text-yideli-dark md:text-5xl">
+         class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 relative z-10">
+      <div class="grid grid-cols-1 gap-4 md:grid-cols-12 md:items-stretch md:gap-5 lg:grid-cols-10 lg:gap-6">
+        <div class="md:col-span-7 lg:col-span-6">
+          <div class="flex h-full flex-col justify-center border border-white/30 bg-white/76 p-4 shadow-2xl backdrop-blur-md sm:p-5 md:min-h-[380px] lg:min-h-[430px] lg:p-7">
+            <h1 class="mb-3 text-2xl font-serif font-bold text-yideli-dark sm:text-3xl md:text-[2rem] lg:text-4xl">
               {!! nl2br(__('process.hero_title')) !!}
             </h1>
-            <p class="space-y-4 text-sm leading-relaxed text-gray-800 md:text-lg">
+            <p class="text-sm leading-relaxed text-gray-800 sm:text-base md:text-[0.95rem] lg:text-lg">
               {!! nl2br(__('process.hero_desc')) !!}
             </p>
           </div>
         </div>
 
-        <div class="lg:col-span-4">
+        <div class="md:col-span-5 lg:col-span-4">
           @include('index.inquire.hero-form', [
               'heroInquiryId' => 'production-process-hero-inquiry',
               'heroInquiryReturnTo' => route('production-process', ['lang' => $lang]) . '#production-process-hero-inquiry',
-              'heroInquiryClass' => 'flex h-full flex-col justify-center bg-white p-6 shadow-2xl sm:p-8 lg:min-h-[560px]',
+              'heroInquiryClass' => 'flex h-full flex-col justify-center border border-white/30 bg-white/76 px-4 py-2 shadow-2xl backdrop-blur-md sm:px-5 sm:py-2.5 md:min-h-[380px] md:px-5 lg:min-h-[430px] lg:px-6 lg:py-3',
           ])
         </div>
       </div>

@@ -26,10 +26,10 @@
 
 @section('main')
   <main
-        class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-4 py-12 font-serif sm:px-6 md:py-20">
-    <section class="mb-12 grid grid-cols-1 gap-6 md:mb-16 lg:grid-cols-10 lg:items-stretch">
-      <div class="lg:col-span-6">
-        <div class="h-full min-h-[420px] overflow-hidden rounded-lg bg-black shadow-lg lg:min-h-[560px]">
+        class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-4 pb-12 pt-8 font-serif sm:px-6 sm:pt-10 md:px-8 md:pb-20 md:pt-12 lg:px-12 lg:pt-14">
+    <section class="mb-12 grid grid-cols-1 gap-4 md:mb-16 md:grid-cols-12 md:items-stretch md:gap-5 lg:grid-cols-10 lg:gap-6">
+      <div class="md:col-span-7 lg:col-span-6">
+        <div class="h-full min-h-[280px] overflow-hidden rounded-lg bg-black shadow-lg sm:min-h-[320px] md:min-h-[380px] lg:min-h-[430px]">
           <video class="h-full w-full object-cover"
                  autoplay
                  controls
@@ -43,11 +43,11 @@
         </div>
       </div>
 
-      <div class="lg:col-span-4">
+      <div class="md:col-span-5 lg:col-span-4">
         @include('index.inquire.hero-form', [
             'heroInquiryId' => 'about-us-hero-inquiry',
             'heroInquiryReturnTo' => route('page.show', ['lang' => $lang, 'slug' => 'about-us']) . '#about-us-hero-inquiry',
-            'heroInquiryClass' => 'flex h-full flex-col bg-white p-6 shadow-2xl sm:p-8',
+            'heroInquiryClass' => 'flex h-full flex-col justify-center border border-white/30 bg-white/76 px-4 py-2 shadow-2xl backdrop-blur-md sm:px-5 sm:py-2.5 md:min-h-[380px] md:px-5 lg:min-h-[430px] lg:px-6 lg:py-3',
         ])
       </div>
     </section>

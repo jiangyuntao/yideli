@@ -16,6 +16,7 @@ class InquireController extends BaseController
     {
         $captchaEnabled = $this->isCaptchaEnabled();
         $this->data['inquiryCaptcha'] = $captchaEnabled ? InquiryCaptcha::generate($request->session()) : null;
+        $this->data['selectedProduct'] = trim((string) $request->query('product', ''));
 
         return view('index.inquire.form', $this->data);
     }
@@ -54,7 +55,6 @@ class InquireController extends BaseController
         ];
 
         if ($isHeroForm) {
-            $rules['need'] = 'required|string|max:255';
             $rules['message'] = 'required|string';
         }
 
@@ -88,12 +88,7 @@ class InquireController extends BaseController
         $message = trim((string) ($validated['message'] ?? ''));
 
         if ($isHeroForm) {
-            $messageParts = array_filter([
-                filled($validated['need'] ?? null) ? 'Need: ' . $validated['need'] : null,
-                filled($message) ? 'Requirement: ' . $message : null,
-            ]);
-
-            $message = implode("\n", $messageParts);
+            $metaData['need'] = filled($validated['need'] ?? null) ? $validated['need'] : $message;
         }
 
         // 3. 创建记录

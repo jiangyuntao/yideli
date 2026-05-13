@@ -3,22 +3,46 @@
 @section('title', $currentCategory ? $currentCategory->name : __('news.header_title_default'))
 
 @section('main')
-  <div class="bg-yideli-base py-16 sm:py-20">
-    <div class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 lg:px-12 text-center">
-      <span
-            class="text-xs font-bold tracking-[0.2em] uppercase text-yideli-dark mb-4 block">{{ __('news.header_subtitle') }}</span>
-      <h1 class="text-3xl font-serif text-yideli-dark sm:text-4xl lg:text-5xl mb-0">
-        {{ $currentCategory ? $currentCategory->name : __('news.header_title_default') }}
-      </h1>
-      @if (request('q'))
-        <p class="text-gray-500 mt-4">{{ __('news.search_results_label') }}: "{{ request('q') }}"</p>
-      @endif
+  <div class="relative overflow-hidden bg-yideli-base pb-10 pt-8 sm:pb-12 sm:pt-10 md:pb-12 md:pt-12 lg:pt-14">
+    <div class="absolute top-0 end-0 hidden h-full w-1/3 translate-x-1/2 skew-x-12 bg-yideli-dark/5 md:block"></div>
+
+    <div class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 relative z-10">
+      <div class="grid grid-cols-1 gap-4 md:grid-cols-12 md:items-stretch md:gap-5 lg:grid-cols-10 lg:gap-6">
+        <div class="md:col-span-7 lg:col-span-6">
+          <div class="flex h-full flex-col justify-center border border-white/30 bg-white/76 p-4 shadow-2xl backdrop-blur-md sm:p-5 md:min-h-[380px] lg:min-h-[430px] lg:p-7">
+            <span class="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-yideli-dark">
+              {{ __('news.header_subtitle') }}
+            </span>
+            <h1 class="mb-3 text-2xl font-serif font-bold text-yideli-dark sm:text-3xl md:text-[2rem] lg:text-4xl">
+              {{ $currentCategory ? $currentCategory->name : __('news.header_title_default') }}
+            </h1>
+            @if (request('q'))
+              <p class="mb-3 text-sm font-medium text-yideli-dark md:text-base">
+                {{ __('news.search_results_label') }}: "{{ request('q') }}"
+              </p>
+            @endif
+            <p class="text-sm leading-relaxed text-gray-700 sm:text-base md:text-[0.95rem] lg:text-lg">
+              {{ __('news.hero_desc') !== 'news.hero_desc'
+                  ? __('news.hero_desc')
+                  : 'Stay updated with company news, product launches, market insights, and OEM/ODM developments from YIDELI.' }}
+            </p>
+          </div>
+        </div>
+
+        <div class="md:col-span-5 lg:col-span-4">
+          @include('index.inquire.hero-form', [
+              'heroInquiryId' => 'news-hero-inquiry',
+              'heroInquiryReturnTo' => url()->current() . '#news-hero-inquiry',
+              'heroInquiryClass' => 'flex h-full flex-col justify-center border border-white/30 bg-white/76 px-4 py-2 shadow-2xl backdrop-blur-md sm:px-5 sm:py-2.5 md:min-h-[380px] md:px-5 lg:min-h-[430px] lg:px-6 lg:py-3',
+          ])
+        </div>
+      </div>
     </div>
   </div>
 
   @if ($featured_news)
     <section
-             class="relative z-10 mx-auto -mt-6 mb-16 max-w-[1200px] px-6 min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] sm:-mt-10 lg:px-12 lg:mb-20">
+             class="relative z-10 mx-auto mt-6 mb-16 max-w-[1200px] px-4 min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] sm:mt-8 sm:px-6 md:mt-10 md:px-8 lg:px-12 lg:mb-20">
       <div
            class="bg-white shadow-xl border border-gray-100 grid lg:grid-cols-2 overflow-hidden group cursor-pointer news-card-hover">
         <a class="relative overflow-hidden h-64 lg:h-96"

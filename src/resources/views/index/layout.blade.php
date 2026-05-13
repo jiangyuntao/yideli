@@ -317,11 +317,11 @@
 
   @yield('main')
 
-  <div class="fixed bottom-3 end-3 z-40 flex flex-col items-end gap-1.5 sm:bottom-5 sm:end-5">
-    <a class="inline-flex h-11 min-w-[118px] items-center justify-center gap-2 whitespace-nowrap rounded-full bg-[#25D366] px-3 text-[11px] font-semibold text-white shadow-[0_14px_40px_rgba(0,0,0,0.22)] transition hover:bg-[#1ebe5d] focus:outline-none focus:ring-2 focus:ring-[#25D366]/30 focus:ring-offset-2 sm:h-auto sm:w-[180px] sm:px-4 sm:py-3"
+  <div class="fixed bottom-3 end-3 z-40 flex flex-col items-end gap-2 sm:bottom-5 sm:end-5">
+    <a class="inline-flex h-12 min-w-[132px] items-center justify-center gap-2.5 whitespace-nowrap rounded-full bg-[#25D366] px-4 text-xs font-semibold text-white shadow-[0_14px_40px_rgba(0,0,0,0.22)] transition hover:bg-[#1ebe5d] focus:outline-none focus:ring-2 focus:ring-[#25D366]/30 focus:ring-offset-2 sm:h-auto sm:w-[204px] sm:px-5 sm:py-3.5 sm:text-[13px]"
        href="{{ $floatingContactHref }}"
        aria-label="{{ $floatingQuoteLabel }}">
-      <svg class="h-4 w-4 sm:h-3.5 sm:w-3.5"
+      <svg class="h-4.5 w-4.5 sm:h-4 sm:w-4"
            fill="none"
            viewBox="0 0 24 24"
            stroke="currentColor">
@@ -343,11 +343,11 @@
         </div>
       </div>
 
-      <a class="inline-flex h-11 min-w-[118px] items-center justify-center gap-2 whitespace-nowrap rounded-full bg-[#25D366] px-3 text-[11px] font-semibold text-white shadow-[0_14px_40px_rgba(0,0,0,0.22)] transition hover:bg-[#1ebe5d] focus:outline-none focus:ring-2 focus:ring-[#25D366]/30 focus:ring-offset-2 sm:h-auto sm:w-[180px] sm:px-4 sm:py-3"
+      <a class="inline-flex h-12 min-w-[132px] items-center justify-center gap-2.5 whitespace-nowrap rounded-full bg-[#25D366] px-4 text-xs font-semibold text-white shadow-[0_14px_40px_rgba(0,0,0,0.22)] transition hover:bg-[#1ebe5d] focus:outline-none focus:ring-2 focus:ring-[#25D366]/30 focus:ring-offset-2 sm:h-auto sm:w-[204px] sm:px-5 sm:py-3.5 sm:text-[13px]"
          href="{{ $whatsappHref ?? 'javascript:;' }}"
          @if($whatsappHref) target="_blank" rel="noopener noreferrer" @endif
          aria-label="{{ $floatingWhatsappCtaLabel }}">
-        <svg class="h-4 w-4 sm:h-3.5 sm:w-3.5"
+        <svg class="h-4.5 w-4.5 sm:h-4 sm:w-4"
              xmlns="http://www.w3.org/2000/svg"
              viewBox="0 0 22 22"
              fill="currentColor">

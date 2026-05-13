@@ -13,6 +13,20 @@
 
         return $fallbacks[$lang] ?? $fallbacks['en'] ?? reset($fallbacks);
     };
+
+    $selectedProduct = trim((string) ($selectedProduct ?? ''));
+    $prefilledMessage = old('message');
+
+    if ($prefilledMessage === '' && $selectedProduct !== '') {
+        $prefilledMessage = $t('inquire.selected_product_message', [
+            'en' => "I'm interested in {$selectedProduct}. Please send me more details and a quotation.",
+            'zh' => "我对 {$selectedProduct} 感兴趣，请向我提供更多详情和报价。",
+            'fr' => "Je m'interesse a {$selectedProduct}. Merci de m'envoyer plus de details et un devis.",
+            'es' => "Estoy interesado en {$selectedProduct}. Por favor envieme mas detalles y una cotizacion.",
+            'ru' => "Меня интересует {$selectedProduct}. Пожалуйста, отправьте мне подробности и расчет.",
+            'ar' => "انا مهتم بـ {$selectedProduct}. يرجى ارسال مزيد من التفاصيل وعرض سعر.",
+        ]);
+    }
   @endphp
 
   <div class="border-b border-yideli-line bg-yideli-base py-16 sm:py-20">
@@ -145,6 +159,7 @@
       <div class="rounded-sm border border-gray-100 bg-gray-50 p-6 sm:p-8 lg:col-span-7 lg:p-12">
         <h3 class="font-serif text-2xl text-yideli-dark mb-2">{!! nl2br(__('inquire.form_title')) !!}</h3>
         <p class="text-gray-500 font-light mb-8 text-sm">{!! nl2br(__('inquire.form_hint')) !!}</p>
+
         @if ($errors->any())
           <div class="mb-6 p-4 bg-red-50 border border-red-200 text-red-700 rounded-sm text-sm">
             <ul class="list-disc ps-5">
@@ -328,7 +343,7 @@
           <div class="relative mt-8">
             <textarea
               class="input-field peer block w-full px-0 py-2 bg-transparent border-b border-gray-300 focus:outline-none focus:border-yideli-dark transition text-gray-900 placeholder-transparent resize-none"
-              id="message" name="message" rows="4" placeholder=" ">{{ old('message') }}</textarea>
+              id="message" name="message" rows="4" placeholder=" ">{{ $prefilledMessage }}</textarea>
             <label
               class="absolute start-0 top-2 text-gray-400 text-sm transition-all duration-300 origin-left cursor-text
                           peer-placeholder-shown:top-2

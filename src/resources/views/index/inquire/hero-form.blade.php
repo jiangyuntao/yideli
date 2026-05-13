@@ -19,22 +19,22 @@
       'ar' => 'احصل على عرض سعر مخصص بسرعة',
   ]);
   $heroInquiryReturnTo = $heroInquiryReturnTo ?? (url()->current() . '#' . $heroInquiryId);
-  $heroInquiryClass = $heroInquiryClass ?? 'bg-white p-6 shadow-2xl sm:p-8';
+  $heroInquiryClass = $heroInquiryClass ?? 'border border-white/30 bg-white/82 p-5 shadow-2xl backdrop-blur-md sm:p-6';
 @endphp
 
 <div id="{{ $heroInquiryId }}"
      class="{{ $heroInquiryClass }}">
-  <h2 class="overflow-hidden text-ellipsis whitespace-nowrap text-[clamp(1.125rem,4.8vw,1.875rem)] font-black leading-tight tracking-tight text-yideli-dark">
+  <h2 class="max-w-full break-words text-[clamp(1.05rem,3.6vw,1.75rem)] font-black leading-tight tracking-tight text-yideli-dark">
     {{ $heroInquiryTitle }}
   </h2>
 
   @if ($errors->any() && old('form_variant') === 'hero')
-    <div class="mt-4 rounded-sm border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+    <div class="mt-3 rounded-sm border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
       {{ $errors->first() }}
     </div>
   @endif
 
-  <form class="mt-6 space-y-4"
+  <form class="mt-4 space-y-3"
         action="{{ route('inquire.submit', ['lang' => $lang]) }}"
         method="POST">
     @csrf
@@ -52,7 +52,7 @@
            class="hidden"
            aria-hidden="true">
 
-    <input class="w-full border border-yideli-line bg-white px-4 py-3 text-sm text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-yideli-dark"
+    <input class="w-full border border-gray-300/90 bg-white/72 px-3.5 py-2.5 text-sm text-gray-900 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.18)] outline-none transition placeholder:text-gray-500 focus:border-yideli-dark sm:px-4 sm:py-3"
            type="text"
            id="{{ $heroInquiryId }}-name"
            name="name"
@@ -60,7 +60,7 @@
            placeholder="{{ $t('home_b2b.hero_form_name', ['en' => 'Your Name', 'zh' => '您的姓名', 'fr' => 'Votre nom', 'es' => 'Su nombre', 'ru' => 'Ваше имя', 'ar' => 'اسمك']) }}"
            required>
 
-    <input class="w-full border border-yideli-line bg-white px-4 py-3 text-sm text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-yideli-dark"
+    <input class="w-full border border-gray-300/90 bg-white/72 px-3.5 py-2.5 text-sm text-gray-900 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.18)] outline-none transition placeholder:text-gray-500 focus:border-yideli-dark sm:px-4 sm:py-3"
            type="email"
            id="{{ $heroInquiryId }}-email"
            name="email"
@@ -68,21 +68,13 @@
            placeholder="{{ $t('home_b2b.hero_form_email', ['en' => 'Business Email', 'zh' => '商务邮箱', 'fr' => 'Email professionnel', 'es' => 'Correo empresarial', 'ru' => '工作邮箱', 'ar' => 'البريد الإلكتروني للعمل']) }}"
            required>
 
-    <input class="w-full border border-yideli-line bg-white px-4 py-3 text-sm text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-yideli-dark"
-           type="text"
-           id="{{ $heroInquiryId }}-need"
-           name="need"
-           value="{{ old('need') }}"
-           placeholder="{{ $t('home_b2b.hero_form_need', ['en' => 'Tell Us What You Need', 'zh' => '告诉我们您需要什么', 'fr' => 'Dites-nous ce dont vous avez besoin', 'es' => 'Diganos lo que necesita', 'ru' => 'Расскажите, что вам нужно', 'ar' => 'اخبرنا بما تحتاجه']) }}"
-           required>
-
-    <textarea class="min-h-[132px] w-full resize-none border border-yideli-line bg-white px-4 py-3 text-sm text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-yideli-dark"
+    <textarea class="min-h-[84px] w-full resize-none border border-gray-300/90 bg-white/72 px-3.5 py-2.5 text-sm text-gray-900 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.18)] outline-none transition placeholder:text-gray-500 focus:border-yideli-dark sm:min-h-[96px] sm:px-4 sm:py-3"
               id="{{ $heroInquiryId }}-message"
               name="message"
-              placeholder="{{ $t('home_b2b.hero_form_requirement', ['en' => 'Your Custom Requirement (Qty, Material, Logo)', 'zh' => '您的定制需求（数量、材质、Logo）', 'fr' => 'Votre exigence personnalisee (quantite, matiere, logo)', 'es' => 'Su requerimiento personalizado (cantidad, material, logo)', 'ru' => 'Ваши требования (тираж, материал, логотип)', 'ar' => 'متطلباتك المخصصة (الكمية، الخامة، الشعار)']) }}"
+              placeholder="{{ $t('home_b2b.hero_form_requirement', ['en' => 'Your Requirements', 'zh' => '您的需求说明', 'fr' => 'Vos exigences', 'es' => 'Sus requisitos', 'ru' => 'Ваши требования', 'ar' => 'متطلباتك']) }}"
               required>{{ old('message') }}</textarea>
 
-    <button class="inline-flex w-full items-center justify-center bg-yideli-dark px-6 py-4 text-sm font-bold uppercase tracking-[0.08em] text-white transition hover:bg-yideli-hover"
+    <button class="inline-flex w-full items-center justify-center bg-yideli-dark px-6 py-2.5 text-sm font-bold uppercase tracking-[0.08em] text-white transition hover:bg-yideli-hover sm:py-3"
             type="submit">
       {{ $t('home_b2b.hero_form_submit', ['en' => 'Send My Inquiry', 'zh' => '发送我的询盘', 'fr' => 'Envoyer ma demande', 'es' => 'Enviar mi consulta', 'ru' => 'Отправить запрос', 'ar' => 'أرسل استفساري']) }}
     </button>
