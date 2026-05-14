@@ -29,20 +29,10 @@
     }
   @endphp
 
-  <div class="border-b border-yideli-line bg-yideli-base py-16 sm:py-20">
-    <div class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 lg:px-12 text-center">
-      <span class="text-xs font-bold tracking-[0.2em] uppercase text-yideli-dark mb-4 block">{!! nl2br(__('inquire.header_subtitle')) !!}</span>
-      <h1 class="mb-6 text-3xl font-serif text-yideli-dark sm:text-4xl lg:text-5xl">{!! nl2br(__('inquire.header_title')) !!}</h1>
-      <p class="mx-auto max-w-2xl text-base font-light text-gray-600 sm:text-lg">
-        {!! nl2br(__('inquire.header_desc')) !!}
-      </p>
-    </div>
-  </div>
-
   <section class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto px-6 py-16 lg:px-12 lg:py-20">
     <div class="grid gap-12 lg:grid-cols-12 lg:gap-24">
 
-      <div class="lg:col-span-5 space-y-12">
+      <div class="order-2 space-y-12 lg:order-1 lg:col-span-5">
 
         <div>
           <h3 class="font-serif text-2xl text-yideli-dark mb-6">{!! nl2br(__('inquire.contact_headquarters')) !!}</h3>
@@ -156,7 +146,8 @@
         </div>
       </div>
 
-      <div class="rounded-sm border border-gray-100 bg-gray-50 p-6 sm:p-8 lg:col-span-7 lg:p-12">
+      <div id="inquiry-form"
+           class="order-1 scroll-mt-24 rounded-sm border border-gray-100 bg-gray-50 p-6 sm:p-8 lg:order-2 lg:col-span-7 lg:p-12">
         <h3 class="font-serif text-2xl text-yideli-dark mb-2">{!! nl2br(__('inquire.form_title')) !!}</h3>
         <p class="text-gray-500 font-light mb-8 text-sm">{!! nl2br(__('inquire.form_hint')) !!}</p>
 

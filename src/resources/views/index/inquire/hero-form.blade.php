@@ -74,9 +74,14 @@
               placeholder="{{ $t('home_b2b.hero_form_requirement', ['en' => 'Your Requirements', 'zh' => '您的需求说明', 'fr' => 'Vos exigences', 'es' => 'Sus requisitos', 'ru' => 'Ваши требования', 'ar' => 'متطلباتك']) }}"
               required>{{ old('message') }}</textarea>
 
-    <button class="inline-flex w-full items-center justify-center bg-yideli-dark px-6 py-2.5 text-sm font-bold uppercase tracking-[0.08em] text-white transition hover:bg-yideli-hover sm:py-3"
-            type="submit">
-      {{ $t('home_b2b.hero_form_submit', ['en' => 'Send My Inquiry', 'zh' => '发送我的询盘', 'fr' => 'Envoyer ma demande', 'es' => 'Enviar mi consulta', 'ru' => 'Отправить запрос', 'ar' => 'أرسل استفساري']) }}
-    </button>
+    <div class="space-y-2">
+      <button class="inline-flex w-full items-center justify-center bg-yideli-dark px-6 py-2.5 text-sm font-bold uppercase tracking-[0.08em] text-white transition hover:bg-yideli-hover sm:py-3"
+              type="submit">
+        {{ $t('home_b2b.hero_form_submit', ['en' => 'Submit for Free Quote', 'zh' => '提交获取免费报价', 'fr' => 'Soumettre pour un devis gratuit', 'es' => 'Enviar para cotizacion gratuita', 'ru' => 'Отправить на бесплатный расчет', 'ar' => 'إرسال للحصول على عرض سعر مجاني']) }}
+      </button>
+      <p class="text-center text-xs text-gray-400">
+        {{ $t('home_b2b.hero_form_note', ['en' => 'Reply within 24h | No Spam', 'zh' => '24小时内回复 | 无垃圾邮件', 'fr' => 'Reponse sous 24 h | Pas de spam', 'es' => 'Respuesta en 24 h | Sin spam', 'ru' => 'Ответ в течение 24 ч | Без спама', 'ar' => 'الرد خلال 24 ساعة | بدون رسائل مزعجة']) }}
+      </p>
+    </div>
   </form>
 </div>
