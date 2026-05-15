@@ -62,10 +62,17 @@ class Setting extends SettingsPage
                         Tab::make('统计代码')
                             ->schema([
                                 Textarea::make('analytics_code')
-                                    ->label('统计代码')
+                                    ->label('Google安装代码')
                                     ->rows(12)
-                                    ->helperText('支持粘贴第三方统计脚本或 HTML 代码，将在前台全站页面的 head 中输出。')
-                                    ->placeholder("<script>\n  // analytics snippet\n</script>")
+                                    ->helperText('支持粘贴 Google 安装脚本或 HTML 代码，将在前台全站页面的 head 中输出。')
+                                    ->placeholder("<script>\n  // Google install snippet\n</script>")
+                                    ->columnSpanFull(),
+
+                                Textarea::make('google_event_code')
+                                    ->label('Google事件代码')
+                                    ->rows(12)
+                                    ->helperText('支持粘贴 Google 事件脚本或 HTML 代码，仅在表单提交成功后的 success 页面输出。')
+                                    ->placeholder("<script>\n  // Google event snippet\n</script>")
                                     ->columnSpanFull(),
                             ]),
 

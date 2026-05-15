@@ -151,7 +151,7 @@
 
   </section>
 
-  <section class="relative z-30 -mt-10 px-4 sm:-mt-12 sm:px-6 lg:-mt-16 lg:px-12">
+  <section class="relative z-30 px-4 pt-2 sm:px-6 sm:pt-3 lg:px-12 lg:pt-4">
     <div class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto">
       <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-4">
         @foreach ($categories->take(4) as $category)

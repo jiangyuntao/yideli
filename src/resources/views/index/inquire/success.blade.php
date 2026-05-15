@@ -11,6 +11,12 @@
   ][$lang] ?? 'Submission Successful' }}
 @endsection
 
+@section('head')
+  @if (filled($settings->google_event_code ?? null))
+    {!! $settings->google_event_code !!}
+  @endif
+@endsection
+
 @section('main')
   @php
     $messages = [

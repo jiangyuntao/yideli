@@ -10,6 +10,7 @@ class GeneralSettings extends Settings
     public ?array $site_description;
     public ?array $site_keywords;
     public ?string $analytics_code;
+    public ?string $google_event_code;
     public ?array $company_name;
     public ?string $contact_email;
     public ?array $contact_address;
