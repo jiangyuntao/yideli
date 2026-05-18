@@ -6,14 +6,15 @@ use App\Settings\GeneralSettings;
 use BackedEnum;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Repeater;
-use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Pages\SettingsPage;
+use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Tabs;
 use Filament\Schemas\Components\Tabs\Tab;
 use Filament\Schemas\Schema;
+use Illuminate\Support\Facades\Storage;
 
 class Setting extends SettingsPage
 {
@@ -97,15 +98,14 @@ class Setting extends SettingsPage
                                     ->label('WhatsApp 账号'),
                             ]),
 
-                        Tab::make('轮播图设置')
+                        Tab::make('首页 Hero 设置')
                             ->schema([
-                                Repeater::make('home_carousel') // 存入数据库的字段名
-                                    ->label('首页轮播图配置')
+                                Grid::make(2)
+                                    ->statePath('home_carousel')
                                     ->schema([
-                                        // 1. 上传图片
                                         FileUpload::make('image')
-                                            ->label('轮播图片')
-                                            ->helperText('建议上传2M以内图片')
+                                            ->label('PC端图片')
+                                            ->helperText('建议大小：PC 端2400 x 1000')
                                             ->image()
                                             ->imageEditor()
                                             ->maxSize(1024 * 10) // 10MB
@@ -113,34 +113,19 @@ class Setting extends SettingsPage
                                             ->directory('carousel') // 图片存放在 storage/app/public/carousel
                                             ->disk('public')
                                             ->required()
-                                            ->columnSpanFull(),
-
-                                        // 2. 标题（可选）
-                                        TextInput::make('title')
-                                            ->label('显示标题')
-                                            ->columnSpan(2),
-
-                                        // 5. 外部链接输入框 (仅当类型为 url 时显示)
-                                        TextInput::make('custom_url')
-                                            ->label('输入链接地址')
-                                            ->placeholder('https://...')
-                                            ->default('javascript:;')
                                             ->columnSpan(1),
 
-                                        Select::make('in_new_windows')
-                                            ->label('是否在新窗口打开')
-                                            ->options([
-                                                '1' => '是',
-                                                '0' => '否',
-                                            ])
-                                            ->default('0')
-                                            ->native(false)
+                                        FileUpload::make('image_mobile')
+                                            ->label('移动端图片')
+                                            ->helperText('建议大小：移动端 1080 x 1920；不上传则默认使用 PC 端图片')
+                                            ->image()
+                                            ->imageEditor()
+                                            ->maxSize(1024 * 10) // 10MB
+                                            ->acceptedFileTypes(['image/*'])
+                                            ->directory('carousel') // 图片存放在 storage/app/public/carousel
+                                            ->disk('public')
                                             ->columnSpan(1),
-                                    ])
-                                    ->columns(2) // 布局为两列
-                                    ->grid(1) // 列表显示模式
-                                    ->itemLabel(fn(array $state): ?string => $state['title'] ?? null) // 折叠时显示标题
-                                    ->collapsible(),
+                                    ]),
                             ]),
 
                         Tab::make('FAQ')
@@ -159,5 +144,52 @@ class Setting extends SettingsPage
                             ],)
                     ]),
             ]);
+    }
+
+    protected function mutateFormDataBeforeFill(array $data): array
+    {
+        $data['home_carousel'] = $this->normalizeHeroSettings($data['home_carousel'] ?? null);
+
+        return $data;
+    }
+
+    protected function mutateFormDataBeforeSave(array $data): array
+    {
+        $data['home_carousel'] = $this->normalizeHeroSettings($data['home_carousel'] ?? null);
+
+        return $data;
+    }
+
+    protected function normalizeHeroSettings(mixed $heroSettings): array
+    {
+        if (! is_array($heroSettings)) {
+            return [];
+        }
+
+        if (array_is_list($heroSettings)) {
+            $heroSettings = $heroSettings[0] ?? [];
+        }
+
+        if (! is_array($heroSettings)) {
+            return [];
+        }
+
+        $heroSettings['image'] = $this->normalizeHeroImagePath($heroSettings['image'] ?? null);
+        $heroSettings['image_mobile'] = $this->normalizeHeroImagePath($heroSettings['image_mobile'] ?? null);
+
+        return $heroSettings;
+    }
+
+    protected function normalizeHeroImagePath(mixed $path): ?string
+    {
+        if (! is_string($path) || $path === '') {
+            return null;
+        }
+
+        if (str_starts_with($path, 'http://') || str_starts_with($path, 'https://') || str_starts_with($path, '/')) {
+            return null;
+        }
+
+        return Storage::disk('public')->exists($path) ? $path : null;
     }
 }

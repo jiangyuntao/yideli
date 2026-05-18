@@ -21,7 +21,9 @@ class ProductController extends BaseController
             ->get();
 
         // 2. 初始化产品查询 (全局显示开关)
-        $query = Product::query()->where('is_visible', true);
+        $query = Product::query()
+            ->where('is_visible', true)
+            ->withCount('accessCodes');
 
         // 3. 处理分类筛选逻辑 (关键点：有 slug 才查分类，没 slug 就跳过)
         $currentCategory = null;
@@ -80,12 +82,16 @@ class ProductController extends BaseController
         $product = Product::where("slug->{$locale}", $slug)
             ->orWhere('slug->en', $slug)
             ->where('is_visible', true)
-            ->with(['category', 'relatedProducts'])
+            ->withCount('accessCodes')
+            ->with([
+                'category',
+                'relatedProducts' => fn($query) => $query->with('category')->withCount('accessCodes'),
+            ])
             ->firstOrFail();
 
         // 2. 权限判断逻辑
         // 检查该产品是否被任何 Access Code 锁定
-        $isPrivate = $product->accessCodes()->exists();
+        $isPrivate = $product->access_codes_count > 0;
 
         // 获取当前用户 Session 中已解锁的 ID
         $unlockedIds = session('unlocked_product_ids', []);

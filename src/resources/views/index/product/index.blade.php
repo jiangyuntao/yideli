@@ -192,7 +192,8 @@
 
           @forelse($products as $product)
             @php
-              $hasAccess = in_array($product->id, $unlockedProductIds);
+              $isPrivate = $product->access_codes_count > 0;
+              $hasAccess = !$isPrivate || in_array($product->id, $unlockedProductIds);
               $imgUrl = $product->cover_image
                   ? asset('storage/' . $product->cover_image)
                   : asset('images/placeholder.jpg');

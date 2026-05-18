@@ -238,7 +238,7 @@
           @foreach ($relatedProducts as $related)
             @php
               $unlockedIds = session('unlocked_product_ids', []);
-              $isRelatedPrivate = $related->accessCodes()->exists();
+              $isRelatedPrivate = $related->access_codes_count > 0;
               $hasRelatedAccess = !$isRelatedPrivate || in_array($related->id, $unlockedIds);
 
               $relImg = $related->cover_image

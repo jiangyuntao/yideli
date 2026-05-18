@@ -75,35 +75,44 @@
         asset('images/index-cert-slides/7.png'),
     ];
 
-    $heroSlide = collect($settings->home_carousel ?? [])->first();
-    $heroImagePath = data_get($heroSlide, 'image');
-    $heroImage = asset('images/working-1.webp');
+    $heroCategoryImageMap = [
+        'binding' => asset('images/binding-book-2.jpg'),
+        'spiral' => asset('images/line-circle-book-2.jpg'),
+        'notebook' => asset('images/notebook-2.jpg'),
+        'calendar' => asset('images/weekly-calendar-2.jpg'),
+    ];
 
-    if (is_string($heroImagePath) && $heroImagePath !== '') {
-        $heroImage = str_starts_with($heroImagePath, 'http://') || str_starts_with($heroImagePath, 'https://') || str_starts_with($heroImagePath, '/')
-            ? $heroImagePath
-            : asset('storage/' . ltrim($heroImagePath, '/'));
+    $heroSlide = $settings->home_carousel ?? [];
+
+    if (is_array($heroSlide) && array_is_list($heroSlide)) {
+        $heroSlide = $heroSlide[0] ?? [];
     }
 
-    $heroLink = trim((string) data_get($heroSlide, 'custom_url', ''));
-    $heroHasLink = $heroLink !== '' && !in_array($heroLink, ['#', 'javascript:;'], true);
-    $heroTarget = (int) data_get($heroSlide, 'in_new_windows', 0) === 1 ? '_blank' : '_self';
-    $heroTitle = trim((string) data_get($heroSlide, 'title', 'Factory Slide')) ?: 'Factory Slide';
+    if (! is_array($heroSlide)) {
+        $heroSlide = [];
+    }
+    $resolveHeroImage = function ($path) {
+        if (! is_string($path) || $path === '') {
+            return null;
+        }
+
+        return str_starts_with($path, 'http://') || str_starts_with($path, 'https://') || str_starts_with($path, '/')
+            ? $path
+            : asset('storage/' . ltrim($path, '/'));
+    };
+
+    $heroDesktopImage = $resolveHeroImage(data_get($heroSlide, 'image')) ?? asset('images/working-1.webp');
+    $heroMobileImage = $resolveHeroImage(data_get($heroSlide, 'image_mobile')) ?? $heroDesktopImage;
   @endphp
 
   <section class="relative mx-auto w-full overflow-hidden shadow-2xl">
     <div class="absolute inset-0 overflow-hidden">
-      <img class="h-full w-full object-cover object-center md:object-[center_20%]"
-           src="{{ $heroImage }}"
-           alt="{{ $heroTitle }}">
-
-      @if ($heroHasLink)
-        <a class="absolute inset-0 z-10"
-           href="{{ $heroLink }}"
-           target="{{ $heroTarget }}"
-           aria-label="{{ $heroTitle }}">
-        </a>
-      @endif
+      <img class="h-full w-full object-cover object-center md:hidden"
+           src="{{ $heroMobileImage }}"
+           alt="Yideli factory hero image">
+      <img class="hidden h-full w-full object-cover object-center md:block md:object-[center_20%]"
+           src="{{ $heroDesktopImage }}"
+           alt="Yideli factory hero image">
     </div>
 
     <div class="relative z-20 flex min-h-[680px] items-start pb-6 pt-8 sm:min-h-[720px] sm:pb-8 sm:pt-10 md:min-h-[760px] md:pb-10 md:pt-12 lg:min-h-[580px] lg:pb-8 lg:pt-14 xl:min-h-[640px]">
@@ -156,25 +165,63 @@
       <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-4">
         @foreach ($categories->take(4) as $category)
           @php
-            $categoryCover = $category->cover_image ? asset('storage/' . $category->cover_image) : asset('images/placeholder.jpg');
+            $categorySlug = strtolower((string) $category->slug);
+            $categoryName = function_exists('mb_strtolower')
+                ? mb_strtolower((string) $category->name)
+                : strtolower((string) $category->name);
+
+            $categoryCover = match (true) {
+                str_contains($categorySlug, 'calendar'),
+                str_contains($categorySlug, 'schedule'),
+                str_contains($categorySlug, 'diary'),
+                str_contains($categoryName, 'calendar'),
+                str_contains($categoryName, 'weekly'),
+                str_contains($categoryName, 'schedule'),
+                str_contains($categoryName, 'diary'),
+                str_contains($categoryName, '日程'),
+                str_contains($categoryName, '日记'),
+                str_contains($categoryName, '周历'),
+                str_contains($categoryName, '周计划') => $heroCategoryImageMap['calendar'],
+
+                str_contains($categorySlug, 'spiral'),
+                str_contains($categorySlug, 'coil'),
+                str_contains($categorySlug, 'wire'),
+                str_contains($categoryName, 'spiral'),
+                str_contains($categoryName, 'coil'),
+                str_contains($categoryName, 'wire'),
+                str_contains($categoryName, '线圈') => $heroCategoryImageMap['spiral'],
+
+                str_contains($categorySlug, 'binding'),
+                str_contains($categorySlug, 'elastic-band'),
+                str_contains($categoryName, 'binding'),
+                str_contains($categoryName, 'elastic'),
+                str_contains($categoryName, '绑带'),
+                str_contains($categoryName, '装订') => $heroCategoryImageMap['binding'],
+
+                str_contains($categorySlug, 'notebook'),
+                str_contains($categoryName, 'notebook'),
+                str_contains($categoryName, '笔记本') => $heroCategoryImageMap['notebook'],
+
+                default => asset('images/placeholder.jpg'),
+            };
           @endphp
-          <article class="group relative overflow-hidden bg-white shadow-2xl">
-            <div class="aspect-[4/3] overflow-hidden">
-              <img class="h-full w-full object-cover transition duration-700 group-hover:scale-105"
+          <article class="group relative overflow-hidden bg-[#fbfbee] shadow-2xl">
+            <div class="aspect-[4/3] overflow-hidden bg-[#fbfbee] p-4 sm:p-5">
+              <img class="h-full w-full object-contain"
                    src="{{ $categoryCover }}"
                    alt="{{ $category->name }}">
             </div>
 
             <div class="absolute inset-0 bg-gradient-to-t from-black/65 via-black/20 to-transparent"></div>
 
-            <div class="absolute inset-x-0 bottom-0 flex h-full flex-col justify-end p-3 sm:p-4">
-              <div class="inline-flex max-w-full bg-black/38 px-3 py-2 backdrop-blur-sm">
-                <h3 class="truncate text-base font-bold uppercase tracking-[0.08em] text-white drop-shadow-[0_3px_10px_rgba(0,0,0,0.65)] sm:text-lg">
-                  {{ $category->name }}
-                </h3>
-              </div>
+            <div class="absolute inset-0 flex items-center justify-center px-4 text-center sm:px-5">
+              <h3 class="max-w-full px-4 text-base font-bold leading-snug text-white [text-shadow:0_3px_10px_rgba(0,0,0,0.45)] [-webkit-text-stroke:0.6px_rgba(0,0,0,0.35)] sm:text-lg lg:text-xl">
+                {{ $category->name }}
+              </h3>
+            </div>
 
-              <div class="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-2">
+            <div class="absolute inset-x-0 bottom-0 p-3 sm:p-4">
+              <div class="grid grid-cols-1 gap-2 sm:grid-cols-2">
                 <a class="inline-flex items-center justify-center bg-white px-3 py-2 text-[11px] font-bold uppercase tracking-[0.08em] text-yideli-dark transition hover:bg-yideli-base sm:text-xs"
                    href="{{ route('product.index', ['lang' => $lang, 'slug' => $category->slug]) }}">
                   {{ $t('home_b2b.category_card_view_details', ['en' => 'View Details', 'zh' => '查看详情', 'fr' => 'Voir details', 'es' => 'Ver detalles', 'ru' => 'Подробнее', 'ar' => 'عرض التفاصيل']) }}
