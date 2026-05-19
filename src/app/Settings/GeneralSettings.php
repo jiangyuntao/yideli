@@ -19,6 +19,7 @@ class GeneralSettings extends Settings
     public ?string $contact_linkedin;
     public ?string $contact_whatsapp;
     public ?array $home_carousel; // 首页 Hero 配置
+    public ?array $home_category_images; // 首页 Hero 下方 4 个分类图
     public bool $is_active; // 网站维护开关
     public bool $captcha_enabled; // 询盘验证码开关
     public ?array $faqs; // 常见问题

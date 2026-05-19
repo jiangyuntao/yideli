@@ -126,6 +126,54 @@ class Setting extends SettingsPage
                                             ->disk('public')
                                             ->columnSpan(1),
                                     ]),
+
+                                Grid::make(2)
+                                    ->statePath('home_category_images')
+                                    ->schema([
+                                        FileUpload::make('image_1')
+                                            ->label('分类图 1')
+                                            ->helperText('对应首页 Hero 下方第 1 个商品分类图')
+                                            ->image()
+                                            ->imageEditor()
+                                            ->maxSize(1024 * 10)
+                                            ->acceptedFileTypes(['image/*'])
+                                            ->directory('home-categories')
+                                            ->disk('public')
+                                            ->columnSpan(1),
+
+                                        FileUpload::make('image_2')
+                                            ->label('分类图 2')
+                                            ->helperText('对应首页 Hero 下方第 2 个商品分类图')
+                                            ->image()
+                                            ->imageEditor()
+                                            ->maxSize(1024 * 10)
+                                            ->acceptedFileTypes(['image/*'])
+                                            ->directory('home-categories')
+                                            ->disk('public')
+                                            ->columnSpan(1),
+
+                                        FileUpload::make('image_3')
+                                            ->label('分类图 3')
+                                            ->helperText('对应首页 Hero 下方第 3 个商品分类图')
+                                            ->image()
+                                            ->imageEditor()
+                                            ->maxSize(1024 * 10)
+                                            ->acceptedFileTypes(['image/*'])
+                                            ->directory('home-categories')
+                                            ->disk('public')
+                                            ->columnSpan(1),
+
+                                        FileUpload::make('image_4')
+                                            ->label('分类图 4')
+                                            ->helperText('对应首页 Hero 下方第 4 个商品分类图')
+                                            ->image()
+                                            ->imageEditor()
+                                            ->maxSize(1024 * 10)
+                                            ->acceptedFileTypes(['image/*'])
+                                            ->directory('home-categories')
+                                            ->disk('public')
+                                            ->columnSpan(1),
+                                    ]),
                             ]),
 
                         Tab::make('FAQ')
@@ -149,6 +197,7 @@ class Setting extends SettingsPage
     protected function mutateFormDataBeforeFill(array $data): array
     {
         $data['home_carousel'] = $this->normalizeHeroSettings($data['home_carousel'] ?? null);
+        $data['home_category_images'] = $this->normalizeHomeCategoryImages($data['home_category_images'] ?? null);
 
         return $data;
     }
@@ -156,6 +205,7 @@ class Setting extends SettingsPage
     protected function mutateFormDataBeforeSave(array $data): array
     {
         $data['home_carousel'] = $this->normalizeHeroSettings($data['home_carousel'] ?? null);
+        $data['home_category_images'] = $this->normalizeHomeCategoryImages($data['home_category_images'] ?? null);
 
         return $data;
     }
@@ -178,6 +228,20 @@ class Setting extends SettingsPage
         $heroSettings['image_mobile'] = $this->normalizeHeroImagePath($heroSettings['image_mobile'] ?? null);
 
         return $heroSettings;
+    }
+
+    protected function normalizeHomeCategoryImages(mixed $images): array
+    {
+        if (! is_array($images)) {
+            return [];
+        }
+
+        return [
+            'image_1' => $this->normalizeHeroImagePath($images['image_1'] ?? null),
+            'image_2' => $this->normalizeHeroImagePath($images['image_2'] ?? null),
+            'image_3' => $this->normalizeHeroImagePath($images['image_3'] ?? null),
+            'image_4' => $this->normalizeHeroImagePath($images['image_4'] ?? null),
+        ];
     }
 
     protected function normalizeHeroImagePath(mixed $path): ?string

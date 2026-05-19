@@ -75,13 +75,6 @@
         asset('images/index-cert-slides/7.png'),
     ];
 
-    $heroCategoryImageMap = [
-        'binding' => asset('images/binding-book-2.jpg'),
-        'spiral' => asset('images/line-circle-book-2.jpg'),
-        'notebook' => asset('images/notebook-2.jpg'),
-        'calendar' => asset('images/weekly-calendar-2.jpg'),
-    ];
-
     $heroSlide = $settings->home_carousel ?? [];
 
     if (is_array($heroSlide) && array_is_list($heroSlide)) {
@@ -103,6 +96,20 @@
 
     $heroDesktopImage = $resolveHeroImage(data_get($heroSlide, 'image')) ?? asset('images/working-1.webp');
     $heroMobileImage = $resolveHeroImage(data_get($heroSlide, 'image_mobile')) ?? $heroDesktopImage;
+
+    $defaultHeroCategoryImages = [
+        asset('images/binding-book-2.jpg'),
+        asset('images/line-circle-book-2.jpg'),
+        asset('images/notebook-2.jpg'),
+        asset('images/weekly-calendar-2.jpg'),
+    ];
+
+    $heroCategoryImages = [
+        $resolveHeroImage(data_get($settings->home_category_images ?? [], 'image_1')) ?? $defaultHeroCategoryImages[0],
+        $resolveHeroImage(data_get($settings->home_category_images ?? [], 'image_2')) ?? $defaultHeroCategoryImages[1],
+        $resolveHeroImage(data_get($settings->home_category_images ?? [], 'image_3')) ?? $defaultHeroCategoryImages[2],
+        $resolveHeroImage(data_get($settings->home_category_images ?? [], 'image_4')) ?? $defaultHeroCategoryImages[3],
+    ];
   @endphp
 
   <section class="relative mx-auto w-full overflow-hidden shadow-2xl">
@@ -163,47 +170,9 @@
   <section class="relative z-30 px-4 pt-2 sm:px-6 sm:pt-3 lg:px-12 lg:pt-4">
     <div class="max-w-[1200px] min-[1921px]:max-w-[1600px] min-[2561px]:max-w-[2400px] mx-auto">
       <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-4">
-        @foreach ($categories->take(4) as $category)
+        @foreach ($categories->take(4) as $index => $category)
           @php
-            $categorySlug = strtolower((string) $category->slug);
-            $categoryName = function_exists('mb_strtolower')
-                ? mb_strtolower((string) $category->name)
-                : strtolower((string) $category->name);
-
-            $categoryCover = match (true) {
-                str_contains($categorySlug, 'calendar'),
-                str_contains($categorySlug, 'schedule'),
-                str_contains($categorySlug, 'diary'),
-                str_contains($categoryName, 'calendar'),
-                str_contains($categoryName, 'weekly'),
-                str_contains($categoryName, 'schedule'),
-                str_contains($categoryName, 'diary'),
-                str_contains($categoryName, '日程'),
-                str_contains($categoryName, '日记'),
-                str_contains($categoryName, '周历'),
-                str_contains($categoryName, '周计划') => $heroCategoryImageMap['calendar'],
-
-                str_contains($categorySlug, 'spiral'),
-                str_contains($categorySlug, 'coil'),
-                str_contains($categorySlug, 'wire'),
-                str_contains($categoryName, 'spiral'),
-                str_contains($categoryName, 'coil'),
-                str_contains($categoryName, 'wire'),
-                str_contains($categoryName, '线圈') => $heroCategoryImageMap['spiral'],
-
-                str_contains($categorySlug, 'binding'),
-                str_contains($categorySlug, 'elastic-band'),
-                str_contains($categoryName, 'binding'),
-                str_contains($categoryName, 'elastic'),
-                str_contains($categoryName, '绑带'),
-                str_contains($categoryName, '装订') => $heroCategoryImageMap['binding'],
-
-                str_contains($categorySlug, 'notebook'),
-                str_contains($categoryName, 'notebook'),
-                str_contains($categoryName, '笔记本') => $heroCategoryImageMap['notebook'],
-
-                default => asset('images/placeholder.jpg'),
-            };
+            $categoryCover = $heroCategoryImages[$index] ?? asset('images/placeholder.jpg');
           @endphp
           <article class="group relative overflow-hidden bg-[#fbfbee] shadow-2xl">
             <div class="aspect-[4/3] overflow-hidden bg-[#fbfbee] p-4 sm:p-5">
