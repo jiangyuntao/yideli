@@ -194,17 +194,22 @@
             @php
               $isPrivate = $product->access_codes_count > 0;
               $hasAccess = !$isPrivate || in_array($product->id, $unlockedProductIds);
+              $productUrl = $product->route_slug
+                  ? route('product.show', ['lang' => $lang, 'slug' => $product->route_slug])
+                  : null;
               $imgUrl = $product->cover_image
                   ? asset('storage/' . $product->cover_image)
                   : asset('images/placeholder.jpg');
             @endphp
 
-            @if ($hasAccess)
+            @if ($hasAccess && $productUrl)
               <a class="product-card group cursor-pointer block"
-                 href="{{ route('product.show', ['lang' => $lang, 'slug' => $product->slug]) }}">
-              @else
+                 href="{{ $productUrl }}">
+            @elseif (!$hasAccess && $productUrl)
                 <div class="product-card group cursor-pointer"
-                     @click="promptAccess('{{ route('product.show', ['lang' => $lang, 'slug' => $product->slug]) }}', {{ $product->id }})">
+                     @click="promptAccess('{{ $productUrl }}', {{ $product->id }})">
+            @else
+              <div class="product-card group block">
             @endif
 
             <div

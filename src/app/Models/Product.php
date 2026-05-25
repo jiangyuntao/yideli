@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Bus;
 use Spatie\Translatable\HasTranslations;
 
@@ -65,6 +66,18 @@ class Product extends Model
     {
         return Attribute::make(
             get: fn() => $this->images[0] ?? null,
+        );
+    }
+
+    protected function routeSlug(): Attribute
+    {
+        return Attribute::make(
+            get: function () {
+                $currentLocale = App::currentLocale();
+
+                return $this->getTranslation('slug', $currentLocale, false)
+                    ?: $this->getTranslation('slug', 'en', false);
+            },
         );
     }
 }
