@@ -91,7 +91,7 @@ class LanguageLinesTable
                             ->label('CSV 文件')
                             ->helperText('请选择包含翻译数据的 CSV 文件。第一行为表头，应包含: group, key, zh')
                             ->acceptedFileTypes(['text/csv', 'text/plain', 'application/vnd.ms-excel'])
-                            ->maxSize(10240) // 10MB
+                            ->maxSize(2048) // 2MB
                             ->required()
                             ->disk('local')
                             ->directory('temp-translations')

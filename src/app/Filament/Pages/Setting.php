@@ -108,7 +108,7 @@ class Setting extends SettingsPage
                                             ->helperText('建议大小：PC 端2400 x 1000')
                                             ->image()
                                             ->imageEditor()
-                                            ->maxSize(1024 * 10) // 10MB
+                                            ->maxSize(1024 * 2) // 2MB
                                             ->acceptedFileTypes(['image/*'])
                                             ->directory('carousel') // 图片存放在 storage/app/public/carousel
                                             ->disk('public')
@@ -120,7 +120,7 @@ class Setting extends SettingsPage
                                             ->helperText('建议大小：移动端 1080 x 1920；不上传则默认使用 PC 端图片')
                                             ->image()
                                             ->imageEditor()
-                                            ->maxSize(1024 * 10) // 10MB
+                                            ->maxSize(1024 * 2) // 2MB
                                             ->acceptedFileTypes(['image/*'])
                                             ->directory('carousel') // 图片存放在 storage/app/public/carousel
                                             ->disk('public')
@@ -135,7 +135,7 @@ class Setting extends SettingsPage
                                             ->helperText('对应首页 Hero 下方第 1 个商品分类图')
                                             ->image()
                                             ->imageEditor()
-                                            ->maxSize(1024 * 10)
+                                            ->maxSize(1024 * 2) // 2MB
                                             ->acceptedFileTypes(['image/*'])
                                             ->directory('home-categories')
                                             ->disk('public')
@@ -146,7 +146,7 @@ class Setting extends SettingsPage
                                             ->helperText('对应首页 Hero 下方第 2 个商品分类图')
                                             ->image()
                                             ->imageEditor()
-                                            ->maxSize(1024 * 10)
+                                            ->maxSize(1024 * 2) // 2MB
                                             ->acceptedFileTypes(['image/*'])
                                             ->directory('home-categories')
                                             ->disk('public')
@@ -157,7 +157,7 @@ class Setting extends SettingsPage
                                             ->helperText('对应首页 Hero 下方第 3 个商品分类图')
                                             ->image()
                                             ->imageEditor()
-                                            ->maxSize(1024 * 10)
+                                            ->maxSize(1024 * 2) // 2MB
                                             ->acceptedFileTypes(['image/*'])
                                             ->directory('home-categories')
                                             ->disk('public')
@@ -168,7 +168,7 @@ class Setting extends SettingsPage
                                             ->helperText('对应首页 Hero 下方第 4 个商品分类图')
                                             ->image()
                                             ->imageEditor()
-                                            ->maxSize(1024 * 10)
+                                            ->maxSize(1024 * 2) // 2MB
                                             ->acceptedFileTypes(['image/*'])
                                             ->directory('home-categories')
                                             ->disk('public')

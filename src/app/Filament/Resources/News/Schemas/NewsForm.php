@@ -96,7 +96,7 @@ class NewsForm
                                     ->directory('products')
                                     ->image()
                                     ->imageEditor()
-                                    ->maxSize(1024 * 10) // 10MB
+                                    ->maxSize(1024 * 2) // 2MB
                                     ->acceptedFileTypes(['image/*']),
 
                                 DateTimePicker::make('published_at')

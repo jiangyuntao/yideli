@@ -86,7 +86,7 @@ class ProductForm
                                     ->directory('products')
                                     ->image()
                                     ->imageEditor()
-                                    ->maxSize(1024 * 10) // 10MB
+                                    ->maxSize(1024 * 2) // 2MB
                                     ->acceptedFileTypes(['image/*']),
 
                                 Toggle::make('is_visible')
