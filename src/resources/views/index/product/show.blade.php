@@ -79,7 +79,7 @@
       <div class="grid lg:grid-cols-2 gap-12 lg:gap-20">
 
         <div class="space-y-6">
-          <div class="aspect-[4/5] bg-gray-50 flex items-center justify-center border border-gray-100 overflow-hidden relative group cursor-pointer"
+          <div class="aspect-[4/5] bg-[#F5F6EA] flex items-center justify-center border border-gray-100 overflow-hidden relative group cursor-pointer"
                @if (!$hasAccess) @click="promptAccess('{{ request()->fullUrl() }}', {{ $product->id }})" @endif>
 
             <img class="w-full h-full object-contain transition-all duration-500 {{ $hasAccess ? 'mix-blend-multiply' : 'blur-xl opacity-70 pointer-events-none' }}"
@@ -132,7 +132,7 @@
             <div class="grid grid-cols-4 gap-2 sm:gap-4">
               @foreach ($product->images as $image)
                 @php $imgUrl = asset('storage/' . $image); @endphp
-                <button class="aspect-square bg-gray-50 border-transparent hover:border-yideli-dark transition border-2"
+                <button class="aspect-square bg-[#F5F6EA] border-transparent hover:border-yideli-dark transition border-2"
                         @click="activeImage = '{{ $imgUrl }}'"
                         :class="activeImage === '{{ $imgUrl }}' ? 'border-yideli-dark' : 'border-transparent'">
                   <img class="w-full h-full object-contain mix-blend-multiply {{ !$hasAccess ? 'blur-sm' : '' }}"
@@ -251,7 +251,7 @@
                  @if ($hasRelatedAccess) onclick="window.location.href='{{ $relatedUrl }}'"
                  @else
                 @click="promptAccess('{{ $relatedUrl }}', {{ $related->id }})" @endif>
-              <div class="aspect-[4/5] bg-gray-50 mb-4 overflow-hidden relative">
+              <div class="aspect-[4/5] bg-[#F5F6EA] mb-4 overflow-hidden relative">
                 <img class="w-full h-full object-cover transition duration-500
                                       {{ $hasRelatedAccess ? 'group-hover:scale-105' : 'blur-md opacity-70' }}"
                      src="{{ $relImg }}">

@@ -209,7 +209,7 @@
             @endif
 
             <div
-                 class="aspect-[4/5] bg-[#fcfcee] relative overflow-hidden mb-4 group-hover:shadow-lg transition-all duration-300">
+                 class="aspect-[4/5] bg-[#F5F6EA] relative overflow-hidden mb-4 group-hover:shadow-lg transition-all duration-300">
               <img class="w-full h-full object-cover scale-105 pointer-events-none transition duration-700
                                     {{ $hasAccess ? 'group-hover:scale-110' : 'blur-xl opacity-70' }}"
                    src="{{ $imgUrl }}"
