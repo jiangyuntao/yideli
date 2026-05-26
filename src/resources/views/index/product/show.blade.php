@@ -240,9 +240,7 @@
               $unlockedIds = session('unlocked_product_ids', []);
               $isRelatedPrivate = $related->access_codes_count > 0;
               $hasRelatedAccess = !$isRelatedPrivate || in_array($related->id, $unlockedIds);
-              $relatedUrl = $related->route_slug
-                  ? route('product.show', ['lang' => $lang, 'slug' => $related->route_slug])
-                  : null;
+              $relatedUrl = route('product.show', ['lang' => $lang, 'slug' => $related->route_slug]);
 
               $relImg = $related->cover_image
                   ? asset('storage/' . $related->cover_image)
@@ -250,8 +248,8 @@
             @endphp
 
             <div class="group block cursor-pointer"
-                 @if ($relatedUrl && $hasRelatedAccess) onclick="window.location.href='{{ $relatedUrl }}'"
-                 @elseif ($relatedUrl)
+                 @if ($hasRelatedAccess) onclick="window.location.href='{{ $relatedUrl }}'"
+                 @else
                 @click="promptAccess('{{ $relatedUrl }}', {{ $related->id }})" @endif>
               <div class="aspect-[4/5] bg-gray-50 mb-4 overflow-hidden relative">
                 <img class="w-full h-full object-cover transition duration-500

@@ -76,7 +76,8 @@ class Product extends Model
                 $currentLocale = App::currentLocale();
 
                 return $this->getTranslation('slug', $currentLocale, false)
-                    ?: $this->getTranslation('slug', 'en', false);
+                    ?: $this->getTranslation('slug', 'en', false)
+                    ?: (string) $this->getKey();
             },
         );
     }

@@ -77,10 +77,18 @@ class ProductController extends BaseController
     public function show(Request $request, $lang, $slug)
     {
         $locale = App::getLocale();
+        $routeKey = (string) $slug;
 
         // 1. 查找产品 (包含关联分类和关联商品)
-        $product = Product::where("slug->{$locale}", $slug)
-            ->orWhere('slug->en', $slug)
+        $product = Product::query()
+            ->where(function ($query) use ($locale, $routeKey) {
+                $query->where("slug->{$locale}", $routeKey)
+                    ->orWhere('slug->en', $routeKey);
+
+                if (ctype_digit($routeKey)) {
+                    $query->orWhere($query->getModel()->getQualifiedKeyName(), (int) $routeKey);
+                }
+            })
             ->where('is_visible', true)
             ->withCount('accessCodes')
             ->with([
