@@ -79,7 +79,7 @@
       <div class="grid lg:grid-cols-2 gap-12 lg:gap-20">
 
         <div class="space-y-6">
-          <div class="aspect-[4/5] bg-gray-50 flex items-center justify-center border border-gray-100 p-8 overflow-hidden relative group cursor-pointer"
+          <div class="aspect-[4/5] bg-gray-50 flex items-center justify-center border border-gray-100 overflow-hidden relative group cursor-pointer"
                @if (!$hasAccess) @click="promptAccess('{{ request()->fullUrl() }}', {{ $product->id }})" @endif>
 
             <img class="w-full h-full object-contain transition-all duration-500 {{ $hasAccess ? 'mix-blend-multiply' : 'blur-xl opacity-70 pointer-events-none' }}"
