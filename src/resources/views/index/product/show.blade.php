@@ -132,7 +132,7 @@
             <div class="grid grid-cols-4 gap-2 sm:gap-4">
               @foreach ($product->images as $image)
                 @php $imgUrl = asset('storage/' . $image); @endphp
-                <button class="aspect-square bg-gray-50 border-transparent hover:border-yideli-dark p-2 transition border-2"
+                <button class="aspect-square bg-gray-50 border-transparent hover:border-yideli-dark transition border-2"
                         @click="activeImage = '{{ $imgUrl }}'"
                         :class="activeImage === '{{ $imgUrl }}' ? 'border-yideli-dark' : 'border-transparent'">
                   <img class="w-full h-full object-contain mix-blend-multiply {{ !$hasAccess ? 'blur-sm' : '' }}"
