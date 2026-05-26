@@ -79,10 +79,10 @@
       <div class="grid lg:grid-cols-2 gap-12 lg:gap-20">
 
         <div class="space-y-6">
-          <div class="aspect-[4/5] bg-[#F5F6EA] flex items-center justify-center border border-gray-100 overflow-hidden relative group cursor-pointer"
+          <div class="aspect-[4/5] bg-[#FBFBEE] flex items-center justify-center border border-gray-100 overflow-hidden relative group cursor-pointer"
                @if (!$hasAccess) @click="promptAccess('{{ request()->fullUrl() }}', {{ $product->id }})" @endif>
 
-            <img class="w-full h-full object-contain transition-all duration-500 {{ $hasAccess ? 'mix-blend-multiply' : 'blur-xl opacity-70 pointer-events-none' }}"
+            <img class="w-full h-full object-contain transition-all duration-500 {{ !$hasAccess ? 'blur-xl opacity-70 pointer-events-none' : '' }}"
                  alt="{{ $product->name }}"
                  :src="activeImage">
 
@@ -132,10 +132,10 @@
             <div class="grid grid-cols-4 gap-2 sm:gap-4">
               @foreach ($product->images as $image)
                 @php $imgUrl = asset('storage/' . $image); @endphp
-                <button class="aspect-square bg-[#F5F6EA] border-transparent hover:border-yideli-dark transition border-2"
+                <button class="aspect-square bg-[#FBFBEE] border-transparent hover:border-yideli-dark transition border-2"
                         @click="activeImage = '{{ $imgUrl }}'"
                         :class="activeImage === '{{ $imgUrl }}' ? 'border-yideli-dark' : 'border-transparent'">
-                  <img class="w-full h-full object-contain mix-blend-multiply {{ !$hasAccess ? 'blur-sm' : '' }}"
+                  <img class="w-full h-full object-contain {{ !$hasAccess ? 'blur-sm' : '' }}"
                        src="{{ $imgUrl }}">
                 </button>
               @endforeach
