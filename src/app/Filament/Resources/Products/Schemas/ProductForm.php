@@ -99,6 +99,26 @@ class ProductForm
                                     ->maxLength(255)
                                     ->translatable(),
 
+                                TextInput::make('size')
+                                    ->label('Size')
+                                    ->maxLength(255)
+                                    ->translatable(),
+
+                                Textarea::make('inner_pages')
+                                    ->label('Inner pages')
+                                    ->rows(3)
+                                    ->translatable(),
+
+                                TextInput::make('moq')
+                                    ->label('MOQ')
+                                    ->maxLength(255)
+                                    ->translatable(),
+
+                                TextInput::make('lead_time')
+                                    ->label('Lead Time')
+                                    ->maxLength(255)
+                                    ->translatable(),
+
                                 TagsInput::make('tags')
                                     ->label('标签')
                                     ->translatable(),

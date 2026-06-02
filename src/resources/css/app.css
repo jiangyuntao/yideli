@@ -129,7 +129,46 @@ html[lang="en"] {
     width: 100%;
   }
 
+  .product-detail-title {
+    margin-bottom: 2rem;
+    color: var(--color-yideli-dark);
+    font-family: var(--font-site-sans);
+    font-size: clamp(2.5rem, 3.5vw, 4rem);
+    font-weight: 800;
+    line-height: 0.98;
+    letter-spacing: -0.04em;
+  }
+
+  .product-detail-specs {
+    display: grid;
+    gap: 1.75rem;
+  }
+
+  .product-detail-spec {
+    color: color-mix(in srgb, var(--color-yideli-dark) 92%, white);
+    font-size: clamp(1.05rem, 1.2vw, 1.45rem);
+    line-height: 1.7;
+  }
+
+  .product-detail-spec__label {
+    margin-inline-end: 0.35rem;
+    font-weight: 800;
+  }
+
+  .product-detail-spec__value {
+    font-weight: 500;
+  }
+
   @media (max-width: 1023px) {
+    .product-detail-title {
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.03em;
+    }
+
+    .product-detail-specs {
+      gap: 1.2rem;
+    }
+
     .responsive-richtext table,
     .prose table {
       display: block;

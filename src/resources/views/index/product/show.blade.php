@@ -143,59 +143,111 @@
           @endif
         </div>
 
-        <div>
-          @if ($product->code)
-            <span
-                  class="text-sm text-yideli-dark font-bold uppercase tracking-widest mb-2 block">{{ __('product.detail_model') }}:
-              {{ $product->code }}</span>
-          @endif
+        <div class="lg:pt-4">
+          @php
+            $specLabels = [
+                'en' => [
+                    'item_number' => 'Item Number',
+                    'material' => 'Material',
+                    'size' => 'Size',
+                    'inner_pages' => 'Inner pages',
+                    'moq' => 'MOQ',
+                    'lead_time' => 'Lead Time',
+                    'description' => 'Description',
+                ],
+                'zh' => [
+                    'item_number' => '产品编号',
+                    'material' => '材质',
+                    'size' => '尺寸',
+                    'inner_pages' => '内页',
+                    'moq' => '起订量',
+                    'lead_time' => '交期',
+                    'description' => '产品说明',
+                ],
+                'fr' => [
+                    'item_number' => 'Numero d\'article',
+                    'material' => 'Materiau',
+                    'size' => 'Taille',
+                    'inner_pages' => 'Pages interieures',
+                    'moq' => 'MOQ',
+                    'lead_time' => 'Delai',
+                    'description' => 'Description',
+                ],
+                'es' => [
+                    'item_number' => 'Numero de articulo',
+                    'material' => 'Material',
+                    'size' => 'Tamano',
+                    'inner_pages' => 'Paginas interiores',
+                    'moq' => 'MOQ',
+                    'lead_time' => 'Plazo de entrega',
+                    'description' => 'Descripcion',
+                ],
+                'ru' => [
+                    'item_number' => 'Артикул',
+                    'material' => 'Материал',
+                    'size' => 'Размер',
+                    'inner_pages' => 'Внутренние страницы',
+                    'moq' => 'MOQ',
+                    'lead_time' => 'Срок поставки',
+                    'description' => 'Описание',
+                ],
+                'ar' => [
+                    'item_number' => 'رقم المنتج',
+                    'material' => 'الخامة',
+                    'size' => 'المقاس',
+                    'inner_pages' => 'الصفحات الداخلية',
+                    'moq' => 'الحد الادنى',
+                    'lead_time' => 'مدة التسليم',
+                    'description' => 'الوصف',
+                ],
+            ];
 
-          <h1 class="mb-6 text-2xl font-serif text-yideli-text sm:text-3xl lg:text-4xl">{{ $product->name }}</h1>
-
-          @if ($product->description)
-            <div class="text-gray-600 leading-relaxed font-light mb-8">
-              {!! nl2br(e($product->description)) !!}
-            </div>
-          @endif
-
-          @if ($product->tags)
-            <div class="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
-              @foreach ($product->tags as $tag)
-                <div class="flex items-center gap-3">
-                  <svg class="w-5 h-5 text-yideli-dark"
-                       fill="none"
-                       stroke="currentColor"
-                       viewBox="0 0 24 24">
-                    <path stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M5 13l4 4L19 7"></path>
-                  </svg>
-                  <span class="text-sm text-gray-700">{{ $tag }}</span>
-                </div>
-              @endforeach
-            </div>
-          @endif
+            $currentSpecLabels = $specLabels[$lang] ?? $specLabels['en'];
+            $descriptionText = trim((string) $product->description);
+            $specItems = [
+                [
+                    'label' => $currentSpecLabels['item_number'],
+                    'value' => $product->code,
+                ],
+                [
+                    'label' => $currentSpecLabels['material'],
+                    'value' => $product->material,
+                ],
+                [
+                    'label' => $currentSpecLabels['size'],
+                    'value' => $product->size,
+                ],
+                [
+                    'label' => $currentSpecLabels['inner_pages'],
+                    'value' => $product->inner_pages,
+                ],
+                [
+                    'label' => $currentSpecLabels['moq'],
+                    'value' => $product->moq,
+                ],
+                [
+                    'label' => $currentSpecLabels['lead_time'],
+                    'value' => $product->lead_time,
+                ],
+                [
+                    'label' => $currentSpecLabels['description'],
+                    'value' => $descriptionText,
+                ],
+            ];
+          @endphp
 
           <div class="mb-10">
-            <h3 class="font-serif text-lg text-yideli-dark mb-4 border-b border-gray-200 pb-2">
-              {{ __('product.detail_specifications') }}</h3>
-            <table class="w-full text-sm spec-table text-left">
-              <tbody>
-                @if ($product->material)
-                  <tr class="border-b border-gray-50">
-                    <th class="py-2 w-1/3 text-gray-500 font-medium">{{ __('product.detail_material') }}</th>
-                    <td class="py-2 text-gray-700">{{ $product->material }}</td>
-                  </tr>
-                @endif
-                @if ($product->code)
-                  <tr class="border-b border-gray-50">
-                    <th class="py-2 w-1/3 text-gray-500 font-medium">{{ __('product.detail_item_code') }}</th>
-                    <td class="py-2 text-gray-700">{{ $product->code }}</td>
-                  </tr>
-                @endif
-              </tbody>
-            </table>
+            <h1 class="product-detail-title">{{ $product->name }}</h1>
+
+            <div class="product-detail-specs">
+              @foreach ($specItems as $item)
+                @php $displayValue = filled($item['value']) ? $item['value'] : '-'; @endphp
+                <p class="product-detail-spec">
+                  <span class="product-detail-spec__label">{{ $item['label'] }}:</span>
+                  <span class="product-detail-spec__value {{ filled($item['value']) ? '' : 'text-gray-400' }}">{!! nl2br(e($displayValue)) !!}</span>
+                </p>
+              @endforeach
+            </div>
           </div>
 
           <div class="bg-gray-50 p-6 border border-gray-100 rounded-sm">

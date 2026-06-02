@@ -37,9 +37,15 @@ beforeEach(function () {
         $table->text('description')->nullable();
         $table->text('content')->nullable();
         $table->text('specifications')->nullable();
+        $table->text('code')->nullable();
         $table->text('material')->nullable();
+        $table->text('size')->nullable();
+        $table->text('inner_pages')->nullable();
+        $table->text('moq')->nullable();
+        $table->text('lead_time')->nullable();
         $table->text('tags')->nullable();
         $table->boolean('is_visible')->default(true);
+        $table->string('translation_status')->nullable();
         $table->timestamp('deleted_at')->nullable();
         $table->timestamps();
     });
