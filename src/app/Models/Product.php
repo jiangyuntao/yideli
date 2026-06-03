@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Bus;
+use Illuminate\Support\Str;
 use Spatie\Translatable\HasTranslations;
 
 class Product extends Model
@@ -75,10 +76,14 @@ class Product extends Model
         return Attribute::make(
             get: function () {
                 $currentLocale = App::currentLocale();
+                $slug = $this->getTranslation('slug', $currentLocale, false)
+                    ?: $this->getTranslation('slug', 'en', false);
 
-                return $this->getTranslation('slug', $currentLocale, false)
-                    ?: $this->getTranslation('slug', 'en', false)
-                    ?: (string) $this->getKey();
+                if (filled($slug)) {
+                    return Str::finish($slug, '-' . $this->getKey());
+                }
+
+                return 'id-' . $this->getKey();
             },
         );
     }

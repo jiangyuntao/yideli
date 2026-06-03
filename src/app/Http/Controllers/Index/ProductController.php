@@ -78,17 +78,24 @@ class ProductController extends BaseController
     {
         $locale = App::getLocale();
         $routeKey = (string) $slug;
+        $productId = null;
+
+        if (preg_match('/^(?:.+-)?(\d+)$/', $routeKey, $matches) === 1) {
+            $productId = (int) $matches[1];
+        }
 
         // 1. 查找产品 (包含关联分类和关联商品)
         $product = Product::query()
-            ->where(function ($query) use ($locale, $routeKey) {
+            ->where(function ($query) use ($locale, $routeKey, $productId) {
                 $query->where("slug->{$locale}", $routeKey)
                     ->orWhere('slug->en', $routeKey);
 
-                if (ctype_digit($routeKey)) {
-                    $query->orWhere($query->getModel()->getQualifiedKeyName(), (int) $routeKey);
+                if ($productId !== null) {
+                    $query->orWhere($query->getModel()->getQualifiedKeyName(), $productId);
                 }
-            })
+            });
+
+        $product = $product
             ->where('is_visible', true)
             ->withCount('accessCodes')
             ->with([
