@@ -129,6 +129,11 @@ class ProductForm
                                         'new' => '最新',
                                         'best_seller' => '热销',
                                     ])
+                                    ->multiple()
+                                    ->default([])
+                                    ->dehydrateStateUsing(
+                                        fn(mixed $state): array => array_values(array_filter((array) $state))
+                                    )
                                     ->native(false),
                                 Select::make('relatedProducts') // 对应模型中的关联方法名
                                     ->label('关联商品')

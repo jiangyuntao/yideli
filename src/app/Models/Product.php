@@ -19,6 +19,7 @@ class Product extends Model
 
     protected $casts = [
         'images' => 'array',
+        'flags' => 'array',
         'is_visible' => 'boolean',
     ];
 

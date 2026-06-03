@@ -115,15 +115,27 @@
               </div>
             @endif
 
-            @if (is_array($product->flags) && in_array('hot', $product->flags))
-              <div
-                   class="absolute start-4 top-4 bg-[#D4A373] px-2 py-1 text-[10px] font-bold uppercase tracking-widest text-white">
-                {{ __('product.badge_best_seller') }}
-              </div>
-            @elseif(is_array($product->flags) && in_array('new', $product->flags))
-              <div
-                   class="absolute start-4 top-4 bg-yideli-dark px-2 py-1 text-[10px] font-bold uppercase tracking-widest text-white">
-                {{ __('product.detail_badge_new_arrival') }}
+            @php
+              $flagBadges = [
+                  'best_seller' => [
+                      'label' => __('product.badge_best_seller'),
+                      'class' => 'bg-[#25D366]',
+                  ],
+                  'new' => [
+                      'label' => __('product.detail_badge_new_arrival'),
+                      'class' => 'bg-yideli-dark',
+                  ],
+              ];
+              $productFlags = array_values(array_filter((array) $product->flags, fn(string $flag): bool => isset($flagBadges[$flag])));
+            @endphp
+            @if ($productFlags !== [])
+              <div class="absolute start-4 top-4 flex flex-wrap gap-2">
+                @foreach ($productFlags as $flag)
+                  <div
+                       class="{{ $flagBadges[$flag]['class'] }} px-2 py-1 text-[10px] font-bold uppercase tracking-widest text-white">
+                    {{ $flagBadges[$flag]['label'] }}
+                  </div>
+                @endforeach
               </div>
             @endif
           </div>
