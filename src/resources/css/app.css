@@ -159,6 +159,24 @@ html[lang="en"] {
     font-weight: 500;
   }
 
+  .product-detail-subspecs {
+    margin-top: 0.45rem;
+  }
+
+  .product-detail-subspec {
+    font-size: clamp(0.98rem, 1.05vw, 1.2rem);
+    line-height: 1.65;
+  }
+
+  .product-detail-subspec__label {
+    margin-inline-end: 0.35rem;
+    font-weight: 500;
+  }
+
+  .product-detail-subspec__value {
+    font-weight: 500;
+  }
+
   @media (max-width: 1023px) {
     .product-detail-title {
       margin-bottom: 1.5rem;

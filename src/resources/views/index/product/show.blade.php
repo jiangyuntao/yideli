@@ -162,6 +162,9 @@
                     'item_number' => 'Item Number',
                     'material' => 'Material',
                     'size' => 'Size',
+                    'inner_page_color' => 'Color',
+                    'inner_page_paper_weight' => 'Paper weight',
+                    'inner_page_sheet_count' => 'Sheet count',
                     'inner_pages' => 'Inner pages',
                     'moq' => 'MOQ',
                     'lead_time' => 'Lead Time',
@@ -171,6 +174,9 @@
                     'item_number' => '产品编号',
                     'material' => '材质',
                     'size' => '尺寸',
+                    'inner_page_color' => '颜色',
+                    'inner_page_paper_weight' => '纸张克重',
+                    'inner_page_sheet_count' => '张数',
                     'inner_pages' => '内页',
                     'moq' => '起订量',
                     'lead_time' => '交期',
@@ -180,6 +186,9 @@
                     'item_number' => 'Numero d\'article',
                     'material' => 'Materiau',
                     'size' => 'Taille',
+                    'inner_page_color' => 'Couleur',
+                    'inner_page_paper_weight' => 'Grammage du papier',
+                    'inner_page_sheet_count' => 'Nombre de feuilles',
                     'inner_pages' => 'Pages interieures',
                     'moq' => 'MOQ',
                     'lead_time' => 'Delai',
@@ -189,6 +198,9 @@
                     'item_number' => 'Numero de articulo',
                     'material' => 'Material',
                     'size' => 'Tamano',
+                    'inner_page_color' => 'Color',
+                    'inner_page_paper_weight' => 'Gramaje del papel',
+                    'inner_page_sheet_count' => 'Numero de hojas',
                     'inner_pages' => 'Paginas interiores',
                     'moq' => 'MOQ',
                     'lead_time' => 'Plazo de entrega',
@@ -198,6 +210,9 @@
                     'item_number' => 'Артикул',
                     'material' => 'Материал',
                     'size' => 'Размер',
+                    'inner_page_color' => 'Цвет',
+                    'inner_page_paper_weight' => 'Плотность бумаги',
+                    'inner_page_sheet_count' => 'Количество листов',
                     'inner_pages' => 'Внутренние страницы',
                     'moq' => 'MOQ',
                     'lead_time' => 'Срок поставки',
@@ -207,6 +222,9 @@
                     'item_number' => 'رقم المنتج',
                     'material' => 'الخامة',
                     'size' => 'المقاس',
+                    'inner_page_color' => 'اللون',
+                    'inner_page_paper_weight' => 'وزن الورق',
+                    'inner_page_sheet_count' => 'عدد الصفحات',
                     'inner_pages' => 'الصفحات الداخلية',
                     'moq' => 'الحد الادنى',
                     'lead_time' => 'مدة التسليم',
@@ -216,6 +234,20 @@
 
             $currentSpecLabels = $specLabels[$lang] ?? $specLabels['en'];
             $descriptionText = trim((string) $product->description);
+            $innerPageChildren = [
+                [
+                    'label' => $currentSpecLabels['inner_page_color'],
+                    'value' => $product->inner_page_color,
+                ],
+                [
+                    'label' => $currentSpecLabels['inner_page_paper_weight'],
+                    'value' => $product->inner_page_paper_weight,
+                ],
+                [
+                    'label' => $currentSpecLabels['inner_page_sheet_count'],
+                    'value' => $product->inner_page_sheet_count,
+                ],
+            ];
             $specItems = [
                 [
                     'label' => $currentSpecLabels['item_number'],
@@ -231,7 +263,8 @@
                 ],
                 [
                     'label' => $currentSpecLabels['inner_pages'],
-                    'value' => $product->inner_pages,
+                    'value' => null,
+                    'children' => $innerPageChildren,
                 ],
                 [
                     'label' => $currentSpecLabels['moq'],
@@ -246,6 +279,18 @@
                     'value' => $descriptionText,
                 ],
             ];
+
+            if (
+                blank($product->inner_page_color)
+                && blank($product->inner_page_paper_weight)
+                && blank($product->inner_page_sheet_count)
+                && filled($product->inner_pages)
+            ) {
+                $specItems[3] = [
+                    'label' => $currentSpecLabels['inner_pages'],
+                    'value' => $product->inner_pages,
+                ];
+            }
           @endphp
 
           <div class="mb-10">
@@ -253,11 +298,26 @@
 
             <div class="product-detail-specs">
               @foreach ($specItems as $item)
-                @php $displayValue = filled($item['value']) ? $item['value'] : '-'; @endphp
-                <p class="product-detail-spec">
-                  <span class="product-detail-spec__label">{{ $item['label'] }}:</span>
-                  <span class="product-detail-spec__value {{ filled($item['value']) ? '' : 'text-gray-400' }}">{!! nl2br(e($displayValue)) !!}</span>
-                </p>
+                @if (!empty($item['children']))
+                  <div class="product-detail-spec">
+                    <span class="product-detail-spec__label">{{ $item['label'] }}:</span>
+                    <div class="product-detail-subspecs">
+                      @foreach ($item['children'] as $child)
+                        @php $childDisplayValue = filled($child['value']) ? $child['value'] : '-'; @endphp
+                        <p class="product-detail-subspec">
+                          <span class="product-detail-subspec__label">{{ $child['label'] }}:</span>
+                          <span class="product-detail-subspec__value {{ filled($child['value']) ? '' : 'text-gray-400' }}">{!! nl2br(e($childDisplayValue)) !!}</span>
+                        </p>
+                      @endforeach
+                    </div>
+                  </div>
+                @else
+                  @php $displayValue = filled($item['value']) ? $item['value'] : '-'; @endphp
+                  <p class="product-detail-spec">
+                    <span class="product-detail-spec__label">{{ $item['label'] }}:</span>
+                    <span class="product-detail-spec__value {{ filled($item['value']) ? '' : 'text-gray-400' }}">{!! nl2br(e($displayValue)) !!}</span>
+                  </p>
+                @endif
               @endforeach
             </div>
           </div>

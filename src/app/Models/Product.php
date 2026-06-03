@@ -23,7 +23,7 @@ class Product extends Model
         'is_visible' => 'boolean',
     ];
 
-    public $translatable = ['name', 'slug', 'description', 'content', 'specifications', 'material', 'size', 'inner_pages', 'moq', 'lead_time', 'tags'];
+    public $translatable = ['name', 'slug', 'description', 'content', 'specifications', 'material', 'size', 'inner_pages', 'inner_page_color', 'inner_page_paper_weight', 'inner_page_sheet_count', 'moq', 'lead_time', 'tags'];
 
     protected static function booted()
     {

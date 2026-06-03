@@ -104,10 +104,23 @@ class ProductForm
                                     ->maxLength(255)
                                     ->translatable(),
 
-                                Textarea::make('inner_pages')
-                                    ->label('Inner pages')
-                                    ->rows(3)
-                                    ->translatable(),
+                                Section::make('Inner pages')
+                                    ->schema([
+                                        Textarea::make('inner_page_color')
+                                            ->label('Color')
+                                            ->rows(2)
+                                            ->translatable(),
+
+                                        Textarea::make('inner_page_paper_weight')
+                                            ->label('Paper weight')
+                                            ->rows(2)
+                                            ->translatable(),
+
+                                        TextInput::make('inner_page_sheet_count')
+                                            ->label('Sheet count')
+                                            ->maxLength(255)
+                                            ->translatable(),
+                                    ]),
 
                                 TextInput::make('moq')
                                     ->label('MOQ')
