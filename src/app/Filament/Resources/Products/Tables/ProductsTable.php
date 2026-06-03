@@ -25,10 +25,14 @@ class ProductsTable
     public static function configure(Table $table): Table
     {
         return $table
-            ->defaultSort('id', 'desc')
+            ->defaultSort('sort_order')
+            ->reorderable('sort_order')
             ->columns([
                 TextColumn::make('id')
                     ->label('ID'),
+                TextColumn::make('sort_order')
+                    ->label('排序')
+                    ->sortable(),
                 TextColumn::make('name')
                     ->label('商品名称')
                     ->searchable(),

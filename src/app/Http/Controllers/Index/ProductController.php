@@ -72,7 +72,11 @@ class ProductController extends BaseController
             ->values();
 
         // 6. 分页查询
-        $products = $query->latest()->paginate(12)->withQueryString();
+        $products = $query
+            ->orderBy('sort_order')
+            ->orderByDesc('id')
+            ->paginate(12)
+            ->withQueryString();
 
         $this->data['categories'] = $categories;
         $this->data['products'] = $products;

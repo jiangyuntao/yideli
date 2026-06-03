@@ -28,13 +28,18 @@ class Product extends Model
 
     protected static function booted()
     {
+        static::creating(function ($model) {
+            if (blank($model->sort_order)) {
+                $model->sort_order = ((int) static::query()->max('sort_order')) + 1;
+            }
+        });
+
         static::saving(function ($model) {
             if ($model->isDirty($model->translatable)) {
                 $model->translation_status = 'pending';
             }
 
             if ($model->wasRecentlyCreated || $model->translation_status === 'pending') {
-
                 // 分发任务到队列
                 Bus::chain([
                     new \App\Jobs\AutoTranslateJob($model),
