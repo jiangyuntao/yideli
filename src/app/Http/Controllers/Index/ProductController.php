@@ -44,21 +44,29 @@ class ProductController extends BaseController
 
         // 4. 处理材质筛选
         $locale = App::getLocale();
-        if ($request->has('material')) {
-            $selectedMaterials = (array) $request->input('material');
-            $query->where(function ($q) use ($selectedMaterials, $locale) {
-                foreach ($selectedMaterials as $mat) {
-                    // JSON 查询：匹配当前语言的材质字段
-                    $q->orWhere("material->{$locale}", $mat);
-                }
+        $materialsQuery = clone $query;
+        $selectedMaterial = trim((string) $request->query('material', ''));
+
+        if ($selectedMaterial !== '') {
+            $query->where(function ($q) use ($selectedMaterial, $locale) {
+                $q->where("material->{$locale}", $selectedMaterial)
+                    ->orWhere(function ($fallbackQuery) use ($selectedMaterial, $locale) {
+                        $fallbackQuery
+                            ->where(function ($emptyLocaleQuery) use ($locale) {
+                                $emptyLocaleQuery
+                                    ->whereNull("material->{$locale}")
+                                    ->orWhere("material->{$locale}", '');
+                            })
+                            ->where('material->en', $selectedMaterial);
+                    });
             });
         }
 
         // 5. 获取所有可选材质 (侧边栏用)
-        // 建议缓存，这里为了演示直接查
-        $availableMaterials = Product::whereNotNull('material')
+        $availableMaterials = $materialsQuery
+            ->whereNotNull('material')
             ->get()
-            ->map(fn($p) => $p->getTranslation('material', $locale))
+            ->map(fn($product) => $product->getTranslation('material', $locale) ?: $product->getTranslation('material', 'en'))
             ->filter()
             ->unique()
             ->values();
@@ -70,6 +78,7 @@ class ProductController extends BaseController
         $this->data['products'] = $products;
         $this->data['currentCategory'] = $currentCategory;
         $this->data['availableMaterials'] = $availableMaterials;
+        $this->data['selectedMaterial'] = $selectedMaterial;
 
         return view('index.product.index', $this->data);
     }

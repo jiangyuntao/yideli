@@ -97,7 +97,7 @@
            }
        }">
 
-    <div class="flex flex-col gap-8 lg:flex-row lg:gap-12">
+    <div class="flex flex-col gap-8 scroll-mt-28 lg:flex-row lg:gap-12 lg:scroll-mt-32" id="product-results">
 
       <aside class="hidden lg:block w-64 flex-shrink-0">
         <div class="sticky top-32 space-y-10">
@@ -147,22 +147,20 @@
           @if ($availableMaterials->isNotEmpty())
             <div>
               <h3 class="font-serif text-xl mb-6 text-yideli-dark">{{ __('product.sidebar_material') }}</h3>
-              <form class="space-y-2"
-                    action="{{ url()->current() }}"
-                    method="GET">
+              @php
+                $materialBaseParams = ['lang' => $lang];
+                if ($currentCategory) {
+                    $materialBaseParams['slug'] = $currentCategory->slug;
+                }
+              @endphp
+              <div class="space-y-2">
+                <a class="block text-sm transition {{ $selectedMaterial === '' ? 'font-bold text-yideli-dark' : 'text-gray-500 hover:text-yideli-dark' }}"
+                   href="{{ route('product.index', $materialBaseParams) }}#product-results">{{ __('product.sidebar_view_all') }}</a>
                 @foreach ($availableMaterials as $material)
-                  <label class="flex items-center gap-3 cursor-pointer group">
-                    <input class="w-4 h-4 rounded border-gray-300 text-yideli-dark focus:ring-yideli-dark"
-                           name="material[]"
-                           type="checkbox"
-                           value="{{ $material }}"
-                           {{ in_array($material, request('material', [])) ? 'checked' : '' }}
-                           onchange="this.form.submit()">
-                    <span
-                          class="text-sm text-gray-500 group-hover:text-yideli-dark transition">{{ $material }}</span>
-                  </label>
+                  <a class="block text-sm transition {{ $selectedMaterial === $material ? 'font-bold text-yideli-dark' : 'text-gray-500 hover:text-yideli-dark' }}"
+                     href="{{ route('product.index', $materialBaseParams + ['material' => $material]) }}#product-results">{{ $material }}</a>
                 @endforeach
-              </form>
+              </div>
             </div>
           @endif
         </div>
