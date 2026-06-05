@@ -27,7 +27,9 @@ class IndexController extends BaseController
         $this->data['caseStudies'] = News::query()
             ->whereNotNull('published_at')
             ->where('published_at', '<=', now())
-            ->latest('published_at')
+            ->orderBy('sort_order')
+            ->orderByDesc('published_at')
+            ->orderByDesc('id')
             ->limit(4)
             ->get()
             ->map(function (News $entry) use ($locale) {

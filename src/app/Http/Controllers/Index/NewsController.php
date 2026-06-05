@@ -49,7 +49,9 @@ class NewsController extends BaseController
             // 克隆一个查询对象来查置顶，以免影响主列表
             $featuredQuery = clone $query;
             $featuredNews = $featuredQuery->where('is_featured', true)
-                ->latest('published_at')
+                ->orderBy('sort_order')
+                ->orderByDesc('published_at')
+                ->orderByDesc('id')
                 ->first();
         }
 
@@ -60,7 +62,9 @@ class NewsController extends BaseController
         }
 
         $entries = $query->with('category') // 预加载分类，避免 N+1
-            ->latest('published_at')
+            ->orderBy('sort_order')
+            ->orderByDesc('published_at')
+            ->orderByDesc('id')
             ->paginate(10)
             ->withQueryString(); // 保持 URL 参数 (如 search q)
 
@@ -96,15 +100,31 @@ class NewsController extends BaseController
         $entry->increment('views');
 
         // 3. 获取上一篇 / 下一篇
-        // 逻辑：同分类下，按发布时间排序
+        // 逻辑：按前台展示顺序（sort_order, id）排序
         $prevEntry = News::whereNotNull('published_at')
-            ->where('published_at', '<', $entry->published_at)
-            ->orderBy('published_at', 'desc')
+            ->where('published_at', '<=', now())
+            ->where(function ($query) use ($entry) {
+                $query->where('sort_order', '<', $entry->sort_order)
+                    ->orWhere(function ($subQuery) use ($entry) {
+                        $subQuery->where('sort_order', $entry->sort_order)
+                            ->where('id', '<', $entry->id);
+                    });
+            })
+            ->orderByDesc('sort_order')
+            ->orderByDesc('id')
             ->first();
 
         $nextEntry = News::whereNotNull('published_at')
-            ->where('published_at', '>', $entry->published_at)
-            ->orderBy('published_at', 'asc')
+            ->where('published_at', '<=', now())
+            ->where(function ($query) use ($entry) {
+                $query->where('sort_order', '>', $entry->sort_order)
+                    ->orWhere(function ($subQuery) use ($entry) {
+                        $subQuery->where('sort_order', $entry->sort_order)
+                            ->where('id', '>', $entry->id);
+                    });
+            })
+            ->orderBy('sort_order')
+            ->orderBy('id')
             ->first();
 
         // 4. 获取相关新闻 (同分类下的最新几条，排除自己)
@@ -113,7 +133,10 @@ class NewsController extends BaseController
             $relatedNews = News::where('category_id', $entry->category_id)
                 ->where('id', '!=', $entry->id)
                 ->whereNotNull('published_at')
-                ->latest('published_at')
+                ->where('published_at', '<=', now())
+                ->orderBy('sort_order')
+                ->orderByDesc('published_at')
+                ->orderByDesc('id')
                 ->limit(3)
                 ->get();
         }

@@ -44,7 +44,7 @@ class BaseController extends Controller
         View::share('dir', $direction); // 共享方向变量
         View::share('settings', app(GeneralSettings::class));
         View::share('nav_categories', Category::whereNull('parent_id')->where('is_visible', true)->get());
-        View::share('pages', Page::get());
+        View::share('pages', Page::query()->orderBy('sort_order')->orderBy('id')->get());
 
         // 6. 继续执行原本的控制器方法
         return $this->{$method}(...array_values($parameters));
