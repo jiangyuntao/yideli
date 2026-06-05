@@ -2,17 +2,24 @@
 
 namespace App\Filament\Pages;
 
+use App\Services\ProductFormTranslationService;
 use App\Settings\GeneralSettings;
 use BackedEnum;
+use Filament\Actions\Action;
+use Filament\Forms\Components\Field;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
+use Filament\Notifications\Notification;
 use Filament\Pages\SettingsPage;
+use Filament\Schemas\Components\FusedGroup;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Tabs;
 use Filament\Schemas\Components\Tabs\Tab;
+use Filament\Schemas\Components\Utilities\Get;
+use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
 use Illuminate\Support\Facades\Storage;
 
@@ -34,20 +41,25 @@ class Setting extends SettingsPage
                     ->tabs([
                         Tab::make('基础信息')
                             ->schema([
-                                TextInput::make('site_name')
-                                    ->label('网站名称')
-                                    ->translatable(),
+                                static::makeTranslatableField(
+                                    TextInput::make('site_name')
+                                        ->label('网站名称')
+                                        ->helperText('可按语言手动填写；也可点击“翻译”补全其他语言'),
+                                ),
 
-                                Textarea::make('site_description')
-                                    ->label('网站描述')
-                                    ->rows(3)
-                                    ->helperText('用于 SEO Meta Description')
-                                    ->translatable(),
+                                static::makeTranslatableField(
+                                    Textarea::make('site_description')
+                                        ->label('网站描述')
+                                        ->rows(3)
+                                        ->helperText('用于 SEO Meta Description；可按语言手动填写，也可点击“翻译”补全其他语言'),
+                                ),
 
-                                TextInput::make('site_keywords')
-                                    ->label('SEO 关键词')
-                                    ->placeholder('笔记本, 销售, 服务')
-                                    ->translatable(),
+                                static::makeTranslatableField(
+                                    TextInput::make('site_keywords')
+                                        ->label('SEO 关键词')
+                                        ->placeholder('笔记本, 销售, 服务')
+                                        ->helperText('可按语言手动填写；也可点击“翻译”补全其他语言'),
+                                ),
 
                                 Toggle::make('is_active')
                                     ->label('网站开启状态')
@@ -79,12 +91,16 @@ class Setting extends SettingsPage
 
                         Tab::make('外观与联系')
                             ->schema([
-                                TextInput::make('company_name')
-                                    ->label('公司名称')
-                                    ->translatable(),
-                                TextInput::make('contact_address')
-                                    ->label('地址')
-                                    ->translatable(),
+                                static::makeTranslatableField(
+                                    TextInput::make('company_name')
+                                        ->label('公司名称')
+                                        ->helperText('可按语言手动填写；也可点击“翻译”补全其他语言'),
+                                ),
+                                static::makeTranslatableField(
+                                    TextInput::make('contact_address')
+                                        ->label('地址')
+                                        ->helperText('可按语言手动填写；也可点击“翻译”补全其他语言'),
+                                ),
                                 TextInput::make('contact_email')
                                     ->label('联系邮箱')
                                     ->email(),
@@ -134,16 +150,62 @@ class Setting extends SettingsPage
                                 Repeater::make('faqs')
                                     ->label('常见问题')
                                     ->schema([
-                                        TextInput::make('question')
-                                            ->label('问题')
-                                            ->translatable(),
-                                        Textarea::make('answer')
-                                            ->label('答案')
-                                            ->rows(5)
-                                            ->translatable(),
+                                        static::makeTranslatableField(
+                                            TextInput::make('question')
+                                                ->label('问题')
+                                                ->helperText('可按语言手动填写；也可点击“翻译”补全其他语言'),
+                                        ),
+                                        static::makeTranslatableField(
+                                            Textarea::make('answer')
+                                                ->label('答案')
+                                                ->rows(5)
+                                                ->helperText('可按语言手动填写；也可点击“翻译”补全其他语言'),
+                                        ),
                                     ])
                             ],)
                     ]),
+            ]);
+    }
+
+    protected static function makeTranslatableField(Field $field, ?array $localeSpecificRules = null): FusedGroup
+    {
+        $name = $field->getName();
+
+        return FusedGroup::make([
+            $field
+                ->hiddenLabel()
+                ->translatable(true, null, $localeSpecificRules),
+        ])
+            ->label($field->getLabel())
+            ->afterLabel([
+                Action::make("translate_{$name}")
+                    ->label('翻译')
+                    ->icon('heroicon-o-language')
+                    ->color('success')
+                    ->action(function (Get $get, Set $set, ProductFormTranslationService $translationService) use ($name): void {
+                        $result = $translationService->translateField(
+                            field: $name,
+                            translations: $get($name),
+                            sourceTranslations: $get($name),
+                        );
+
+                        $set($name, $result['value']);
+
+                        if ($result['updated_count'] === 0) {
+                            Notification::make()
+                                ->title('没有可补全的翻译内容')
+                                ->warning()
+                                ->send();
+
+                            return;
+                        }
+
+                        Notification::make()
+                            ->title('翻译已回填')
+                            ->body("本次更新 {$result['updated_count']} 项内容")
+                            ->success()
+                            ->send();
+                    }),
             ]);
     }
 

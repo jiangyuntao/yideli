@@ -14,10 +14,16 @@ class PagesTable
     public static function configure(Table $table): Table
     {
         return $table
-            ->defaultSort('id', 'desc')
+            ->defaultSort('sort_order')
+            ->reorderable('sort_order')
             ->columns([
                 TextColumn::make('id')
                     ->label('ID'),
+
+                TextColumn::make('sort_order')
+                    ->label('排序')
+                    ->sortable(),
+
                 TextColumn::make('title')
                     ->label('标题')
                     ->searchable(query: function (Builder $query, string $search): Builder {

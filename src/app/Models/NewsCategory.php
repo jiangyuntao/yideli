@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\Bus;
+use Illuminate\Support\Str;
 use Spatie\Translatable\HasTranslations;
 
 class NewsCategory extends Model
@@ -18,20 +18,33 @@ class NewsCategory extends Model
 
     protected static function booted()
     {
-        static::saving(function ($model) {
-            if ($model->isDirty('name') || $model->isDirty('description')) {
-                $model->translation_status = 'pending';
-            }
-
-            if ($model->wasRecentlyCreated || $model->translation_status === 'pending') {
-
-                // 分发任务到队列
-                Bus::chain([
-                    new \App\Jobs\AutoTranslateJob($model),
-                    new \App\Jobs\AutoFillSlug($model),
-                ])->dispatch();
+        static::creating(function ($model) {
+            if (blank($model->sort_order)) {
+                $model->sort_order = ((int) static::query()->max('sort_order')) + 1;
             }
         });
+
+        static::saving(function ($model) {
+            $model->fillMissingSlugTranslations('name');
+        });
+    }
+
+    protected function fillMissingSlugTranslations(string $sourceField): void
+    {
+        foreach (['zh', 'en', 'fr', 'es', 'ru', 'ar'] as $locale) {
+            $slug = $this->getTranslation('slug', $locale, false);
+            $source = $this->getTranslation($sourceField, $locale, false);
+
+            if (filled($slug) || ! is_string($source) || trim($source) === '') {
+                continue;
+            }
+
+            $generatedSlug = Str::slug($source, '-', $locale);
+
+            if ($generatedSlug !== '') {
+                $this->setTranslation('slug', $locale, $generatedSlug);
+            }
+        }
     }
 
     public function parent()

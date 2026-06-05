@@ -10,6 +10,16 @@ class ListNewsCategories extends ListRecords
 {
     protected static string $resource = NewsCategoryResource::class;
 
+    protected function getTableReorderColumn(): ?string
+    {
+        return 'sort_order';
+    }
+
+    protected function isTablePaginationEnabledWhileReordering(): bool
+    {
+        return false;
+    }
+
     protected function getHeaderActions(): array
     {
         return [

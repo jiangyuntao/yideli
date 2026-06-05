@@ -2,7 +2,10 @@
 
 namespace App\Filament\Resources\News\Schemas;
 
+use App\Services\ProductFormTranslationService;
+use Filament\Actions\Action;
 use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\Field;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\RichEditor;
@@ -10,11 +13,13 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Notifications\Notification;
+use Filament\Schemas\Components\FusedGroup;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Utilities\Get;
+use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Str;
 
 class NewsForm
 {
@@ -26,39 +31,46 @@ class NewsForm
                     ->schema([
                         // --- 左侧：内容区域 (占 2 列) ---
                         Section::make('新闻内容')
+                            ->description('多语言内容可手动填写；每个字段都可单独点击“翻译”补全其他语言。')
                             ->columnSpan(2)
                             ->schema([
-                                TextInput::make('title')
-                                    ->label('标题')
-                                    ->maxLength(255)
-                                    // 自动生成 Slug (仅创建时)
-                                    ->live(onBlur: true)
-                                    ->afterStateUpdated(function ($state, callable $set, $operation) {
-                                        if ($operation === 'create') {
-                                            $set('slug', Str::slug($state));
-                                        }
-                                    })
-                                    // Outerweb v3 语法: 仅中文必填
-                                    ->translatable(true, null, [
+                                static::makeTranslatableField(
+                                    TextInput::make('title')
+                                        ->label('标题')
+                                        ->helperText('可按语言手动填写；也可点击“翻译”补全其他语言')
+                                        ->maxLength(255),
+                                    localeSpecificRules: [
                                         'zh' => 'required',
-                                    ]),
+                                    ],
+                                    sourceField: 'title',
+                                ),
 
-                                TextInput::make('slug')
-                                    ->label('美化URL')
-                                    ->maxLength(255)
-                                    ->translatable(),
+                                static::makeTranslatableField(
+                                    TextInput::make('slug')
+                                        ->label('美化URL')
+                                        ->helperText('可按语言手动填写；留空时系统会根据对应语言的标题自动生成，也可点击“翻译”立即生成')
+                                        ->maxLength(255),
+                                    sourceField: 'title',
+                                ),
 
-                                Textarea::make('excerpt')
-                                    ->label('简介')
-                                    ->rows(5)
-                                    ->translatable(),
+                                static::makeTranslatableField(
+                                    Textarea::make('excerpt')
+                                        ->label('简介')
+                                        ->helperText('可按语言手动填写；也可点击“翻译”补全其他语言')
+                                        ->rows(5),
+                                    sourceField: 'title',
+                                ),
 
-                                RichEditor::make('content')
-                                    ->label('内容')
-                                    ->columnSpanFull()
-                                    ->fileAttachmentsDisk('public')
-                                    ->fileAttachmentsDirectory('news')
-                                    ->translatable(),
+                                static::makeTranslatableField(
+                                    RichEditor::make('content')
+                                        ->label('内容')
+                                        ->helperText('可按语言手动填写；也可点击“翻译”补全其他语言')
+                                        ->columnSpanFull()
+                                        ->fileAttachmentsDisk('public')
+                                        ->fileAttachmentsDirectory('news'),
+                                    sourceField: 'title',
+                                )
+                                    ->columnSpanFull(),
                             ]),
 
                         // --- 右侧：发布设置 (占 1 列) ---
@@ -109,12 +121,71 @@ class NewsForm
                                 TextInput::make('author')
                                     ->label('作者'),
 
-                                TagsInput::make('tags')
-                                    ->label('标签')
-                                    ->translatable(),
+                                TextInput::make('sort_order')
+                                    ->label('排序')
+                                    ->numeric()
+                                    ->default(0)
+                                    ->helperText('数值越小，排序越靠前。'),
+
+                                static::makeTranslatableField(
+                                    TagsInput::make('tags')
+                                        ->label('标签')
+                                        ->helperText('可按语言手动填写；也可点击“翻译”补全其他语言'),
+                                    sourceField: 'title',
+                                ),
                             ]),
                     ])
                     ->columnSpanFull(),
+            ]);
+    }
+
+    protected static function makeTranslatableField(
+        Field $field,
+        ?array $localeSpecificRules = null,
+        string $sourceField = 'title',
+    ): FusedGroup {
+        $name = $field->getName();
+
+        return FusedGroup::make([
+            $field
+                ->hiddenLabel()
+                ->translatable(true, null, $localeSpecificRules),
+        ])
+            ->label($field->getLabel())
+            ->afterLabel([
+                Action::make("translate_{$name}")
+                    ->label('翻译')
+                    ->icon('heroicon-o-language')
+                    ->color('success')
+                    ->action(function (Get $get, Set $set, ProductFormTranslationService $translationService) use ($name, $sourceField): void {
+                        $result = $translationService->translateField(
+                            field: $name,
+                            translations: $get($name),
+                            slugTranslations: $get('slug'),
+                            sourceTranslations: $get($sourceField),
+                        );
+
+                        $set($name, $result['value']);
+
+                        foreach ($result['extra'] as $extraField => $extraValue) {
+                            $set($extraField, $extraValue);
+                        }
+
+                        if ($result['updated_count'] === 0) {
+                            Notification::make()
+                                ->title('没有可补全的翻译内容')
+                                ->warning()
+                                ->send();
+
+                            return;
+                        }
+
+                        Notification::make()
+                            ->title('翻译已回填')
+                            ->body("本次更新 {$result['updated_count']} 项内容")
+                            ->success()
+                            ->send();
+                    }),
             ]);
     }
 }

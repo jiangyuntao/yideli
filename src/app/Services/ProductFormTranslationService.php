@@ -10,7 +10,9 @@ class ProductFormTranslationService
 
     public const TRANSLATABLE_FIELDS = [
         'name',
+        'title',
         'description',
+        'excerpt',
         'content',
         'material',
         'size',
@@ -20,6 +22,9 @@ class ProductFormTranslationService
         'moq',
         'lead_time',
         'tags',
+        'seo_title',
+        'seo_description',
+        'seo_keywords',
     ];
 
     public function __construct(
@@ -32,10 +37,13 @@ class ProductFormTranslationService
         ?array $nameTranslations = null,
         ?array $slugTranslations = null,
         bool $overwrite = false,
+        ?array $sourceTranslations = null,
     ): array {
         if ($field === 'slug') {
             [$data, $updatedCount] = $this->fillSlugTranslations([
-                'name' => is_array($nameTranslations) ? $nameTranslations : [],
+                'name' => is_array($sourceTranslations)
+                    ? $sourceTranslations
+                    : (is_array($nameTranslations) ? $nameTranslations : []),
                 'slug' => is_array($translations) ? $translations : [],
             ], $overwrite);
 
@@ -46,7 +54,7 @@ class ProductFormTranslationService
             ];
         }
 
-        if (! in_array($field, self::TRANSLATABLE_FIELDS, true) || ! is_array($translations)) {
+        if (! is_array($translations)) {
             return [
                 'value' => $translations,
                 'extra' => [],
@@ -57,7 +65,7 @@ class ProductFormTranslationService
         [$translatedTranslations, $updatedCount] = $this->translateTranslations($translations, $overwrite);
         $extra = [];
 
-        if ($field === 'name') {
+        if (in_array($field, ['name', 'title'], true)) {
             [$data, $slugUpdates] = $this->fillSlugTranslations([
                 'name' => $translatedTranslations,
                 'slug' => is_array($slugTranslations) ? $slugTranslations : [],
