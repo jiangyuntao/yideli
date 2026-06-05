@@ -2,13 +2,20 @@
 
 namespace App\Filament\Resources\Categories\Schemas;
 
+use App\Services\ProductFormTranslationService;
+use Filament\Actions\Action;
+use Filament\Forms\Components\Field;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
+use Filament\Notifications\Notification;
+use Filament\Schemas\Components\FusedGroup;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Utilities\Get;
+use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -22,28 +29,32 @@ class CategoryForm
                     ->schema([
                         // --- 左侧：主要内容区域 (占 2 列) ---
                         Section::make('基础信息')
+                            ->description('多语言内容可手动填写；每个字段都可单独点击“翻译”补全其他语言。')
                             ->columnSpan(2)
                             ->schema([
-                                TextInput::make('name')
-                                    ->label('分类名称')
-                                    ->helperText('填写简体中文分类名称后，会自动翻译其他语言')
-                                    ->maxLength(255)
-                                    ->translatable(true, null, [
-                                        'zh_CN' => 'required',
-                                    ]),
+                                static::makeTranslatableField(
+                                    TextInput::make('name')
+                                        ->label('分类名称')
+                                        ->helperText('可按语言手动填写；也可点击“翻译”补全其他语言')
+                                        ->maxLength(255),
+                                    localeSpecificRules: [
+                                        'zh' => 'required',
+                                    ],
+                                ),
 
-                                TextInput::make('slug')
-                                    ->label('美化URL')
-                                    ->helperText('会根据各语言分类名称自动生成')
-                                    ->maxLength(255)
-                                    // 注意：多语言字段的 unique 验证通常需要自定义规则，这里先不做严格唯一限制以免报错
-                                    ->translatable(),
+                                static::makeTranslatableField(
+                                    TextInput::make('slug')
+                                        ->label('美化URL')
+                                        ->helperText('可按语言手动填写；留空时系统会根据对应语言的分类名称自动生成，也可点击“翻译”立即生成')
+                                        ->maxLength(255),
+                                ),
 
-                                Textarea::make('description')
-                                    ->label('描述')
-                                    ->helperText('填写简体中文分类描述后，会自动翻译其他语言')
-                                    ->rows(4)
-                                    ->translatable(),
+                                static::makeTranslatableField(
+                                    Textarea::make('description')
+                                        ->label('描述')
+                                        ->helperText('可按语言手动填写；也可点击“翻译”补全其他语言')
+                                        ->rows(4),
+                                ),
                             ]),
 
                         // --- 右侧：设置区域 (占 1 列) ---
@@ -85,6 +96,53 @@ class CategoryForm
                             ]),
                     ])
                     ->columnSpanFull(),
+            ]);
+    }
+
+    protected static function makeTranslatableField(Field $field, ?array $localeSpecificRules = null): FusedGroup
+    {
+        $name = $field->getName();
+
+        return FusedGroup::make([
+            $field
+                ->hiddenLabel()
+                ->translatable(true, null, $localeSpecificRules),
+        ])
+            ->label($field->getLabel())
+            ->afterLabel([
+                Action::make("translate_{$name}")
+                    ->label('翻译')
+                    ->icon('heroicon-o-language')
+                    ->color('success')
+                    ->action(function (Get $get, Set $set, ProductFormTranslationService $translationService) use ($name): void {
+                        $result = $translationService->translateField(
+                            field: $name,
+                            translations: $get($name),
+                            nameTranslations: $get('name'),
+                            slugTranslations: $get('slug'),
+                        );
+
+                        $set($name, $result['value']);
+
+                        foreach ($result['extra'] as $extraField => $extraValue) {
+                            $set($extraField, $extraValue);
+                        }
+
+                        if ($result['updated_count'] === 0) {
+                            Notification::make()
+                                ->title('没有可补全的翻译内容')
+                                ->warning()
+                                ->send();
+
+                            return;
+                        }
+
+                        Notification::make()
+                            ->title('翻译已回填')
+                            ->body("本次更新 {$result['updated_count']} 项内容")
+                            ->success()
+                            ->send();
+                    }),
             ]);
     }
 }

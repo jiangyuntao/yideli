@@ -38,6 +38,7 @@ class ProductForm
                                 static::makeTranslatableField(
                                     TextInput::make('name')
                                         ->label('产品名称')
+                                        ->helperText('可按语言手动填写；也可点击“翻译”补全其他语言')
                                         ->maxLength(255),
                                     localeSpecificRules: [
                                         'zh' => 'required',
@@ -47,18 +48,21 @@ class ProductForm
                                 static::makeTranslatableField(
                                     TextInput::make('slug')
                                         ->label('美化URL')
+                                        ->helperText('可按语言手动填写；留空时系统会根据对应语言的产品名称自动生成，也可点击“翻译”立即生成')
                                         ->maxLength(255),
                                 ),
 
                                 static::makeTranslatableField(
                                     Textarea::make('description')
                                         ->label('产品描述')
+                                        ->helperText('可按语言手动填写；也可点击“翻译”补全其他语言')
                                         ->rows(5),
                                 ),
 
                                 static::makeTranslatableField(
                                     RichEditor::make('content')
-                                        ->label('内容'),
+                                        ->label('内容')
+                                        ->helperText('可按语言手动填写；也可点击“翻译”补全其他语言'),
                                 )
                                     ->columnSpanFull(),
                             ]),
@@ -106,12 +110,14 @@ class ProductForm
                                 static::makeTranslatableField(
                                     TextInput::make('material')
                                         ->label('材质')
+                                        ->helperText('可按语言手动填写；也可点击“翻译”补全其他语言')
                                         ->maxLength(255),
                                 ),
 
                                 static::makeTranslatableField(
                                     TextInput::make('size')
                                         ->label('Size')
+                                        ->helperText('可按语言手动填写；也可点击“翻译”补全其他语言')
                                         ->maxLength(255),
                                 ),
 
@@ -120,18 +126,21 @@ class ProductForm
                                         static::makeTranslatableField(
                                             Textarea::make('inner_page_color')
                                                 ->label('Color')
+                                                ->helperText('可按语言手动填写；也可点击“翻译”补全其他语言')
                                                 ->rows(2),
                                         ),
 
                                         static::makeTranslatableField(
                                             Textarea::make('inner_page_paper_weight')
                                                 ->label('Paper weight')
+                                                ->helperText('可按语言手动填写；也可点击“翻译”补全其他语言')
                                                 ->rows(2),
                                         ),
 
                                         static::makeTranslatableField(
                                             TextInput::make('inner_page_sheet_count')
                                                 ->label('Sheet count')
+                                                ->helperText('可按语言手动填写；也可点击“翻译”补全其他语言')
                                                 ->maxLength(255),
                                         ),
                                     ]),
@@ -139,18 +148,21 @@ class ProductForm
                                 static::makeTranslatableField(
                                     TextInput::make('moq')
                                         ->label('MOQ')
+                                        ->helperText('可按语言手动填写；也可点击“翻译”补全其他语言')
                                         ->maxLength(255),
                                 ),
 
                                 static::makeTranslatableField(
                                     TextInput::make('lead_time')
                                         ->label('Lead Time')
+                                        ->helperText('可按语言手动填写；也可点击“翻译”补全其他语言')
                                         ->maxLength(255),
                                 ),
 
                                 static::makeTranslatableField(
                                     TagsInput::make('tags')
-                                        ->label('标签'),
+                                        ->label('标签')
+                                        ->helperText('可按语言手动填写；也可点击“翻译”补全其他语言'),
                                 ),
 
                                 Select::make('flags')

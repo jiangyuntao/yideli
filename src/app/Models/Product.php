@@ -35,6 +35,8 @@ class Product extends Model
         });
 
         static::saving(function ($model) {
+            $model->fillMissingSlugTranslations('name');
+
             if ($model->isDirty($model->translatable)) {
                 $model->translation_status = 'pending';
             }
@@ -43,10 +45,27 @@ class Product extends Model
                 // 分发任务到队列
                 Bus::chain([
                     new \App\Jobs\AutoTranslateJob($model),
-                    new \App\Jobs\AutoFillSlug($model),
                 ])->dispatch();
             }
         });
+    }
+
+    protected function fillMissingSlugTranslations(string $sourceField): void
+    {
+        foreach (['zh', 'en', 'fr', 'es', 'ru', 'ar'] as $locale) {
+            $slug = $this->getTranslation('slug', $locale, false);
+            $source = $this->getTranslation($sourceField, $locale, false);
+
+            if (filled($slug) || ! is_string($source) || trim($source) === '') {
+                continue;
+            }
+
+            $generatedSlug = Str::slug($source, '-', $locale);
+
+            if ($generatedSlug !== '') {
+                $this->setTranslation('slug', $locale, $generatedSlug);
+            }
+        }
     }
 
     public function category()
