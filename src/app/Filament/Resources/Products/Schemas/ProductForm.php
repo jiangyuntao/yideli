@@ -8,7 +8,6 @@ use Filament\Forms\Components\Field;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
@@ -159,24 +158,21 @@ class ProductForm
                                         ->maxLength(255),
                                 ),
 
-                                static::makeTranslatableField(
-                                    TagsInput::make('tags')
-                                        ->label('标签')
-                                        ->helperText('可按语言手动填写；也可点击“翻译”补全其他语言'),
-                                ),
-
-                                Select::make('flags')
-                                    ->label('标记')
-                                    ->options([
-                                        'new' => '最新',
-                                        'best_seller' => '热销',
-                                    ])
-                                    ->multiple()
-                                    ->default([])
-                                    ->dehydrateStateUsing(
-                                        fn(mixed $state): array => array_values(array_filter((array) $state))
+                                Select::make('productTags')
+                                    ->label('标签标记')
+                                    ->relationship(
+                                        name: 'productTags',
+                                        titleAttribute: 'name',
+                                        modifyQueryUsing: fn(Builder $query) => $query
+                                            ->orderBy('sort_order')
+                                            ->orderBy('id'),
                                     )
-                                    ->native(false),
+                                    ->multiple()
+                                    ->preload()
+                                    ->searchable()
+                                    ->native(false)
+                                    ->getOptionLabelFromRecordUsing(fn(Model $record) => (string) $record->name)
+                                    ->helperText('从“产品标签”中选择，前台徽标也读取这里。'),
                                 Select::make('relatedProducts') // 对应模型中的关联方法名
                                     ->label('关联商品')
                                     ->relationship('relatedProducts', 'title') // 关联名, 显示字段(如 title)

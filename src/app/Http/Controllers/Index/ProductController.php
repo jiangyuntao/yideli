@@ -23,6 +23,7 @@ class ProductController extends BaseController
         // 2. 初始化产品查询 (全局显示开关)
         $query = Product::query()
             ->where('is_visible', true)
+            ->with('productTags')
             ->withCount('accessCodes');
 
         // 3. 处理分类筛选逻辑 (关键点：有 slug 才查分类，没 slug 就跳过)
@@ -113,7 +114,8 @@ class ProductController extends BaseController
             ->withCount('accessCodes')
             ->with([
                 'category',
-                'relatedProducts' => fn($query) => $query->with('category')->withCount('accessCodes'),
+                'productTags',
+                'relatedProducts' => fn($query) => $query->with('category')->with('productTags')->withCount('accessCodes'),
             ])
             ->firstOrFail();
 

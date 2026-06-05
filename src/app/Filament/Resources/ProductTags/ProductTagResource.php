@@ -1,0 +1,64 @@
+<?php
+
+namespace App\Filament\Resources\ProductTags;
+
+use App\Filament\Resources\ProductTags\Pages\CreateProductTag;
+use App\Filament\Resources\ProductTags\Pages\EditProductTag;
+use App\Filament\Resources\ProductTags\Pages\ListProductTags;
+use App\Filament\Resources\ProductTags\Schemas\ProductTagForm;
+use App\Filament\Resources\ProductTags\Tables\ProductTagsTable;
+use App\Models\ProductTag;
+use BackedEnum;
+use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
+use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
+
+class ProductTagResource extends Resource
+{
+    protected static ?string $model = ProductTag::class;
+
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedTag;
+
+    protected static ?int $navigationSort = 2;
+
+    protected static ?string $navigationLabel = '产品标签';
+
+    protected static ?string $pluralModelLabel = '产品标签';
+
+    protected static ?string $modelLabel = '产品标签';
+
+    public static function form(Schema $schema): Schema
+    {
+        return ProductTagForm::configure($schema);
+    }
+
+    public static function table(Table $table): Table
+    {
+        return ProductTagsTable::configure($table);
+    }
+
+    public static function getRelations(): array
+    {
+        return [];
+    }
+
+    public static function getPages(): array
+    {
+        return [
+            'index' => ListProductTags::route('/'),
+            'create' => CreateProductTag::route('/create'),
+            'edit' => EditProductTag::route('/{record}/edit'),
+        ];
+    }
+
+    public static function getRecordRouteBindingEloquentQuery(): Builder
+    {
+        return parent::getRecordRouteBindingEloquentQuery()
+            ->withoutGlobalScopes([
+                SoftDeletingScope::class,
+            ]);
+    }
+}

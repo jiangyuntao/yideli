@@ -88,6 +88,14 @@ class Product extends Model
         return $this->belongsToMany(ProductAccessCode::class, 'product_access_code_product');
     }
 
+    public function productTags(): BelongsToMany
+    {
+        return $this->belongsToMany(ProductTag::class, 'product_tag_product')
+            ->withTimestamps()
+            ->orderBy('sort_order')
+            ->orderBy('product_tags.id');
+    }
+
     public function coverImage(): Attribute
     {
         return Attribute::make(

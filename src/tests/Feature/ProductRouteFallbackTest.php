@@ -11,8 +11,10 @@ use Illuminate\View\View;
 
 beforeEach(function () {
     Schema::dropIfExists('product_access_code_product');
+    Schema::dropIfExists('product_tag_product');
     Schema::dropIfExists('product_related');
     Schema::dropIfExists('product_access_codes');
+    Schema::dropIfExists('product_tags');
     Schema::dropIfExists('products');
     Schema::dropIfExists('categories');
 
@@ -44,8 +46,17 @@ beforeEach(function () {
         $table->text('moq')->nullable();
         $table->text('lead_time')->nullable();
         $table->text('tags')->nullable();
+        $table->text('flags')->nullable();
         $table->boolean('is_visible')->default(true);
         $table->string('translation_status')->nullable();
+        $table->timestamp('deleted_at')->nullable();
+        $table->timestamps();
+    });
+
+    Schema::create('product_tags', function (Blueprint $table) {
+        $table->id();
+        $table->text('name')->nullable();
+        $table->integer('sort_order')->default(0);
         $table->timestamp('deleted_at')->nullable();
         $table->timestamps();
     });
@@ -64,6 +75,12 @@ beforeEach(function () {
     Schema::create('product_related', function (Blueprint $table) {
         $table->unsignedBigInteger('product_id');
         $table->unsignedBigInteger('related_product_id');
+    });
+
+    Schema::create('product_tag_product', function (Blueprint $table) {
+        $table->unsignedBigInteger('product_id');
+        $table->unsignedBigInteger('product_tag_id');
+        $table->timestamps();
     });
 });
 
@@ -91,7 +108,7 @@ it('falls back to the product id for route links when slug is missing', function
 
     $product = Product::query()->findOrFail(7);
 
-    expect($product->route_slug)->toBe('7');
+    expect($product->route_slug)->toBe('id-7');
 });
 
 it('resolves a visible product by id when slug is missing', function () {

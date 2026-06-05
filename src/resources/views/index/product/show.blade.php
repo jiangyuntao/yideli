@@ -116,24 +116,13 @@
             @endif
 
             @php
-              $flagBadges = [
-                  'best_seller' => [
-                      'label' => __('product.badge_best_seller'),
-                      'class' => 'bg-[#25D366]',
-                  ],
-                  'new' => [
-                      'label' => __('product.detail_badge_new_arrival'),
-                      'class' => 'bg-yideli-dark',
-                  ],
-              ];
-              $productFlags = array_values(array_filter((array) $product->flags, fn(string $flag): bool => isset($flagBadges[$flag])));
+              $productTags = $product->productTags ?? collect();
             @endphp
-            @if ($productFlags !== [])
+            @if ($productTags->isNotEmpty())
               <div class="absolute start-4 top-4 flex flex-wrap gap-2">
-                @foreach ($productFlags as $flag)
-                  <div
-                       class="{{ $flagBadges[$flag]['class'] }} px-2 py-1 text-[10px] font-bold uppercase tracking-widest text-white">
-                    {{ $flagBadges[$flag]['label'] }}
+                @foreach ($productTags as $tag)
+                  <div class="bg-yideli-dark px-2 py-1 text-[10px] font-bold uppercase tracking-widest text-white">
+                    {{ $tag->name }}
                   </div>
                 @endforeach
               </div>
