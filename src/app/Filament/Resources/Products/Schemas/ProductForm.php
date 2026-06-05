@@ -2,6 +2,9 @@
 
 namespace App\Filament\Resources\Products\Schemas;
 
+use App\Services\ProductFormTranslationService;
+use Filament\Actions\Action;
+use Filament\Forms\Components\Field;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
@@ -9,8 +12,12 @@ use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
+use Filament\Notifications\Notification;
+use Filament\Schemas\Components\FusedGroup;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Utilities\Get;
+use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -25,33 +32,35 @@ class ProductForm
                     ->schema([
                         // --- 左侧：核心内容区域 (占 2 列) ---
                         Section::make('基础信息')
+                            ->description('每个多语言字段都可单独点击“翻译”补全其他语言。')
                             ->columnSpan(2)
                             ->schema([
-                                TextInput::make('name')
-                                    ->label('产品名称')
-                                    ->maxLength(255)
-                                    // 仅中文必填
-                                    ->translatable(true, null, [
+                                static::makeTranslatableField(
+                                    TextInput::make('name')
+                                        ->label('产品名称')
+                                        ->maxLength(255),
+                                    localeSpecificRules: [
                                         'zh' => 'required',
-                                    ]),
+                                    ],
+                                ),
 
-                                TextInput::make('slug')
-                                    ->label('美化URL')
-                                    ->maxLength(255)
-                                    ->translatable(),
+                                static::makeTranslatableField(
+                                    TextInput::make('slug')
+                                        ->label('美化URL')
+                                        ->maxLength(255),
+                                ),
 
-                                Textarea::make('description')
-                                    ->label('产品描述')
-                                    ->rows(5)
-                                    ->translatable(),
+                                static::makeTranslatableField(
+                                    Textarea::make('description')
+                                        ->label('产品描述')
+                                        ->rows(5),
+                                ),
 
-                                RichEditor::make('content')
-                                    ->label('内容')
-                                    ->columnSpanFull()
-                                    // ->extraAttributes([
-                                    //     'style' => 'min-height: 300px',
-                                    // ])
-                                    ->translatable(),
+                                static::makeTranslatableField(
+                                    RichEditor::make('content')
+                                        ->label('内容'),
+                                )
+                                    ->columnSpanFull(),
                             ]),
 
                         // --- 右侧：设置与属性 (占 1 列) ---
@@ -94,47 +103,55 @@ class ProductForm
                                     ->inline(false)
                                     ->default(true),
 
-                                TextInput::make('material')
-                                    ->label('材质')
-                                    ->maxLength(255)
-                                    ->translatable(),
+                                static::makeTranslatableField(
+                                    TextInput::make('material')
+                                        ->label('材质')
+                                        ->maxLength(255),
+                                ),
 
-                                TextInput::make('size')
-                                    ->label('Size')
-                                    ->maxLength(255)
-                                    ->translatable(),
+                                static::makeTranslatableField(
+                                    TextInput::make('size')
+                                        ->label('Size')
+                                        ->maxLength(255),
+                                ),
 
                                 Section::make('Inner pages')
                                     ->schema([
-                                        Textarea::make('inner_page_color')
-                                            ->label('Color')
-                                            ->rows(2)
-                                            ->translatable(),
+                                        static::makeTranslatableField(
+                                            Textarea::make('inner_page_color')
+                                                ->label('Color')
+                                                ->rows(2),
+                                        ),
 
-                                        Textarea::make('inner_page_paper_weight')
-                                            ->label('Paper weight')
-                                            ->rows(2)
-                                            ->translatable(),
+                                        static::makeTranslatableField(
+                                            Textarea::make('inner_page_paper_weight')
+                                                ->label('Paper weight')
+                                                ->rows(2),
+                                        ),
 
-                                        TextInput::make('inner_page_sheet_count')
-                                            ->label('Sheet count')
-                                            ->maxLength(255)
-                                            ->translatable(),
+                                        static::makeTranslatableField(
+                                            TextInput::make('inner_page_sheet_count')
+                                                ->label('Sheet count')
+                                                ->maxLength(255),
+                                        ),
                                     ]),
 
-                                TextInput::make('moq')
-                                    ->label('MOQ')
-                                    ->maxLength(255)
-                                    ->translatable(),
+                                static::makeTranslatableField(
+                                    TextInput::make('moq')
+                                        ->label('MOQ')
+                                        ->maxLength(255),
+                                ),
 
-                                TextInput::make('lead_time')
-                                    ->label('Lead Time')
-                                    ->maxLength(255)
-                                    ->translatable(),
+                                static::makeTranslatableField(
+                                    TextInput::make('lead_time')
+                                        ->label('Lead Time')
+                                        ->maxLength(255),
+                                ),
 
-                                TagsInput::make('tags')
-                                    ->label('标签')
-                                    ->translatable(),
+                                static::makeTranslatableField(
+                                    TagsInput::make('tags')
+                                        ->label('标签'),
+                                ),
 
                                 Select::make('flags')
                                     ->label('标记')
@@ -164,6 +181,53 @@ class ProductForm
                             ]),
                     ])
                     ->columnSpanFull(),
+            ]);
+    }
+
+    protected static function makeTranslatableField(Field $field, ?array $localeSpecificRules = null): FusedGroup
+    {
+        $name = $field->getName();
+
+        return FusedGroup::make([
+            $field
+                ->hiddenLabel()
+                ->translatable(true, null, $localeSpecificRules),
+        ])
+            ->label($field->getLabel())
+            ->afterLabel([
+                Action::make("translate_{$name}")
+                    ->label('翻译')
+                    ->icon('heroicon-o-language')
+                    ->color('success')
+                    ->action(function (Get $get, Set $set, ProductFormTranslationService $translationService) use ($name): void {
+                        $result = $translationService->translateField(
+                            field: $name,
+                            translations: $get($name),
+                            nameTranslations: $get('name'),
+                            slugTranslations: $get('slug'),
+                        );
+
+                        $set($name, $result['value']);
+
+                        foreach ($result['extra'] as $extraField => $extraValue) {
+                            $set($extraField, $extraValue);
+                        }
+
+                        if ($result['updated_count'] === 0) {
+                            Notification::make()
+                                ->title('没有可补全的翻译内容')
+                                ->warning()
+                                ->send();
+
+                            return;
+                        }
+
+                        Notification::make()
+                            ->title('翻译已回填')
+                            ->body("本次更新 {$result['updated_count']} 项内容")
+                            ->success()
+                            ->send();
+                    }),
             ]);
     }
 }
