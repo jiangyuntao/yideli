@@ -71,7 +71,7 @@ class CategoryForm
                                     ->directory('category-images')
                                     ->image()
                                     ->maxSize(1024 * 2) // 2MB
-                                    ->helperText('建议上传 400x500px 的图片'),
+                                    ->helperText('建议上传 400x500px 的图片；首页 Hero 下方分类卡片也会优先使用这张图。'),
 
                                 TextInput::make('sort_order')
                                     ->label('排序')

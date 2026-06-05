@@ -98,18 +98,12 @@
     $heroMobileImage = $resolveHeroImage(data_get($heroSlide, 'image_mobile')) ?? $heroDesktopImage;
 
     $defaultHeroCategoryImages = [
-        asset('images/binding-book-2.jpg'),
-        asset('images/line-circle-book-2.jpg'),
-        asset('images/notebook-2.jpg'),
-        asset('images/weekly-calendar-2.jpg'),
+        asset('images/index-hero-categories/1.jpg'),
+        asset('images/index-hero-categories/2.jpg'),
+        asset('images/index-hero-categories/3.jpg'),
+        asset('images/index-hero-categories/4.jpg'),
     ];
 
-    $heroCategoryImages = [
-        $resolveHeroImage(data_get($settings->home_category_images ?? [], 'image_1')) ?? $defaultHeroCategoryImages[0],
-        $resolveHeroImage(data_get($settings->home_category_images ?? [], 'image_2')) ?? $defaultHeroCategoryImages[1],
-        $resolveHeroImage(data_get($settings->home_category_images ?? [], 'image_3')) ?? $defaultHeroCategoryImages[2],
-        $resolveHeroImage(data_get($settings->home_category_images ?? [], 'image_4')) ?? $defaultHeroCategoryImages[3],
-    ];
   @endphp
 
   <section class="relative mx-auto w-full overflow-hidden shadow-2xl">
@@ -172,7 +166,8 @@
       <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-4">
         @foreach ($categories->take(4) as $index => $category)
           @php
-            $categoryCover = $heroCategoryImages[$index] ?? asset('images/placeholder.jpg');
+            $categoryCover = $resolveHeroImage($category->cover_image ?? null)
+                ?? ($defaultHeroCategoryImages[$index] ?? asset('images/placeholder.jpg'));
           @endphp
           <article class="group relative overflow-hidden bg-[#fbfbee] shadow-2xl">
             <div class="aspect-[4/3] overflow-hidden bg-[#fbfbee] p-4 sm:p-5">
