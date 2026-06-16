@@ -95,6 +95,7 @@ function call($url, $args = null, $method = 'post', $testflag = 0, $timeout = 20
 
 function callOnce($url, $args = null, $method = 'post', $withCookie = false, $timeout = 2000, $headers = [])
 {
+    RequestThrottler::throttle();
     $ch = curl_init();
     if ($method == 'post') {
         $data = convert($args);

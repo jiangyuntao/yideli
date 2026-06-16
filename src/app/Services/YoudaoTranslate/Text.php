@@ -28,6 +28,7 @@ class Text
         ];
 
         $params = add_auth_params($params, $this->appKey, $this->appSecret);
+        RequestThrottler::throttle();
         $response = do_call($this->apiUrl, 'post', [], $params, 'application/json');
         $result = json_decode($response, true);
 

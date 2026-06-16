@@ -41,7 +41,7 @@ class LanguageLinesTable
             ])
             ->filters([
                 SelectFilter::make('group')->options(
-                    fn() => LanguageLine::query()->pluck('group', 'group')->toArray()
+                    fn () => LanguageLine::query()->pluck('group', 'group')->toArray()
                 ),
             ])
             ->recordActions([
@@ -84,7 +84,7 @@ class LanguageLinesTable
                     ->color('primary')
                     ->modalHeading('批量导入翻译')
                     ->modalWidth(Width::ThreeExtraLarge)
-                    ->modalContent(fn() => view('filament.resources.language-lines.batch-import-modal'))
+                    ->modalContent(fn () => view('filament.resources.language-lines.batch-import-modal'))
                     ->modalSubmitActionLabel('开始导入')
                     ->form([
                         FileUpload::make('csv_file')
@@ -126,13 +126,13 @@ class LanguageLinesTable
 
     public static function importTranslationsFromCsv(string $filePath): array
     {
-        $reader = Reader::createFromPath(storage_path('app/private/' . $filePath), 'r');
+        $reader = Reader::createFromPath(storage_path('app/private/'.$filePath), 'r');
         $reader->setHeaderOffset(0); // 第一行作为表头
 
         $headers = [
             'group',
             'key',
-            'zh'
+            'zh',
         ];
 
         $records = $reader->getRecords();
@@ -145,14 +145,15 @@ class LanguageLinesTable
             try {
                 // 验证必需字段
                 if (empty($record['group']) || empty($record['key']) || empty($record['zh'])) {
-                    $errors[] = "第 " . ($index + 2) . " 行缺少必要字段(group、key 或 zh)";
+                    $errors[] = '第 '.($index + 2).' 行缺少必要字段(group、key 或 zh)';
                     $errorCount++;
+
                     continue;
                 }
 
                 // 准备语言数据，只包含中文
                 $textData = [
-                    'zh' => trim($record['zh'])
+                    'zh' => trim($record['zh']),
                 ];
 
                 // 查找或创建 LanguageLine 记录
@@ -167,7 +168,7 @@ class LanguageLinesTable
                 );
 
                 // 如果是更新现有记录，则只更新中文翻译
-                if (!$languageLine->wasRecentlyCreated) {
+                if (! $languageLine->wasRecentlyCreated) {
                     $existingText = $languageLine->text ?? [];
                     $existingText['zh'] = trim($record['zh']);
                     $languageLine->update(['text' => $existingText]);
@@ -178,7 +179,7 @@ class LanguageLinesTable
                 $languageLine->flushGroupCache(); // 刷新缓存
                 $successCount++;
             } catch (\Exception $e) {
-                $errors[] = "第 " . ($index + 2) . " 行导入失败: " . $e->getMessage();
+                $errors[] = '第 '.($index + 2).' 行导入失败: '.$e->getMessage();
                 $errorCount++;
             }
         }
@@ -212,8 +213,6 @@ class LanguageLinesTable
                 if ($translated) {
                     $text[$locale] = $translated;
                     $updated = true;
-                    // 稍微停顿防 API 限制
-                    sleep(1);
                 }
             }
         }

@@ -43,6 +43,7 @@ class FillProductMaterialTranslations extends Command
 
             if ($sourceLocale === null) {
                 $this->line("Skipping product #{$product->id}: no material source text.");
+
                 continue;
             }
 
@@ -50,6 +51,7 @@ class FillProductMaterialTranslations extends Command
 
             if ($sourceText === '') {
                 $this->line("Skipping product #{$product->id}: empty source material.");
+
                 continue;
             }
 
@@ -70,6 +72,7 @@ class FillProductMaterialTranslations extends Command
 
                 if (! is_string($translated) || trim($translated) === '') {
                     $this->warn("Failed translating product #{$product->id} material to {$locale}.");
+
                     continue;
                 }
 
@@ -82,8 +85,6 @@ class FillProductMaterialTranslations extends Command
                 if (! $dryRun) {
                     $product->setTranslation('material', $locale, $translated);
                 }
-
-                sleep(1);
             }
 
             if ($hasChanges) {

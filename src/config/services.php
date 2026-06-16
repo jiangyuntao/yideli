@@ -38,6 +38,7 @@ return [
     'youdao' => [
         'app_key' => env('YOUDAO_APP_KEY'),
         'app_secret' => env('YOUDAO_APP_SECRET'),
+        'request_interval_ms' => (int) env('YOUDAO_REQUEST_INTERVAL_MS', 1200),
     ],
 
 ];

@@ -5,12 +5,11 @@ namespace App\Jobs;
 use App\Services\YoudaoTranslate;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Str;
 
 class AutoTranslateJob implements ShouldQueue
 {
@@ -48,7 +47,7 @@ class AutoTranslateJob implements ShouldQueue
                 $fields = $this->model->getTranslatableAttributes();
                 foreach ($fields as $field) {
                     // 跳过 slug 和已经翻译过的字段
-                    if ($field == 'slug' || !empty($this->model->getTranslation($field, $locale, false))) {
+                    if ($field == 'slug' || ! empty($this->model->getTranslation($field, $locale, false))) {
                         continue;
                     }
 
@@ -59,8 +58,9 @@ class AutoTranslateJob implements ShouldQueue
                             $translatedArray = [];
 
                             foreach ($sourceText as $item) {
-                                if (!is_string($item) || $item === '') {
+                                if (! is_string($item) || $item === '') {
                                     $translatedArray[] = $item;
+
                                     continue;
                                 }
 
@@ -71,8 +71,6 @@ class AutoTranslateJob implements ShouldQueue
                                 } else {
                                     $translatedArray[] = $item;
                                 }
-
-                                sleep(1);
                             }
 
                             $this->model->setTranslation($field, $locale, $translatedArray);
@@ -80,10 +78,8 @@ class AutoTranslateJob implements ShouldQueue
                             $translatedText = $translator->translate($sourceText, 'zh-CHS', $locale);
 
                             if ($translatedText) {
-                                $this->model->setTranslation($field, $locale,  $translatedText);
+                                $this->model->setTranslation($field, $locale, $translatedText);
                             }
-
-                            sleep(1);
                         }
                     }
                 }
@@ -94,7 +90,7 @@ class AutoTranslateJob implements ShouldQueue
             $this->model->saveQuietly(); // 使用 saveQuietly 防止死循环 (如果有 Observer 监听 updated)
 
         } catch (\Exception $e) {
-            Log::error('Auto Translate Job Failed: ' . $e->getMessage());
+            Log::error('Auto Translate Job Failed: '.$e->getMessage());
             $this->model->update(['translation_status' => 'failed']);
         }
     }
