@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'required' => ':attribute为必填项。',
     'uploaded' => '文件上传失败，通常是因为文件超过 2MB 限制。请压缩后重新上传。',
 
     'max' => [
