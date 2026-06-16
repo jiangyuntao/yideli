@@ -20,6 +20,7 @@ class TranslateManagedContent extends Command
     protected $signature = 'content:translate-managed
         {--type=* : Limit to product-tags,categories,products,news-categories,news,pages}
         {--overwrite : Overwrite existing translations instead of filling blanks only}
+        {--retry-wait=10 : Seconds to wait before retrying a failed translation request}
         {--dry-run : Preview the translation pass without saving changes}';
 
     protected $description = 'Run the translation flow for managed content records.';
@@ -85,6 +86,7 @@ class TranslateManagedContent extends Command
 
         $overwrite = (bool) $this->option('overwrite');
         $dryRun = (bool) $this->option('dry-run');
+        $retryWaitSeconds = $this->resolveRetryWaitSeconds();
         $summaries = [];
         $hasFailures = false;
 
@@ -93,7 +95,7 @@ class TranslateManagedContent extends Command
             $this->newLine();
             $this->info("处理 {$definition['label']}...");
 
-            $summary = $this->processType($type, $definition, $translationService, $overwrite, $dryRun);
+            $summary = $this->processType($type, $definition, $translationService, $overwrite, $dryRun, $retryWaitSeconds);
             $summaries[] = $summary;
             $hasFailures = $hasFailures || ($summary['failed_records'] > 0);
         }
@@ -137,12 +139,26 @@ class TranslateManagedContent extends Command
         return $types;
     }
 
+    protected function resolveRetryWaitSeconds(): int
+    {
+        $retryWaitSeconds = (int) $this->option('retry-wait');
+
+        if ($retryWaitSeconds < 1) {
+            $this->warn('`--retry-wait` 小于 1，已自动改为 1 秒。');
+
+            return 1;
+        }
+
+        return $retryWaitSeconds;
+    }
+
     protected function processType(
         string $type,
         array $definition,
         ProductFormTranslationService $translationService,
         bool $overwrite,
         bool $dryRun,
+        int $retryWaitSeconds,
     ): array {
         $modelClass = $definition['model'];
         $fields = $definition['fields'];
@@ -165,49 +181,22 @@ class TranslateManagedContent extends Command
                 $translationService,
                 $overwrite,
                 $dryRun,
+                $retryWaitSeconds,
                 &$summary
             ): void {
                 foreach ($records as $record) {
                     $summary['processed_records']++;
 
                     try {
-                        $result = $this->translateRecord(
-                            $record,
-                            $fields,
-                            $sourceField,
-                            $translationService,
-                            $overwrite,
+                        $result = $this->translateRecordWithRetry(
+                            type: $type,
+                            record: $record,
+                            fields: $fields,
+                            sourceField: $sourceField,
+                            translationService: $translationService,
+                            overwrite: $overwrite,
+                            retryWaitSeconds: $retryWaitSeconds,
                         );
-
-                        if ($result['updated_items'] === 0) {
-                            continue;
-                        }
-
-                        $summary['updated_records']++;
-                        $summary['updated_items'] += $result['updated_items'];
-
-                        if ($dryRun) {
-                            $this->line("  [dry-run] #{$record->getKey()} {$result['updated_items']} 项");
-
-                            continue;
-                        }
-
-                        foreach ($result['state'] as $field => $value) {
-                            $record->setAttribute($field, $value);
-                        }
-
-                        $record->saveQuietly();
-                        $this->line("  #{$record->getKey()} 已回填 {$result['updated_items']} 项");
-                    } catch (TranslationException $exception) {
-                        $summary['failed_records']++;
-
-                        Log::warning('Managed content translation failed with a translation exception.', [
-                            'type' => $type,
-                            'record_id' => $record->getKey(),
-                            'message' => $exception->getMessage(),
-                        ]);
-
-                        $this->warn("  #{$record->getKey()} 翻译失败：{$exception->getMessage()}");
                     } catch (Throwable $exception) {
                         $summary['failed_records']++;
 
@@ -218,7 +207,29 @@ class TranslateManagedContent extends Command
                         ]);
 
                         $this->warn("  #{$record->getKey()} 翻译失败：{$exception->getMessage()}");
+
+                        continue;
                     }
+
+                    if ($result['updated_items'] === 0) {
+                        continue;
+                    }
+
+                    $summary['updated_records']++;
+                    $summary['updated_items'] += $result['updated_items'];
+
+                    if ($dryRun) {
+                        $this->line("  [dry-run] #{$record->getKey()} {$result['updated_items']} 项");
+
+                        continue;
+                    }
+
+                    foreach ($result['state'] as $field => $value) {
+                        $record->setAttribute($field, $value);
+                    }
+
+                    $record->saveQuietly();
+                    $this->line("  #{$record->getKey()} 已回填 {$result['updated_items']} 项");
                 }
             });
 
@@ -233,6 +244,7 @@ class TranslateManagedContent extends Command
         bool $overwrite,
     ): array {
         $state = [];
+        $allowedFields = $this->resolveAllowedFields($record, $fields);
 
         foreach ($fields as $field) {
             $state[$field] = $this->getTranslations($record, $field);
@@ -259,6 +271,10 @@ class TranslateManagedContent extends Command
             $updatedItems += $result['updated_count'];
 
             foreach ($result['extra'] as $extraField => $extraValue) {
+                if (! in_array($extraField, $allowedFields, true)) {
+                    continue;
+                }
+
                 $state[$extraField] = $extraValue;
             }
         }
@@ -269,6 +285,46 @@ class TranslateManagedContent extends Command
         ];
     }
 
+    protected function translateRecordWithRetry(
+        string $type,
+        Model $record,
+        array $fields,
+        string $sourceField,
+        ProductFormTranslationService $translationService,
+        bool $overwrite,
+        int $retryWaitSeconds,
+    ): array {
+        $attempt = 0;
+
+        while (true) {
+            $attempt++;
+
+            try {
+                return $this->translateRecord(
+                    $record,
+                    $fields,
+                    $sourceField,
+                    $translationService,
+                    $overwrite,
+                );
+            } catch (TranslationException $exception) {
+                Log::warning('Managed content translation hit a retryable translation exception.', [
+                    'type' => $type,
+                    'record_id' => $record->getKey(),
+                    'attempt' => $attempt,
+                    'retry_wait_seconds' => $retryWaitSeconds,
+                    'message' => $exception->getMessage(),
+                ]);
+
+                $this->warn(
+                    "  #{$record->getKey()} 翻译失败：{$exception->getMessage()}，{$retryWaitSeconds} 秒后重试（第 {$attempt} 次）"
+                );
+
+                sleep($retryWaitSeconds);
+            }
+        }
+    }
+
     protected function getTranslations(Model $record, string $field): array
     {
         if (! method_exists($record, 'getTranslations')) {
@@ -276,5 +332,14 @@ class TranslateManagedContent extends Command
         }
 
         return $record->getTranslations($field);
+    }
+
+    protected function resolveAllowedFields(Model $record, array $defaultFields): array
+    {
+        if (method_exists($record, 'getTranslatableAttributes')) {
+            return $record->getTranslatableAttributes();
+        }
+
+        return $defaultFields;
     }
 }
