@@ -65,7 +65,7 @@
            id="{{ $heroInquiryId }}-email"
            name="email"
            value="{{ old('email') }}"
-           placeholder="{{ $t('home_b2b.hero_form_email', ['en' => 'Business Email', 'zh' => '商务邮箱', 'fr' => 'Email professionnel', 'es' => 'Correo empresarial', 'ru' => '工作邮箱', 'ar' => 'البريد الإلكتروني للعمل']) }}"
+           placeholder="{{ $t('home_b2b.hero_form_email', ['en' => 'Business Email', 'zh' => '商务邮箱', 'fr' => 'Email professionnel', 'es' => 'Correo empresarial', 'ru' => 'Рабочая электронная почта', 'ar' => 'البريد الإلكتروني للعمل']) }}"
            required>
 
     <textarea class="min-h-[84px] w-full resize-none border border-gray-300/90 bg-white/72 px-3.5 py-2.5 text-sm text-gray-900 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.18)] outline-none transition placeholder:text-gray-500 focus:border-yideli-dark sm:min-h-[96px] sm:px-4 sm:py-3"
